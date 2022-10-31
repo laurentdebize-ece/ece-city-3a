@@ -3,4 +3,7 @@ project(ece-city-3a C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(ece-city-3a main.c)
+add_executable(ece-city-3a main.c Structures/structures.c Structures/structures.h Map/map.c Map/map.h Bitmaps/bitmaps.c Bitmaps/bitmaps.h)
+
+target_link_libraries(ece-city-3a -lmingw32 -lallegro-5.0.10-monolith-md-debug)
+
