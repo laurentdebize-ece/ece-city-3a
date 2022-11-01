@@ -32,6 +32,7 @@ void boucleTest(Simcity* simcity){
                 simcity->allegro.coordonneesSourisX = simcity->allegro.event.mouse.x;
                 simcity->allegro.coordonneesSourisY = simcity->allegro.event.mouse.y;
                 calculPositionSourisEnCelluleXY(simcity);
+                outOfBorder(simcity);
                 simcity->dessin = true;
                 break;
             }
@@ -54,7 +55,9 @@ void boucleTest(Simcity* simcity){
 
                 if (simcity->dessin) {
                     afficherMap(simcity);
-                    afficherHoverMap(simcity);
+                    if (simcity->outOfBorder){
+                        afficherHoverMap(simcity);
+                    }
                     al_flip_display();
                     simcity->dessin = false;
                 }

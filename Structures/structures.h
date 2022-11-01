@@ -98,6 +98,7 @@ typedef struct {
     Map map; //carte du jeu
     bool dessin;
     bool endGame;
+    bool outOfBorder;
 
 } Simcity;
 

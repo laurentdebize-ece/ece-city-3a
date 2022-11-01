@@ -34,20 +34,23 @@ void bitmapSpriteInit(Simcity* simcity){
 }
 
 void calculPositionSourisEnCelluleXY(Simcity* simcity) {
-    /*simcity->interactionExterieure.mouse.celluleXY.celluleX =
-            simcity->allegro.event.mouse.x / simcity->map.mapTile[0][0].spriteLargeur;
-    simcity->interactionExterieure.mouse.celluleXY.celluleY =
-            simcity->allegro.event.mouse.y / simcity->map.mapTile[0][0].spriteHauteur;*/
-
     for (int x = 0; x < NBCELLULEX; ++x) {
         for (int y = 0; y < NBCELLULEY; ++y) {
-            if (simcity->allegro.event.mouse.x >= simcity->map.mapTile[x][y].coordsXY.screenX && simcity->allegro.event.mouse.x <= simcity->map.mapTile[x][y].coordsXY.screenX + simcity->map.mapTile[x][y].spriteLargeur){
+            if (simcity->allegro.coordonneesSourisX >= simcity->map.mapTile[x][y].coordsXY.screenX && simcity->allegro.coordonneesSourisX <= simcity->map.mapTile[x][y].coordsXY.screenX + simcity->map.mapTile[x][y].spriteLargeur){
                 simcity->interactionExterieure.mouse.celluleXY.celluleX = x;
             }
-            if (simcity->allegro.event.mouse.y >= simcity->map.mapTile[x][y].coordsXY.screenY && simcity->allegro.event.mouse.y <= simcity->map.mapTile[x][y].coordsXY.screenY + simcity->map.mapTile[x][y].spriteHauteur){
+            if (simcity->allegro.coordonneesSourisY >= simcity->map.mapTile[x][y].coordsXY.screenY && simcity->allegro.coordonneesSourisY <= simcity->map.mapTile[x][y].coordsXY.screenY + simcity->map.mapTile[x][y].spriteHauteur){
                 simcity->interactionExterieure.mouse.celluleXY.celluleY = y;
             }
         }
+    }
+}
+
+void outOfBorder(Simcity* simcity){
+    if(simcity->allegro.coordonneesSourisX >= 111 && simcity->allegro.coordonneesSourisX <= 1011 && simcity->allegro.coordonneesSourisY <= 700 && simcity->allegro.coordonneesSourisY > 0){
+        simcity->outOfBorder = 1;
+    }else{
+        simcity->outOfBorder = 0;
     }
 }
 
@@ -65,7 +68,6 @@ void afficherHoverMap(Simcity* simcity){
     for (int x = 0; x < NBCELLULEX ; ++x) {
         for (int y = 0; y < NBCELLULEY; ++y) {
             if (simcity->interactionExterieure.mouse.celluleXY.celluleX == simcity->map.mapTile[x][y].coordsXY.celluleX && simcity->interactionExterieure.mouse.celluleXY.celluleY == simcity->map.mapTile[x][y].coordsXY.celluleY){
-                printf(" x = %d  y = %d\n", x,y);
                 al_draw_bitmap_region(*(simcity->map.spriteTile[HOOVER_TILE].image), simcity->map.spriteTile[HOOVER_TILE].spriteX, simcity->map.spriteTile[HOOVER_TILE].spriteY, simcity->map.spriteTile[HOOVER_TILE].spriteLargeur, simcity->map.spriteTile[HOOVER_TILE].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
             }
         }
