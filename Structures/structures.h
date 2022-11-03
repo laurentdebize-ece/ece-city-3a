@@ -17,8 +17,9 @@
 #define SCREEN_LARGEUR 1024 //const taille écran large
 #define SCREEN_HAUTEUR 768 //const taille écran haut
 
-enum BITMAP{BITMAP_MAP, NB_BITMAP};
-enum SPRITE_MAP {HERBE, HOOVER_TILE,NB_SPRITE_MAP};
+enum BITMAP{BITMAP_MAP, BITMAP_MENU_PRINCIPAL_INTRO, BITMAP_MENU_PRINCIPAL, BITMAP_BOUTTON_MENU_PRINCIPAL,NB_BITMAP};
+enum SPRITE_MAP {HERBE, HOVER_TILE,NB_SPRITE_MAP};
+enum SPRITE_MENU_PRINCIPAL { INTRO , FOND,LANCER, LANCER_HOVER, LANCER_CLIQUE, CHARGER, CHARGER_HOVER, CHARGER_CLIQUE, QUITTER, QUITTER_HOVER, QUITTER_CLIQUE,NB_SPRITE_MENU_PRINCIPAL};
 
 typedef struct {
     ALLEGRO_DISPLAY* display;
@@ -70,9 +71,29 @@ typedef struct {
     int compteurTimer;
     int nbSecondes;
     int chronoTour;
-    //CoordsIsometric chemin[nbPM]; //Alloué dynamiquement et free ou RAZ à chaque fin de tour de joueur
 
 } InteractionExterieure;
+
+typedef struct {
+
+    Bitmap tabSpriteMenu[NB_SPRITE_MENU_PRINCIPAL];
+    bool menuPrincipalIntro;
+    bool menuPrincipal; //permet de rester dans la boucle de cette page
+    bool lancer;
+    bool lancerHover;
+    bool lancerClique;
+    bool charger;
+    bool chargerHover;
+    bool chargerClique;
+    bool quitter;
+    bool quitterHover;
+    bool quitterClique;
+
+} PageMenuPrincipal;
+
+typedef struct {
+    PageMenuPrincipal menuPrincipal;
+}Pages;
 
 typedef struct {
     CoordsXY coordsXY;
@@ -96,6 +117,7 @@ typedef struct {
     ALLEGRO_BITMAP* tabBitmap[NB_BITMAP];
     InteractionExterieure interactionExterieure;
     Map map; //carte du jeu
+    Pages pages;
     bool dessin;
     bool endGame;
     bool outOfBorder;

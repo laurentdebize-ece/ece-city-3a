@@ -25,11 +25,11 @@ void bitmapSpriteInit(Simcity* simcity){
     simcity->map.spriteTile[HERBE].spriteX = 32;
     simcity->map.spriteTile[HERBE].spriteY = 3;
 
-    simcity->map.spriteTile[HOOVER_TILE].image = &simcity->tabBitmap[BITMAP_MAP];
-    simcity->map.spriteTile[HOOVER_TILE].spriteLargeur = 20;
-    simcity->map.spriteTile[HOOVER_TILE].spriteHauteur = 20;
-    simcity->map.spriteTile[HOOVER_TILE].spriteX = 4;
-    simcity->map.spriteTile[HOOVER_TILE].spriteY = 3;
+    simcity->map.spriteTile[HOVER_TILE].image = &simcity->tabBitmap[BITMAP_MAP];
+    simcity->map.spriteTile[HOVER_TILE].spriteLargeur = 20;
+    simcity->map.spriteTile[HOVER_TILE].spriteHauteur = 20;
+    simcity->map.spriteTile[HOVER_TILE].spriteX = 4;
+    simcity->map.spriteTile[HOVER_TILE].spriteY = 3;
 
 }
 
@@ -68,7 +68,7 @@ void afficherHoverMap(Simcity* simcity){
     for (int x = 0; x < NBCELLULEX ; ++x) {
         for (int y = 0; y < NBCELLULEY; ++y) {
             if (simcity->interactionExterieure.mouse.celluleXY.celluleX == simcity->map.mapTile[x][y].coordsXY.celluleX && simcity->interactionExterieure.mouse.celluleXY.celluleY == simcity->map.mapTile[x][y].coordsXY.celluleY){
-                al_draw_bitmap_region(*(simcity->map.spriteTile[HOOVER_TILE].image), simcity->map.spriteTile[HOOVER_TILE].spriteX, simcity->map.spriteTile[HOOVER_TILE].spriteY, simcity->map.spriteTile[HOOVER_TILE].spriteLargeur, simcity->map.spriteTile[HOOVER_TILE].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
+                al_draw_bitmap_region(*(simcity->map.spriteTile[HOVER_TILE].image), simcity->map.spriteTile[HOVER_TILE].spriteX, simcity->map.spriteTile[HOVER_TILE].spriteY, simcity->map.spriteTile[HOVER_TILE].spriteLargeur, simcity->map.spriteTile[HOVER_TILE].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
             }
         }
     }
