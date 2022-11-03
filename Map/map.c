@@ -1,6 +1,7 @@
 #include "map.h"
 #include "../Structures/structures.h"
 
+
 void initDataMap(Simcity* simcity){
     for (int x = 0; x < NBCELLULEX; ++x) {
         for (int y = 0; y < NBCELLULEY ; ++y) {
