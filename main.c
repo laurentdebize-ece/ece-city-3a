@@ -123,6 +123,6 @@ int main() {
     boucletestMenuPrincipal(&simcity);
     boucleTest(&simcity);
     libererAll(&simcity);
-
+    printf("Hello pierre");
     return 0;
 }
