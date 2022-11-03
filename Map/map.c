@@ -55,6 +55,7 @@ void outOfBorder(Simcity* simcity){
 }
 
 void afficherMap(Simcity* simcity){
+    al_clear_to_color(al_map_rgb(0,0,0));
     for (int x = 0; x < NBCELLULEX; ++x) {
         for (int y = 0; y < NBCELLULEY; ++y) {
             if (simcity->map.mapTile[x][y].typeBloc == 0){

@@ -91,10 +91,27 @@ void calculHover(Simcity * simcity){
         simcity->pages.menuPrincipal.chargerHover = true;
     } else if(simcity->allegro.event.mouse.x >= 262 && simcity->allegro.event.mouse.x <= 262 + simcity->pages.menuPrincipal.tabSpriteMenu[QUITTER].spriteLargeur && simcity->allegro.event.mouse.y >= 540 && simcity->allegro.event.mouse.y <= 540 + simcity->pages.menuPrincipal.tabSpriteMenu[QUITTER].spriteHauteur){
         simcity->pages.menuPrincipal.quitterHover = true;
-    } else {
+    }else {
         simcity->pages.menuPrincipal.lancerHover = false;
         simcity->pages.menuPrincipal.chargerHover = false;
         simcity->pages.menuPrincipal.quitterHover = false;
+    }
+}
+
+void detectionClique(Simcity * simcity){
+    if(simcity->allegro.event.mouse.button == 1 && simcity->allegro.event.mouse.x >= 262 && simcity->allegro.event.mouse.x <= 262 + simcity->pages.menuPrincipal.tabSpriteMenu[LANCER].spriteLargeur && simcity->allegro.event.mouse.y >= 80 && simcity->allegro.event.mouse.y <= 80 + simcity->pages.menuPrincipal.tabSpriteMenu[LANCER].spriteHauteur){
+        simcity->pages.menuPrincipal.lancerClique = true;
+        simcity->pages.menuPrincipal.menuPrincipal = 1;
+    } else if(simcity->allegro.event.mouse.button == 1 && simcity->allegro.event.mouse.x >= 262 && simcity->allegro.event.mouse.x <= 262 + simcity->pages.menuPrincipal.tabSpriteMenu[CHARGER].spriteLargeur && simcity->allegro.event.mouse.y >= 310 && simcity->allegro.event.mouse.y <= 310 + simcity->pages.menuPrincipal.tabSpriteMenu[CHARGER].spriteHauteur){
+        simcity->pages.menuPrincipal.chargerClique = true;
+    } else if(simcity->allegro.event.mouse.button == 1 && simcity->allegro.event.mouse.x >= 262 && simcity->allegro.event.mouse.x <= 262 + simcity->pages.menuPrincipal.tabSpriteMenu[QUITTER].spriteLargeur && simcity->allegro.event.mouse.y >= 540 && simcity->allegro.event.mouse.y <= 540 + simcity->pages.menuPrincipal.tabSpriteMenu[QUITTER].spriteHauteur){
+        simcity->pages.menuPrincipal.quitterClique = true;
+        simcity->endGame = 1;
+        simcity->pages.menuPrincipal.menuPrincipal = 1;
+    } else {
+        simcity->pages.menuPrincipal.lancerClique = false;
+        simcity->pages.menuPrincipal.chargerClique = false;
+        simcity->pages.menuPrincipal.quitterClique = false;
     }
 }
 

@@ -5,6 +5,7 @@
 
 void initDataMenuPrincipal(Simcity* simcity);
 void calculHover(Simcity * simcity);
+void detectionClique(Simcity * simcity);
 void afficherMenuPrincipal(Simcity* simcity);
 
 

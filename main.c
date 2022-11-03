@@ -70,7 +70,7 @@ void boucleTest(Simcity* simcity){
 }
 
 void boucletestMenuPrincipal(Simcity* simcity){
-    while (!simcity->endGame) {
+    while (!simcity->pages.menuPrincipal.menuPrincipal) {
 
         al_wait_for_event(simcity->allegro.queue, &simcity->allegro.event);
 
@@ -92,6 +92,7 @@ void boucletestMenuPrincipal(Simcity* simcity){
                 switch (simcity->allegro.event.mouse.button) {
                     case 1:{
                         calculHover(simcity);
+                        detectionClique(simcity);
                         simcity->dessin = true;
                         break;
                     }
@@ -99,7 +100,6 @@ void boucletestMenuPrincipal(Simcity* simcity){
                 break;
             }
             case ALLEGRO_EVENT_MOUSE_BUTTON_UP:{
-
                 break;
             }
             case ALLEGRO_EVENT_TIMER:{
@@ -120,9 +120,8 @@ void boucletestMenuPrincipal(Simcity* simcity){
 int main() {
     Simcity simcity = {0};
     initAll(&simcity);
-    simcity.pages.menuPrincipal.menuPrincipalIntro = 1;
-    //boucleTest(&simcity);
     boucletestMenuPrincipal(&simcity);
+    boucleTest(&simcity);
     libererAll(&simcity);
 
     return 0;
