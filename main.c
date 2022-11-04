@@ -42,6 +42,7 @@ void boucleTest(Simcity* simcity){
                 switch (simcity->allegro.event.mouse.button) {
                     case 1:{
                         poserTerrainVague(simcity);
+                        poserRoute(simcity);
                         simcity->dessin = true;
                         break;
                     }
