@@ -32,6 +32,18 @@ void bitmapSpriteInit(Simcity* simcity){
     simcity->map.spriteTile[HOVER_TILE].spriteX = 4;
     simcity->map.spriteTile[HOVER_TILE].spriteY = 3;
 
+    simcity->map.spriteTile[TERRAIN_VAGUE].image = &simcity->tabBitmap[BITMAP_MAP];
+    simcity->map.spriteTile[TERRAIN_VAGUE].spriteLargeur = 60;
+    simcity->map.spriteTile[TERRAIN_VAGUE].spriteHauteur = 60;
+    simcity->map.spriteTile[TERRAIN_VAGUE].spriteX = 135;
+    simcity->map.spriteTile[TERRAIN_VAGUE].spriteY = 3;
+
+    simcity->map.spriteTile[MAISON].image = &simcity->tabBitmap[BITMAP_MAP];
+    simcity->map.spriteTile[MAISON].spriteLargeur = 60;
+    simcity->map.spriteTile[MAISON].spriteHauteur = 60;
+    simcity->map.spriteTile[MAISON].spriteX = 59;
+    simcity->map.spriteTile[MAISON].spriteY = 3;
+
 }
 
 void calculPositionSourisEnCelluleXY(Simcity* simcity) {
@@ -49,9 +61,9 @@ void calculPositionSourisEnCelluleXY(Simcity* simcity) {
 
 void outOfBorder(Simcity* simcity){
     if(simcity->allegro.coordonneesSourisX >= 111 && simcity->allegro.coordonneesSourisX <= 1011 && simcity->allegro.coordonneesSourisY <= 700 && simcity->allegro.coordonneesSourisY > 0){
-        simcity->outOfBorder = 1;
+        simcity->outOfBorder = 1; // souris sur la map
     }else{
-        simcity->outOfBorder = 0;
+        simcity->outOfBorder = 0; // souris en dehors de la map
     }
 }
 
@@ -61,6 +73,12 @@ void afficherMap(Simcity* simcity){
         for (int y = 0; y < NBCELLULEY; ++y) {
             if (simcity->map.mapTile[x][y].typeBloc == 0){
                 al_draw_bitmap_region(*(simcity->map.spriteTile[HERBE].image), simcity->map.spriteTile[HERBE].spriteX, simcity->map.spriteTile[HERBE].spriteY, simcity->map.spriteTile[HERBE].spriteLargeur, simcity->map.spriteTile[HERBE].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
+            }
+            else if (simcity->map.mapTile[x][y].typeBloc == 1){
+                al_draw_bitmap_region(*(simcity->map.spriteTile[TERRAIN_VAGUE].image), simcity->map.spriteTile[TERRAIN_VAGUE].spriteX, simcity->map.spriteTile[TERRAIN_VAGUE].spriteY, simcity->map.spriteTile[TERRAIN_VAGUE].spriteLargeur, simcity->map.spriteTile[TERRAIN_VAGUE].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
+            }
+            else if (simcity->map.mapTile[x][y].typeBloc == 2){
+                al_draw_bitmap_region(*(simcity->map.spriteTile[MAISON].image), simcity->map.spriteTile[MAISON].spriteX, simcity->map.spriteTile[MAISON].spriteY, simcity->map.spriteTile[MAISON].spriteLargeur, simcity->map.spriteTile[MAISON].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
             }
         }
     }
@@ -74,4 +92,35 @@ void afficherHoverMap(Simcity* simcity){
             }
         }
     }
+}
+
+// permet de savoir si on peut placer un terrain vague
+int isTerrainVaguePossible(Simcity* simcity){
+    if (simcity->toolBox.terrainVagueEnMain == 1 && simcity->outOfBorder && simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == 0){
+        for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 3; ++x) {
+            for (int y = simcity->interactionExterieure.mouse.celluleXY.celluleY; y < simcity->interactionExterieure.mouse.celluleXY.celluleY + 3; ++y) {
+                if (simcity->map.mapTile[x][y].typeBloc != 0 || x > NBCELLULEX || y > NBCELLULEY){
+                    return 0;
+                }
+            }
+        }
+        return 1;
+    }
+    return 0;
+}
+
+void poserTerrainVague(Simcity* simcity){
+    if (simcity->allegro.event.mouse.button == 1 && isTerrainVaguePossible(simcity)){
+        simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc = 1;
+        for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 3; ++x) {
+            for (int y = simcity->interactionExterieure.mouse.celluleXY.celluleY; y < simcity->interactionExterieure.mouse.celluleXY.celluleY + 3; ++y) {
+                if (simcity->interactionExterieure.mouse.celluleXY.celluleX == x && simcity->interactionExterieure.mouse.celluleXY.celluleY == y){
+                    simcity->map.mapTile[x][y].typeBloc = 1;
+                }else{
+                    simcity->map.mapTile[x][y].typeBloc = -1; // permet de ne pas faire bug l'affchage des maisons
+                }
+            }
+        }
+    }
+
 }

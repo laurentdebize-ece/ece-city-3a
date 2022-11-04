@@ -82,9 +82,6 @@ void initDataMenuPrincipal(Simcity* simcity){
 }
 
 void calculHover(Simcity * simcity){
-    if (simcity->allegro.event.mouse.button == 1){
-        simcity->pages.menuPrincipal.menuPrincipalIntro = 0;
-    }
     if(simcity->allegro.event.mouse.x >= 262 && simcity->allegro.event.mouse.x <= 262 + simcity->pages.menuPrincipal.tabSpriteMenu[LANCER].spriteLargeur && simcity->allegro.event.mouse.y >= 80 && simcity->allegro.event.mouse.y <= 80 + simcity->pages.menuPrincipal.tabSpriteMenu[LANCER].spriteHauteur){
         simcity->pages.menuPrincipal.lancerHover = true;
     } else if(simcity->allegro.event.mouse.x >= 262 && simcity->allegro.event.mouse.x <= 262 + simcity->pages.menuPrincipal.tabSpriteMenu[CHARGER].spriteLargeur && simcity->allegro.event.mouse.y >= 310 && simcity->allegro.event.mouse.y <= 310 + simcity->pages.menuPrincipal.tabSpriteMenu[CHARGER].spriteHauteur){
@@ -99,7 +96,9 @@ void calculHover(Simcity * simcity){
 }
 
 void detectionClique(Simcity * simcity){
-    if(simcity->allegro.event.mouse.button == 1 && simcity->allegro.event.mouse.x >= 262 && simcity->allegro.event.mouse.x <= 262 + simcity->pages.menuPrincipal.tabSpriteMenu[LANCER].spriteLargeur && simcity->allegro.event.mouse.y >= 80 && simcity->allegro.event.mouse.y <= 80 + simcity->pages.menuPrincipal.tabSpriteMenu[LANCER].spriteHauteur){
+    if (simcity->allegro.event.mouse.button == 1 && simcity->pages.menuPrincipal.menuPrincipalIntro){
+        simcity->pages.menuPrincipal.menuPrincipalIntro = 0;
+    }else if(simcity->allegro.event.mouse.button == 1 && simcity->allegro.event.mouse.x >= 262 && simcity->allegro.event.mouse.x <= 262 + simcity->pages.menuPrincipal.tabSpriteMenu[LANCER].spriteLargeur && simcity->allegro.event.mouse.y >= 80 && simcity->allegro.event.mouse.y <= 80 + simcity->pages.menuPrincipal.tabSpriteMenu[LANCER].spriteHauteur){
         simcity->pages.menuPrincipal.lancerClique = true;
         simcity->pages.menuPrincipal.menuPrincipal = 1;
     } else if(simcity->allegro.event.mouse.button == 1 && simcity->allegro.event.mouse.x >= 262 && simcity->allegro.event.mouse.x <= 262 + simcity->pages.menuPrincipal.tabSpriteMenu[CHARGER].spriteLargeur && simcity->allegro.event.mouse.y >= 310 && simcity->allegro.event.mouse.y <= 310 + simcity->pages.menuPrincipal.tabSpriteMenu[CHARGER].spriteHauteur){

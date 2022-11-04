@@ -9,5 +9,6 @@ void calculPositionSourisEnCelluleXY(Simcity* simcity);
 void outOfBorder(Simcity* simcity);
 void afficherMap(Simcity* simcity);
 void afficherHoverMap(Simcity* simcity);
+void poserTerrainVague(Simcity* simcity);
 
 #endif

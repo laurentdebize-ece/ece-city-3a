@@ -18,8 +18,9 @@
 #define SCREEN_HAUTEUR 768 //const taille écran haut
 
 enum BITMAP{BITMAP_MAP, BITMAP_MENU_PRINCIPAL_INTRO, BITMAP_MENU_PRINCIPAL, BITMAP_BOUTTON_MENU_PRINCIPAL,NB_BITMAP};
-enum SPRITE_MAP {HERBE, HOVER_TILE,NB_SPRITE_MAP};
+enum SPRITE_MAP {HERBE, HOVER_TILE, MAISON, TERRAIN_VAGUE,NB_SPRITE_MAP};
 enum SPRITE_MENU_PRINCIPAL { INTRO , FOND,LANCER, LANCER_HOVER, LANCER_CLIQUE, CHARGER, CHARGER_HOVER, CHARGER_CLIQUE, QUITTER, QUITTER_HOVER, QUITTER_CLIQUE,NB_SPRITE_MENU_PRINCIPAL};
+enum{ ROUTE, HABITATION,NIVEAU1, NIVEAU2,NB_SPRITE_TOOL_BOX};
 
 typedef struct {
     ALLEGRO_DISPLAY* display;
@@ -111,6 +112,11 @@ typedef struct {
 
 } Map;
 
+typedef struct {
+    Bitmap tabSpriteToolBox[NB_SPRITE_TOOL_BOX];
+    bool terrainVagueEnMain;
+} ToolBox;
+
 
 typedef struct {
     Allegro allegro;// Contient tous les éléments ALLEGRO
@@ -118,6 +124,7 @@ typedef struct {
     InteractionExterieure interactionExterieure;
     Map map; //carte du jeu
     Pages pages;
+    ToolBox toolBox;
     bool dessin;
     bool endGame;
     bool outOfBorder;
