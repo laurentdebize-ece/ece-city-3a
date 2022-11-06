@@ -8,6 +8,8 @@
 #include "Map/map.h"
 #include "Pages/MenuPrincipal/menuPrincipal.h"
 
+#include "noemie.h"
+
 void initAll(Simcity* simcity){
     srand(time(NULL));
     installAllegro();
@@ -139,8 +141,16 @@ void mainAntoine() {
 
 }
 
+void mainNoemie() {
+    Simcity simcity = {0};
+    noemie(&simcity);
+    libererAll(&simcity);
+
+}
+
 // appeler son main afin de tester les fonctions
 int main(){
     mainAntoine();
+    //mainNoemie();
     return 0;
 }

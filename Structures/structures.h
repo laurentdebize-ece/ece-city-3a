@@ -129,6 +129,7 @@ typedef struct {
     bool dessin;
     bool endGame;
     bool outOfBorder;
+    int argent;
 
 } Simcity;
 
