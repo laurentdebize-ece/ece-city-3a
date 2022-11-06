@@ -1,7 +1,9 @@
 #include "banque.h"
-/*
-void initBanque(Simcity* simcity) {
+/*      !!! PAS LE PLUS PRATIQUE JE PENSE !!!
+void initBanqueEtPrix(Simcity* simcity) {
     simcity->argent = SOLDEINITIAL;
+    simcity->habitation.prixTerrainVague = PRIX_TERRAIN_VAGUE;
+    ...
 }
 
 void payerBanque(Simcity* simcity) {
@@ -32,6 +34,25 @@ void recevoirImpots(Simcity* simcity) {
     if(simcity->batiment->cycleFini == 1) { // a mettre dans la fonction d'amelirotation du batiment directement ????
         impotTot = simcity->batiment->nbHabitants * IMPOT;
         simcity->argent += impotTot;
+    }
+}
+
+ !!! PLUTOT FAIRE CA JE PENSE !!!
+    # plus réutilisable et facile d'utilisation
+
+void retirerArgent(Simcity* simcity, int sommeARetirer){
+    simcity->argent -= sommeARetirer;
+}
+
+void payerBanque(Simcity* simcity){
+    if (simcity->habitation.achatTerrainVague){
+        retirerArgent(simcity,simcity->habitation.prixTerrainVague);
+    }else if(simcity->habitation.achatPompier){
+        retirerArgent(simcity,simcity->habitation.prixPompier);
+    }else if(simcity->habitation.achatChateauEau){
+        retirerArgent(simcity,simcity->habitation.prixChateauEau);
+    }else if(simcity->habitation.achatElectricite){
+        retirerArgent(simcity,simcity->habitation.prixElectricite);
     }
 }
  */

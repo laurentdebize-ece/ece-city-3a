@@ -118,6 +118,16 @@ typedef struct {
     bool routeEnMain;
 } ToolBox;
 
+typedef struct {
+    bool achatTerrainVague;
+    bool achatPompier;
+    bool achatChateauEau;
+    bool achatElectricite;
+    int prixTerrainVague;
+    int prixPompier;
+    int prixChateauEau;
+    int prixElectricite;
+} Habitation;
 
 typedef struct {
     Allegro allegro;// Contient tous les éléments ALLEGRO
@@ -126,6 +136,7 @@ typedef struct {
     Map map; //carte du jeu
     Pages pages;
     ToolBox toolBox;
+    Habitation habitation;
     bool dessin;
     bool endGame;
     bool outOfBorder;
