@@ -8,6 +8,8 @@
 #include "Map/map.h"
 #include "Pages/MenuPrincipal/menuPrincipal.h"
 
+#include "noemie.h"
+
 void initAll(Simcity* simcity){
     srand(time(NULL));
     installAllegro();
@@ -41,6 +43,8 @@ void boucleTest(Simcity* simcity){
             case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:{
                 switch (simcity->allegro.event.mouse.button) {
                     case 1:{
+                        poserTerrainVague(simcity);
+                        poserRoute(simcity);
                         simcity->dessin = true;
                         break;
                     }
@@ -79,6 +83,7 @@ void boucletestMenuPrincipal(Simcity* simcity){
 
             case ALLEGRO_EVENT_DISPLAY_CLOSE:{
                 simcity->endGame = true;
+                simcity->pages.menuPrincipal.menuPrincipal = true;
                 break;
             }
             case ALLEGRO_EVENT_MOUSE_AXES:{
@@ -117,12 +122,35 @@ void boucletestMenuPrincipal(Simcity* simcity){
     }
 }
 
-int main() {
+// main antoine pour tester ses fonctions
+void mainAntoine() {
     Simcity simcity = {0};
     initAll(&simcity);
     boucletestMenuPrincipal(&simcity);
+    /*simcity.map.mapTile[0][0].typeBloc = 2;
+    simcity.map.mapTile[0][1].typeBloc = 4;
+    simcity.map.mapTile[0][2].typeBloc = 4;
+    simcity.map.mapTile[1][0].typeBloc = 4;
+    simcity.map.mapTile[1][1].typeBloc = 4;
+    simcity.map.mapTile[1][2].typeBloc = 4;
+    simcity.map.mapTile[2][0].typeBloc = 4;
+    simcity.map.mapTile[2][1].typeBloc = 4;
+    simcity.map.mapTile[2][2].typeBloc = 4;*/
     boucleTest(&simcity);
     libererAll(&simcity);
-    printf("Hello pierre");
+
+}
+
+void mainNoemie() {
+    Simcity simcity = {0};
+    noemie(&simcity);
+    libererAll(&simcity);
+
+}
+
+// appeler son main afin de tester les fonctions
+int main(){
+    mainAntoine();
+    //mainNoemie();
     return 0;
 }
