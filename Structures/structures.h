@@ -72,7 +72,6 @@ typedef struct {
     int compteurTimer;
     int nbSecondes;
     int chronoTour;
-
 } InteractionExterieure;
 
 typedef struct {
