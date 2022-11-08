@@ -17,6 +17,7 @@ void declarerAllegro(Simcity* simcity){
     simcity->allegro.display = NULL;
     simcity->allegro.queue = NULL;
     simcity->allegro.timer = NULL;
+    simcity->allegro.chrono = NULL;
 }
 
 void registerEvents(Simcity* simcity){
