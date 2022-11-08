@@ -10,6 +10,7 @@
 #define COUTROUTE 10 //par unite de surface
 #define COUTTERRAINVAGUE 1000
 #define COUTCASERNE 10000
+
 /*
 void initBanque(Simcity* simcity);
 void payerBanque(Simcity* simcity);

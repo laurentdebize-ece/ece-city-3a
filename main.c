@@ -8,9 +8,11 @@
 #include "Map/map.h"
 #include "Pages/MenuPrincipal/menuPrincipal.h"
 #include "time.h"
+#include "Timers/timers.h"
+#include "Batiments/batiments.h"
 
 #include "noemie.h"
-#include "Timers/timers.h"
+
 
 void initAll(Simcity* simcity){
     srand(time(NULL));
@@ -147,13 +149,13 @@ void mainAntoine() {
     libererAll(&simcity);
 
 }
-
+/*
 void mainNoemie() {
     Simcity simcity = {0};
     noemie(&simcity);
     libererAll(&simcity);
 
-}
+}*/
 
 // appeler son main afin de tester les fonctions
 int main(){

@@ -128,6 +128,8 @@ typedef struct {
     int timerBatiment;
     int compteurEvolution;
     int nbHabitants;
+    int capaciteElectrique;
+    int capaciteEau;
 } Batiment;
 
 typedef struct {
