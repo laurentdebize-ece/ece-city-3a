@@ -144,8 +144,7 @@ typedef struct {
     bool endGame;
     bool outOfBorder;
     int argent;
-    int mois;
-    int annee;
+    int mois, annee, secondes, minutes;
     int nbBatiments; //a mettre a jour a chaque fois qu'on cree un batiment
     Batiment tabBatiment; //remplir le tableau avec le nouveau batiment a chaque fois qu'il est crée
 
