@@ -59,7 +59,6 @@ typedef struct {
 
 } Souris;
 
-
 typedef struct {
     bool tabTouches[10];//Permet de connaître quelle touche est enfoncée
     bool tab;
@@ -72,7 +71,6 @@ typedef struct {
     int compteurTimer;
     int nbSecondes;
     int chronoTour;
-
 } InteractionExterieure;
 
 typedef struct {
@@ -127,7 +125,12 @@ typedef struct {
     int prixPompier;
     int prixChateauEau;
     int prixElectricite;
-} Habitation;
+    int timerBatiment;
+    int compteurEvolution;
+    int nbHabitants;
+    int capaciteElectrique;
+    int capaciteEau;
+} Batiment;
 
 typedef struct {
     Allegro allegro;// Contient tous les éléments ALLEGRO
@@ -136,11 +139,15 @@ typedef struct {
     Map map; //carte du jeu
     Pages pages;
     ToolBox toolBox;
-    Habitation habitation;
+    Batiment batiment;
     bool dessin;
     bool endGame;
     bool outOfBorder;
     int argent;
+    int mois;
+    int annee;
+    int nbBatiments; //a mettre a jour a chaque fois qu'on cree un batiment
+    Batiment tabBatiment; //remplir le tableau avec le nouveau batiment a chaque fois qu'il est crée
 
 } Simcity;
 

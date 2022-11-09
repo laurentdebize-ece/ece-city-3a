@@ -7,8 +7,12 @@
 #include "Structures/structures.h"
 #include "Map/map.h"
 #include "Pages/MenuPrincipal/menuPrincipal.h"
+#include "time.h"
+#include "Timers/timers.h"
+#include "Batiments/batiments.h"
 
 #include "noemie.h"
+
 
 void initAll(Simcity* simcity){
     srand(time(NULL));
@@ -56,7 +60,12 @@ void boucleTest(Simcity* simcity){
                 break;
             }
             case ALLEGRO_EVENT_TIMER:{
-
+                /*timerDate(simcity);
+                afficherDate(simcity);
+                for (int i = 0; i < simcity->nbBatiments; ++i) {
+                    timerBatiment(simcity);
+                    evolutionBatiment(simcity);
+                }*/
                 simcity->dessin = true;
 
                 if (simcity->dessin) {
@@ -140,13 +149,13 @@ void mainAntoine() {
     libererAll(&simcity);
 
 }
-
+/*
 void mainNoemie() {
     Simcity simcity = {0};
     noemie(&simcity);
     libererAll(&simcity);
 
-}
+}*/
 
 // appeler son main afin de tester les fonctions
 int main(){

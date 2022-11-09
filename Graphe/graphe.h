@@ -23,6 +23,7 @@ typedef struct {
 
 // cellule du tableau = sommet de la map
 typedef struct {
+    struct Arc* arc;
     int id;
     enum construction type;
     coordonnees coord;
