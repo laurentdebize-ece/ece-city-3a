@@ -18,6 +18,11 @@ void initDataMap(Simcity* simcity){
     bitmapSpriteInit(simcity);
 }
 
+void toolboxSpriteInit (Simcity* simcity){
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX].image = &simcity->tabBitmap[BITMAP_TOOLBOX];
+}
+
+
 void bitmapSpriteInit(Simcity* simcity){
 
     simcity->map.spriteTile[HERBE].image = &simcity->tabBitmap[BITMAP_MAP];
@@ -90,8 +95,13 @@ void outOfBorder(Simcity* simcity){
     }
 }
 
+void afficherToolbox (Simcity* simcity){
+    al_draw_bitmap(*(simcity->toolBox.tabSpriteToolBox[TOOLBOX].image),0,0,0);
+}
+
 void afficherMap(Simcity* simcity){
     al_clear_to_color(al_map_rgb(0,0,0));
+    afficherToolbox(simcity);
     for (int x = 0; x < NBCELLULEX; ++x) {
         for (int y = 0; y < NBCELLULEY; ++y) {
             if (simcity->map.mapTile[x][y].typeBloc == 0){
@@ -128,6 +138,7 @@ void afficherHoverMap(Simcity* simcity){
         }
     }
 }
+
 
 // permet de savoir si on peut placer un terrain vague
 int isTerrainVaguePossible(Simcity* simcity){

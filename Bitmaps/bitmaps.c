@@ -17,11 +17,16 @@ void bitmapCreateBoutonMenuPrincipal(Simcity* simcity){
     simcity->tabBitmap[BITMAP_BOUTTON_MENU_PRINCIPAL] = al_load_bitmap("../Sources/img/boutonMenuPrincipal.png");
 }
 
+void bitmapCreateToolbox (Simcity* simcity){
+    simcity->tabBitmap[BITMAP_TOOLBOX] = al_load_bitmap("../Sources/img/Toolbox.png");
+}
+
 void bitmapCreateAll(Simcity* simcity){
     bitmapCreateMap(simcity);
     bitmapCreateMenuPrincipal(simcity);
     bitmapCreateMenuPrincipalIntro(simcity);
     bitmapCreateBoutonMenuPrincipal(simcity);
+    bitmapCreateToolbox(simcity);
 }
 
 void libererBitmapMap(Simcity* simcity){
@@ -40,10 +45,16 @@ void libererBitmapBoutonMenuPrincipal(Simcity* simcity){
     al_destroy_bitmap(simcity->tabBitmap[BITMAP_BOUTTON_MENU_PRINCIPAL]);
 }
 
+void libererBitmapToolbox (Simcity* simcity){
+    al_destroy_bitmap(simcity->tabBitmap[BITMAP_TOOLBOX]);
+}
+
 void libererBitmapAll(Simcity* simcity){
     libererBitmapMap(simcity);
     libererBitmapMenuPrincipal(simcity);
     libererBitmapMenuPrincipalIntro(simcity);
     libererBitmapBoutonMenuPrincipal(simcity);
+    libererBitmapToolbox(simcity);
+
 }
 
