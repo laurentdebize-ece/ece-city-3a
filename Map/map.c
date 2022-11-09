@@ -16,9 +16,10 @@ void initDataMap(Simcity* simcity){
         }
     }
     bitmapSpriteInit(simcity);
+    toolboxSpriteInit(simcity);
 }
 
-void toolboxSpriteInit (Simcity* simcity){
+void toolboxSpriteInit(Simcity* simcity){
     simcity->toolBox.tabSpriteToolBox[TOOLBOX].image = &simcity->tabBitmap[BITMAP_TOOLBOX];
 }
 
