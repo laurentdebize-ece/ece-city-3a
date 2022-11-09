@@ -24,7 +24,7 @@ void initDataMenuPrincipal(Simcity* simcity){
     simcity->pages.menuPrincipal.tabSpriteMenu[LANCER_HOVER].spriteX = 36;
     simcity->pages.menuPrincipal.tabSpriteMenu[LANCER_HOVER].spriteY = 219;
     simcity->pages.menuPrincipal.tabSpriteMenu[LANCER_HOVER].spriteLargeur = 500;
-    simcity->pages.menuPrincipal.tabSpriteMenu[LANCER_HOVER].spriteHauteur = 150;
+    simcity->pages.menuPrincipal.tabSpriteMenu[LANCER_HOVER].spriteHauteur = 160;
 
     simcity->pages.menuPrincipal.tabSpriteMenu[LANCER_CLIQUE].image = &simcity->tabBitmap[BITMAP_BOUTTON_MENU_PRINCIPAL];
     simcity->pages.menuPrincipal.tabSpriteMenu[LANCER_CLIQUE].spriteX = 36;
