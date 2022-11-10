@@ -28,4 +28,9 @@ void timerBatiment(Simcity* simcity) {
         }
     }
 }
- */
+
+void afficherTimerDate(Simcity* simcity) {
+    ALLEGRO_FONT* arial172;
+    ALLEGRO_COLOR black = al_map_rgb(0, 0, 0);
+    al_draw_text(arial172, black, 95, 620, 0, 'aa');
+}*/

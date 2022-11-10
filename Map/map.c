@@ -1,5 +1,6 @@
 #include "map.h"
 #include "../Structures/structures.h"
+#include "../Timers/timers.h"
 
 
 void initDataMap(Simcity* simcity){
@@ -103,9 +104,15 @@ void afficherToolbox (Simcity* simcity){
     al_draw_bitmap(*(simcity->toolBox.tabSpriteToolBox[TOOLBOX].image),0,0,0);
 }
 
+void afficherBarreCompteurs (Simcity* simcity) {
+    al_draw_bitmap(simcity->tabBitmap[BITMAP_BARRECOMPTEURS],95, 620, 0);
+}
+
 void afficherMap(Simcity* simcity){
     al_clear_to_color(al_map_rgb(0,0,0));
     afficherToolbox(simcity);
+    afficherBarreCompteurs(simcity);
+    //afficherTimerDate(simcity);
     for (int x = 0; x < NBCELLULEX; ++x) {
         for (int y = 0; y < NBCELLULEY; ++y) {
             if (simcity->map.mapTile[x][y].typeBloc == 0){
