@@ -148,6 +148,7 @@ void mainAntoine() {
     simcity.map.mapTile[2][1].typeBloc = 4;
     simcity.map.mapTile[2][2].typeBloc = 4;*/
     //simcity.toolBox.routeEnMain = 1;
+    simcity.toolBox.routeEnMain = 1;
     boucleTest(&simcity);
     libererAll(&simcity);
 

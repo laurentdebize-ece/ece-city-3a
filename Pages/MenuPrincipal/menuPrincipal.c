@@ -42,7 +42,7 @@ void initDataMenuPrincipal(Simcity* simcity){
     simcity->pages.menuPrincipal.tabSpriteMenu[CHARGER_HOVER].spriteX = 592;
     simcity->pages.menuPrincipal.tabSpriteMenu[CHARGER_HOVER].spriteY = 219;
     simcity->pages.menuPrincipal.tabSpriteMenu[CHARGER_HOVER].spriteLargeur = 500;
-    simcity->pages.menuPrincipal.tabSpriteMenu[CHARGER_HOVER].spriteHauteur = 150;
+    simcity->pages.menuPrincipal.tabSpriteMenu[CHARGER_HOVER].spriteHauteur = 160;
 
     simcity->pages.menuPrincipal.tabSpriteMenu[CHARGER_CLIQUE].image = &simcity->tabBitmap[BITMAP_BOUTTON_MENU_PRINCIPAL];
     simcity->pages.menuPrincipal.tabSpriteMenu[CHARGER_CLIQUE].spriteX = 592;
@@ -60,7 +60,7 @@ void initDataMenuPrincipal(Simcity* simcity){
     simcity->pages.menuPrincipal.tabSpriteMenu[QUITTER_HOVER].spriteX = 1148;
     simcity->pages.menuPrincipal.tabSpriteMenu[QUITTER_HOVER].spriteY = 219;
     simcity->pages.menuPrincipal.tabSpriteMenu[QUITTER_HOVER].spriteLargeur = 500;
-    simcity->pages.menuPrincipal.tabSpriteMenu[QUITTER_HOVER].spriteHauteur = 150;
+    simcity->pages.menuPrincipal.tabSpriteMenu[QUITTER_HOVER].spriteHauteur = 160;
 
     simcity->pages.menuPrincipal.tabSpriteMenu[QUITTER_CLIQUE].image = &simcity->tabBitmap[BITMAP_BOUTTON_MENU_PRINCIPAL];
     simcity->pages.menuPrincipal.tabSpriteMenu[QUITTER_CLIQUE].spriteX = 1148;

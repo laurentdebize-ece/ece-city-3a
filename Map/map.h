@@ -12,5 +12,6 @@ void afficherMap(Simcity* simcity);
 void afficherHoverMap(Simcity* simcity);
 void poserTerrainVague(Simcity* simcity);
 void poserRoute(Simcity* simcity);
+void afficherPrevisionRoute(Simcity* simcity);
 
 #endif
