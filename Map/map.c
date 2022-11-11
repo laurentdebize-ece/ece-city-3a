@@ -88,9 +88,6 @@ void calculPositionSourisEnCelluleXY(Simcity* simcity) {
             }
         }
     }
-    if(simcity->allegro.event.mouse.button == 1 ){
-        printf("x = %d, y = %d \n", simcity->interactionExterieure.mouse.celluleXY.celluleX, simcity->interactionExterieure.mouse.celluleXY.celluleY);
-    }
 }
 
 void outOfBorder(Simcity* simcity){

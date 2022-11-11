@@ -45,8 +45,9 @@ typedef struct Graphe {
     Cellule grille[LIGNES][COLONNES];
 }Graphe;
 
-Graphe *lire_graphe(char *nomFichier);
-pCellule *CreerArete( pCellule* Cellule, int s1, int s2);
+Graphe *lire_graphe(Graphe *graphe, char *nomFichier);
+void recupdonne(Graphe *graphe);
+void ecrire_graphe(Graphe *graphe, char *nomFichier);
 
 
 #endif //ECE_CITY_3A_GRAPHE_H
