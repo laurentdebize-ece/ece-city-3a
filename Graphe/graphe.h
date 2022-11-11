@@ -6,6 +6,9 @@
 #include <stdbool.h>
 #include <string.h>
 
+#define LIGNES 35
+#define COLONNES 45
+
 enum construction {route, chateau, centrale, terrain, cabane, maison, immeuble, gratteCiel};
 // route = 1
 // chateau = 2
@@ -21,31 +24,29 @@ typedef struct {
     int y;
 } coordonnees;
 
-// cellule du tableau = sommet de la map
-typedef struct {
+/////SOMMET/////
+typedef struct Cellule{
     struct Arc* arc;
-    int id;
     enum construction type;
     coordonnees coord;
-    int capacite;
-} cellule;
-typedef struct cellule *pCellule;
+}Cellule;
+typedef struct Cellule *pCellule;
 
-// liste chainée de cellules
-typedef struct{
-    int sommet;
+//////ARC/////
+struct Arc{
     struct Arc *arc_suivant;
-}Arc;
+    int sommet;
+};
 typedef struct Arc *pArc;
 
-typedef struct {
+//////GRAPHE/////
+typedef struct Graphe {
     int ordre;
-    pCellule *pCellule;
-    cellule **grille;
+    Cellule grille[LIGNES][COLONNES];
 }Graphe;
 
 Graphe *lire_graphe(char *nomFichier);
-pCellule *CreerArete( pCellule* cellule, int s1, int s2);
+pCellule *CreerArete( pCellule* Cellule, int s1, int s2);
 
 
 #endif //ECE_CITY_3A_GRAPHE_H
