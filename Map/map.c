@@ -1,7 +1,8 @@
 #include "map.h"
 #include "../Structures/structures.h"
 #include "../Timers/timers.h"
-
+#include "../Banque/banque.h"
+#include "../Batiments//batiments.h"
 
 void initDataMap(Simcity* simcity){
     for (int x = 0; x < NBCELLULEX; ++x) {
@@ -113,7 +114,8 @@ void afficherMap(Simcity* simcity){
     afficherToolbox(simcity);
     afficherBarreCompteurs(simcity);
     afficherTimerDate(*simcity);
-    //afficherTimerDate(simcity);
+    afficherArgent(*simcity);
+    afficherNbHabitantsTot(*simcity);
     for (int x = 0; x < NBCELLULEX; ++x) {
         for (int y = 0; y < NBCELLULEY; ++y) {
             if (simcity->map.mapTile[x][y].typeBloc == TYPE_HERBE){
