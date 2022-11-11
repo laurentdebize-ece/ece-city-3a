@@ -112,6 +112,7 @@ void afficherMap(Simcity* simcity){
     al_clear_to_color(al_map_rgb(0,0,0));
     afficherToolbox(simcity);
     afficherBarreCompteurs(simcity);
+    afficherTimerDate(*simcity);
     //afficherTimerDate(simcity);
     for (int x = 0; x < NBCELLULEX; ++x) {
         for (int y = 0; y < NBCELLULEY; ++y) {

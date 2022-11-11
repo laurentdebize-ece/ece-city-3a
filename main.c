@@ -11,8 +11,6 @@
 #include "Timers/timers.h"
 #include "Batiments/batiments.h"
 
-#include "noemie.h"
-
 
 void initAll(Simcity* simcity){
     srand(time(NULL));
@@ -21,6 +19,7 @@ void initAll(Simcity* simcity){
     initAllegroAll(simcity);
     initDataMap(simcity);
     initDataMenuPrincipal(simcity);
+    initCompteurs(simcity);
 }
 
 void boucleTest(Simcity* simcity){
@@ -60,9 +59,8 @@ void boucleTest(Simcity* simcity){
                 break;
             }
             case ALLEGRO_EVENT_TIMER:{
-                /*timerDate(simcity);
-                afficherDate(simcity);
-                timerTempsJeu(Simcity* simcity);
+//                timerDate(simcity);
+                /*timerTempsJeu(simcity);
                 afficherTempsJeu(simCity);
                 for (int i = 0; i < simcity->nbBatiments; ++i) {
                     timerBatiment(simcity);
@@ -75,6 +73,8 @@ void boucleTest(Simcity* simcity){
                     if (simcity->outOfBorder){
                         afficherHoverMap(simcity);
                     }
+                    //afficherTimerDate(*simcity);
+                    afficherTimerTempsJeu(*simcity);
                     al_flip_display();
                     simcity->dessin = false;
                 }
@@ -152,13 +152,6 @@ void mainAntoine() {
     libererAll(&simcity);
 
 }
-/*
-void mainNoemie() {
-    Simcity simcity = {0};
-    noemie(&simcity);
-    libererAll(&simcity);
-
-}*/
 
 // appeler son main afin de tester les fonctions
 int main(){

@@ -22,6 +22,7 @@ enum BITMAP{BITMAP_MAP, BITMAP_TOOLBOX,BITMAP_BARRECOMPTEURS, BITMAP_MENU_PRINCI
 enum SPRITE_MAP {HERBE, HOVER_TILE, ROUTE, TERRAIN_VAGUE, CABANE, MAISON, IMMEUBLE, GRATTE_CIEL, NB_SPRITE_MAP};
 enum SPRITE_MENU_PRINCIPAL { INTRO , FOND,LANCER, LANCER_HOVER, LANCER_CLIQUE, CHARGER, CHARGER_HOVER, CHARGER_CLIQUE, QUITTER, QUITTER_HOVER, QUITTER_CLIQUE,NB_SPRITE_MENU_PRINCIPAL};
 enum SPRITE_BOITE_A_OUTIL {HABITATION,NIVEAU1, TOOLBOX, NIVEAU2, NB_SPRITE_TOOL_BOX};
+enum COLOR{ BLACK, WHITE, ORANGE};
 
 typedef struct {
     ALLEGRO_DISPLAY* display;
@@ -35,6 +36,7 @@ typedef struct {
     int compteurSecondes; //Permet de savoir le nombre de secondes écoulées pour le chrono
     int compteur;
     ALLEGRO_SAMPLE* music[10]; //tableau qui contient tous les sons du jeu
+    ALLEGRO_COLOR color[3];
 
 } Allegro;
 
@@ -134,6 +136,15 @@ typedef struct {
 } Batiment;
 
 typedef struct {
+    int mois;
+    int annee;
+    int secondes;
+    int minutes;
+    bool zeroDevantMinutes;
+    bool zeroDevantSecondes;
+}Timers;
+
+typedef struct {
     Allegro allegro;// Contient tous les éléments ALLEGRO
     ALLEGRO_BITMAP* tabBitmap[NB_BITMAP];
     InteractionExterieure interactionExterieure;
@@ -145,8 +156,8 @@ typedef struct {
     bool endGame;
     bool outOfBorder;
     int argent;
-    int mois, annee, secondes, minutes;
     int nbBatiments; //a mettre a jour a chaque fois qu'on cree un batiment
+    Timers timers;
     Batiment tabBatiment; //remplir le tableau avec le nouveau batiment a chaque fois qu'il est crée
 
 } Simcity;
@@ -158,10 +169,13 @@ void registerEvents(Simcity* simcity);
 void displayCreate(Simcity* simCity);
 void queueCreate(Simcity* simcity);
 void timerCreate(Simcity* simcity);
+void fontsCreate(Simcity* simcity);
+void colorCreate(Simcity* simcity);
 void initAllegroAll(Simcity* simcity);
 void libererDisplay(Simcity* simcity);
 void libererTimer(Simcity* simcity);
 void libererQueue(Simcity* simcity);
+void libererFonts(Simcity* simcity);
 void libererAll(Simcity* simcity);
 
 
