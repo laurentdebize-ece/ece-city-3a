@@ -230,10 +230,10 @@ void calculHoverToolBox(Simcity* simcity){
 
 void detectionCliqueToolBox(Simcity* simcity){
     if (simcity->allegro.event.mouse.button == 1 && simcity->allegro.event.mouse.x >= simcity->toolBox.tabSpriteToolBox[ROUTE_].screenX && simcity->allegro.event.mouse.x <= simcity->toolBox.tabSpriteToolBox[ROUTE_].screenX + simcity->toolBox.tabSpriteToolBox[ROUTE_].spriteLargeur && simcity->allegro.event.mouse.y >= simcity->toolBox.tabSpriteToolBox[ROUTE_].screenY && simcity->allegro.event.mouse.y <= simcity->toolBox.tabSpriteToolBox[ROUTE_].screenY + simcity->toolBox.tabSpriteToolBox[ROUTE_].spriteHauteur ){
-        simcity->toolBox.maisonClique = 1;
+        simcity->toolBox.routeClique = 1;
         simcity->toolBox.routeEnMain = 1;
     }else if (simcity->allegro.event.mouse.button == 1 && simcity->allegro.event.mouse.x >= simcity->toolBox.tabSpriteToolBox[MAISON_].screenX && simcity->allegro.event.mouse.x <= simcity->toolBox.tabSpriteToolBox[MAISON_].screenX + simcity->toolBox.tabSpriteToolBox[MAISON_].spriteLargeur && simcity->allegro.event.mouse.y > simcity->toolBox.tabSpriteToolBox[MAISON_].screenY && simcity->allegro.event.mouse.y <= simcity->toolBox.tabSpriteToolBox[MAISON_].screenY + simcity->toolBox.tabSpriteToolBox[MAISON_].spriteHauteur ){
-        simcity->toolBox.routeClique = 1;
+        simcity->toolBox.maisonClique = 1;
         simcity->toolBox.terrainVagueEnMain = 1;
     }else if (simcity->allegro.event.mouse.button == 1 && simcity->allegro.event.mouse.x >= simcity->toolBox.tabSpriteToolBox[EAU].screenX && simcity->allegro.event.mouse.x <= simcity->toolBox.tabSpriteToolBox[EAU].screenX + simcity->toolBox.tabSpriteToolBox[EAU].spriteLargeur && simcity->allegro.event.mouse.y >= simcity->toolBox.tabSpriteToolBox[EAU].screenY && simcity->allegro.event.mouse.y <= simcity->toolBox.tabSpriteToolBox[EAU].screenY + simcity->toolBox.tabSpriteToolBox[EAU].spriteHauteur ){
         simcity->toolBox.eauClique = 1;
