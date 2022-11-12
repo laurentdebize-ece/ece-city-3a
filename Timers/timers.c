@@ -36,9 +36,7 @@ void timerTempsJeu(Simcity* simcity) {
     } else {modulo60 = FALSE;}
     int secondes = (int)compteurChrono;
     int tempSecondes;
-    if(secondes < 60) {
-        tempSecondes = secondes;
-    }else{ tempSecondes = secondes - 60;}
+    tempSecondes = secondes - (60*simcity->timers.minutes);
     simcity->timers.secondes = tempSecondes;
     if (compteurChrono%60 == 0 &&  modulo60 == TRUE) {
         simcity->timers.minutes++;
