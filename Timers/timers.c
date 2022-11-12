@@ -26,13 +26,22 @@ void timerDate(Simcity* simcity) {
         simcity->timers.mois = 1;
     }
 }
-/*
 
 void timerTempsJeu(Simcity* simcity) {
-    long long compteurTempsJeu = al_get_timer_count(simcity->allegro.chrono);
-    if (compteurTempsJeu%60 == 0) {
+    long long compteurChrono = al_get_timer_count(simcity->allegro.chrono);
+    long long compteurTimer = al_get_timer_count(simcity->allegro.timer);
+    bool modulo60 = FALSE;
+    if (compteurTimer%60 == 0) {
+        modulo60 = TRUE;
+    } else {modulo60 = FALSE;}
+    int secondes = (int)compteurChrono;
+    int tempSecondes;
+    if(secondes < 60) {
+        tempSecondes = secondes;
+    }else{ tempSecondes = secondes - 60;}
+    simcity->timers.secondes = tempSecondes;
+    if (compteurChrono%60 == 0 &&  modulo60 == TRUE) {
         simcity->timers.minutes++;
-        simcity->timers.secondes = 0;
     }
     if(simcity->timers.minutes >= 10) {
         simcity->timers.zeroDevantMinutes = FALSE;
@@ -41,7 +50,7 @@ void timerTempsJeu(Simcity* simcity) {
         simcity->timers.zeroDevantSecondes = FALSE;
     } else {simcity->timers.zeroDevantSecondes = TRUE;}
 }
-
+/*
 void timerBatiment(Simcity* simcity) {
     for (int i = 0; i < simcity->nbBatiments; ++i) {
         if(simcity->batiment[i].timerBatiment % 15 == 0) {
@@ -95,8 +104,8 @@ void afficherTimerDate(Simcity simcity) {
 }
 
 void afficherTimerTempsJeu(Simcity simcity) {
-    al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 550, 725, 0, "%lld", al_get_timer_count(simcity.allegro.chrono));
-    /*
+    //al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 550, 725, 0, "%lld", al_get_timer_count(simcity.allegro.chrono));
+
     if(simcity.timers.zeroDevantMinutes == TRUE && simcity.timers.zeroDevantSecondes == TRUE) {
         al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 550, 725, 0, "0%d : 0%d", simcity.timers.minutes, simcity.timers.secondes);
     }
@@ -109,5 +118,4 @@ void afficherTimerTempsJeu(Simcity simcity) {
     else if(simcity.timers.zeroDevantMinutes == FALSE && simcity.timers.zeroDevantSecondes == FALSE) {
         al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 550, 725, 0, "%d : %d", simcity.timers.minutes, simcity.timers.secondes);
     }
-     */
 }
