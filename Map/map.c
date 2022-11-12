@@ -3,6 +3,7 @@
 #include "../Timers/timers.h"
 #include "../Banque/banque.h"
 #include "../Batiments//batiments.h"
+#include "../ToolBox/toolbox.h"
 
 void initDataMap(Simcity* simcity){
     for (int x = 0; x < NBCELLULEX; ++x) {
@@ -21,9 +22,7 @@ void initDataMap(Simcity* simcity){
     toolboxSpriteInit(simcity);
 }
 
-void toolboxSpriteInit(Simcity* simcity){
-    simcity->toolBox.tabSpriteToolBox[TOOLBOX].image = &simcity->tabBitmap[BITMAP_TOOLBOX];
-}
+
 
 
 void bitmapSpriteInit(Simcity* simcity){
@@ -98,9 +97,7 @@ void outOfBorder(Simcity* simcity){
     }
 }
 
-void afficherToolbox (Simcity* simcity){
-    al_draw_bitmap(*(simcity->toolBox.tabSpriteToolBox[TOOLBOX].image),0,0,0);
-}
+
 
 void afficherBarreCompteurs (Simcity* simcity) {
     al_draw_bitmap(simcity->tabBitmap[BITMAP_BARRECOMPTEURS],95, 620, 0);
@@ -400,47 +397,3 @@ void poserRoute(Simcity *simcity){
         }
     }
 
-/*
- * void afficherSortIop(Dofus* dofus){
-    for (int i = 0; i < NB_SORTS_IOP; ++i) {
-        al_draw_bitmap_region(dofus->tabBitmap[BITMAP_SORTS],dofus->tabSortsIop[i].spriteSorts[i].spriteX,dofus->tabSortsIop[i].spriteSorts[i].spriteY,dofus->tabSortsIop[i].spriteSorts[i].spriteLargeur,dofus->tabSortsIop[i].spriteSorts[i].spriteHauteur,dofus->tabSortsIop[i].spriteSorts[i].screenXFixe,dofus->tabSortsIop[i].spriteSorts[i].screenYFixe,0);
-        if (dofus->tabSortsIop[i].sortSelectionne == true){
-            al_draw_bitmap_region(dofus->tabBitmap[BITMAP_SORTS],dofus->tabSortsIop[i].spriteSorts[i].spriteX,dofus->tabSortsIop[i].spriteSorts[i].spriteY,dofus->tabSortsIop[i].spriteSorts[i].spriteLargeur,dofus->tabSortsIop[i].spriteSorts[i].spriteHauteur,dofus->tabSortsIop[i].spriteSorts[i].screenX,dofus->tabSortsIop[i].spriteSorts[i].screenY,0);
-
-        }
-    }
-}
-void afficherSortMouvIop(Dofus* dofus){
-    for (int i = 0; i < NB_SORTS_IOP; ++i) {
-        if (dofus->tabSortsIop[i].sortSelectionne == true) {
-            dofus->tabSortsIop[i].spriteSorts[i].screenX = dofus->allegro.event.mouse.x - dofus->tabSortsIop[i].offSetX;
-            dofus->tabSortsIop[i].spriteSorts[i].screenY = dofus->allegro.event.mouse.y - dofus->tabSortsIop[i].offSetY;
-        }
-    }
-}
-
- void cliqueSortIop(Dofus* dofus){
-    for (int i = 0; i < NB_SORTS_IOP; ++i) {
-        if (dofus->tabSortsIop[i].sortSelectionne == true){
-            dofus->tabSortsIop[i].sortSelectionne = false;
-            dofus->sortEnMain = false;
-            dofus->sortlance = true;
-            dofus->tabSortsIop[i].sortLance = true;
-            initPositionSortMouvIop(dofus);
-            break; // permet de lancer le sort
-        }
-        if (dofus->sortEnMain == false) {
-            if (dofus->tabSortsIop[i].sortSelectionne != true && dofus->allegro.event.mouse.x <= dofus->tabSortsIop[i].spriteSorts[i].screenXFixe + dofus->tabSortsIop[i].spriteSorts[i].spriteLargeur && dofus->allegro.event.mouse.x >= dofus->tabSortsIop[i].spriteSorts[i].screenXFixe && dofus->allegro.event.mouse.y <= dofus->tabSortsIop[i].spriteSorts[i].screenYFixe + dofus->tabSortsIop[i].spriteSorts[i].spriteHauteur && dofus->allegro.event.mouse.y >= dofus->tabSortsIop[i].spriteSorts[i].screenYFixe) {
-                dofus->tabSortsIop[i].sortSelectionne = true;
-                dofus->sortEnMain = true;
-                dofus->tabSortsIop[i].offSetX = dofus->allegro.event.mouse.x - dofus->tabSortsIop[i].spriteSorts[i].screenX;
-                dofus->tabSortsIop[i].offSetY = dofus->allegro.event.mouse.y - dofus->tabSortsIop[i].spriteSorts[i].screenY;
-                break; // selectionne le sort cliquer et suit la souris
-            }
-        }
-    }
-}
-
-
-
- */

@@ -10,6 +10,7 @@
 #include "time.h"
 #include "Timers/timers.h"
 #include "Batiments/batiments.h"
+#include "ToolBox/toolbox.h"
 
 
 void initAll(Simcity* simcity){
@@ -39,6 +40,7 @@ void boucleTest(Simcity* simcity){
                 simcity->allegro.coordonneesSourisX = simcity->allegro.event.mouse.x;
                 simcity->allegro.coordonneesSourisY = simcity->allegro.event.mouse.y;
                 calculPositionSourisEnCelluleXY(simcity);
+                calculHoverToolBox(simcity);
                 outOfBorder(simcity);
                 simcity->dessin = true;
                 break;
@@ -48,6 +50,7 @@ void boucleTest(Simcity* simcity){
                     case 1:{
                         poserTerrainVague(simcity);
                         poserRoute(simcity);
+                        detectionCliqueToolBox(simcity);
                         simcity->dessin = true;
                         break;
                     }
