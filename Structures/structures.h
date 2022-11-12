@@ -157,6 +157,8 @@ typedef struct {
     int prixChateauEau;
     int prixElectricite;
     int timerBatiment;
+    bool timerCree;
+    int dateCreation;
     int compteurEvolution;
     int nbHabitants;
     int capaciteElectrique;
