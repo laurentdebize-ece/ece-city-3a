@@ -8,20 +8,25 @@ void initCompteurs(Simcity* simcity) {
     simcity->timers.zeroDevantMinutes = TRUE;
     simcity->timers.zeroDevantSecondes = TRUE;
 }
-/*
+
 void timerDate(Simcity* simcity) {
-    long long compteurTimer = al_get_timer_count(simcity->allegro.chrono);
-    if (compteurTimer%15 == 0) {
+    long long compteurChrono = al_get_timer_count(simcity->allegro.chrono);
+    long long compteurTimer = al_get_timer_count(simcity->allegro.timer);
+    bool modulo60 = FALSE;
+    if (compteurTimer%60 == 0) {
+        modulo60 = TRUE;
+    } else {modulo60 = FALSE;}
+    if (compteurChrono%15 == 0 && modulo60 == TRUE) {
         simcity->timers.mois++;
     }
-    if (compteurTimer%180 == 0) {
+    if (compteurChrono%180 == 0 &&  modulo60 == TRUE) {
         simcity->timers.annee++;
     }
-    printf("%d/%d ", simcity->timers.mois, simcity->timers.annee);
-    //if (simcity->mois % 12 == 0) {
-    //    simcity->mois = 0;
-    //}
+    if (simcity->timers.mois % 13 == 0) {
+        simcity->timers.mois = 1;
+    }
 }
+/*
 
 void timerTempsJeu(Simcity* simcity) {
     long long compteurTempsJeu = al_get_timer_count(simcity->allegro.chrono);
@@ -46,49 +51,47 @@ void timerBatiment(Simcity* simcity) {
 }*/
 
 void afficherTimerDate(Simcity simcity) {
-    al_draw_text(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 775, 725, 0, "MAY 2022");
-    //al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[WHITE], 775, 725, 0, "%d/%d", simcity.mois, simcity.annee);
-    /*switch(simcity.timers.mois) {
+    switch(simcity.timers.mois) {
         case 1 :
-            al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[WHITE], 775, 725, 0, "JANV %d", simcity.timers.annee);
+            al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 775, 725, 0, "JANV %d", simcity.timers.annee);
             break;
         case 2 :
-            al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[WHITE], 775, 725, 0, "FEV %d", simcity.timers.annee);
+            al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 775, 725, 0, "FEV %d", simcity.timers.annee);
             break;
         case 3 :
-            al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[WHITE], 775, 725, 0, "MARS %d", simcity.timers.annee);
+            al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 775, 725, 0, "MARS %d", simcity.timers.annee);
             break;
         case 4 :
-            al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[WHITE], 775, 725, 0, "AVR %d", simcity.timers.annee);
+            al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 775, 725, 0, "AVR %d", simcity.timers.annee);
             break;
         case 5 :
-            al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[WHITE], 775, 725, 0, "MAI %d", simcity.timers.annee);
+            al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 775, 725, 0, "MAI %d", simcity.timers.annee);
             break;
         case 6 :
-            al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[WHITE], 775, 725, 0, "JUIN %d", simcity.timers.annee);
+            al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 775, 725, 0, "JUIN %d", simcity.timers.annee);
             break;
         case 7 :
-            al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[WHITE], 775, 725, 0, "JUIL %d", simcity.timers.annee);
+            al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 775, 725, 0, "JUIL %d", simcity.timers.annee);
             break;
         case 8 :
-            al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[WHITE], 775, 725, 0, "AOUT %d", simcity.timers.annee);
+            al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 775, 725, 0, "AOUT %d", simcity.timers.annee);
             break;
         case 9 :
-            al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[WHITE], 775, 725, 0, "SEPT %d", simcity.timers.annee);
+            al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 775, 725, 0, "SEPT %d", simcity.timers.annee);
             break;
         case 10 :
-            al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[WHITE], 775, 725, 0, "OCT %d", simcity.timers.annee);
+            al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 775, 725, 0, "OCT %d", simcity.timers.annee);
             break;
         case 11 :
-            al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[WHITE], 775, 725, 0, "NOV %d", simcity.timers.annee);
+            al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 775, 725, 0, "NOV %d", simcity.timers.annee);
             break;
         case 12 :
-            al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[WHITE], 775, 725, 0, "DEC %d", simcity.timers.annee);
+            al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 775, 725, 0, "DEC %d", simcity.timers.annee);
             break;
         default:
             printf("ERREUR numero mois.\n");
             break;
-    }*/
+    }
 }
 
 void afficherTimerTempsJeu(Simcity simcity) {
