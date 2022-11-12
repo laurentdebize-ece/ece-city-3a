@@ -137,17 +137,8 @@ void mainAntoine() {
     Simcity simcity = {0};
     initAll(&simcity);
     boucletestMenuPrincipal(&simcity);
-    /*simcity.map.mapTile[0][0].typeBloc = 2;
-    simcity.map.mapTile[0][1].typeBloc = 4;
-    simcity.map.mapTile[0][2].typeBloc = 4;
-    simcity.map.mapTile[1][0].typeBloc = 4;
-    simcity.map.mapTile[1][1].typeBloc = 4;
-    simcity.map.mapTile[1][2].typeBloc = 4;
-    simcity.map.mapTile[2][0].typeBloc = 4;
-    simcity.map.mapTile[2][1].typeBloc = 4;
-    simcity.map.mapTile[2][2].typeBloc = 4;*/
     //simcity.toolBox.routeEnMain = 1;
-    simcity.toolBox.routeEnMain = 1;
+    //simcity.toolBox.terrainVagueEnMain = 1;
     boucleTest(&simcity);
     libererAll(&simcity);
 

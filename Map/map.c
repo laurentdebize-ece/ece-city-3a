@@ -139,6 +139,7 @@ void afficherMap(Simcity* simcity){
         }
     }
     afficherPrevisionRoute(simcity);
+    afficherPrevTerrainVague(simcity);
 }
 
 void afficherHoverMap(Simcity* simcity){
@@ -183,6 +184,12 @@ void poserTerrainVague(Simcity* simcity){
 
 }
 
+void afficherPrevTerrainVague(Simcity* simcity){
+    if (simcity->toolBox.terrainVagueEnMain && isTerrainVaguePossible(simcity)){
+        al_draw_bitmap_region(*(simcity->map.spriteTile[TERRAIN_VAGUE].image), simcity->map.spriteTile[TERRAIN_VAGUE].spriteX, simcity->map.spriteTile[TERRAIN_VAGUE].spriteY, simcity->map.spriteTile[TERRAIN_VAGUE].spriteLargeur, simcity->map.spriteTile[TERRAIN_VAGUE].spriteHauteur,simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].coordsXY.screenX,simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].coordsXY.screenY,0);
+    }
+}
+
 int isRoutePossible(Simcity* simcity){
     if (simcity->toolBox.routeEnMain == 1 && simcity->outOfBorder && simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_HERBE){
         return 1;
@@ -218,7 +225,7 @@ int routePossibleChemin(Simcity* simcity){
 }
 
 void afficherPrevisionRoute(Simcity* simcity) {
-    if (routePossibleChemin(simcity)) {
+    if (routePossibleChemin(simcity) && simcity->map.cliqueRoute) {
         if (simcity->map.creationRouteX < simcity->interactionExterieure.mouse.celluleXY.celluleX &&
             simcity->map.creationRouteY < simcity->interactionExterieure.mouse.celluleXY.celluleY){
             for (int x = simcity->map.creationRouteX; x <= simcity->map.creationRouteX + simcity->map.compteurCheminsX; ++x) {
