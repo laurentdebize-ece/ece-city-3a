@@ -61,7 +61,6 @@ void boucleTest(Simcity* simcity){
             case ALLEGRO_EVENT_TIMER:{
                 timerDate(simcity);
                 /*timerTempsJeu(simcity);
-                afficherTempsJeu(simCity);
                 for (int i = 0; i < simcity->nbBatiments; ++i) {
                     timerBatiment(simcity);
                     evolutionBatiment(simcity);
