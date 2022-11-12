@@ -7,6 +7,11 @@ void initCompteurs(Simcity* simcity) {
     simcity->timers.secondes = 0;
     simcity->timers.zeroDevantMinutes = TRUE;
     simcity->timers.zeroDevantSecondes = TRUE;
+    /*for (int i = 0; i < simcity->nbBatiments; ++i) {
+        simcity->batiment[i].timerCree == FALSE
+        simcity->batiment[i].dateCreation = 0;
+        simcity->batiment[i].timerBatiment = 0;
+    }*/
 }
 
 void timerDate(Simcity* simcity) {
@@ -50,8 +55,19 @@ void timerTempsJeu(Simcity* simcity) {
 }
 /*
 void timerBatiment(Simcity* simcity) {
+    long long compteurChrono = al_get_timer_count(simcity->allegro.chrono);
+    long long compteurTimer = al_get_timer_count(simcity->allegro.timer);
+    bool modulo60 = FALSE;
+    if (compteurTimer%60 == 0) {
+        modulo60 = TRUE;
+    } else {modulo60 = FALSE;}
     for (int i = 0; i < simcity->nbBatiments; ++i) {
-        if(simcity->batiment[i].timerBatiment % 15 == 0) {
+        if (simcity->batiment[i].timerCree == FALSE) {
+            simcity->batiment[i].dateCreation = (int) al_get_timer_count(simcity->allegro.chrono);
+            simcity->batiment[i].timerCree = TRUE;
+        }
+        simcity->batiment[i].timerBatiment = compteurChrono - simcity->batiment[i].dateCreation;
+        if(simcity->batiment[i].timerBatiment % 15 == 0 && modulo60 == TRUE) {
             simcity->batiment[i].compteurEvolution++;
         }
     }
@@ -102,8 +118,6 @@ void afficherTimerDate(Simcity simcity) {
 }
 
 void afficherTimerTempsJeu(Simcity simcity) {
-    //al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 550, 725, 0, "%lld", al_get_timer_count(simcity.allegro.chrono));
-
     if(simcity.timers.zeroDevantMinutes == TRUE && simcity.timers.zeroDevantSecondes == TRUE) {
         al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 550, 725, 0, "0%d : 0%d", simcity.timers.minutes, simcity.timers.secondes);
     }
