@@ -18,7 +18,7 @@ void bitmapCreateBoutonMenuPrincipal(Simcity* simcity){
 }
 
 void bitmapCreateToolbox (Simcity* simcity){
-    simcity->tabBitmap[BITMAP_TOOLBOX] = al_load_bitmap("../Sources/img/Toolbox.png");
+    simcity->tabBitmap[BITMAP_TOOLBOX] = al_load_bitmap("../Sources/img/bouton_toolbox.png");
 }
 
 void bitmapCreateAll(Simcity* simcity){

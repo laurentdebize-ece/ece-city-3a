@@ -20,7 +20,83 @@ void initDataMap(Simcity* simcity){
 }
 
 void toolboxSpriteInit(Simcity* simcity){
-    simcity->toolBox.tabSpriteToolBox[TOOLBOX].image = &simcity->tabBitmap[BITMAP_TOOLBOX];
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_FOND_GRIS].image = &simcity->tabBitmap[BITMAP_TOOLBOX];
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_FOND_GRIS].spriteLargeur = 111;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_FOND_GRIS].spriteHauteur = 360;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_FOND_GRIS].spriteX = 388;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_FOND_GRIS].spriteY = 15;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_FOND_GRIS].screenX = 0;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_FOND_GRIS].screenY = 0;
+
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_ROUTE].image = &simcity->tabBitmap[BITMAP_TOOLBOX];
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_ROUTE].spriteLargeur = 35;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_ROUTE].spriteHauteur = 35;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_ROUTE].spriteX = 13;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_ROUTE].spriteY = 15;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_ROUTE].screenX = 15;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_ROUTE].screenY = 15;
+
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_MAISON].image = &simcity->tabBitmap[BITMAP_TOOLBOX];
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_MAISON].spriteLargeur = 36;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_MAISON].spriteHauteur = 36;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_MAISON].spriteX = 62;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_MAISON].spriteY = 14;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_MAISON].screenX = 65;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_MAISON].screenY = 15;
+
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_ELEC].image = &simcity->tabBitmap[BITMAP_TOOLBOX];
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_ELEC].spriteLargeur = 35;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_ELEC].spriteHauteur = 35;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_ELEC].spriteX = 107;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_ELEC].spriteY = 14;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_ELEC].screenX = 15;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_ELEC].screenY = 65;
+
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_EAU].image = &simcity->tabBitmap[BITMAP_TOOLBOX];
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_EAU].spriteLargeur = 35;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_EAU].spriteHauteur = 35;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_EAU].spriteX = 152;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_EAU].spriteY = 14;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_EAU].screenX = 65;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_EAU].screenY = 65;
+
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_DEMOLIR].image = &simcity->tabBitmap[BITMAP_TOOLBOX];
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_DEMOLIR].spriteLargeur = 35;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_DEMOLIR].spriteHauteur = 35;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_DEMOLIR].spriteX = 196;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_DEMOLIR].spriteY = 14;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_DEMOLIR].screenX = 15;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_DEMOLIR].screenY = 115;
+
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_POMPIERS].image = &simcity->tabBitmap[BITMAP_TOOLBOX];
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_POMPIERS].spriteLargeur = 35;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_POMPIERS].spriteHauteur = 35;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_POMPIERS].spriteX = 338;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_POMPIERS].spriteY = 14;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_POMPIERS].screenX = 65;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_POMPIERS].screenY = 115;
+
+
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_NIVEAU1].image = &simcity->tabBitmap[BITMAP_TOOLBOX];
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_NIVEAU1].spriteLargeur = 35;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_NIVEAU1].spriteHauteur = 35;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_NIVEAU1].spriteX = 241;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_NIVEAU1].spriteY = 14;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_NIVEAU1].screenX = 15;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_NIVEAU1].screenY = 165;
+
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_NIVEAU2].image = &simcity->tabBitmap[BITMAP_TOOLBOX];
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_NIVEAU2].spriteLargeur = 35;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_NIVEAU2].spriteHauteur = 35;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_NIVEAU2].spriteX = 292;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_NIVEAU2].spriteY = 14;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_NIVEAU2].screenX = 65;
+    simcity->toolBox.tabSpriteToolBox[TOOLBOX_NIVEAU2].screenY = 165;
+
+
+
+
+
 }
 
 
@@ -100,7 +176,16 @@ void outOfBorder(Simcity* simcity){
 }
 
 void afficherToolbox (Simcity* simcity){
-    al_draw_bitmap(*(simcity->toolBox.tabSpriteToolBox[TOOLBOX].image),0,0,0);
+    al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[TOOLBOX_FOND_GRIS].image), simcity->toolBox.tabSpriteToolBox[TOOLBOX_FOND_GRIS].spriteX, simcity->toolBox.tabSpriteToolBox[TOOLBOX_FOND_GRIS].spriteY, simcity->toolBox.tabSpriteToolBox[TOOLBOX_FOND_GRIS].spriteLargeur, simcity->toolBox.tabSpriteToolBox[TOOLBOX_FOND_GRIS].spriteHauteur, simcity->toolBox.tabSpriteToolBox[TOOLBOX_FOND_GRIS].screenX, simcity->toolBox.tabSpriteToolBox[TOOLBOX_FOND_GRIS].screenY, 0);
+    al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[TOOLBOX_ROUTE].image), simcity->toolBox.tabSpriteToolBox[TOOLBOX_ROUTE].spriteX, simcity->toolBox.tabSpriteToolBox[TOOLBOX_ROUTE].spriteY, simcity->toolBox.tabSpriteToolBox[TOOLBOX_ROUTE].spriteLargeur, simcity->toolBox.tabSpriteToolBox[TOOLBOX_ROUTE].spriteHauteur, simcity->toolBox.tabSpriteToolBox[TOOLBOX_ROUTE].screenX, simcity->toolBox.tabSpriteToolBox[TOOLBOX_ROUTE].screenY, 0);
+    al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[TOOLBOX_MAISON].image), simcity->toolBox.tabSpriteToolBox[TOOLBOX_MAISON].spriteX, simcity->toolBox.tabSpriteToolBox[TOOLBOX_MAISON].spriteY, simcity->toolBox.tabSpriteToolBox[TOOLBOX_MAISON].spriteLargeur, simcity->toolBox.tabSpriteToolBox[TOOLBOX_MAISON].spriteHauteur, simcity->toolBox.tabSpriteToolBox[TOOLBOX_MAISON].screenX, simcity->toolBox.tabSpriteToolBox[TOOLBOX_MAISON].screenY, 0);
+    al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[TOOLBOX_ELEC].image), simcity->toolBox.tabSpriteToolBox[TOOLBOX_ELEC].spriteX, simcity->toolBox.tabSpriteToolBox[TOOLBOX_ELEC].spriteY, simcity->toolBox.tabSpriteToolBox[TOOLBOX_ELEC].spriteLargeur, simcity->toolBox.tabSpriteToolBox[TOOLBOX_ELEC].spriteHauteur, simcity->toolBox.tabSpriteToolBox[TOOLBOX_ELEC].screenX, simcity->toolBox.tabSpriteToolBox[TOOLBOX_ELEC].screenY, 0);
+    al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[TOOLBOX_EAU].image), simcity->toolBox.tabSpriteToolBox[TOOLBOX_EAU].spriteX, simcity->toolBox.tabSpriteToolBox[TOOLBOX_EAU].spriteY, simcity->toolBox.tabSpriteToolBox[TOOLBOX_EAU].spriteLargeur, simcity->toolBox.tabSpriteToolBox[TOOLBOX_EAU].spriteHauteur, simcity->toolBox.tabSpriteToolBox[TOOLBOX_EAU].screenX, simcity->toolBox.tabSpriteToolBox[TOOLBOX_EAU].screenY, 0);
+    al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[TOOLBOX_DEMOLIR].image), simcity->toolBox.tabSpriteToolBox[TOOLBOX_DEMOLIR].spriteX, simcity->toolBox.tabSpriteToolBox[TOOLBOX_DEMOLIR].spriteY, simcity->toolBox.tabSpriteToolBox[TOOLBOX_DEMOLIR].spriteLargeur, simcity->toolBox.tabSpriteToolBox[TOOLBOX_DEMOLIR].spriteHauteur, simcity->toolBox.tabSpriteToolBox[TOOLBOX_DEMOLIR].screenX, simcity->toolBox.tabSpriteToolBox[TOOLBOX_DEMOLIR].screenY, 0);
+    al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[TOOLBOX_POMPIERS].image), simcity->toolBox.tabSpriteToolBox[TOOLBOX_POMPIERS].spriteX, simcity->toolBox.tabSpriteToolBox[TOOLBOX_POMPIERS].spriteY, simcity->toolBox.tabSpriteToolBox[TOOLBOX_POMPIERS].spriteLargeur, simcity->toolBox.tabSpriteToolBox[TOOLBOX_POMPIERS].spriteHauteur, simcity->toolBox.tabSpriteToolBox[TOOLBOX_POMPIERS].screenX, simcity->toolBox.tabSpriteToolBox[TOOLBOX_POMPIERS].screenY, 0);
+    al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[TOOLBOX_NIVEAU1].image), simcity->toolBox.tabSpriteToolBox[TOOLBOX_NIVEAU1].spriteX, simcity->toolBox.tabSpriteToolBox[TOOLBOX_NIVEAU1].spriteY, simcity->toolBox.tabSpriteToolBox[TOOLBOX_NIVEAU1].spriteLargeur, simcity->toolBox.tabSpriteToolBox[TOOLBOX_NIVEAU1].spriteHauteur, simcity->toolBox.tabSpriteToolBox[TOOLBOX_NIVEAU1].screenX, simcity->toolBox.tabSpriteToolBox[TOOLBOX_NIVEAU1].screenY, 0);
+    al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[TOOLBOX_NIVEAU2].image), simcity->toolBox.tabSpriteToolBox[TOOLBOX_NIVEAU2].spriteX, simcity->toolBox.tabSpriteToolBox[TOOLBOX_NIVEAU2].spriteY, simcity->toolBox.tabSpriteToolBox[TOOLBOX_NIVEAU2].spriteLargeur, simcity->toolBox.tabSpriteToolBox[TOOLBOX_NIVEAU2].spriteHauteur, simcity->toolBox.tabSpriteToolBox[TOOLBOX_NIVEAU2].screenX, simcity->toolBox.tabSpriteToolBox[TOOLBOX_NIVEAU2].screenY, 0);
+
 }
 
 void afficherMap(Simcity* simcity){
