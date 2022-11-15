@@ -18,6 +18,7 @@ void declarerAllegro(Simcity* simcity){
     simcity->allegro.queue = NULL;
     simcity->allegro.timer = NULL;
     simcity->allegro.chrono = NULL;
+    simcity->allegro.fonts[0] = NULL;
 }
 
 void registerEvents(Simcity* simcity){
@@ -45,13 +46,23 @@ void timerCreate(Simcity* simcity){
     al_start_timer(simcity->allegro.chrono);
 }
 
+void fontsCreate(Simcity* simcity) {
+    simcity->allegro.fonts[0] =  al_load_font("../Sources/polices/barreCompteurs.ttf", 25, 0);
+}
+
+void colorCreate(Simcity* simcity) {
+    simcity->allegro.color[BLACK] = al_map_rgb(0,0,0);
+    simcity->allegro.color[WHITE] = al_map_rgb(255,255,255);
+}
+
 void initAllegroAll(Simcity* simcity){
     displayCreate(simcity);
     queueCreate(simcity);
     timerCreate(simcity);
     registerEvents(simcity);
     bitmapCreateAll(simcity);
-
+    fontsCreate(simcity);
+    colorCreate(simcity);
 }
 
 void libererDisplay(Simcity* simcity){
@@ -67,9 +78,14 @@ void libererQueue(Simcity* simcity){
     al_destroy_event_queue(simcity->allegro.queue);
 }
 
+void libererFonts(Simcity* simcity) {
+    al_destroy_font(simcity->allegro.fonts[0]);
+}
+
 void libererAll(Simcity* simcity){
     libererDisplay(simcity);
     libererQueue(simcity);
     libererTimer(simcity);
     libererBitmapAll(simcity);
+    libererFonts(simcity);
 }

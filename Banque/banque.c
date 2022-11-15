@@ -36,7 +36,12 @@ void recevoirImpots(Simcity* simcity) {
         simcity->argent += impotTot;
     }
 }
+*/
+void afficherArgent(Simcity simcity) {
+    al_draw_text(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 375, 725, 0, "20003");
+}
 
+ /*
  !!! PLUTOT FAIRE CA JE PENSE !!!
     # plus réutilisable et facile d'utilisation
 

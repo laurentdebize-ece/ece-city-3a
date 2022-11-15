@@ -10,8 +10,7 @@
 #include "time.h"
 #include "Timers/timers.h"
 #include "Batiments/batiments.h"
-
-#include "noemie.h"
+#include "ToolBox/toolbox.h"
 
 
 void initAll(Simcity* simcity){
@@ -21,6 +20,7 @@ void initAll(Simcity* simcity){
     initAllegroAll(simcity);
     initDataMap(simcity);
     initDataMenuPrincipal(simcity);
+    initCompteurs(simcity);
 }
 
 void boucleTest(Simcity* simcity){
@@ -40,6 +40,7 @@ void boucleTest(Simcity* simcity){
                 simcity->allegro.coordonneesSourisX = simcity->allegro.event.mouse.x;
                 simcity->allegro.coordonneesSourisY = simcity->allegro.event.mouse.y;
                 calculPositionSourisEnCelluleXY(simcity);
+                calculHoverToolBox(simcity);
                 outOfBorder(simcity);
                 simcity->dessin = true;
                 break;
@@ -49,6 +50,7 @@ void boucleTest(Simcity* simcity){
                     case 1:{
                         poserTerrainVague(simcity);
                         poserRoute(simcity);
+                        detectionCliqueToolBox(simcity);
                         simcity->dessin = true;
                         break;
                     }
@@ -60,9 +62,9 @@ void boucleTest(Simcity* simcity){
                 break;
             }
             case ALLEGRO_EVENT_TIMER:{
-                /*timerDate(simcity);
-                afficherDate(simcity);
-                for (int i = 0; i < simcity->nbBatiments; ++i) {
+                timerDate(simcity);
+                timerTempsJeu(simcity);
+                /*for (int i = 0; i < simcity->nbBatiments; ++i) {
                     timerBatiment(simcity);
                     evolutionBatiment(simcity);
                 }*/
@@ -73,6 +75,8 @@ void boucleTest(Simcity* simcity){
                     if (simcity->outOfBorder){
                         afficherHoverMap(simcity);
                     }
+                    //afficherTimerDate(*simcity);
+                    afficherTimerTempsJeu(*simcity);
                     al_flip_display();
                     simcity->dessin = false;
                 }
@@ -136,27 +140,12 @@ void mainAntoine() {
     Simcity simcity = {0};
     initAll(&simcity);
     boucletestMenuPrincipal(&simcity);
-    /*simcity.map.mapTile[0][0].typeBloc = 2;
-    simcity.map.mapTile[0][1].typeBloc = 4;
-    simcity.map.mapTile[0][2].typeBloc = 4;
-    simcity.map.mapTile[1][0].typeBloc = 4;
-    simcity.map.mapTile[1][1].typeBloc = 4;
-    simcity.map.mapTile[1][2].typeBloc = 4;
-    simcity.map.mapTile[2][0].typeBloc = 4;
-    simcity.map.mapTile[2][1].typeBloc = 4;
-    simcity.map.mapTile[2][2].typeBloc = 4;*/
     //simcity.toolBox.routeEnMain = 1;
+    //simcity.toolBox.terrainVagueEnMain = 1;
     boucleTest(&simcity);
     libererAll(&simcity);
 
 }
-/*
-void mainNoemie() {
-    Simcity simcity = {0};
-    noemie(&simcity);
-    libererAll(&simcity);
-
-}*/
 
 // appeler son main afin de tester les fonctions
 int main(){

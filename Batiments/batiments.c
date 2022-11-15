@@ -46,3 +46,6 @@ void evolutionBatiment(Simcity* simcity) {
     afficherBatiment(simcity);
 }
 */
+void afficherNbHabitantsTot(Simcity simcity) {
+    al_draw_text(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 225, 725, 0, "20003");
+}

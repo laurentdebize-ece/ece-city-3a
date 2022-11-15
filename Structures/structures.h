@@ -18,10 +18,13 @@
 #define SCREEN_LARGEUR 1024 //const taille écran large
 #define SCREEN_HAUTEUR 768 //const taille écran haut
 
-enum BITMAP{BITMAP_MAP, BITMAP_TOOLBOX,BITMAP_MENU_PRINCIPAL_INTRO, BITMAP_MENU_PRINCIPAL, BITMAP_BOUTTON_MENU_PRINCIPAL,NB_BITMAP};
+enum BITMAP{BITMAP_MAP, BITMAP_TOOLBOX,BITMAP_BARRECOMPTEURS, BITMAP_MENU_PRINCIPAL_INTRO, BITMAP_MENU_PRINCIPAL, BITMAP_BOUTTON_MENU_PRINCIPAL,NB_BITMAP};
 enum SPRITE_MAP {HERBE, HOVER_TILE, ROUTE, TERRAIN_VAGUE, CABANE, MAISON, IMMEUBLE, GRATTE_CIEL, NB_SPRITE_MAP};
 enum SPRITE_MENU_PRINCIPAL { INTRO , FOND,LANCER, LANCER_HOVER, LANCER_CLIQUE, CHARGER, CHARGER_HOVER, CHARGER_CLIQUE, QUITTER, QUITTER_HOVER, QUITTER_CLIQUE,NB_SPRITE_MENU_PRINCIPAL};
 enum SPRITE_BOITE_A_OUTIL {HABITATION,TOOLBOX_NIVEAU1, TOOLBOX_NIVEAU2, TOOLBOX_FOND_GRIS, TOOLBOX_ROUTE, TOOLBOX_MAISON, TOOLBOX_ELEC, TOOLBOX_EAU, TOOLBOX_DEMOLIR, TOOLBOX_POMPIERS, TOOLBOX_HOVER_ROUTE, NB_SPRITE_TOOL_BOX};
+//enum SPRITE_BOITE_A_OUTIL {ROUTE_, ROUTE_HOVER, ROUTE_CLIQUE,MAISON_, MAISON_HOVER, MAISON_CLIQUE,ELEC, ELEC_HOVER, ELEC_CLIQUE, EAU, EAU_HOVER, EAU_CLIQUE, DETRUIRE, DETRUIRE_HOVER, DETRUIRE_CLIQUE, VUE1, VUE1_HOVER, VUE1_CLIQUE,VUE2, VUE2_HOVER, VUE2_CLIQUE, POMPIER, POMPIER_HOVER, POMPIER_CLIQUE, NB_SPRITE_TOOL_BOX};
+enum COLOR{ BLACK, WHITE, ORANGE};
+enum TYPE_BLOC{TYPE_HERBE,TYPE_ROUTE,TYPE_TERRAIN_VAGUE,TYPE_CABANE,TYPE_MAISON,TYPE_IMMEUBLE,TYPE_GRATTE_CIEL, NB_TYPE_BLOC};
 
 typedef struct {
     ALLEGRO_DISPLAY* display;
@@ -35,6 +38,7 @@ typedef struct {
     int compteurSecondes; //Permet de savoir le nombre de secondes écoulées pour le chrono
     int compteur;
     ALLEGRO_SAMPLE* music[10]; //tableau qui contient tous les sons du jeu
+    ALLEGRO_COLOR color[3];
 
 } Allegro;
 
@@ -107,7 +111,10 @@ typedef struct {
     Tile mapTile[NBCELLULEX][NBCELLULEY];//Tableau à 2 dimensions de Tuiles qui permet de générer la map
     CoordsXY Origine;
     Bitmap spriteTile[NB_SPRITE_MAP]; //Permet de connaître les tuiles et leur position dans le .png
-    int compteurChemins;
+    bool cliqueRoute;
+    int compteurCheminsX, compteurCheminsY;
+    int creationRouteX, creationRouteY;
+
 
 } Map;
 
@@ -115,6 +122,30 @@ typedef struct {
     Bitmap tabSpriteToolBox[NB_SPRITE_TOOL_BOX];
     bool terrainVagueEnMain;
     bool routeEnMain;
+    bool pompierEnMain;
+    bool detruireEnMain;
+    bool elecEnMain;
+    bool eauEnMain;
+    bool vue1EnMain;
+    bool vue2EnMain;
+
+    bool routeHover;
+    bool maisonHover;
+    bool elecHover;
+    bool eauHover;
+    bool detruireHover;
+    bool vue1Hover;
+    bool vue2Hover;
+    bool pompierHover;
+    bool routeClique;
+    bool maisonClique;
+    bool elecClique;
+    bool eauClique;
+    bool detruireClique;
+    bool vue1Clique;
+    bool vue2Clique;
+    bool pompierClique;
+
 } ToolBox;
 
 typedef struct {
@@ -127,11 +158,22 @@ typedef struct {
     int prixChateauEau;
     int prixElectricite;
     int timerBatiment;
+    bool timerCree;
+    int dateCreation;
     int compteurEvolution;
     int nbHabitants;
     int capaciteElectrique;
     int capaciteEau;
 } Batiment;
+
+typedef struct {
+    int mois;
+    int annee;
+    int secondes;
+    int minutes;
+    bool zeroDevantMinutes;
+    bool zeroDevantSecondes;
+}Timers;
 
 typedef struct {
     Allegro allegro;// Contient tous les éléments ALLEGRO
@@ -145,9 +187,8 @@ typedef struct {
     bool endGame;
     bool outOfBorder;
     int argent;
-    int mois;
-    int annee;
     int nbBatiments; //a mettre a jour a chaque fois qu'on cree un batiment
+    Timers timers;
     Batiment tabBatiment; //remplir le tableau avec le nouveau batiment a chaque fois qu'il est crée
 
 } Simcity;
@@ -159,10 +200,13 @@ void registerEvents(Simcity* simcity);
 void displayCreate(Simcity* simCity);
 void queueCreate(Simcity* simcity);
 void timerCreate(Simcity* simcity);
+void fontsCreate(Simcity* simcity);
+void colorCreate(Simcity* simcity);
 void initAllegroAll(Simcity* simcity);
 void libererDisplay(Simcity* simcity);
 void libererTimer(Simcity* simcity);
 void libererQueue(Simcity* simcity);
+void libererFonts(Simcity* simcity);
 void libererAll(Simcity* simcity);
 
 
