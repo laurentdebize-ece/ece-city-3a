@@ -15,6 +15,9 @@ void poserElec(Simcity *simcity);
 void tournerBatiment(Simcity *simcity);
 void afficherPrevisionRoute(Simcity* simcity);
 void afficherPrevTerrainVague(Simcity* simcity);
+void afficherPrevElec(Simcity* simcity);
+void afficherPrevEau(Simcity* simcity);
+
 void poserBatiment(Simcity *simcity);
 
 #endif
