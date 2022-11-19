@@ -37,27 +37,50 @@ void recevoirImpots(Simcity* simcity) {
     }
 }
 */
-void afficherArgent(Simcity simcity) {
-    al_draw_text(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 375, 725, 0, "20003");
+void initBanque(Simcity* simcity){
+    simcity->argent = SOLDEINITIAL;
+    simcity->batiment.prixTerrainVague = COUTTERRAINVAGUE;
+    simcity->batiment.prixChateauEau = COUTCHATEAUEAU;
+    simcity->batiment.prixElectricite = COUTCENTRALE;
+    simcity->batiment.prixPompier = COUTCASERNE;
+    simcity->batiment.prixRoute = COUTROUTE;
 }
 
- /*
- !!! PLUTOT FAIRE CA JE PENSE !!!
-    # plus réutilisable et facile d'utilisation
+void afficherArgent(Simcity simcity) {
+    al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 325, 725, 0, " %d", simcity.argent);
+}
+
+bool isPayer(Simcity* simcity, int sommeARetirer){
+    if (simcity->argent - sommeARetirer < 0){
+        return false;
+    }else{
+        return true;
+    }
+}
 
 void retirerArgent(Simcity* simcity, int sommeARetirer){
-    simcity->argent -= sommeARetirer;
+    if (isPayer(simcity,sommeARetirer)){
+        simcity->argent -= sommeARetirer;
+    }
 }
 
 void payerBanque(Simcity* simcity){
-    if (simcity->habitation.achatTerrainVague){
-        retirerArgent(simcity,simcity->habitation.prixTerrainVague);
-    }else if(simcity->habitation.achatPompier){
-        retirerArgent(simcity,simcity->habitation.prixPompier);
-    }else if(simcity->habitation.achatChateauEau){
-        retirerArgent(simcity,simcity->habitation.prixChateauEau);
-    }else if(simcity->habitation.achatElectricite){
-        retirerArgent(simcity,simcity->habitation.prixElectricite);
+    if (simcity->banque.achatTerrainVague == 1){
+        retirerArgent(simcity,simcity->batiment.prixTerrainVague);
+        simcity->banque.achatTerrainVague = false;
+    }else if(simcity->banque.achatPompier == 1){
+        retirerArgent(simcity,simcity->batiment.prixPompier);
+        simcity->banque.achatPompier = false;
+
+    }else if(simcity->banque.achatChateauEau == 1){
+        retirerArgent(simcity,simcity->batiment.prixChateauEau);
+        simcity->banque.achatChateauEau = false;
+
+    }else if(simcity->banque.achatElectricite == 1){
+        retirerArgent(simcity,simcity->batiment.prixElectricite);
+        simcity->banque.achatElectricite = false;
+    }else if(simcity->banque.achatRoute == 1){
+        retirerArgent(simcity,simcity->batiment.prixRoute * (simcity->map.compteurCheminsX + simcity->map.compteurCheminsY + 1));
+        simcity->banque.achatRoute = false;
     }
 }
- */

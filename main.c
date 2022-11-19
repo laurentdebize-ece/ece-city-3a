@@ -11,6 +11,7 @@
 #include "Timers/timers.h"
 #include "Batiments/batiments.h"
 #include "ToolBox/toolbox.h"
+#include "Banque/banque.h"
 
 
 void initAll(Simcity* simcity){
@@ -21,6 +22,7 @@ void initAll(Simcity* simcity){
     initDataMap(simcity);
     initDataMenuPrincipal(simcity);
     initCompteurs(simcity);
+    initBanque(simcity);
 }
 
 void boucleTest(Simcity* simcity){
@@ -48,9 +50,14 @@ void boucleTest(Simcity* simcity){
             case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:{
                 switch (simcity->allegro.event.mouse.button) {
                     case 1:{
-                        poserTerrainVague(simcity);
-                        poserRoute(simcity);
+                        poserBatiment(simcity);
+                        detruire(simcity);
                         detectionCliqueToolBox(simcity);
+                        simcity->dessin = true;
+                        break;
+                    }
+                    case 2:{
+                        tournerBatiment(simcity);
                         simcity->dessin = true;
                         break;
                     }
@@ -64,6 +71,7 @@ void boucleTest(Simcity* simcity){
             case ALLEGRO_EVENT_TIMER:{
                 timerDate(simcity);
                 timerTempsJeu(simcity);
+                payerBanque(simcity);
                 /*for (int i = 0; i < simcity->nbBatiments; ++i) {
                     timerBatiment(simcity);
                     evolutionBatiment(simcity);
@@ -142,6 +150,7 @@ void mainAntoine() {
     boucletestMenuPrincipal(&simcity);
     //simcity.toolBox.routeEnMain = 1;
     //simcity.toolBox.terrainVagueEnMain = 1;
+
     boucleTest(&simcity);
     libererAll(&simcity);
 

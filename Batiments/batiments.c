@@ -1,4 +1,5 @@
 #include "batiments.h"
+
 /*
 void construireBatiment(Simcity* simcity) {
     simcity->nbBatiments++;

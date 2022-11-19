@@ -238,9 +238,11 @@ void detectionCliqueToolBox(Simcity* simcity){
     }else if (simcity->allegro.event.mouse.button == 1 && simcity->allegro.event.mouse.x >= simcity->toolBox.tabSpriteToolBox[EAU].screenX && simcity->allegro.event.mouse.x <= simcity->toolBox.tabSpriteToolBox[EAU].screenX + simcity->toolBox.tabSpriteToolBox[EAU].spriteLargeur && simcity->allegro.event.mouse.y >= simcity->toolBox.tabSpriteToolBox[EAU].screenY && simcity->allegro.event.mouse.y <= simcity->toolBox.tabSpriteToolBox[EAU].screenY + simcity->toolBox.tabSpriteToolBox[EAU].spriteHauteur ){
         simcity->toolBox.eauClique = 1;
         simcity->toolBox.eauEnMain = 1;
+        simcity->toolBox.eauDroit = 1;
     }else if (simcity->allegro.event.mouse.button == 1 && simcity->allegro.event.mouse.x >= simcity->toolBox.tabSpriteToolBox[ELEC].screenX && simcity->allegro.event.mouse.x <= simcity->toolBox.tabSpriteToolBox[ELEC].screenX + simcity->toolBox.tabSpriteToolBox[ELEC].spriteLargeur && simcity->allegro.event.mouse.y >= simcity->toolBox.tabSpriteToolBox[ELEC].screenY && simcity->allegro.event.mouse.y <= simcity->toolBox.tabSpriteToolBox[ELEC].screenY + simcity->toolBox.tabSpriteToolBox[ELEC].spriteHauteur ){
         simcity->toolBox.elecClique = 1;
         simcity->toolBox.elecEnMain = 1;
+        simcity->toolBox.elecDroit = 1;
     }else if (simcity->allegro.event.mouse.button == 1 && simcity->allegro.event.mouse.x >= simcity->toolBox.tabSpriteToolBox[DETRUIRE].screenX && simcity->allegro.event.mouse.x <= simcity->toolBox.tabSpriteToolBox[DETRUIRE].screenX + simcity->toolBox.tabSpriteToolBox[DETRUIRE].spriteLargeur && simcity->allegro.event.mouse.y >= simcity->toolBox.tabSpriteToolBox[DETRUIRE].screenY && simcity->allegro.event.mouse.y <= simcity->toolBox.tabSpriteToolBox[DETRUIRE].screenY + simcity->toolBox.tabSpriteToolBox[DETRUIRE].spriteHauteur ){
         simcity->toolBox.detruireClique = 1;
         simcity->toolBox.detruireEnMain = 1;
@@ -253,6 +255,7 @@ void detectionCliqueToolBox(Simcity* simcity){
     }else if (simcity->allegro.event.mouse.button == 1 && simcity->allegro.event.mouse.x >= simcity->toolBox.tabSpriteToolBox[POMPIER].screenX && simcity->allegro.event.mouse.x <= simcity->toolBox.tabSpriteToolBox[POMPIER].screenX + simcity->toolBox.tabSpriteToolBox[POMPIER].spriteLargeur && simcity->allegro.event.mouse.y >= simcity->toolBox.tabSpriteToolBox[POMPIER].screenY && simcity->allegro.event.mouse.y <= simcity->toolBox.tabSpriteToolBox[POMPIER].screenY + simcity->toolBox.tabSpriteToolBox[POMPIER].spriteHauteur ){
         simcity->toolBox.pompierClique = 1;
         simcity->toolBox.pompierEnMain = 1;
+        simcity->toolBox.pompierDroit = 1;
     } else{
         simcity->toolBox.routeClique = 0;
         simcity->toolBox.maisonClique = 0;
