@@ -489,6 +489,8 @@ void poserRoute(Simcity *simcity){
                         simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][y].typeBloc = TYPE_ROUTE;
                     }
                 }
+                simcity->banque.achatRoute = true;
+                payerBanque(simcity);
 
                 /*for (int y = simcity->map.creationRouteY; y <= simcity->map.creationRouteY + simcity->map.compteurCheminsY; ++y) {
                     simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][y].typeBloc = TYPE_ROUTE;

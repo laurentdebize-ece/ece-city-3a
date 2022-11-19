@@ -43,6 +43,7 @@ void initBanque(Simcity* simcity){
     simcity->batiment.prixChateauEau = COUTCHATEAUEAU;
     simcity->batiment.prixElectricite = COUTCENTRALE;
     simcity->batiment.prixPompier = COUTCASERNE;
+    simcity->batiment.prixRoute = COUTROUTE;
 }
 
 void afficherArgent(Simcity simcity) {
@@ -78,5 +79,8 @@ void payerBanque(Simcity* simcity){
     }else if(simcity->banque.achatElectricite == 1){
         retirerArgent(simcity,simcity->batiment.prixElectricite);
         simcity->banque.achatElectricite = false;
+    }else if(simcity->banque.achatRoute == 1){
+        retirerArgent(simcity,simcity->batiment.prixRoute * (simcity->map.compteurCheminsX + simcity->map.compteurCheminsY + 1));
+        simcity->banque.achatRoute = false;
     }
 }
