@@ -4,6 +4,7 @@
 #include "../Banque/banque.h"
 #include "../Batiments//batiments.h"
 #include "../ToolBox/toolbox.h"
+#include "../Banque/banque.h"
 
 void initDataMap(Simcity* simcity){
     for (int x = 0; x < NBCELLULEX; ++x) {
@@ -210,7 +211,7 @@ int isTerrainVaguePossible(Simcity* simcity){
 }
 
 void poserTerrainVague(Simcity* simcity){
-    if (simcity->allegro.event.mouse.button == 1 && isTerrainVaguePossible(simcity)){
+    if (simcity->allegro.event.mouse.button == 1 && isTerrainVaguePossible(simcity) && isPayer(simcity,simcity->batiment.prixTerrainVague)){
         simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc = TYPE_TERRAIN_VAGUE;
         for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 3; ++x) {
             for (int y = simcity->interactionExterieure.mouse.celluleXY.celluleY; y < simcity->interactionExterieure.mouse.celluleXY.celluleY + 3; ++y) {
@@ -221,8 +222,8 @@ void poserTerrainVague(Simcity* simcity){
                 }
             }
         }
+        simcity->banque.achatTerrainVague = true;
     }
-
 }
 
 void afficherPrevTerrainVague(Simcity* simcity){
@@ -604,7 +605,7 @@ int isElecPossible(Simcity* simcity){
 }
 
 void poserElec(Simcity *simcity){
-    if (simcity->allegro.event.mouse.button == 1 && simcity->toolBox.elecEnMain && isElecPossible(simcity)) {
+    if (simcity->allegro.event.mouse.button == 1 && simcity->toolBox.elecEnMain && isElecPossible(simcity) && isPayer(simcity,simcity->batiment.prixElectricite)) {
         if (simcity->toolBox.elecDroit) {
             simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc = TYPE_ELEC_DROIT;
             for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX;
@@ -619,6 +620,8 @@ void poserElec(Simcity *simcity){
                     }
                 }
             }
+            simcity->banque.achatElectricite = 1;
+
         } else if (!simcity->toolBox.elecDroit) {
             simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc = TYPE_ELEC_COTE;
             for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 4; ++x) {
@@ -629,6 +632,8 @@ void poserElec(Simcity *simcity){
                     }
                 }
             }
+            simcity->banque.achatElectricite = 1;
+
         }
     }
 }
@@ -671,7 +676,7 @@ int isEauPossible(Simcity* simcity){
 }
 
 void poserEau(Simcity *simcity){
-    if (simcity->allegro.event.mouse.button == 1 && simcity->toolBox.eauEnMain && isEauPossible(simcity)) {
+    if (simcity->allegro.event.mouse.button == 1 && simcity->toolBox.eauEnMain && isEauPossible(simcity) && isPayer(simcity,simcity->batiment.prixChateauEau)) {
         if (simcity->toolBox.eauDroit) {
                 simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc = TYPE_EAU_DROIT;
             for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX;
@@ -686,6 +691,7 @@ void poserEau(Simcity *simcity){
                     }
                 }
             }
+            simcity->banque.achatChateauEau = 1;
         } else if (!simcity->toolBox.eauDroit) {
             simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc = TYPE_EAU_COTE;
             for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 4; ++x) {
@@ -696,6 +702,7 @@ void poserEau(Simcity *simcity){
                     }
                 }
             }
+            simcity->banque.achatChateauEau = 1;
         }
     }
 }

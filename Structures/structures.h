@@ -151,10 +151,6 @@ typedef struct {
 } ToolBox;
 
 typedef struct {
-    bool achatTerrainVague;
-    bool achatPompier;
-    bool achatChateauEau;
-    bool achatElectricite;
     int prixTerrainVague;
     int prixPompier;
     int prixChateauEau;
@@ -178,6 +174,14 @@ typedef struct {
 }Timers;
 
 typedef struct {
+    bool achatTerrainVague;
+    bool achatPompier;
+    bool achatChateauEau;
+    bool achatElectricite;
+
+}Banque;
+
+typedef struct {
     Allegro allegro;// Contient tous les éléments ALLEGRO
     ALLEGRO_BITMAP* tabBitmap[NB_BITMAP];
     InteractionExterieure interactionExterieure;
@@ -192,6 +196,7 @@ typedef struct {
     int nbBatiments; //a mettre a jour a chaque fois qu'on cree un batiment
     Timers timers;
     Batiment tabBatiment; //remplir le tableau avec le nouveau batiment a chaque fois qu'il est crée
+    Banque banque;
 
 } Simcity;
 

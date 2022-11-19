@@ -11,6 +11,7 @@
 #include "Timers/timers.h"
 #include "Batiments/batiments.h"
 #include "ToolBox/toolbox.h"
+#include "Banque/banque.h"
 
 
 void initAll(Simcity* simcity){
@@ -21,6 +22,7 @@ void initAll(Simcity* simcity){
     initDataMap(simcity);
     initDataMenuPrincipal(simcity);
     initCompteurs(simcity);
+    initBanque(simcity);
 }
 
 void boucleTest(Simcity* simcity){
@@ -68,6 +70,7 @@ void boucleTest(Simcity* simcity){
             case ALLEGRO_EVENT_TIMER:{
                 timerDate(simcity);
                 timerTempsJeu(simcity);
+                payerBanque(simcity);
                 /*for (int i = 0; i < simcity->nbBatiments; ++i) {
                     timerBatiment(simcity);
                     evolutionBatiment(simcity);

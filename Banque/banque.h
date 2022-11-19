@@ -16,5 +16,9 @@ void initBanque(Simcity* simcity);
 void payerBanque(Simcity* simcity);
 void recevoirImpots(Simcity* simcity);
 */
+void initBanque(Simcity* simcity);
+bool isPayer(Simcity* simcity, int sommeARetirer);
 void afficherArgent(Simcity simcity);
+void payerBanque(Simcity* simcity);
+
 #endif //ECE_CITY_3A_BANQUE_H
