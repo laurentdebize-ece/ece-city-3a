@@ -255,6 +255,7 @@ void detectionCliqueToolBox(Simcity* simcity){
     }else if (simcity->allegro.event.mouse.button == 1 && simcity->allegro.event.mouse.x >= simcity->toolBox.tabSpriteToolBox[POMPIER].screenX && simcity->allegro.event.mouse.x <= simcity->toolBox.tabSpriteToolBox[POMPIER].screenX + simcity->toolBox.tabSpriteToolBox[POMPIER].spriteLargeur && simcity->allegro.event.mouse.y >= simcity->toolBox.tabSpriteToolBox[POMPIER].screenY && simcity->allegro.event.mouse.y <= simcity->toolBox.tabSpriteToolBox[POMPIER].screenY + simcity->toolBox.tabSpriteToolBox[POMPIER].spriteHauteur ){
         simcity->toolBox.pompierClique = 1;
         simcity->toolBox.pompierEnMain = 1;
+        simcity->toolBox.pompierDroit = 1;
     } else{
         simcity->toolBox.routeClique = 0;
         simcity->toolBox.maisonClique = 0;

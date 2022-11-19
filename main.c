@@ -51,6 +51,7 @@ void boucleTest(Simcity* simcity){
                 switch (simcity->allegro.event.mouse.button) {
                     case 1:{
                         poserBatiment(simcity);
+                        detruire(simcity);
                         detectionCliqueToolBox(simcity);
                         simcity->dessin = true;
                         break;
@@ -149,6 +150,7 @@ void mainAntoine() {
     boucletestMenuPrincipal(&simcity);
     //simcity.toolBox.routeEnMain = 1;
     //simcity.toolBox.terrainVagueEnMain = 1;
+
     boucleTest(&simcity);
     libererAll(&simcity);
 
