@@ -119,6 +119,7 @@ typedef struct {
 
 typedef struct {
     Bitmap tabSpriteToolBox[NB_SPRITE_TOOL_BOX];
+
     bool terrainVagueEnMain;
     bool routeEnMain;
     bool pompierEnMain;
@@ -136,6 +137,7 @@ typedef struct {
     bool vue1Hover;
     bool vue2Hover;
     bool pompierHover;
+
     bool routeClique;
     bool maisonClique;
     bool elecClique;
@@ -192,14 +194,16 @@ typedef struct {
     Pages pages;
     ToolBox toolBox;
     Batiment batiment;
-    bool dessin;
-    bool endGame;
-    bool outOfBorder;
-    int argent;
-    int nbBatiments; //a mettre a jour a chaque fois qu'on cree un batiment
     Timers timers;
     Batiment tabBatiment; //remplir le tableau avec le nouveau batiment a chaque fois qu'il est crée
     Banque banque;
+
+    int argent;
+    int nbBatiments; //a mettre a jour a chaque fois qu'on cree un batiment
+
+    bool dessin;
+    bool endGame;
+    bool outOfBorder;
 
 } Simcity;
 
