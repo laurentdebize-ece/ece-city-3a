@@ -1,13 +1,5 @@
 #include "banque.h"
-/*
-void recevoirImpots(Simcity* simcity) {
-    int impotTot = 0;
-    if(simcity->batiment->cycleFini == 1) { // a mettre dans la fonction d'amelirotation du batiment directement ????
-        impotTot = simcity->batiment->nbHabitants * IMPOT;
-        simcity->argent += impotTot;
-    }
-}
-*/
+
 void initBanque(Simcity* simcity){
     simcity->argent = SOLDEINITIAL;
     simcity->banque.prixTerrainVague = COUTTERRAINVAGUE;
@@ -54,4 +46,9 @@ void payerBanque(Simcity* simcity){
         retirerArgent(simcity,simcity->banque.prixRoute * (simcity->map.compteurCheminsX + simcity->map.compteurCheminsY + 1));
         simcity->banque.achatRoute = false;
     }
+}
+
+void recevoirImpots(Simcity* simcity, int nbHabitants) {
+        simcity->argent += nbHabitants * IMPOT;
+        printf("imp:%d, %d", nbHabitants*IMPOT, simcity->argent);
 }

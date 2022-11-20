@@ -2,6 +2,8 @@
 #define ECE_CITY_3A_TIMERS_H
 
 #include "../Structures/structures.h"
+#include "../Banque/banque.h"
+#include "../Batiments/batiments.h"
 
 void initCompteurs(Simcity* simcity);
 void timerDate(Simcity* simcity);

@@ -85,7 +85,7 @@ void boucleTest(Simcity* simcity){
                 timerTempsJeu(simcity);
                 payerBanque(simcity);
                 timerBatiment(simcity);
-                nombreHabitants(simcity);
+                nombreHabitantsTot(simcity);
                 simcity->dessin = true;
 
                 if (simcity->dessin) {

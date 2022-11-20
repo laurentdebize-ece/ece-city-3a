@@ -34,31 +34,9 @@ void construireBatiment(Simcity* simcity) {
     simcity->nbBatiments++;
 }
 
-void nombreHabitants(Simcity* simcity) {
+void nombreHabitantsTot(Simcity* simcity) {
     int nbHabitantsTot = 0;
     for (int i = 0; i < simcity->nbBatiments; ++i) {
-        switch (simcity->tabBatiments[i].compteurEvolution) {
-            case 0: //terrain vague
-                simcity->tabBatiments[i].nbHabitants = NB_HABITANTS_TERRAINVAGUE;
-                break;
-            case 1: //cabane
-                simcity->tabBatiments[i].nbHabitants = NB_HABITANTS_CABANE;
-                break;
-            case 2: //maison
-                simcity->tabBatiments[i].nbHabitants = NB_HABITANTS_MAISON;
-                break;
-            case 3: //immeuble
-                simcity->tabBatiments[i].nbHabitants = NB_HABITANTS_IMMEUBLE;
-                break;
-            case 4: //gratteciel
-                simcity->tabBatiments[i].nbHabitants = NB_HABITANTS_GRATTECIEL;
-                break;
-            case 5: //ruine
-                simcity->tabBatiments[i].nbHabitants = NB_HABITANTS_RUINE;
-                break;
-            default:
-                printf("ERREUR evolution batiment.\n");
-        }
         nbHabitantsTot += simcity->tabBatiments[i].nbHabitants;
     }
     simcity->nbHabitants = nbHabitantsTot;
