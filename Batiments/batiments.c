@@ -4,6 +4,8 @@ void initTabBatiments(Simcity* simcity) {
     for (int i = 0; i < NBR_MAX_BAT; ++i) {
         simcity->tabBatiments[i].typeBatiment = 0;
         simcity->tabBatiments[i].compteurEvolution = 0;
+        simcity->tabBatiments[i].timerCree = 0;
+        simcity->tabBatiments[i].dateCreation = -1;
         simcity->tabBatiments[i].timerBatiment = 0;
         simcity->tabBatiments[i].nbHabitants = 0;
         simcity->tabBatiments[i].capaciteElectrique = 0;
@@ -25,42 +27,45 @@ void construireBatiment(Simcity* simcity) {
         simcity->tabBatiments[simcity->nbBatiments].typeBatiment = 3;
         simcity->tabBatiments[simcity->nbBatiments].capaciteEau = CAPACITE_EAU;
     }
+    simcity->tabBatiments[simcity->nbBatiments].dateCreation = (int) al_get_timer_count(simcity->allegro.chrono);
+    if(simcity->tabBatiments[simcity->nbBatiments].dateCreation != -1) {
+        simcity->tabBatiments[simcity->nbBatiments].timerCree = TRUE;
+    } else {printf("ERREUR lancement timer batiment.\n");}
     simcity->nbBatiments++;
 }
-/*
-void evolutionBatiment(Simcity* simcity) {
-    if(simcity->batiment.achatTerrainVague == 1) {
-        if (simcity->batiment.compteurEvolution < 6){
-            simcity->batiment.compteurEvolution++;
-        }
-        switch (simcity->batiment.compteurEvolution++) {
-            case 1: //terrain vague
-                simcity->batiment.nbHabitants = NB_HABITANTS_TERRAINVAGUE;
+
+void nombreHabitants(Simcity* simcity) {
+    int nbHabitantsTot = 0;
+    for (int i = 0; i < simcity->nbBatiments; ++i) {
+        switch (simcity->tabBatiments[i].compteurEvolution) {
+            case 0: //terrain vague
+                simcity->tabBatiments[i].nbHabitants = NB_HABITANTS_TERRAINVAGUE;
                 break;
-            case 2: //cabane
-                simcity->batiment.nbHabitants = NB_HABITANTS_CABANE;
+            case 1: //cabane
+                simcity->tabBatiments[i].nbHabitants = NB_HABITANTS_CABANE;
                 break;
-            case 3: //maison
-                simcity->batiment.nbHabitants = NB_HABITANTS_MAISON;
+            case 2: //maison
+                simcity->tabBatiments[i].nbHabitants = NB_HABITANTS_MAISON;
                 break;
-            case 4: //immeuble
-                simcity->batiment.nbHabitants = NB_HABITANTS_IMMEUBLE;
+            case 3: //immeuble
+                simcity->tabBatiments[i].nbHabitants = NB_HABITANTS_IMMEUBLE;
                 break;
-            case 5: //gratteciel
-                simcity->batiment.nbHabitants = NB_HABITANTS_GRATTECIEL;
+            case 4: //gratteciel
+                simcity->tabBatiments[i].nbHabitants = NB_HABITANTS_GRATTECIEL;
                 break;
-            case 6: //ruine
-                simcity->batiment.nbHabitants = NB_HABITANTS_RUINE;
+            case 5: //ruine
+                simcity->tabBatiments[i].nbHabitants = NB_HABITANTS_RUINE;
                 break;
             default:
                 printf("ERREUR evolution batiment.\n");
         }
+        nbHabitantsTot += simcity->tabBatiments[i].nbHabitants;
     }
-    afficherBatiment(simcity);
+    simcity->nbHabitants = nbHabitantsTot;
+    printf("%d\n", simcity->nbHabitants);
 }
-*/
 
 
 void afficherNbHabitantsTot(Simcity simcity) {
-    al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 225, 725, 0, "%d",simcity.nbHabitant);
+    al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 225, 725, 0, "%d",simcity.nbHabitants);
 }

@@ -204,12 +204,12 @@ typedef struct {
     Pages pages;
     ToolBox toolBox;
     Timers timers;
-    Batiment tabBatiments[NBR_MAX_BAT]; //remplir le tableau avec le nouveau batiment a chaque fois qu'il est crée
+    Batiment tabBatiments[NBR_MAX_BAT];
     Banque banque;
 
     int argent;
-    int nbBatiments; //a mettre a jour a chaque fois qu'on cree un batiment
-    int nbHabitant;
+    int nbBatiments;
+    int nbHabitants;
 
     bool dessin;
     bool endGame;

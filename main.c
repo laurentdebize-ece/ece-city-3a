@@ -84,10 +84,8 @@ void boucleTest(Simcity* simcity){
                 timerDate(simcity);
                 timerTempsJeu(simcity);
                 payerBanque(simcity);
-                /*for (int i = 0; i < simcity->nbBatiments; ++i) {
-                    timerBatiment(simcity);
-                    evolutionBatiment(simcity);
-                }*/
+                timerBatiment(simcity);
+                nombreHabitants(simcity);
                 simcity->dessin = true;
 
                 if (simcity->dessin) {
@@ -95,7 +93,6 @@ void boucleTest(Simcity* simcity){
                     if (simcity->outOfBorder){
                         afficherHoverMap(simcity);
                     }
-                    //afficherTimerDate(*simcity);
                     afficherTimerTempsJeu(*simcity);
                     al_flip_display();
                     simcity->dessin = false;

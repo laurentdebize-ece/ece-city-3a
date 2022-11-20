@@ -14,9 +14,7 @@
 
 void initTabBatiments(Simcity* simcity);
 void construireBatiment(Simcity* simcity);
-/*
-void evolutionBatiment(Simcity* simcity);
-*/
+void nombreHabitants(Simcity* simcity);
 void afficherNbHabitantsTot(Simcity simcity);
 void allocationHabitation(Simcity * simcity);
 

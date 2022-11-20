@@ -53,7 +53,7 @@ void timerTempsJeu(Simcity* simcity) {
         simcity->timers.zeroDevantSecondes = FALSE;
     } else {simcity->timers.zeroDevantSecondes = TRUE;}
 }
-/*
+
 void timerBatiment(Simcity* simcity) {
     long long compteurChrono = al_get_timer_count(simcity->allegro.chrono);
     long long compteurTimer = al_get_timer_count(simcity->allegro.timer);
@@ -62,16 +62,14 @@ void timerBatiment(Simcity* simcity) {
         modulo60 = TRUE;
     } else {modulo60 = FALSE;}
     for (int i = 0; i < simcity->nbBatiments; ++i) {
-        if (simcity->batiment[i].timerCree == FALSE) {
-            simcity->batiment[i].dateCreation = (int) al_get_timer_count(simcity->allegro.chrono);
-            simcity->batiment[i].timerCree = TRUE;
-        }
-        simcity->batiment[i].timerBatiment = compteurChrono - simcity->batiment[i].dateCreation;
-        if(simcity->batiment[i].timerBatiment % 15 == 0 && modulo60 == TRUE) {
-            simcity->batiment[i].compteurEvolution++;
+        if(simcity->tabBatiments[i].timerCree == TRUE) {
+            simcity->tabBatiments[i].timerBatiment = (int)compteurChrono - simcity->tabBatiments[i].dateCreation;
+            if(simcity->tabBatiments[i].timerBatiment % 15 == 0 && modulo60 == TRUE) {
+                simcity->tabBatiments[i].compteurEvolution++;
+            }
         }
     }
-}*/
+}
 
 void afficherTimerDate(Simcity simcity) {
     switch(simcity.timers.mois) {
