@@ -205,17 +205,17 @@ void toolboxSpriteInit(Simcity* simcity){
     simcity->toolBox.tabSpriteToolBox[PAUSE].screenY = 720;
 
     simcity->toolBox.tabSpriteToolBox[PAUSE_HOVER].image = &simcity->tabBitmap[BITMAP_BOUTON_PAUSE];
-    simcity->toolBox.tabSpriteToolBox[PAUSE_HOVER].spriteLargeur = 35;
-    simcity->toolBox.tabSpriteToolBox[PAUSE_HOVER].spriteHauteur = 35;
-    simcity->toolBox.tabSpriteToolBox[PAUSE_HOVER].spriteX = 69;
+    simcity->toolBox.tabSpriteToolBox[PAUSE_HOVER].spriteLargeur = 40;
+    simcity->toolBox.tabSpriteToolBox[PAUSE_HOVER].spriteHauteur = 40;
+    simcity->toolBox.tabSpriteToolBox[PAUSE_HOVER].spriteX = 65;
     simcity->toolBox.tabSpriteToolBox[PAUSE_HOVER].spriteY = 11;
     simcity->toolBox.tabSpriteToolBox[PAUSE_HOVER].screenX = 111;
     simcity->toolBox.tabSpriteToolBox[PAUSE_HOVER].screenY = 720;
 
     simcity->toolBox.tabSpriteToolBox[PAUSE_CLIQUE].image = &simcity->tabBitmap[BITMAP_BOUTON_PAUSE];
-    simcity->toolBox.tabSpriteToolBox[PAUSE_CLIQUE].spriteLargeur = 35;
+    simcity->toolBox.tabSpriteToolBox[PAUSE_CLIQUE].spriteLargeur = 40;
     simcity->toolBox.tabSpriteToolBox[PAUSE_CLIQUE].spriteHauteur = 40;
-    simcity->toolBox.tabSpriteToolBox[PAUSE_CLIQUE].spriteX = 123;
+    simcity->toolBox.tabSpriteToolBox[PAUSE_CLIQUE].spriteX = 120;
     simcity->toolBox.tabSpriteToolBox[PAUSE_CLIQUE].spriteY = 11;
     simcity->toolBox.tabSpriteToolBox[PAUSE_CLIQUE].screenX = 111;
     simcity->toolBox.tabSpriteToolBox[PAUSE_CLIQUE].screenY = 720;
@@ -349,7 +349,7 @@ void afficherToolbox (Simcity* simcity){
         al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[POMPIER_HOVER].image),simcity->toolBox.tabSpriteToolBox[POMPIER_HOVER].spriteX,simcity->toolBox.tabSpriteToolBox[POMPIER_HOVER].spriteY,simcity->toolBox.tabSpriteToolBox[POMPIER_HOVER].spriteLargeur,simcity->toolBox.tabSpriteToolBox[POMPIER_HOVER].spriteHauteur,simcity->toolBox.tabSpriteToolBox[POMPIER_HOVER].screenX,simcity->toolBox.tabSpriteToolBox[POMPIER_HOVER].screenY,0);
 
     }else if (simcity->toolBox.pauseHover){
-        al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[PAUSE_HOVER].image),simcity->toolBox.tabSpriteToolBox[PAUSE_HOVER].spriteX,simcity->toolBox.tabSpriteToolBox[PAUSE_HOVER].spriteY,simcity->toolBox.tabSpriteToolBox[PAUSE_HOVER].spriteLargeur,simcity->toolBox.tabSpriteToolBox[PAUSE_HOVER].spriteHauteur,simcity->toolBox.tabSpriteToolBox[PAUSE_HOVER].screenX,simcity->toolBox.tabSpriteToolBox[PAUSE_HOVER].screenY,0);
+        al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[PAUSE_HOVER].image),simcity->toolBox.tabSpriteToolBox[PAUSE_HOVER].spriteX,simcity->toolBox.tabSpriteToolBox[PAUSE_HOVER].spriteY,simcity->toolBox.tabSpriteToolBox[PAUSE_HOVER].spriteLargeur,simcity->toolBox.tabSpriteToolBox[PAUSE_HOVER].spriteHauteur,simcity->toolBox.tabSpriteToolBox[PAUSE_HOVER].screenX - 4,simcity->toolBox.tabSpriteToolBox[PAUSE_HOVER].screenY,0);
 
     }else if (simcity->toolBox.routeClique){
         al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[ROUTE_CLIQUE].image),simcity->toolBox.tabSpriteToolBox[ROUTE_CLIQUE].spriteX,simcity->toolBox.tabSpriteToolBox[ROUTE_CLIQUE].spriteY,simcity->toolBox.tabSpriteToolBox[ROUTE_CLIQUE].spriteLargeur,simcity->toolBox.tabSpriteToolBox[ROUTE_CLIQUE].spriteHauteur,simcity->toolBox.tabSpriteToolBox[ROUTE_CLIQUE].screenX,simcity->toolBox.tabSpriteToolBox[ROUTE_CLIQUE].screenY,0);
@@ -375,7 +375,7 @@ void afficherToolbox (Simcity* simcity){
     }else if (simcity->toolBox.pompierClique){
         al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[POMPIER_CLIQUE].image),simcity->toolBox.tabSpriteToolBox[POMPIER_CLIQUE].spriteX,simcity->toolBox.tabSpriteToolBox[POMPIER_CLIQUE].spriteY,simcity->toolBox.tabSpriteToolBox[POMPIER_CLIQUE].spriteLargeur,simcity->toolBox.tabSpriteToolBox[POMPIER_CLIQUE].spriteHauteur,simcity->toolBox.tabSpriteToolBox[POMPIER_CLIQUE].screenX,simcity->toolBox.tabSpriteToolBox[POMPIER_CLIQUE].screenY,0);
     }else if (simcity->toolBox.pauseClique){
-        al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[PAUSE_CLIQUE].image),simcity->toolBox.tabSpriteToolBox[PAUSE_CLIQUE].spriteX,simcity->toolBox.tabSpriteToolBox[PAUSE_CLIQUE].spriteY,simcity->toolBox.tabSpriteToolBox[PAUSE_CLIQUE].spriteLargeur,simcity->toolBox.tabSpriteToolBox[PAUSE_CLIQUE].spriteHauteur,simcity->toolBox.tabSpriteToolBox[PAUSE_CLIQUE].screenX,simcity->toolBox.tabSpriteToolBox[PAUSE_CLIQUE].screenY,0);
+        al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[PAUSE_CLIQUE].image),simcity->toolBox.tabSpriteToolBox[PAUSE_CLIQUE].spriteX,simcity->toolBox.tabSpriteToolBox[PAUSE_CLIQUE].spriteY,simcity->toolBox.tabSpriteToolBox[PAUSE_CLIQUE].spriteLargeur,simcity->toolBox.tabSpriteToolBox[PAUSE_CLIQUE].spriteHauteur,simcity->toolBox.tabSpriteToolBox[PAUSE_CLIQUE].screenX - 4,simcity->toolBox.tabSpriteToolBox[PAUSE_CLIQUE].screenY,0);
     }
 
 
