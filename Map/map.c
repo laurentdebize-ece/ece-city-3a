@@ -64,8 +64,8 @@ void bitmapSpriteInit(Simcity* simcity){
     simcity->map.spriteTile[GRATTE_CIEL].image = &simcity->tabBitmap[BITMAP_MAP];
     simcity->map.spriteTile[GRATTE_CIEL].spriteLargeur = 60;
     simcity->map.spriteTile[GRATTE_CIEL].spriteHauteur = 60;
-    simcity->map.spriteTile[GRATTE_CIEL].spriteX = 0;
-    simcity->map.spriteTile[GRATTE_CIEL].spriteY = 0;
+    simcity->map.spriteTile[GRATTE_CIEL].spriteX = 388;
+    simcity->map.spriteTile[GRATTE_CIEL].spriteY = 147;
 
     simcity->map.spriteTile[ROUTE].image = &simcity->tabBitmap[BITMAP_MAP];
     simcity->map.spriteTile[ROUTE].spriteLargeur = 20;
@@ -96,6 +96,18 @@ void bitmapSpriteInit(Simcity* simcity){
     simcity->map.spriteTile[EAU_COTE].spriteHauteur = 120;
     simcity->map.spriteTile[EAU_COTE].spriteX = 288;
     simcity->map.spriteTile[EAU_COTE].spriteY = 3;
+
+    simcity->map.spriteTile[POMPIER_DROIT].image = &simcity->tabBitmap[BITMAP_MAP];
+    simcity->map.spriteTile[POMPIER_DROIT].spriteLargeur = 120;
+    simcity->map.spriteTile[POMPIER_DROIT].spriteHauteur = 80;
+    simcity->map.spriteTile[POMPIER_DROIT].spriteX = 263;
+    simcity->map.spriteTile[POMPIER_DROIT].spriteY = 147;
+
+    simcity->map.spriteTile[POMPIER_COTE].image = &simcity->tabBitmap[BITMAP_MAP];
+    simcity->map.spriteTile[POMPIER_COTE].spriteLargeur = 80;
+    simcity->map.spriteTile[POMPIER_COTE].spriteHauteur = 120;
+    simcity->map.spriteTile[POMPIER_COTE].spriteX = 375;
+    simcity->map.spriteTile[POMPIER_COTE].spriteY = 3;
 }
 
 void calculPositionSourisEnCelluleXY(Simcity* simcity) {
@@ -167,12 +179,15 @@ void afficherMap(Simcity* simcity){
             else if (simcity->map.mapTile[x][y].typeBloc == TYPE_EAU_COTE){
                 al_draw_bitmap_region(*(simcity->map.spriteTile[EAU_COTE].image), simcity->map.spriteTile[EAU_COTE].spriteX, simcity->map.spriteTile[EAU_COTE].spriteY, simcity->map.spriteTile[EAU_COTE].spriteLargeur, simcity->map.spriteTile[EAU_COTE].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
             }
+            else if (simcity->map.mapTile[x][y].typeBloc == TYPE_POMPIER_DROIT){
+                al_draw_bitmap_region(*(simcity->map.spriteTile[POMPIER_DROIT].image), simcity->map.spriteTile[POMPIER_DROIT].spriteX, simcity->map.spriteTile[POMPIER_DROIT].spriteY, simcity->map.spriteTile[POMPIER_DROIT].spriteLargeur, simcity->map.spriteTile[POMPIER_DROIT].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
+            }
+            else if (simcity->map.mapTile[x][y].typeBloc == TYPE_POMPIER_COTE){
+                al_draw_bitmap_region(*(simcity->map.spriteTile[POMPIER_COTE].image), simcity->map.spriteTile[POMPIER_COTE].spriteX, simcity->map.spriteTile[POMPIER_COTE].spriteY, simcity->map.spriteTile[POMPIER_COTE].spriteLargeur, simcity->map.spriteTile[POMPIER_COTE].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
+            }
         }
     }
-    afficherPrevisionRoute(simcity);
-    afficherPrevTerrainVague(simcity);
-    afficherPrevElec(simcity);
-    afficherPrevEau(simcity);
+    afficherPrevision(simcity);
 }
 
 void afficherHoverMap(Simcity* simcity){
@@ -185,6 +200,14 @@ void afficherHoverMap(Simcity* simcity){
     }
 }
 
+void afficherPrevision(Simcity* simcity){
+    afficherPrevRoute(simcity);
+    afficherPrevTerrainVague(simcity);
+    afficherPrevElec(simcity);
+    afficherPrevEau(simcity);
+    afficherPrevPompier(simcity);
+}
+
 
 bool collerAlaRouteHab(Simcity* simcity){
 
@@ -195,7 +218,6 @@ bool collerAlaRouteHab(Simcity* simcity){
 
 }
 
-// permet de savoir si on peut placer un terrain vague
 int isTerrainVaguePossible(Simcity* simcity){
     if (simcity->toolBox.terrainVagueEnMain == 1 && simcity->outOfBorder  && collerAlaRouteHab(simcity) && simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_HERBE){
         for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 3; ++x) {
@@ -211,7 +233,7 @@ int isTerrainVaguePossible(Simcity* simcity){
 }
 
 void poserTerrainVague(Simcity* simcity){
-    if (simcity->allegro.event.mouse.button == 1 && isTerrainVaguePossible(simcity) && isPayer(simcity,simcity->batiment.prixTerrainVague)){
+    if (simcity->allegro.event.mouse.button == 1 && isTerrainVaguePossible(simcity) && isPayer(simcity,simcity->banque.prixTerrainVague)){
         simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc = TYPE_TERRAIN_VAGUE;
         for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 3; ++x) {
             for (int y = simcity->interactionExterieure.mouse.celluleXY.celluleY; y < simcity->interactionExterieure.mouse.celluleXY.celluleY + 3; ++y) {
@@ -329,7 +351,7 @@ int routePossibleChemin(Simcity* simcity){
     return 1;
 }
 
-void afficherPrevisionRoute(Simcity* simcity) {
+void afficherPrevRoute(Simcity* simcity) {
     if (routePossibleChemin(simcity) && simcity->map.cliqueRoute) {
         if (simcity->map.creationRouteX < simcity->interactionExterieure.mouse.celluleXY.celluleX &&
             simcity->map.creationRouteY < simcity->interactionExterieure.mouse.celluleXY.celluleY){
@@ -507,14 +529,6 @@ void poserRoute(Simcity *simcity){
         }
 }
 
-void tournerBatiment(Simcity *simcity){
-    if (simcity->allegro.event.mouse.button == 2 && simcity->toolBox.elecEnMain){
-        simcity->toolBox.elecDroit = !simcity->toolBox.elecDroit;
-    }
-    if (simcity->allegro.event.mouse.button == 2 && simcity->toolBox.eauEnMain){
-        simcity->toolBox.eauDroit = !simcity->toolBox.eauDroit;
-    }
-}
 
 bool collerAlaRouteElec(Simcity* simcity){
     if (simcity->toolBox.elecDroit){
@@ -571,12 +585,42 @@ bool collerAlaRouteEau(Simcity* simcity){
     }
     return false;
 }
+bool collerAlaRoutPompier(Simcity* simcity){
+    if (simcity->toolBox.pompierDroit == 1){
+        for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 6; ++x) {
+            if (simcity->map.mapTile[x][simcity->interactionExterieure.mouse.celluleXY.celluleY - 1].typeBloc == TYPE_ROUTE || simcity->map.mapTile[x][simcity->interactionExterieure.mouse.celluleXY.celluleY + 4].typeBloc == TYPE_ROUTE ){
+                return true;
+            }
+        }
+        for (int y = simcity->interactionExterieure.mouse.celluleXY.celluleY; y < simcity->interactionExterieure.mouse.celluleXY.celluleY + 4; ++y) {
+            if (simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX - 1][y].typeBloc == TYPE_ROUTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX + 6][y].typeBloc == TYPE_ROUTE){
+                return true;
+            }
+        }
+        return false;
+    }else if (simcity->toolBox.pompierDroit == 0){
+        for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 4; ++x) {
+            if (simcity->map.mapTile[x][simcity->interactionExterieure.mouse.celluleXY.celluleY - 1].typeBloc == TYPE_ROUTE || simcity->map.mapTile[x][simcity->interactionExterieure.mouse.celluleXY.celluleY + 6].typeBloc == TYPE_ROUTE ){
+                return true;
+            }
+        }
+        for (int y = simcity->interactionExterieure.mouse.celluleXY.celluleY; y < simcity->interactionExterieure.mouse.celluleXY.celluleY + 6; ++y) {
+            if (simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX - 1][y].typeBloc == TYPE_ROUTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX + 4][y].typeBloc == TYPE_ROUTE){
+                return true;
+            }
+        }
+        return false;
+    }
+    return false;
+}
 
 bool collerAlaRouteInfra(Simcity* simcity){
     if (simcity->toolBox.elecEnMain){
         return collerAlaRouteElec(simcity);
     } else if (simcity->toolBox.eauEnMain){
-        collerAlaRouteEau(simcity);
+        return collerAlaRouteEau(simcity);
+    }else if (simcity->toolBox.pompierEnMain){
+        return collerAlaRoutPompier(simcity);
     }
 }
 
@@ -608,7 +652,7 @@ int isElecPossible(Simcity* simcity){
 }
 
 void poserElec(Simcity *simcity){
-    if (simcity->allegro.event.mouse.button == 1 && simcity->toolBox.elecEnMain && isElecPossible(simcity) && isPayer(simcity,simcity->batiment.prixElectricite)) {
+    if (simcity->allegro.event.mouse.button == 1 && simcity->toolBox.elecEnMain && isElecPossible(simcity) && isPayer(simcity,simcity->banque.prixElectricite)) {
         if (simcity->toolBox.elecDroit) {
             simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc = TYPE_ELEC_DROIT;
             for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX;
@@ -679,7 +723,7 @@ int isEauPossible(Simcity* simcity){
 }
 
 void poserEau(Simcity *simcity){
-    if (simcity->allegro.event.mouse.button == 1 && simcity->toolBox.eauEnMain && isEauPossible(simcity) && isPayer(simcity,simcity->batiment.prixChateauEau)) {
+    if (simcity->allegro.event.mouse.button == 1 && simcity->toolBox.eauEnMain && isEauPossible(simcity) && isPayer(simcity,simcity->banque.prixChateauEau)) {
         if (simcity->toolBox.eauDroit) {
                 simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc = TYPE_EAU_DROIT;
             for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX;
@@ -720,11 +764,99 @@ void afficherPrevEau(Simcity* simcity){
     }
 }
 
+int isPompierPossible(Simcity* simcity){
+    if (simcity->toolBox.pompierEnMain == 1 && collerAlaRouteInfra(simcity) && simcity->outOfBorder && simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_HERBE){
+        if (simcity->toolBox.pompierDroit){
+            for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 6; ++x) {
+                for (int y = simcity->interactionExterieure.mouse.celluleXY.celluleY; y < simcity->interactionExterieure.mouse.celluleXY.celluleY + 4; ++y) {
+                    if (simcity->map.mapTile[x][y].typeBloc != TYPE_HERBE || x > NBCELLULEX || y >= NBCELLULEY){
+                        return 0;
+                    }
+                }
+            }
+            return 1;
+        }
+        else if (!simcity->toolBox.pompierDroit){
+            for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 4; ++x) {
+                for (int y = simcity->interactionExterieure.mouse.celluleXY.celluleY; y < simcity->interactionExterieure.mouse.celluleXY.celluleY + 6; ++y) {
+                    if (simcity->map.mapTile[x][y].typeBloc != TYPE_HERBE || x > NBCELLULEX || y >= NBCELLULEY){
+                        return 0;
+                    }
+                }
+            }
+            return 1;
+        }
+        return 0;
+    }
+    return 0;
+}
+
+void poserPompier(Simcity *simcity){
+    if (simcity->allegro.event.mouse.button == 1 && simcity->toolBox.pompierEnMain && isPompierPossible(simcity) && isPayer(simcity,simcity->banque.prixPompier)) {
+        if (simcity->toolBox.pompierDroit) {
+            simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc = TYPE_POMPIER_DROIT;
+            for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX;
+                 x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 6; ++x) {
+                for (int y = simcity->interactionExterieure.mouse.celluleXY.celluleY;
+                     y < simcity->interactionExterieure.mouse.celluleXY.celluleY + 4; ++y) {
+                    if (simcity->interactionExterieure.mouse.celluleXY.celluleX == x &&
+                        simcity->interactionExterieure.mouse.celluleXY.celluleY == y) {
+
+                    } else {
+                        simcity->map.mapTile[x][y].typeBloc = -3; // permet de ne pas faire bug l'affchage des maisons
+                    }
+                }
+            }
+            simcity->banque.achatPompier = 1;
+        } else if (!simcity->toolBox.pompierDroit) {
+            simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc = TYPE_POMPIER_COTE;
+            for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 4; ++x) {
+                for (int y = simcity->interactionExterieure.mouse.celluleXY.celluleY; y < simcity->interactionExterieure.mouse.celluleXY.celluleY + 6; ++y) {
+                    if (simcity->interactionExterieure.mouse.celluleXY.celluleX == x && simcity->interactionExterieure.mouse.celluleXY.celluleY == y) {
+                    } else {
+                        simcity->map.mapTile[x][y].typeBloc = -2; // permet de ne pas faire bug l'affchage des maisons
+                    }
+                }
+            }
+            simcity->banque.achatPompier = 1;
+        }
+    }
+}
+
+
+void afficherPrevPompier(Simcity* simcity){
+    if (simcity->toolBox.pompierEnMain && isPompierPossible(simcity)){
+        if (simcity->toolBox.pompierDroit){
+            al_draw_bitmap_region(*(simcity->map.spriteTile[POMPIER_DROIT].image), simcity->map.spriteTile[POMPIER_DROIT].spriteX, simcity->map.spriteTile[POMPIER_DROIT].spriteY, simcity->map.spriteTile[POMPIER_DROIT].spriteLargeur, simcity->map.spriteTile[POMPIER_DROIT].spriteHauteur,simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].coordsXY.screenX,simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].coordsXY.screenY,0);
+
+        } else if(!simcity->toolBox.pompierDroit){
+            al_draw_bitmap_region(*(simcity->map.spriteTile[POMPIER_COTE].image), simcity->map.spriteTile[POMPIER_COTE].spriteX, simcity->map.spriteTile[POMPIER_COTE].spriteY, simcity->map.spriteTile[POMPIER_COTE].spriteLargeur, simcity->map.spriteTile[POMPIER_COTE].spriteHauteur,simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].coordsXY.screenX,simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].coordsXY.screenY,0);
+        }
+    }
+}
 
 void poserBatiment(Simcity *simcity){
     poserTerrainVague(simcity);
     poserRoute(simcity);
     poserElec(simcity);
     poserEau(simcity);
+    poserPompier(simcity);
 }
 
+void tournerBatiment(Simcity *simcity){
+    if (simcity->allegro.event.mouse.button == 2 && simcity->toolBox.elecEnMain){
+        simcity->toolBox.elecDroit = !simcity->toolBox.elecDroit;
+    }
+    if (simcity->allegro.event.mouse.button == 2 && simcity->toolBox.eauEnMain){
+        simcity->toolBox.eauDroit = !simcity->toolBox.eauDroit;
+    }
+    if (simcity->allegro.event.mouse.button == 2 && simcity->toolBox.pompierEnMain){
+        simcity->toolBox.pompierDroit = !simcity->toolBox.pompierDroit;
+    }
+}
+
+void detruire(Simcity *simcity){
+    if (simcity->allegro.event.mouse.button == 1 && simcity->toolBox.detruireEnMain && simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc != TYPE_HERBE){
+        simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc = TYPE_HERBE;
+    }
+}

@@ -39,11 +39,11 @@ void recevoirImpots(Simcity* simcity) {
 */
 void initBanque(Simcity* simcity){
     simcity->argent = SOLDEINITIAL;
-    simcity->batiment.prixTerrainVague = COUTTERRAINVAGUE;
-    simcity->batiment.prixChateauEau = COUTCHATEAUEAU;
-    simcity->batiment.prixElectricite = COUTCENTRALE;
-    simcity->batiment.prixPompier = COUTCASERNE;
-    simcity->batiment.prixRoute = COUTROUTE;
+    simcity->banque.prixTerrainVague = COUTTERRAINVAGUE;
+    simcity->banque.prixChateauEau = COUTCHATEAUEAU;
+    simcity->banque.prixElectricite = COUTCENTRALE;
+    simcity->banque.prixPompier = COUTCASERNE;
+    simcity->banque.prixRoute = COUTROUTE;
 }
 
 void afficherArgent(Simcity simcity) {
@@ -66,21 +66,21 @@ void retirerArgent(Simcity* simcity, int sommeARetirer){
 
 void payerBanque(Simcity* simcity){
     if (simcity->banque.achatTerrainVague == 1){
-        retirerArgent(simcity,simcity->batiment.prixTerrainVague);
+        retirerArgent(simcity,simcity->banque.prixTerrainVague);
         simcity->banque.achatTerrainVague = false;
     }else if(simcity->banque.achatPompier == 1){
-        retirerArgent(simcity,simcity->batiment.prixPompier);
+        retirerArgent(simcity,simcity->banque.prixPompier);
         simcity->banque.achatPompier = false;
 
     }else if(simcity->banque.achatChateauEau == 1){
-        retirerArgent(simcity,simcity->batiment.prixChateauEau);
+        retirerArgent(simcity,simcity->banque.prixChateauEau);
         simcity->banque.achatChateauEau = false;
 
     }else if(simcity->banque.achatElectricite == 1){
-        retirerArgent(simcity,simcity->batiment.prixElectricite);
+        retirerArgent(simcity,simcity->banque.prixElectricite);
         simcity->banque.achatElectricite = false;
     }else if(simcity->banque.achatRoute == 1){
-        retirerArgent(simcity,simcity->batiment.prixRoute * (simcity->map.compteurCheminsX + simcity->map.compteurCheminsY + 1));
+        retirerArgent(simcity,simcity->banque.prixRoute * (simcity->map.compteurCheminsX + simcity->map.compteurCheminsY + 1));
         simcity->banque.achatRoute = false;
     }
 }
