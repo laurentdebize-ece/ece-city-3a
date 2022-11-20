@@ -131,3 +131,23 @@ void afficherTimerTempsJeu(Simcity simcity) {
         al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 550, 725, 0, "%d : %d", simcity.timers.minutes, simcity.timers.secondes);
     }
 }
+
+void pauseTimerClavier(Simcity* simcity){
+     if (simcity->allegro.event.keyboard.keycode == ALLEGRO_KEY_ESCAPE && simcity->pause){
+        simcity->pause = !simcity->pause;
+        al_start_timer(simcity->allegro.chrono);
+    }else if (simcity->allegro.event.keyboard.keycode == ALLEGRO_KEY_ESCAPE && !simcity->pause){
+         simcity->pause = !simcity->pause;
+         al_stop_timer(simcity->allegro.chrono);
+     }
+}
+
+void pauseTimerSouris(Simcity* simcity){
+    if (!simcity->pause && simcity->toolBox.pauseEnMain){
+        simcity->pause = !simcity->pause;
+        al_stop_timer(simcity->allegro.chrono);
+    }else if (simcity->pause && simcity->toolBox.pauseEnMain){
+        simcity->pause = !simcity->pause;
+        al_start_timer(simcity->allegro.chrono);
+    }
+}

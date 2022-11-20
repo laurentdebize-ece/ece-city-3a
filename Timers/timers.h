@@ -9,5 +9,7 @@ void timerTempsJeu(Simcity* simcity);
 //void timerBatiment(Simcity* simcity);
 void afficherTimerDate (Simcity simcity);
 void afficherTimerTempsJeu(Simcity simcity);
+void pauseTimerClavier(Simcity* simcity);
+void pauseTimerSouris(Simcity* simcity);
 
 #endif //ECE_CITY_3A_TIMERS_H

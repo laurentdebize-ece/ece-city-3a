@@ -17,4 +17,6 @@ void construireBatiment(Simcity* simcity);
 void evolutionBatiment(Simcity* simcity);
 */
 void afficherNbHabitantsTot(Simcity simcity);
+void allocationHabitation(Simcity * simcity);
+
 #endif //ECE_CITY_3A_BATIMENTS_H

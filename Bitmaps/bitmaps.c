@@ -25,6 +25,10 @@ void bitmapCreateBarreCompteurs (Simcity* simcity) {
     simcity->tabBitmap[BITMAP_BARRECOMPTEURS] = al_load_bitmap("../Sources/img/barreCompteurs.png");
 }
 
+void bitmapCreateBoutonsPause(Simcity* simcity){
+    simcity->tabBitmap[BITMAP_BOUTON_PAUSE] = al_load_bitmap("../Sources/img/boutonPause.png");
+}
+
 void bitmapCreateAll(Simcity* simcity){
     bitmapCreateMap(simcity);
     bitmapCreateMenuPrincipal(simcity);
@@ -32,6 +36,7 @@ void bitmapCreateAll(Simcity* simcity){
     bitmapCreateBoutonMenuPrincipal(simcity);
     bitmapCreateToolbox(simcity);
     bitmapCreateBarreCompteurs(simcity);
+    bitmapCreateBoutonsPause(simcity);
 }
 
 void libererBitmapMap(Simcity* simcity){
@@ -58,6 +63,10 @@ void libererBitmapBarreCompteurs (Simcity* simcity) {
     al_destroy_bitmap(simcity->tabBitmap[BITMAP_BARRECOMPTEURS]);
 }
 
+void libererBitmapBoutonPause (Simcity* simcity) {
+    al_destroy_bitmap(simcity->tabBitmap[BITMAP_BOUTON_PAUSE]);
+}
+
 void libererBitmapAll(Simcity* simcity){
     libererBitmapMap(simcity);
     libererBitmapMenuPrincipal(simcity);
@@ -65,5 +74,6 @@ void libererBitmapAll(Simcity* simcity){
     libererBitmapBoutonMenuPrincipal(simcity);
     libererBitmapToolbox(simcity);
     libererBitmapBarreCompteurs(simcity);
+    libererBitmapBoutonPause(simcity);
 }
 

@@ -47,12 +47,22 @@ void boucleTest(Simcity* simcity){
                 simcity->dessin = true;
                 break;
             }
+            case ALLEGRO_EVENT_KEY_DOWN:{
+                switch (simcity->allegro.event.keyboard.keycode) {
+                    case ALLEGRO_KEY_ESCAPE:{
+                        pauseTimerClavier(simcity);
+                        break;
+                    }
+                }
+                break;
+            }
             case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:{
                 switch (simcity->allegro.event.mouse.button) {
                     case 1:{
                         poserBatiment(simcity);
                         detruire(simcity);
                         detectionCliqueToolBox(simcity);
+                        pauseTimerSouris(simcity);
                         simcity->dessin = true;
                         break;
                     }
