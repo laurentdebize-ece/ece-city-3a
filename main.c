@@ -29,6 +29,9 @@ void initAll(Simcity* simcity){
 
 void boucleTest(Simcity* simcity){
 
+    /*al_set_timer_count(simcity->allegro.timer, 0);
+    al_set_timer_count(simcity->allegro.chrono, 0);*/
+
     while (!simcity->endGame) {
 
         al_wait_for_event(simcity->allegro.queue, &simcity->allegro.event);
@@ -159,7 +162,6 @@ void mainAntoine() {
     boucletestMenuPrincipal(&simcity);
     //simcity.toolBox.routeEnMain = 1;
     //simcity.toolBox.terrainVagueEnMain = 1;
-
     boucleTest(&simcity);
     libererAll(&simcity);
 

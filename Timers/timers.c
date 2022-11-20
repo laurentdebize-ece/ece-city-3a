@@ -7,6 +7,7 @@ void initCompteurs(Simcity* simcity) {
     simcity->timers.secondes = 0;
     simcity->timers.zeroDevantMinutes = TRUE;
     simcity->timers.zeroDevantSecondes = TRUE;
+    simcity->pause = 0;
 }
 
 void timerDate(Simcity* simcity) {
@@ -59,31 +60,52 @@ void timerBatiment(Simcity* simcity) {
     for (int i = 0; i < simcity->nbBatiments; ++i) {
         if(simcity->tabBatiments[i].timerCree == TRUE) {
             simcity->tabBatiments[i].timerBatiment = (int)compteurChrono - simcity->tabBatiments[i].dateCreation;
-            if(simcity->tabBatiments[i].timerBatiment % 15 == 0 && modulo60 == TRUE) {
+            if(simcity->pause == 0 && simcity->tabBatiments[i].timerBatiment % 15 == 0 && modulo60 == TRUE && simcity->tabBatiments[i].compteurEvolution != 4) {
                 simcity->tabBatiments[i].compteurEvolution++;
                 switch (simcity->tabBatiments[i].compteurEvolution) {
-                    case 0: //terrain vague
+                    case 0: { //terrain vague
                         simcity->tabBatiments[i].nbHabitants = NB_HABITANTS_TERRAINVAGUE;
                         break;
-                    case 1: //cabane
+
+                    }
+                    case 1:{//cabane
                         simcity->tabBatiments[i].nbHabitants = NB_HABITANTS_CABANE;
+                        simcity->map.mapTile[simcity->tabBatiments[i].coordXY.celluleX][simcity->tabBatiments[i].coordXY.celluleY].typeBloc = TYPE_CABANE;
                         break;
-                    case 2: //maison
+                    }
+
+                    case 2:{//maison
                         simcity->tabBatiments[i].nbHabitants = NB_HABITANTS_MAISON;
+                        simcity->map.mapTile[simcity->tabBatiments[i].coordXY.celluleX][simcity->tabBatiments[i].coordXY.celluleY].typeBloc = TYPE_MAISON;
+
                         break;
-                    case 3: //immeuble
+                    }
+
+                    case 3:{//immeuble
                         simcity->tabBatiments[i].nbHabitants = NB_HABITANTS_IMMEUBLE;
+                        simcity->map.mapTile[simcity->tabBatiments[i].coordXY.celluleX][simcity->tabBatiments[i].coordXY.celluleY].typeBloc = TYPE_IMMEUBLE;
+
                         break;
-                    case 4: //gratteciel
+                    }
+
+                    case 4: {//gratteciel
                         simcity->tabBatiments[i].nbHabitants = NB_HABITANTS_GRATTECIEL;
+                        simcity->map.mapTile[simcity->tabBatiments[i].coordXY.celluleX][simcity->tabBatiments[i].coordXY.celluleY].typeBloc = TYPE_GRATTE_CIEL;
+
                         break;
-                    case 5: //ruine
+                    }
+
+                    /*case 5:{//ruine
+
                         simcity->tabBatiments[i].nbHabitants = NB_HABITANTS_RUINE;
                         break;
+                    }*/
                     default:
                         printf("ERREUR evolution batiment.\n");
                         break;
                 }
+
+            }else if (simcity->pause == 0 && simcity->tabBatiments[i].timerBatiment % 15 == 0 && modulo60 == TRUE){
                 recevoirImpots(simcity, simcity->tabBatiments[i].nbHabitants);
             }
         }

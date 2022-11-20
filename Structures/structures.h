@@ -157,6 +157,7 @@ typedef struct {
 } ToolBox;
 
 typedef struct {
+    CoordsXY coordXY;
     int typeBatiment;
     int prixTerrainVague;
     int prixPompier;
@@ -170,6 +171,7 @@ typedef struct {
     int nbHabitants;
     int capaciteElectrique;
     int capaciteEau;
+
 } Batiment;
 
 typedef struct {

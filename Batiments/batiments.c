@@ -9,7 +9,9 @@ void initTabBatiments(Simcity* simcity) {
         simcity->tabBatiments[i].timerBatiment = 0;
         simcity->tabBatiments[i].nbHabitants = 0;
         simcity->tabBatiments[i].capaciteElectrique = 0;
-        simcity->tabBatiments[i].capaciteEau = 0;;
+        simcity->tabBatiments[i].capaciteEau = 0;
+        simcity->tabBatiments->coordXY.celluleX = 0;
+        simcity->tabBatiments->coordXY.celluleY = 0;
     }
     simcity->nbBatiments = 0;
 }
@@ -18,6 +20,8 @@ void initTabBatiments(Simcity* simcity) {
 void construireBatiment(Simcity* simcity) {
     if(simcity->banque.achatTerrainVague == 1) {
         simcity->tabBatiments[simcity->nbBatiments].typeBatiment = 1;
+        simcity->tabBatiments[simcity->nbBatiments].coordXY.celluleX = simcity->interactionExterieure.mouse.celluleXY.celluleX;
+        simcity->tabBatiments[simcity->nbBatiments].coordXY.celluleY = simcity->interactionExterieure.mouse.celluleXY.celluleY;
     }
     if(simcity->banque.achatElectricite == 1) {
         simcity->tabBatiments[simcity->nbBatiments].typeBatiment = 2;
