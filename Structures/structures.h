@@ -18,11 +18,7 @@
 #define SCREEN_LARGEUR 1024 //const taille écran large
 #define SCREEN_HAUTEUR 768 //const taille écran haut
 
-#define NB_MAX_BATIMENTS 50 //const nombre max de batiments possible
-
-enum BITMAP{BITMAP_MAP, BITMAP_TOOLBOX,BITMAP_BARRECOMPTEURS, BITMAP_MENU_PRINCIPAL_INTRO, BITMAP_MENU_PRINCIPAL, BITMAP_BOUTTON_MENU_PRINCIPAL,NB_BITMAP};
-enum SPRITE_MAP {HERBE, HOVER_TILE, ROUTE, TERRAIN_VAGUE, CABANE, MAISON, IMMEUBLE, GRATTE_CIEL,ELEC_DROIT, ELEC_COTE, EAU_DROIT, EAU_COTE, NB_SPRITE_MAP};
-#define NBR_MAX_BAT 50
+#define NBR_MAX_BAT 50 //const nombre max de batiments possible
 
 enum BITMAP{BITMAP_MAP, BITMAP_TOOLBOX,BITMAP_BARRECOMPTEURS, BITMAP_BOUTON_PAUSE ,BITMAP_MENU_PRINCIPAL_INTRO, BITMAP_MENU_PRINCIPAL, BITMAP_BOUTTON_MENU_PRINCIPAL,NB_BITMAP};
 enum SPRITE_MAP {HERBE, HOVER_TILE, ROUTE, TERRAIN_VAGUE, CABANE, MAISON, IMMEUBLE, GRATTE_CIEL,ELEC_DROIT, ELEC_COTE, EAU_DROIT, EAU_COTE, POMPIER_DROIT, POMPIER_COTE,NB_SPRITE_MAP};
@@ -125,6 +121,7 @@ typedef struct {
 
 typedef struct {
     Bitmap tabSpriteToolBox[NB_SPRITE_TOOL_BOX];
+    bool pauseEnMain;
     bool terrainVagueEnMain;
     bool routeEnMain;
     bool pompierEnMain;
@@ -142,6 +139,8 @@ typedef struct {
     bool vue1Hover;
     bool vue2Hover;
     bool pompierHover;
+    bool pauseHover;
+
     bool routeClique;
     bool maisonClique;
     bool elecClique;
@@ -150,13 +149,15 @@ typedef struct {
     bool vue1Clique;
     bool vue2Clique;
     bool pompierClique;
-
+    bool pompierDroit;
     bool elecDroit;
     bool eauDroit;
+    bool pauseClique;
 
 } ToolBox;
 
 typedef struct {
+    int typeBatiment;
     int prixTerrainVague;
     int prixPompier;
     int prixChateauEau;
@@ -203,7 +204,7 @@ typedef struct {
     Pages pages;
     ToolBox toolBox;
     Timers timers;
-    Batiment tabBatiment[NBR_MAX_BAT]; //remplir le tableau avec le nouveau batiment a chaque fois qu'il est crée
+    Batiment tabBatiments[NBR_MAX_BAT]; //remplir le tableau avec le nouveau batiment a chaque fois qu'il est crée
     Banque banque;
 
     int argent;

@@ -1,7 +1,7 @@
 #include "batiments.h"
 
 void initTabBatiments(Simcity* simcity) {
-    for (int i = 0; i < NB_MAX_BATIMENTS; ++i) {
+    for (int i = 0; i < NBR_MAX_BAT; ++i) {
         simcity->tabBatiments[i].typeBatiment = 0;
         simcity->tabBatiments[i].compteurEvolution = 0;
         simcity->tabBatiments[i].timerBatiment = 0;
