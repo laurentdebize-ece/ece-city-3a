@@ -18,6 +18,8 @@
 #define SCREEN_LARGEUR 1024 //const taille écran large
 #define SCREEN_HAUTEUR 768 //const taille écran haut
 
+#define NB_MAX_BATIMENTS 50 //const nombre max de batiments possible
+
 enum BITMAP{BITMAP_MAP, BITMAP_TOOLBOX,BITMAP_BARRECOMPTEURS, BITMAP_MENU_PRINCIPAL_INTRO, BITMAP_MENU_PRINCIPAL, BITMAP_BOUTTON_MENU_PRINCIPAL,NB_BITMAP};
 enum SPRITE_MAP {HERBE, HOVER_TILE, ROUTE, TERRAIN_VAGUE, CABANE, MAISON, IMMEUBLE, GRATTE_CIEL,ELEC_DROIT, ELEC_COTE, EAU_DROIT, EAU_COTE, NB_SPRITE_MAP};
 enum SPRITE_MENU_PRINCIPAL { INTRO , FOND,LANCER, LANCER_HOVER, LANCER_CLIQUE, CHARGER, CHARGER_HOVER, CHARGER_CLIQUE, QUITTER, QUITTER_HOVER, QUITTER_CLIQUE,NB_SPRITE_MENU_PRINCIPAL};
@@ -151,6 +153,7 @@ typedef struct {
 } ToolBox;
 
 typedef struct {
+    int typeBatiment; // terrain vague(1) - centrale electrique(2) - chateau d'eau(3) - caserne(4)
     int prixTerrainVague;
     int prixPompier;
     int prixChateauEau;
@@ -190,14 +193,14 @@ typedef struct {
     Map map; //carte du jeu
     Pages pages;
     ToolBox toolBox;
-    Batiment batiment;
     bool dessin;
     bool endGame;
     bool outOfBorder;
     int argent;
     int nbBatiments; //a mettre a jour a chaque fois qu'on cree un batiment
+    Batiment batiment;
+    Batiment tabBatiments[NB_MAX_BATIMENTS]; //remplir le tableau avec le nouveau batiment a chaque fois qu'il est crée
     Timers timers;
-    Batiment tabBatiment; //remplir le tableau avec le nouveau batiment a chaque fois qu'il est crée
     Banque banque;
 
 } Simcity;

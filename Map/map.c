@@ -223,6 +223,7 @@ void poserTerrainVague(Simcity* simcity){
             }
         }
         simcity->banque.achatTerrainVague = true;
+        construireBatiment(simcity);
     }
 }
 

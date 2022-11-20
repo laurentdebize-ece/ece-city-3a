@@ -12,6 +12,7 @@
 #include "Batiments/batiments.h"
 #include "ToolBox/toolbox.h"
 #include "Banque/banque.h"
+#include "Batiments/batiments.h"
 
 
 void initAll(Simcity* simcity){
@@ -23,6 +24,7 @@ void initAll(Simcity* simcity){
     initDataMenuPrincipal(simcity);
     initCompteurs(simcity);
     initBanque(simcity);
+    initTabBatiments(simcity);
 }
 
 void boucleTest(Simcity* simcity){

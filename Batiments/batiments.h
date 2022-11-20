@@ -12,8 +12,9 @@
 #define CAPACITE_EAU 5000
 #define CAPACITE_ELECTRIQUE 5000
 
-/*
+void initTabBatiments(Simcity* simcity);
 void construireBatiment(Simcity* simcity);
+/*
 void evolutionBatiment(Simcity* simcity);
 */
 void afficherNbHabitantsTot(Simcity simcity);

@@ -1,21 +1,33 @@
 #include "batiments.h"
 
-/*
-void construireBatiment(Simcity* simcity) {
-    simcity->nbBatiments++;
-    simcity->batiment[simcity->nbBatiments].compteurEvolution = 0;
-    simcity->batiment[simcity->nbBatiments].timerBatiment = 0;
-    simcity->batiment[simcity->nbBatiments].nbHabitants = 0;
-    simcity->batiment[simcity->nbBatiments].capaciteElectrique = 0;
-    simcity->batiment[simcity->nbBatiments].capaciteEau = 0;
-    if(simcity->batiment[simcity->nbBatiments].achatElectricite == 1) {
-        simcity->batiment[simcity->nbBatiments].capaciteElectrique = CAPACITE_ELECTRIQUE;
+void initTabBatiments(Simcity* simcity) {
+    for (int i = 0; i < NB_MAX_BATIMENTS; ++i) {
+        simcity->tabBatiments[i].typeBatiment = 0;
+        simcity->tabBatiments[i].compteurEvolution = 0;
+        simcity->tabBatiments[i].timerBatiment = 0;
+        simcity->tabBatiments[i].nbHabitants = 0;
+        simcity->tabBatiments[i].capaciteElectrique = 0;
+        simcity->tabBatiments[i].capaciteEau = 0;;
     }
-    if(simcity->batiment[simcity->nbBatiments].achatChateauEau == 1) {
-        simcity->batiment[simcity->nbBatiments].capaciteEau = CAPACITE_EAU;
-    }
-    afficherBatiment(simcity);
+    simcity->nbBatiments = 0;
 }
+
+
+void construireBatiment(Simcity* simcity) {
+    if(simcity->banque.achatTerrainVague == 1) {
+        simcity->tabBatiments[simcity->nbBatiments].typeBatiment = 1;
+    }
+    if(simcity->banque.achatElectricite == 1) {
+        simcity->tabBatiments[simcity->nbBatiments].typeBatiment = 2;
+        simcity->tabBatiments[simcity->nbBatiments].capaciteElectrique = CAPACITE_ELECTRIQUE;
+    }
+    if(simcity->banque.achatChateauEau == 1) {
+        simcity->tabBatiments[simcity->nbBatiments].typeBatiment = 3;
+        simcity->tabBatiments[simcity->nbBatiments].capaciteEau = CAPACITE_EAU;
+    }
+    simcity->nbBatiments++;
+}
+/*
 void evolutionBatiment(Simcity* simcity) {
     if(simcity->batiment.achatTerrainVague == 1) {
         if (simcity->batiment.compteurEvolution < 6){
