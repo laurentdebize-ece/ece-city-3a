@@ -62,10 +62,9 @@ void nombreHabitants(Simcity* simcity) {
         nbHabitantsTot += simcity->tabBatiments[i].nbHabitants;
     }
     simcity->nbHabitants = nbHabitantsTot;
-    printf("%d\n", simcity->nbHabitants);
 }
 
 
 void afficherNbHabitantsTot(Simcity simcity) {
-    al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 225, 725, 0, "%d",simcity.nbHabitants);
+    al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 250, 725, 0, "%d",simcity.nbHabitants);
 }

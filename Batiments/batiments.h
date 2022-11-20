@@ -16,6 +16,6 @@ void initTabBatiments(Simcity* simcity);
 void construireBatiment(Simcity* simcity);
 void nombreHabitants(Simcity* simcity);
 void afficherNbHabitantsTot(Simcity simcity);
-void allocationHabitation(Simcity * simcity);
+void allocationHabitation(Simcity* simcity);
 
 #endif //ECE_CITY_3A_BATIMENTS_H

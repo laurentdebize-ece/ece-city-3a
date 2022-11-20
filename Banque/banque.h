@@ -12,8 +12,6 @@
 #define COUTCASERNE 10000
 
 /*
-void initBanque(Simcity* simcity);
-void payerBanque(Simcity* simcity);
 void recevoirImpots(Simcity* simcity);
 */
 void initBanque(Simcity* simcity);

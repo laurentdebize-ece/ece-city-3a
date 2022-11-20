@@ -1,34 +1,5 @@
 #include "banque.h"
-/*      !!! PAS LE PLUS PRATIQUE JE PENSE !!!
-void initBanqueEtPrix(Simcity* simcity) {
-    simcity->argent = SOLDEINITIAL;
-    simcity->habitation.prixTerrainVague = PRIX_TERRAIN_VAGUE;
-    ...
-}
-
-void payerBanque(Simcity* simcity) {
-    switch (simcity->action) {
-        case 1: //achat d'un terrain vague
-            simcity->argent -= COUTTERRAINVAGUE;
-            break;
-        case 2: //achat d'une route
-            simcity->argent -= COUTROUTE;
-            break;
-        case 3: //achat d'une centrale electrique
-            simcity->argent -= COUTCENTRALE;
-            break;
-        case 4: //achat d'un chateau d'eau
-            simcity->argent -= COUTCHATEAUEAU;
-            break;
-        case 5: //achat d'une caserne
-            simcity->argent -= COUTCASERNE;
-            break;
-        default :
-            printf("ERREUR numero action.\n");
-            break;
-    }
-}
-
+/*
 void recevoirImpots(Simcity* simcity) {
     int impotTot = 0;
     if(simcity->batiment->cycleFini == 1) { // a mettre dans la fonction d'amelirotation du batiment directement ????
@@ -47,7 +18,7 @@ void initBanque(Simcity* simcity){
 }
 
 void afficherArgent(Simcity simcity) {
-    al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 325, 725, 0, " %d", simcity.argent);
+    al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 440, 725, 0, " %d", simcity.argent);
 }
 
 bool isPayer(Simcity* simcity, int sommeARetirer){
