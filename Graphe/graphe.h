@@ -1,10 +1,9 @@
 #ifndef ECE_CITY_3A_GRAPHE_H
 #define ECE_CITY_3A_GRAPHE_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <string.h>
+#include "../Structures/structures.h"
+
+/*
 
 #define LIGNES 35
 #define COLONNES 45
@@ -44,7 +43,7 @@ typedef struct Graphe {
     int ordre;
     Cellule grille[LIGNES][COLONNES];
 }Graphe;
-
+*/
 Graphe *lire_graphe(Graphe *graphe, char *nomFichier);
 void recupdonne(Graphe *graphe);
 void ecrire_graphe(Graphe *graphe, char *nomFichier);

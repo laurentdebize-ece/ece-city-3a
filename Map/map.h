@@ -3,16 +3,20 @@
 
 #include "../Structures/structures.h"
 
+
 void initDataMap(Simcity* simcity);
 void bitmapSpriteInit(Simcity* simcity);
 
 void calculPositionSourisEnCelluleXY(Simcity* simcity);
 void outOfBorder(Simcity* simcity);
 
+
+/////ICI pour modifier le tab sous jacent
 void poserTerrainVague(Simcity* simcity);
 void poserRoute(Simcity* simcity);
 void poserElec(Simcity *simcity);
 void poserBatiment(Simcity *simcity);
+
 
 void tournerBatiment(Simcity *simcity);
 
