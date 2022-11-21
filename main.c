@@ -12,6 +12,7 @@
 #include "Batiments/batiments.h"
 #include "ToolBox/toolbox.h"
 #include "Banque/banque.h"
+#include "Batiments/batiments.h"
 
 
 void initAll(Simcity* simcity){
@@ -23,9 +24,13 @@ void initAll(Simcity* simcity){
     initDataMenuPrincipal(simcity);
     initCompteurs(simcity);
     initBanque(simcity);
+    initTabBatiments(simcity);
 }
 
 void boucleTest(Simcity* simcity){
+
+    /*al_set_timer_count(simcity->allegro.timer, 0);
+    al_set_timer_count(simcity->allegro.chrono, 0);*/
 
     while (!simcity->endGame) {
 
@@ -47,12 +52,22 @@ void boucleTest(Simcity* simcity){
                 simcity->dessin = true;
                 break;
             }
+            case ALLEGRO_EVENT_KEY_DOWN:{
+                switch (simcity->allegro.event.keyboard.keycode) {
+                    case ALLEGRO_KEY_ESCAPE:{
+                        pauseTimerClavier(simcity);
+                        break;
+                    }
+                }
+                break;
+            }
             case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:{
                 switch (simcity->allegro.event.mouse.button) {
                     case 1:{
                         poserBatiment(simcity);
                         detruire(simcity);
                         detectionCliqueToolBox(simcity);
+                        pauseTimerSouris(simcity);
                         simcity->dessin = true;
                         break;
                     }
@@ -72,10 +87,8 @@ void boucleTest(Simcity* simcity){
                 timerDate(simcity);
                 timerTempsJeu(simcity);
                 payerBanque(simcity);
-                /*for (int i = 0; i < simcity->nbBatiments; ++i) {
-                    timerBatiment(simcity);
-                    evolutionBatiment(simcity);
-                }*/
+                timerBatiment(simcity);
+                nombreHabitantsTot(simcity);
                 simcity->dessin = true;
 
                 if (simcity->dessin) {
@@ -83,7 +96,6 @@ void boucleTest(Simcity* simcity){
                     if (simcity->outOfBorder){
                         afficherHoverMap(simcity);
                     }
-                    //afficherTimerDate(*simcity);
                     afficherTimerTempsJeu(*simcity);
                     al_flip_display();
                     simcity->dessin = false;
@@ -150,7 +162,6 @@ void mainAntoine() {
     boucletestMenuPrincipal(&simcity);
     //simcity.toolBox.routeEnMain = 1;
     //simcity.toolBox.terrainVagueEnMain = 1;
-
     boucleTest(&simcity);
     libererAll(&simcity);
 

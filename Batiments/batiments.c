@@ -1,52 +1,52 @@
 #include "batiments.h"
 
-/*
+void initTabBatiments(Simcity* simcity) {
+    for (int i = 0; i < NBR_MAX_BAT; ++i) {
+        simcity->tabBatiments[i].typeBatiment = 0;
+        simcity->tabBatiments[i].compteurEvolution = 0;
+        simcity->tabBatiments[i].timerCree = 0;
+        simcity->tabBatiments[i].dateCreation = -1;
+        simcity->tabBatiments[i].timerBatiment = 0;
+        simcity->tabBatiments[i].nbHabitants = 0;
+        simcity->tabBatiments[i].capaciteElectrique = 0;
+        simcity->tabBatiments[i].capaciteEau = 0;
+        simcity->tabBatiments->coordXY.celluleX = 0;
+        simcity->tabBatiments->coordXY.celluleY = 0;
+    }
+    simcity->nbBatiments = 0;
+}
+
+
 void construireBatiment(Simcity* simcity) {
+    if(simcity->banque.achatTerrainVague == 1) {
+        simcity->tabBatiments[simcity->nbBatiments].typeBatiment = 1;
+        simcity->tabBatiments[simcity->nbBatiments].coordXY.celluleX = simcity->interactionExterieure.mouse.celluleXY.celluleX;
+        simcity->tabBatiments[simcity->nbBatiments].coordXY.celluleY = simcity->interactionExterieure.mouse.celluleXY.celluleY;
+    }
+    if(simcity->banque.achatElectricite == 1) {
+        simcity->tabBatiments[simcity->nbBatiments].typeBatiment = 2;
+        simcity->tabBatiments[simcity->nbBatiments].capaciteElectrique = CAPACITE_ELECTRIQUE;
+    }
+    if(simcity->banque.achatChateauEau == 1) {
+        simcity->tabBatiments[simcity->nbBatiments].typeBatiment = 3;
+        simcity->tabBatiments[simcity->nbBatiments].capaciteEau = CAPACITE_EAU;
+    }
+    simcity->tabBatiments[simcity->nbBatiments].dateCreation = (int) al_get_timer_count(simcity->allegro.chrono);
+    if(simcity->tabBatiments[simcity->nbBatiments].dateCreation != -1) {
+        simcity->tabBatiments[simcity->nbBatiments].timerCree = TRUE;
+    } else {printf("ERREUR lancement timer batiment.\n");}
     simcity->nbBatiments++;
-    simcity->batiment[simcity->nbBatiments].compteurEvolution = 0;
-    simcity->batiment[simcity->nbBatiments].timerBatiment = 0;
-    simcity->batiment[simcity->nbBatiments].nbHabitants = 0;
-    simcity->batiment[simcity->nbBatiments].capaciteElectrique = 0;
-    simcity->batiment[simcity->nbBatiments].capaciteEau = 0;
-    if(simcity->batiment[simcity->nbBatiments].achatElectricite == 1) {
-        simcity->batiment[simcity->nbBatiments].capaciteElectrique = CAPACITE_ELECTRIQUE;
-    }
-    if(simcity->batiment[simcity->nbBatiments].achatChateauEau == 1) {
-        simcity->batiment[simcity->nbBatiments].capaciteEau = CAPACITE_EAU;
-    }
-    afficherBatiment(simcity);
 }
-void evolutionBatiment(Simcity* simcity) {
-    if(simcity->batiment.achatTerrainVague == 1) {
-        if (simcity->batiment.compteurEvolution < 6){
-            simcity->batiment.compteurEvolution++;
-        }
-        switch (simcity->batiment.compteurEvolution++) {
-            case 1: //terrain vague
-                simcity->batiment.nbHabitants = NB_HABITANTS_TERRAINVAGUE;
-                break;
-            case 2: //cabane
-                simcity->batiment.nbHabitants = NB_HABITANTS_CABANE;
-                break;
-            case 3: //maison
-                simcity->batiment.nbHabitants = NB_HABITANTS_MAISON;
-                break;
-            case 4: //immeuble
-                simcity->batiment.nbHabitants = NB_HABITANTS_IMMEUBLE;
-                break;
-            case 5: //gratteciel
-                simcity->batiment.nbHabitants = NB_HABITANTS_GRATTECIEL;
-                break;
-            case 6: //ruine
-                simcity->batiment.nbHabitants = NB_HABITANTS_RUINE;
-                break;
-            default:
-                printf("ERREUR evolution batiment.\n");
-        }
+
+void nombreHabitantsTot(Simcity* simcity) {
+    int nbHabitantsTot = 0;
+    for (int i = 0; i < simcity->nbBatiments; ++i) {
+        nbHabitantsTot += simcity->tabBatiments[i].nbHabitants;
     }
-    afficherBatiment(simcity);
+    simcity->nbHabitants = nbHabitantsTot;
 }
-*/
+
+
 void afficherNbHabitantsTot(Simcity simcity) {
-    al_draw_text(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 225, 725, 0, "20003");
+    al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 250, 725, 0, "%d",simcity.nbHabitants);
 }

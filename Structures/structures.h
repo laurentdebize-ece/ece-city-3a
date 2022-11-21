@@ -18,11 +18,12 @@
 #define SCREEN_LARGEUR 1024 //const taille écran large
 #define SCREEN_HAUTEUR 768 //const taille écran haut
 
-enum BITMAP{BITMAP_MAP, BITMAP_TOOLBOX,BITMAP_BARRECOMPTEURS, BITMAP_MENU_PRINCIPAL_INTRO, BITMAP_MENU_PRINCIPAL, BITMAP_BOUTTON_MENU_PRINCIPAL,NB_BITMAP};
+#define NBR_MAX_BAT 50 //const nombre max de batiments possible
+
+enum BITMAP{BITMAP_MAP, BITMAP_TOOLBOX,BITMAP_BARRECOMPTEURS, BITMAP_BOUTON_PAUSE ,BITMAP_MENU_PRINCIPAL_INTRO, BITMAP_MENU_PRINCIPAL, BITMAP_BOUTTON_MENU_PRINCIPAL,NB_BITMAP};
 enum SPRITE_MAP {HERBE, HOVER_TILE, ROUTE, TERRAIN_VAGUE, CABANE, MAISON, IMMEUBLE, GRATTE_CIEL,ELEC_DROIT, ELEC_COTE, EAU_DROIT, EAU_COTE, POMPIER_DROIT, POMPIER_COTE,NB_SPRITE_MAP};
 enum SPRITE_MENU_PRINCIPAL { INTRO , FOND,LANCER, LANCER_HOVER, LANCER_CLIQUE, CHARGER, CHARGER_HOVER, CHARGER_CLIQUE, QUITTER, QUITTER_HOVER, QUITTER_CLIQUE,NB_SPRITE_MENU_PRINCIPAL};
-enum SPRITE_BOITE_A_OUTIL {HABITATION,TOOLBOX_NIVEAU1, TOOLBOX_NIVEAU2, TOOLBOX_FOND_GRIS, TOOLBOX_ROUTE, TOOLBOX_MAISON, TOOLBOX_ELEC, TOOLBOX_EAU, TOOLBOX_DEMOLIR, TOOLBOX_POMPIERS, TOOLBOX_HOVER_ROUTE, NB_SPRITE_TOOL_BOX};
-//enum SPRITE_BOITE_A_OUTIL {ROUTE_, ROUTE_HOVER, ROUTE_CLIQUE,MAISON_, MAISON_HOVER, MAISON_CLIQUE,ELEC, ELEC_HOVER, ELEC_CLIQUE, EAU, EAU_HOVER, EAU_CLIQUE, DETRUIRE, DETRUIRE_HOVER, DETRUIRE_CLIQUE, VUE1, VUE1_HOVER, VUE1_CLIQUE,VUE2, VUE2_HOVER, VUE2_CLIQUE, POMPIER, POMPIER_HOVER, POMPIER_CLIQUE, NB_SPRITE_TOOL_BOX};
+enum SPRITE_BOITE_A_OUTIL {ROUTE_, ROUTE_HOVER, ROUTE_CLIQUE,MAISON_, MAISON_HOVER, MAISON_CLIQUE,ELEC, ELEC_HOVER, ELEC_CLIQUE, EAU, EAU_HOVER, EAU_CLIQUE, DETRUIRE, DETRUIRE_HOVER, DETRUIRE_CLIQUE, VUE1, VUE1_HOVER, VUE1_CLIQUE,VUE2, VUE2_HOVER, VUE2_CLIQUE, POMPIER, POMPIER_HOVER, POMPIER_CLIQUE, PAUSE, PAUSE_HOVER, PAUSE_CLIQUE, NB_SPRITE_TOOL_BOX};
 enum COLOR{ BLACK, WHITE, ORANGE};
 enum TYPE_BLOC{TYPE_HERBE,TYPE_ROUTE,TYPE_TERRAIN_VAGUE,TYPE_CABANE,TYPE_MAISON,TYPE_IMMEUBLE,TYPE_GRATTE_CIEL, TYPE_ELEC_DROIT, TYPE_ELEC_COTE, TYPE_EAU_DROIT, TYPE_EAU_COTE, TYPE_POMPIER_DROIT, TYPE_POMPIER_COTE, NB_TYPE_BLOC};
 
@@ -120,7 +121,7 @@ typedef struct {
 
 typedef struct {
     Bitmap tabSpriteToolBox[NB_SPRITE_TOOL_BOX];
-
+    bool pauseEnMain;
     bool terrainVagueEnMain;
     bool routeEnMain;
     bool pompierEnMain;
@@ -138,6 +139,7 @@ typedef struct {
     bool vue1Hover;
     bool vue2Hover;
     bool pompierHover;
+    bool pauseHover;
 
     bool routeClique;
     bool maisonClique;
@@ -147,14 +149,16 @@ typedef struct {
     bool vue1Clique;
     bool vue2Clique;
     bool pompierClique;
-
+    bool pompierDroit;
     bool elecDroit;
     bool eauDroit;
-    bool pompierDroit;
+    bool pauseClique;
 
 } ToolBox;
 
 typedef struct {
+    CoordsXY coordXY;
+    int typeBatiment;
     int prixTerrainVague;
     int prixPompier;
     int prixChateauEau;
@@ -167,6 +171,7 @@ typedef struct {
     int nbHabitants;
     int capaciteElectrique;
     int capaciteEau;
+
 } Batiment;
 
 typedef struct {
@@ -185,6 +190,12 @@ typedef struct {
     bool achatElectricite;
     bool achatRoute;
 
+    int prixTerrainVague;
+    int prixPompier;
+    int prixChateauEau;
+    int prixElectricite;
+    int prixRoute;
+
 }Banque;
 
 typedef struct {
@@ -194,17 +205,18 @@ typedef struct {
     Map map; //carte du jeu
     Pages pages;
     ToolBox toolBox;
-    Batiment batiment;
     Timers timers;
-    Batiment tabBatiment; //remplir le tableau avec le nouveau batiment a chaque fois qu'il est crée
+    Batiment tabBatiments[NBR_MAX_BAT];
     Banque banque;
 
     int argent;
-    int nbBatiments; //a mettre a jour a chaque fois qu'on cree un batiment
+    int nbBatiments;
+    int nbHabitants;
 
     bool dessin;
     bool endGame;
     bool outOfBorder;
+    bool pause;
 
 } Simcity;
 
