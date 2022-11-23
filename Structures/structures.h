@@ -198,6 +198,28 @@ typedef struct {
 
 }Banque;
 
+
+/////SOMMET/////
+typedef struct Cellule{
+    struct Arc* arc;
+    enum TYPE_BLOC type;
+    CoordsXY coord;
+}Cellule;
+typedef struct Cellule *pCellule;
+
+//////ARC/////
+struct Arc{
+    struct Arc *arc_suivant;
+    int sommet;
+};
+typedef struct Arc *pArc;
+
+//////GRAPHE/////
+typedef struct Graphe {
+    int ordre;
+    Cellule grille[NBCELLULEX][NBCELLULEY];
+}Graphe;
+
 typedef struct {
     Allegro allegro;// Contient tous les éléments ALLEGRO
     ALLEGRO_BITMAP* tabBitmap[NB_BITMAP];
@@ -208,6 +230,7 @@ typedef struct {
     Timers timers;
     Batiment tabBatiments[NBR_MAX_BAT];
     Banque banque;
+    Graphe graphe;
 
     int argent;
     int nbBatiments;

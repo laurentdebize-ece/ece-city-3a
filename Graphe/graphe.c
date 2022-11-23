@@ -10,7 +10,7 @@ int main() {
 */
 Graphe *lire_graphe( Graphe *graphe, char *nomFichier){
     FILE *fichierO = fopen(nomFichier, "r");
-    FILE *fichierM = fopen("../matrice.txt", "w");
+    FILE *fichierM = fopen("../ordre.txt", "w");
     if (fichierO == NULL){
         printf("Erreur lors de l'ouverture du fichier ordre.txt");
         return NULL;
@@ -24,8 +24,8 @@ Graphe *lire_graphe( Graphe *graphe, char *nomFichier){
     graphe->ordre = ordre;
 
 
-    for (int i = 0; i < LIGNES ; i++){
-        for(int j = 0; j < COLONNES; j++){
+    for (int i = 0; i < NBCELLULEX ; i++){
+        for(int j = 0; j < NBCELLULEY; j++){
             graphe->grille[i][j].arc = NULL;
             graphe->grille[i][j].type = 0;
             //fprintf(fichierM, "%d", graphe->grille[i][j].type);
@@ -46,8 +46,8 @@ void ecrire_graphe(Graphe *graphe, char *nomFichier){
         printf("Erreur lors de l'ouverture du fichier matrice.txt");
         return;
     }
-    for (int i = 0; i < LIGNES ; i++){
-        for(int j = 0; j < COLONNES; j++){
+    for (int i = 0; i < NBCELLULEX ; i++){
+        for(int j = 0; j < NBCELLULEY; j++){
             fprintf(fichierM, "%d", graphe->grille[i][j].type);
         }
         fprintf(fichierM, "\n");

@@ -237,6 +237,7 @@ void poserTerrainVague(Simcity* simcity){
         simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc = TYPE_TERRAIN_VAGUE;
         for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 3; ++x) {
             for (int y = simcity->interactionExterieure.mouse.celluleXY.celluleY; y < simcity->interactionExterieure.mouse.celluleXY.celluleY + 3; ++y) {
+                simcity->graphe.grille[x][y].type = TYPE_TERRAIN_VAGUE;
                 if (simcity->interactionExterieure.mouse.celluleXY.celluleX == x && simcity->interactionExterieure.mouse.celluleXY.celluleY == y){
                     simcity->map.mapTile[x][y].typeBloc = TYPE_TERRAIN_VAGUE;
                 }else{
@@ -471,45 +472,60 @@ void poserRoute(Simcity *simcity){
                 if (simcity->map.creationRouteX < simcity->interactionExterieure.mouse.celluleXY.celluleX && simcity->map.creationRouteY < simcity->interactionExterieure.mouse.celluleXY.celluleY) {
                     for (int x = simcity->map.creationRouteX; x <= simcity->map.creationRouteX + simcity->map.compteurCheminsX; ++x){
                         simcity->map.mapTile[x][simcity->interactionExterieure.mouse.celluleXY.celluleY - simcity->map.compteurCheminsY].typeBloc = TYPE_ROUTE;
+                        simcity->graphe.grille[x][simcity->interactionExterieure.mouse.celluleXY.celluleY - simcity->map.compteurCheminsY].type = TYPE_ROUTE;
                     }
                     for (int y = simcity->map.creationRouteY;y <= simcity->map.creationRouteY + simcity->map.compteurCheminsY; ++y) {
                         simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][y].typeBloc = TYPE_ROUTE;
+                        simcity->graphe.grille[simcity->interactionExterieure.mouse.celluleXY.celluleX][y].type = TYPE_ROUTE;
+
                     }
                 } else if (simcity->map.creationRouteX > simcity->interactionExterieure.mouse.celluleXY.celluleX && simcity->map.creationRouteY < simcity->interactionExterieure.mouse.celluleXY.celluleY) {
                     for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x <= simcity->interactionExterieure.mouse.celluleXY.celluleX + simcity->map.compteurCheminsX; ++x) {
                         simcity->map.mapTile[x][simcity->interactionExterieure.mouse.celluleXY.celluleY - simcity->map.compteurCheminsY].typeBloc = TYPE_ROUTE;
+                        simcity->graphe.grille[x][simcity->interactionExterieure.mouse.celluleXY.celluleY - simcity->map.compteurCheminsY].type = TYPE_ROUTE;
                     }
                     for (int y = simcity->map.creationRouteY; y <= simcity->map.creationRouteY + simcity->map.compteurCheminsY; ++y){
                         simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][y].typeBloc = TYPE_ROUTE;
+                        simcity->graphe.grille[simcity->interactionExterieure.mouse.celluleXY.celluleX][y].type = TYPE_ROUTE;
                     }
                 } else if (simcity->map.creationRouteX > simcity->interactionExterieure.mouse.celluleXY.celluleX && simcity->map.creationRouteY > simcity->interactionExterieure.mouse.celluleXY.celluleY) {
                     for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x <= simcity->interactionExterieure.mouse.celluleXY.celluleX + simcity->map.compteurCheminsX; ++x) {
                         simcity->map.mapTile[x][simcity->interactionExterieure.mouse.celluleXY.celluleY + simcity->map.compteurCheminsY].typeBloc = TYPE_ROUTE;
+                        simcity->graphe.grille[x][simcity->interactionExterieure.mouse.celluleXY.celluleY + simcity->map.compteurCheminsY].type = TYPE_ROUTE;
+
                     }
                     for (int y = simcity->interactionExterieure.mouse.celluleXY.celluleY; y <= simcity->interactionExterieure.mouse.celluleXY.celluleY + simcity->map.compteurCheminsY; ++y) {
                         simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][y].typeBloc = TYPE_ROUTE;
+                        simcity->graphe.grille[simcity->interactionExterieure.mouse.celluleXY.celluleX][y].type = TYPE_ROUTE;
                     }
                 } else if (simcity->map.creationRouteX < simcity->interactionExterieure.mouse.celluleXY.celluleX && simcity->map.creationRouteY > simcity->interactionExterieure.mouse.celluleXY.celluleY) {
                     for (int x = simcity->map.creationRouteX; x <= simcity->map.creationRouteX + simcity->map.compteurCheminsX; ++x) {
                         simcity->map.mapTile[x][simcity->interactionExterieure.mouse.celluleXY.celluleY + simcity->map.compteurCheminsY].typeBloc = TYPE_ROUTE;
+                        simcity->graphe.grille[x][simcity->interactionExterieure.mouse.celluleXY.celluleY + simcity->map.compteurCheminsY].type = TYPE_ROUTE;
                     }
                     for (int y = simcity->interactionExterieure.mouse.celluleXY.celluleY; y <= simcity->interactionExterieure.mouse.celluleXY.celluleY + simcity->map.compteurCheminsY; ++y) {
                         simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][y].typeBloc = TYPE_ROUTE;
+                        simcity->graphe.grille[simcity->interactionExterieure.mouse.celluleXY.celluleX][y].type = TYPE_ROUTE;
                     }
                 } else if (simcity->map.creationRouteX < simcity->interactionExterieure.mouse.celluleXY.celluleX) {
-                    for (int x = simcity->map.creationRouteX; x <= simcity->map.creationRouteX + simcity->map.compteurCheminsX; ++x) { simcity->map.mapTile[x][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc = TYPE_ROUTE;
+                    for (int x = simcity->map.creationRouteX; x <= simcity->map.creationRouteX + simcity->map.compteurCheminsX; ++x) {
+                        simcity->map.mapTile[x][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc = TYPE_ROUTE;
+                        simcity->graphe.grille[x][simcity->interactionExterieure.mouse.celluleXY.celluleY].type = TYPE_ROUTE;
                     }
                 } else if (simcity->map.creationRouteX > simcity->interactionExterieure.mouse.celluleXY.celluleX) {
                     for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x <= simcity->interactionExterieure.mouse.celluleXY.celluleX + simcity->map.compteurCheminsX; ++x) {
                         simcity->map.mapTile[x][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc = TYPE_ROUTE;
+                        simcity->graphe.grille[x][simcity->interactionExterieure.mouse.celluleXY.celluleY].type = TYPE_ROUTE;
                     }
                 } else if (simcity->map.creationRouteY < simcity->interactionExterieure.mouse.celluleXY.celluleY) {
                     for (int y = simcity->map.creationRouteY; y <= simcity->map.creationRouteY + simcity->map.compteurCheminsY; ++y) {
                         simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][y].typeBloc = TYPE_ROUTE;
+                        simcity->graphe.grille[simcity->interactionExterieure.mouse.celluleXY.celluleX][y].type = TYPE_ROUTE;
                     }
                 } else if (simcity->map.creationRouteY > simcity->interactionExterieure.mouse.celluleXY.celluleY) {
                     for (int y = simcity->interactionExterieure.mouse.celluleXY.celluleY; y <= simcity->interactionExterieure.mouse.celluleXY.celluleY + simcity->map.compteurCheminsY; ++y) {
                         simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][y].typeBloc = TYPE_ROUTE;
+                        simcity->graphe.grille[simcity->interactionExterieure.mouse.celluleXY.celluleX][y].type = TYPE_ROUTE;
                     }
                 }
                 simcity->banque.achatRoute = true;
@@ -529,7 +545,7 @@ void poserRoute(Simcity *simcity){
         }
 }
 
-
+////ICI METTRE LE SUCCESSEUR SI CONDITION REMPLIE
 bool collerAlaRouteElec(Simcity* simcity){
     if (simcity->toolBox.elecDroit){
         for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 6; ++x) {
@@ -659,6 +675,7 @@ void poserElec(Simcity *simcity){
                  x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 6; ++x) {
                 for (int y = simcity->interactionExterieure.mouse.celluleXY.celluleY;
                      y < simcity->interactionExterieure.mouse.celluleXY.celluleY + 4; ++y) {
+                    simcity->graphe.grille[x][y].type = TYPE_ELEC_DROIT;
                     if (simcity->interactionExterieure.mouse.celluleXY.celluleX == x &&
                         simcity->interactionExterieure.mouse.celluleXY.celluleY == y) {
 
@@ -673,6 +690,7 @@ void poserElec(Simcity *simcity){
             simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc = TYPE_ELEC_COTE;
             for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 4; ++x) {
                 for (int y = simcity->interactionExterieure.mouse.celluleXY.celluleY; y < simcity->interactionExterieure.mouse.celluleXY.celluleY + 6; ++y) {
+                    simcity->graphe.grille[x][y].type = TYPE_ELEC_COTE;
                     if (simcity->interactionExterieure.mouse.celluleXY.celluleX == x && simcity->interactionExterieure.mouse.celluleXY.celluleY == y) {
                     } else {
                         simcity->map.mapTile[x][y].typeBloc = -2; // permet de ne pas faire bug l'affchage des maisons
@@ -730,6 +748,7 @@ void poserEau(Simcity *simcity){
                  x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 6; ++x) {
                 for (int y = simcity->interactionExterieure.mouse.celluleXY.celluleY;
                      y < simcity->interactionExterieure.mouse.celluleXY.celluleY + 4; ++y) {
+                    simcity->graphe.grille[x][y].type = TYPE_EAU_DROIT;
                     if (simcity->interactionExterieure.mouse.celluleXY.celluleX == x &&
                         simcity->interactionExterieure.mouse.celluleXY.celluleY == y) {
 
@@ -743,6 +762,7 @@ void poserEau(Simcity *simcity){
             simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc = TYPE_EAU_COTE;
             for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 4; ++x) {
                 for (int y = simcity->interactionExterieure.mouse.celluleXY.celluleY; y < simcity->interactionExterieure.mouse.celluleXY.celluleY + 6; ++y) {
+                    simcity->graphe.grille[x][y].type = TYPE_EAU_COTE;
                     if (simcity->interactionExterieure.mouse.celluleXY.celluleX == x && simcity->interactionExterieure.mouse.celluleXY.celluleY == y) {
                     } else {
                         simcity->map.mapTile[x][y].typeBloc = -2; // permet de ne pas faire bug l'affchage des maisons
@@ -799,6 +819,7 @@ void poserPompier(Simcity *simcity){
                  x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 6; ++x) {
                 for (int y = simcity->interactionExterieure.mouse.celluleXY.celluleY;
                      y < simcity->interactionExterieure.mouse.celluleXY.celluleY + 4; ++y) {
+                    simcity->graphe.grille[x][y].type = TYPE_POMPIER_DROIT;
                     if (simcity->interactionExterieure.mouse.celluleXY.celluleX == x &&
                         simcity->interactionExterieure.mouse.celluleXY.celluleY == y) {
 
@@ -812,6 +833,7 @@ void poserPompier(Simcity *simcity){
             simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc = TYPE_POMPIER_COTE;
             for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 4; ++x) {
                 for (int y = simcity->interactionExterieure.mouse.celluleXY.celluleY; y < simcity->interactionExterieure.mouse.celluleXY.celluleY + 6; ++y) {
+                    simcity->graphe.grille[x][y].type = TYPE_POMPIER_COTE;
                     if (simcity->interactionExterieure.mouse.celluleXY.celluleX == x && simcity->interactionExterieure.mouse.celluleXY.celluleY == y) {
                     } else {
                         simcity->map.mapTile[x][y].typeBloc = -2; // permet de ne pas faire bug l'affchage des maisons
