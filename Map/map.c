@@ -244,7 +244,7 @@ void poserTerrainVague(Simcity* simcity){
             }
         }
         simcity->banque.achatTerrainVague = true;
-        construireBatiment(simcity);
+        construireHabitation(simcity);
     }
 }
 
@@ -683,7 +683,7 @@ void poserElec(Simcity *simcity){
                 }
             }
             simcity->banque.achatElectricite = 1;
-
+            construireInfrastructure(simcity);
         } else if (!simcity->toolBox.elecDroit) {
             simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc = TYPE_ELEC_COTE;
             for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 4; ++x) {
@@ -696,7 +696,7 @@ void poserElec(Simcity *simcity){
                 }
             }
             simcity->banque.achatElectricite = 1;
-
+            construireInfrastructure(simcity);
         }
     }
 }
@@ -756,6 +756,7 @@ void poserEau(Simcity *simcity){
                 }
             }
             simcity->banque.achatChateauEau = 1;
+            construireInfrastructure(simcity);
         } else if (!simcity->toolBox.eauDroit) {
             simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc = TYPE_EAU_COTE;
             for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 4; ++x) {
@@ -768,6 +769,7 @@ void poserEau(Simcity *simcity){
                 }
             }
             simcity->banque.achatChateauEau = 1;
+            construireInfrastructure(simcity);
         }
     }
 }
@@ -879,4 +881,15 @@ void detruire(Simcity *simcity){
     if (simcity->allegro.event.mouse.button == 1 && simcity->toolBox.detruireEnMain && simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc != TYPE_HERBE){
         simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc = TYPE_HERBE;
     }
+}
+
+void cliquer(Simcity* simcity){
+    for (int i = 0; i < NBR_MAX_BAT; ++i) {
+        for (int j = 0; j < 8; ++j) {
+            if (simcity->allegro.event.mouse.button == 1 && simcity->tabHabitation[i].coordXY[j].celluleX == simcity->interactionExterieure.mouse.celluleXY.celluleX && simcity->tabHabitation[i].coordXY[j].celluleY == simcity->interactionExterieure.mouse.celluleXY.celluleY){
+                printf("Habitation : %d\n", i);
+            }
+        }
+    }
+
 }

@@ -31,5 +31,7 @@ void afficherHoverMap(Simcity* simcity);
 
 void detruire(Simcity *simcity);
 
+void cliquer(Simcity* simcity);
+
 
 #endif

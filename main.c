@@ -69,6 +69,7 @@ void boucleTest(Simcity* simcity){
                         detruire(simcity);
                         detectionCliqueToolBox(simcity);
                         pauseTimerSouris(simcity);
+                        //cliquer(simcity);
                         simcity->dessin = true;
                         break;
                     }

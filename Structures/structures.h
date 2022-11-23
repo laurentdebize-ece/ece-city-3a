@@ -19,6 +19,7 @@
 #define SCREEN_HAUTEUR 768 //const taille écran haut
 
 #define NBR_MAX_BAT 50 //const nombre max de batiments possible
+#define NBR_MAX_INFRA 15 //const nombre max de batiments possible
 
 enum BITMAP{BITMAP_MAP, BITMAP_TOOLBOX,BITMAP_BARRECOMPTEURS, BITMAP_BOUTON_PAUSE ,BITMAP_MENU_PRINCIPAL_INTRO, BITMAP_MENU_PRINCIPAL, BITMAP_MENU_COMMUNISTE_CAPITALISTE, BITMAP_BOUTONS_MENU_COMMUNISTE_CAPITALISTE, BITMAP_BOUTTON_MENU_PRINCIPAL,NB_BITMAP};
 enum SPRITE_MAP {HERBE, HOVER_TILE, ROUTE, TERRAIN_VAGUE, CABANE, MAISON, IMMEUBLE, GRATTE_CIEL,ELEC_DROIT, ELEC_COTE, EAU_DROIT, EAU_COTE, POMPIER_DROIT, POMPIER_COTE,NB_SPRITE_MAP};
@@ -169,7 +170,7 @@ typedef struct {
 } ToolBox;
 
 typedef struct {
-    CoordsXY coordXY;
+    CoordsXY coordXY[7];
     int typeBatiment;
     int nbHabitants;
 
@@ -185,8 +186,17 @@ typedef struct {
 
     int timerBatiment;
     bool timerCree;
+    bool isFeu;
     int dateCreation;
 
+    int capaciteElectrique;
+    int capaciteEau;
+
+} Habitation;
+
+typedef struct {
+    CoordsXY coordXY;
+    int typeBatiment;
     int capaciteElectrique;
     int capaciteEau;
 
@@ -246,12 +256,14 @@ typedef struct {
     Pages pages;
     ToolBox toolBox;
     Timers timers;
-    Batiment tabBatiments[NBR_MAX_BAT];
+    Habitation tabHabitation[NBR_MAX_BAT];
+    Batiment tabInfrastructure[NBR_MAX_INFRA];
     Banque banque;
     Graphe graphe;
 
     int argent;
-    int nbBatiments;
+    int nbHabititations;
+    int nbInfrastructures;
     int nbHabitants;
     int capaciteEauRestante;
     int capaciteElecRestante;

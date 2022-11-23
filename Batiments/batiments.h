@@ -19,5 +19,7 @@ void regressionBatiment(Simcity* simcity, Batiment* batiment);
 void isEvolutionPossible(Simcity* simcity, Batiment* batiment);
 void nombreHabitantsTot(Simcity* simcity);
 void afficherNbHabitantsTot(Simcity simcity);
+void construireHabitation(Simcity* simcity);
+void construireInfrastructure(Simcity* simcity);
 
 #endif //ECE_CITY_3A_BATIMENTS_H
