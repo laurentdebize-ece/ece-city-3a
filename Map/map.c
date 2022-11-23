@@ -627,7 +627,6 @@ bool collerAlaRoutPompier(Simcity* simcity){
     }
     return false;
 }
-
 bool collerAlaRouteInfra(Simcity* simcity){
     if (simcity->toolBox.elecEnMain){
         return collerAlaRouteElec(simcity);
@@ -845,7 +844,6 @@ void poserPompier(Simcity *simcity){
     }
 }
 
-
 void afficherPrevPompier(Simcity* simcity){
     if (simcity->toolBox.pompierEnMain && isPompierPossible(simcity)){
         if (simcity->toolBox.pompierDroit){
@@ -888,6 +886,73 @@ void cliquer(Simcity* simcity){
         for (int j = 0; j < 8; ++j) {
             if (simcity->allegro.event.mouse.button == 1 && simcity->tabHabitation[i].coordXY[j].celluleX == simcity->interactionExterieure.mouse.celluleXY.celluleX && simcity->tabHabitation[i].coordXY[j].celluleY == simcity->interactionExterieure.mouse.celluleXY.celluleY){
                 printf("Habitation : %d\n", i);
+            }
+        }
+    }
+
+}
+
+void *lire_graphe( Simcity *simcity){
+    FILE *fichierM = fopen("../ordre.txt", "w");
+    if (fichierM == NULL){
+        printf("Erreur lors de l'ouverture du fichier matrice.txt");
+        return NULL;
+    }
+    int ordre;
+    fscanf(fichierM, "%d", &ordre);
+    simcity->graphe.ordre = ordre;
+    fclose(fichierM);
+}
+
+int fileVide(t_file *f) {
+    return f->queue == NULL && f->tete == NULL;
+}
+void enfiler(t_file *f, int s0) {
+    pmaillon maillon = NULL;
+    maillon = (pmaillon) malloc(sizeof(struct maillon));
+    maillon->num = s0;
+    if (fileVide(f)) {
+        f->queue = f->tete = maillon;
+    } else {
+        f->queue->suiv = maillon;
+        f->queue = maillon;
+    }
+};
+
+int defiler(t_file *f) {
+
+    t_maillon *pMaillon = f->tete;
+
+    if (f->queue == pMaillon) {
+        f->queue = NULL;
+        f->tete = NULL;
+    } else {
+        f->tete = f->tete->suiv;
+    }
+    int numSommet = pMaillon->num;
+    free(pMaillon);
+    return numSommet;
+};
+
+void BFSEau(Simcity* simcity){
+    lire_graphe(simcity);
+    int *predecesseur = (int*) malloc(sizeof(int) * simcity->graphe.ordre);
+    for(int i = 0; i < simcity->graphe.ordre; ++i){
+        predecesseur[i] = -1;
+    }
+    t_file f ={NULL, NULL};// on init la file
+    // on parcours tout le tableau de batiments
+    for(int i = 0; i < 50 ; ++i){
+        if(simcity->tabInfrastructure[i].typeBatiment == 3) {
+            enfiler(&f, 7);/////mettre la coordonnée du batiment dans le s0
+        }
+    }
+    while(!fileVide(&f)){
+        int s0 = defiler(&f);
+        for(int i = 0; i < simcity->graphe.ordre; ++i){
+            if(simcity->graphe.grille[s0][i].type == 1 && predecesseur[i] == -1){
+                predecesseur[i] = s0;
+                enfiler(&f, i);
             }
         }
     }

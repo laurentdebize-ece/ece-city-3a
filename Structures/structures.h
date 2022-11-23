@@ -238,7 +238,7 @@ typedef struct Cellule *pCellule;
 //////ARC/////
 struct Arc{
     struct Arc *arc_suivant;
-    int sommet;
+    int sommet;///type
 };
 typedef struct Arc *pArc;
 
