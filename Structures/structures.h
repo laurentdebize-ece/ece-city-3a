@@ -191,7 +191,7 @@ typedef struct {
 } Habitation;
 
 typedef struct {
-    CoordsXY coordXY;
+    CoordsXY coordXY[15];
     int typeBatiment;
     int capaciteElectrique;
     int capaciteEau;
