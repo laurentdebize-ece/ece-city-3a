@@ -74,8 +74,7 @@ void timerBatiment(Simcity* simcity) {
                         miseAJourDonneesHabitation(simcity, &simcity->tabHabitation[i]);
                     }
                 }
-            }else if (simcity->pause == 0 && simcity->tabHabitation[i].timerBatiment % 15 == 0 && modulo60 == TRUE){
-//                recevoirImpots(simcity, simcity->tabBatiments[i].nbHabitants);
+                recevoirImpots(simcity, simcity->tabHabitation[i].nbHabitants);
             }
         }
     }

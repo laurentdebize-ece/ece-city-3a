@@ -48,8 +48,8 @@ void payerBanque(Simcity* simcity){
     }
 }
 
-void recevoirArgent(Simcity* simcity, int nbHabitants) {
-    simcity->argent += nbHabitants * IMPOT;
+void recevoirImpots(Simcity* simcity, int nbHabitants) {
+    simcity->argent += (nbHabitants * IMPOT);
 }
 
 
