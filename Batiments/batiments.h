@@ -13,6 +13,10 @@
 #define CAPACITE_ELECTRIQUE 5000
 
 void initTabBatiments(Simcity* simcity);
+void construireBatiment(Simcity* simcity);
+void miseAJourDonneesHabitation(Simcity* simcity, Habitation* habitation);
+void regressionHabitation(Simcity* simcity, Habitation* habitation);
+void isEvolutionPossible(Simcity* simcity, Habitation* habitation);
 void nombreHabitantsTot(Simcity* simcity);
 void afficherNbHabitantsTot(Simcity simcity);
 void construireHabitation(Simcity* simcity);

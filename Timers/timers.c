@@ -47,9 +47,8 @@ void timerTempsJeu(Simcity* simcity) {
     } else {simcity->timers.zeroDevantMinutes = TRUE;}
     if(simcity->timers.secondes >= 10) {
         simcity->timers.zeroDevantSecondes = FALSE;
-    } else{simcity->timers.zeroDevantSecondes = TRUE;}
+    } else {simcity->timers.zeroDevantSecondes = TRUE;}
 }
-
 
 void timerBatiment(Simcity* simcity) {
     long long compteurChrono = al_get_timer_count(simcity->allegro.chrono);
@@ -58,59 +57,25 @@ void timerBatiment(Simcity* simcity) {
     if (compteurTimer%60 == 0) {
         modulo60 = TRUE;
     } else {modulo60 = FALSE;}
-    for (int i = 0; i < simcity->nbHabititations; ++i) {
+    for (int i = 0; i < simcity->nbHabitations; ++i) {
         if(simcity->tabHabitation[i].timerCree == TRUE) {
             simcity->tabHabitation[i].timerBatiment = (int)compteurChrono - simcity->tabHabitation[i].dateCreation;
-            if(simcity->pause == 0 && simcity->tabHabitation[i].timerBatiment % 15 == 0 && modulo60 == TRUE && simcity->tabHabitation[i].compteurEvolution != 4) {
-                simcity->tabHabitation[i].compteurEvolution++;
-                switch (simcity->tabHabitation[i].compteurEvolution) {
-                    case 0: { //terrain vague
-                        simcity->tabHabitation[i].nbHabitants = NB_HABITANTS_TERRAINVAGUE;
-                        break;
-
+            if(simcity->pause == 0 && simcity->tabHabitation[i].timerBatiment % 15 == 0 && modulo60 == TRUE) {
+                if(simcity->communiste == TRUE) {
+                    isEvolutionPossible(simcity, &simcity->tabHabitation[i]);
+                }
+                if(simcity->tabHabitation[i].evolutionPossible == TRUE) {
+                    if(simcity->tabHabitation[i].compteurEvolution == 5) {
+                        simcity->tabHabitation[i].compteurEvolution = 0;
                     }
-                    case 1:{//cabane
-                        simcity->tabHabitation[i].nbHabitants = NB_HABITANTS_CABANE;
-                        simcity->map.mapTile[simcity->tabHabitation[i].coordXY[0].celluleX][simcity->tabHabitation[i].coordXY[0].celluleY].typeBloc = TYPE_CABANE;
-                        break;
+                    if(simcity->tabHabitation[i].compteurEvolution != 4) {
+                        simcity->tabHabitation[i].compteurEvolution++;
+                        printf("%d\n", simcity->tabHabitation[i].compteurEvolution);
+                        miseAJourDonneesHabitation(simcity, &simcity->tabHabitation[i]);
                     }
-
-                    case 2:{//maison
-                        simcity->tabHabitation[i].nbHabitants = NB_HABITANTS_MAISON;
-                        simcity->map.mapTile[simcity->tabHabitation[i].coordXY[0].celluleX][simcity->tabHabitation[i].coordXY[0].celluleY].typeBloc = TYPE_MAISON;
-
-                        break;
-                    }
-
-                    case 3:{//immeuble
-                        simcity->tabHabitation[i].nbHabitants = NB_HABITANTS_IMMEUBLE;
-                        simcity->map.mapTile[simcity->tabHabitation[i].coordXY[0].celluleX][simcity->tabHabitation[i].coordXY[0].celluleY].typeBloc = TYPE_IMMEUBLE;
-
-                        break;
-                    }
-
-                    case 4: {//gratteciel
-                        simcity->tabHabitation[i].nbHabitants = NB_HABITANTS_GRATTECIEL;
-                        simcity->map.mapTile[simcity->tabHabitation[i].coordXY[0].celluleX][simcity->tabHabitation[i].coordXY[0].celluleY].typeBloc = TYPE_GRATTE_CIEL;
-
-                        break;
-                    }
-
-                    /*case 5:{//ruine
-
-                        simcity->tabBatiments[i].nbHabitants = NB_HABITANTS_RUINE;
-                        break;
-                    }*/
-                    default:
-                        printf("ERREUR evolution batiment.\n");
-                        break;
                 }
                 recevoirImpots(simcity, simcity->tabHabitation[i].nbHabitants);
-
-            }else if (simcity->pause == 0 && simcity->tabHabitation[i].timerBatiment % 15 == 0 && modulo60 == TRUE){
-                recevoirImpots(simcity, simcity->tabHabitation[i].nbHabitants);
             }
-            //recevoirImpots(simcity, simcity->tabBatiments[i].nbHabitants);
         }
     }
 }

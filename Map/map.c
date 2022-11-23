@@ -131,8 +131,6 @@ void outOfBorder(Simcity* simcity){
     }
 }
 
-
-
 void afficherBarreCompteurs (Simcity* simcity) {
     al_draw_bitmap(simcity->tabBitmap[BITMAP_BARRECOMPTEURS],95, 620, 0);
 }
