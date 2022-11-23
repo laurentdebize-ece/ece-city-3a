@@ -57,23 +57,24 @@ void timerBatiment(Simcity* simcity) {
     if (compteurTimer%60 == 0) {
         modulo60 = TRUE;
     } else {modulo60 = FALSE;}
-    for (int i = 0; i < simcity->nbBatiments; ++i) {
-        if(simcity->tabBatiments[i].timerCree == TRUE) {
-            simcity->tabBatiments[i].timerBatiment = (int)compteurChrono - simcity->tabBatiments[i].dateCreation;
-            if(simcity->pause == 0 && simcity->tabBatiments[i].timerBatiment % 15 == 0 && modulo60 == TRUE) {
+    for (int i = 0; i < simcity->nbHabitations; ++i) {
+        if(simcity->tabHabitation[i].timerCree == TRUE) {
+            simcity->tabHabitation[i].timerBatiment = (int)compteurChrono - simcity->tabHabitation[i].dateCreation;
+            if(simcity->pause == 0 && simcity->tabHabitation[i].timerBatiment % 15 == 0 && modulo60 == TRUE) {
                 if(simcity->communiste == TRUE) {
-                    isEvolutionPossible(simcity, &simcity->tabBatiments[i]);
+                    isEvolutionPossible(simcity, &simcity->tabHabitation[i]);
                 }
-                if(simcity->tabBatiments[i].evolutionPossible == TRUE) {
-                    if(simcity->tabBatiments[i].compteurEvolution == 5) {
-                        simcity->tabBatiments[i].compteurEvolution = 0;
+                if(simcity->tabHabitation[i].evolutionPossible == TRUE) {
+                    if(simcity->tabHabitation[i].compteurEvolution == 5) {
+                        simcity->tabHabitation[i].compteurEvolution = 0;
                     }
-                    if(simcity->tabBatiments[i].compteurEvolution != 4) {
-                        simcity->tabBatiments[i].compteurEvolution++;
-                        miseAJourDonneesBatiment(simcity, &simcity->tabBatiments[i]);
+                    if(simcity->tabHabitation[i].compteurEvolution != 4) {
+                        simcity->tabHabitation[i].compteurEvolution++;
+                        printf("%d\n", simcity->tabHabitation[i].compteurEvolution);
+                        miseAJourDonneesHabitation(simcity, &simcity->tabHabitation[i]);
                     }
                 }
-            }else if (simcity->pause == 0 && simcity->tabBatiments[i].timerBatiment % 15 == 0 && modulo60 == TRUE){
+            }else if (simcity->pause == 0 && simcity->tabHabitation[i].timerBatiment % 15 == 0 && modulo60 == TRUE){
 //                recevoirImpots(simcity, simcity->tabBatiments[i].nbHabitants);
             }
         }

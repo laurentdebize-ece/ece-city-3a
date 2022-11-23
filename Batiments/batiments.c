@@ -3,6 +3,7 @@
 void initTabBatiments(Simcity* simcity) {
     for (int i = 0; i < NBR_MAX_BAT; ++i) {
         simcity->tabHabitation[i].typeBatiment = 0;
+        simcity->tabHabitation[i].evolutionPossible = TRUE;
         simcity->tabHabitation[i].compteurEvolution = 0;
         simcity->tabHabitation[i].timerCree = 0;
         simcity->tabHabitation[i].dateCreation = -1;
@@ -15,44 +16,46 @@ void initTabBatiments(Simcity* simcity) {
             simcity->tabHabitation->coordXY[j].celluleY = 0;
         }
     }
-    simcity->nbHabititations = 0;
+    simcity->nbHabitations = 0;
 }
 
 
 void construireHabitation(Simcity* simcity) {
     if(simcity->banque.achatTerrainVague == 1) {
-        simcity->tabHabitation[simcity->nbHabititations].typeBatiment = 1;
-        simcity->tabHabitation[simcity->nbHabititations].coordXY[0].celluleX = simcity->interactionExterieure.mouse.celluleXY.celluleX;
-        simcity->tabHabitation[simcity->nbHabititations].coordXY[0].celluleY = simcity->interactionExterieure.mouse.celluleXY.celluleY;
+        simcity->tabHabitation[simcity->nbHabitations].typeBatiment = 1;
+        simcity->tabHabitation[simcity->nbHabitations].coordXY[0].celluleX = simcity->interactionExterieure.mouse.celluleXY.celluleX;
+        simcity->tabHabitation[simcity->nbHabitations].coordXY[0].celluleY = simcity->interactionExterieure.mouse.celluleXY.celluleY;
 
-        simcity->tabHabitation[simcity->nbHabititations].coordXY[1].celluleX = simcity->interactionExterieure.mouse.celluleXY.celluleX + 1;
-        simcity->tabHabitation[simcity->nbHabititations].coordXY[1].celluleY = simcity->interactionExterieure.mouse.celluleXY.celluleY;
+        simcity->tabHabitation[simcity->nbHabitations].coordXY[1].celluleX = simcity->interactionExterieure.mouse.celluleXY.celluleX + 1;
+        simcity->tabHabitation[simcity->nbHabitations].coordXY[1].celluleY = simcity->interactionExterieure.mouse.celluleXY.celluleY;
 
-        simcity->tabHabitation[simcity->nbHabititations].coordXY[2].celluleX = simcity->interactionExterieure.mouse.celluleXY.celluleX + 2;
-        simcity->tabHabitation[simcity->nbHabititations].coordXY[2].celluleY = simcity->interactionExterieure.mouse.celluleXY.celluleY;
+        simcity->tabHabitation[simcity->nbHabitations].coordXY[2].celluleX = simcity->interactionExterieure.mouse.celluleXY.celluleX + 2;
+        simcity->tabHabitation[simcity->nbHabitations].coordXY[2].celluleY = simcity->interactionExterieure.mouse.celluleXY.celluleY;
 
-        simcity->tabHabitation[simcity->nbHabititations].coordXY[3].celluleX = simcity->interactionExterieure.mouse.celluleXY.celluleX;
-        simcity->tabHabitation[simcity->nbHabititations].coordXY[3].celluleY = simcity->interactionExterieure.mouse.celluleXY.celluleY + 1;
+        simcity->tabHabitation[simcity->nbHabitations].coordXY[3].celluleX = simcity->interactionExterieure.mouse.celluleXY.celluleX;
+        simcity->tabHabitation[simcity->nbHabitations].coordXY[3].celluleY = simcity->interactionExterieure.mouse.celluleXY.celluleY + 1;
 
-        simcity->tabHabitation[simcity->nbHabititations].coordXY[4].celluleX = simcity->interactionExterieure.mouse.celluleXY.celluleX + 2;
-        simcity->tabHabitation[simcity->nbHabititations].coordXY[4].celluleY = simcity->interactionExterieure.mouse.celluleXY.celluleY + 1;
+        simcity->tabHabitation[simcity->nbHabitations].coordXY[4].celluleX = simcity->interactionExterieure.mouse.celluleXY.celluleX + 2;
+        simcity->tabHabitation[simcity->nbHabitations].coordXY[4].celluleY = simcity->interactionExterieure.mouse.celluleXY.celluleY + 1;
 
-        simcity->tabHabitation[simcity->nbHabititations].coordXY[5].celluleX = simcity->interactionExterieure.mouse.celluleXY.celluleX ;
-        simcity->tabHabitation[simcity->nbHabititations].coordXY[5].celluleY = simcity->interactionExterieure.mouse.celluleXY.celluleY + 2;
+        simcity->tabHabitation[simcity->nbHabitations].coordXY[5].celluleX = simcity->interactionExterieure.mouse.celluleXY.celluleX ;
+        simcity->tabHabitation[simcity->nbHabitations].coordXY[5].celluleY = simcity->interactionExterieure.mouse.celluleXY.celluleY + 2;
 
-        simcity->tabHabitation[simcity->nbHabititations].coordXY[6].celluleX = simcity->interactionExterieure.mouse.celluleXY.celluleX + 1;
-        simcity->tabHabitation[simcity->nbHabititations].coordXY[6].celluleY = simcity->interactionExterieure.mouse.celluleXY.celluleY + 2;
+        simcity->tabHabitation[simcity->nbHabitations].coordXY[6].celluleX = simcity->interactionExterieure.mouse.celluleXY.celluleX + 1;
+        simcity->tabHabitation[simcity->nbHabitations].coordXY[6].celluleY = simcity->interactionExterieure.mouse.celluleXY.celluleY + 2;
 
-        simcity->tabHabitation[simcity->nbHabititations].coordXY[7].celluleX = simcity->interactionExterieure.mouse.celluleXY.celluleX + 2;
-        simcity->tabHabitation[simcity->nbHabititations].coordXY[7].celluleY = simcity->interactionExterieure.mouse.celluleXY.celluleY + 2;
+        simcity->tabHabitation[simcity->nbHabitations].coordXY[7].celluleX = simcity->interactionExterieure.mouse.celluleXY.celluleX + 2;
+        simcity->tabHabitation[simcity->nbHabitations].coordXY[7].celluleY = simcity->interactionExterieure.mouse.celluleXY.celluleY + 2;
 
-        simcity->tabHabitation[simcity->nbHabititations].dateCreation = (int) al_get_timer_count(simcity->allegro.chrono);
+        simcity->tabHabitation[simcity->nbHabitations].dateCreation = (int) al_get_timer_count(simcity->allegro.chrono);
+
+        simcity->tabHabitation[simcity->nbHabitations].compteurEvolution = 0;
 
     }
-    if(simcity->tabHabitation[simcity->nbHabititations].dateCreation != -1) {
-        simcity->tabHabitation[simcity->nbHabititations].timerCree = TRUE;
+    if(simcity->tabHabitation[simcity->nbHabitations].dateCreation != -1) {
+        simcity->tabHabitation[simcity->nbHabitations].timerCree = TRUE;
     } else {printf("ERREUR lancement timer batiment.\n");}
-    simcity->nbHabititations++;
+    simcity->nbHabitations++;
 }
 
 void construireInfrastructure(Simcity* simcity){
@@ -66,40 +69,40 @@ void construireInfrastructure(Simcity* simcity){
     }
 }
 
-void miseAJourDonneesBatiment(Simcity* simcity, Batiment* batiment) {
-    switch (batiment->compteurEvolution) {
+void miseAJourDonneesHabitation(Simcity* simcity, Habitation* habitation) {
+    switch (habitation->compteurEvolution) {
         case 0: { //terrain vague
-            batiment->nbHabitants = NB_HABITANTS_TERRAINVAGUE;
+            habitation->nbHabitants = NB_HABITANTS_TERRAINVAGUE;
             break;
 
         }
         case 1:{//cabane
-            batiment->nbHabitants = NB_HABITANTS_CABANE;
-            simcity->map.mapTile[batiment->coordXY.celluleX][batiment->coordXY.celluleY].typeBloc = TYPE_CABANE;
+            habitation->nbHabitants = NB_HABITANTS_CABANE;
+            simcity->map.mapTile[habitation->coordXY->celluleX][habitation->coordXY->celluleY].typeBloc = TYPE_CABANE;
             break;
         }
 
         case 2:{//maison
-            batiment->nbHabitants = NB_HABITANTS_MAISON;
-            simcity->map.mapTile[batiment->coordXY.celluleX][batiment->coordXY.celluleY].typeBloc = TYPE_MAISON;
+            habitation->nbHabitants = NB_HABITANTS_MAISON;
+            simcity->map.mapTile[habitation->coordXY->celluleX][habitation->coordXY->celluleY].typeBloc = TYPE_MAISON;
             break;
         }
 
         case 3:{//immeuble
-            batiment->nbHabitants = NB_HABITANTS_IMMEUBLE;
-            simcity->map.mapTile[batiment->coordXY.celluleX][batiment->coordXY.celluleY].typeBloc = TYPE_IMMEUBLE;
+            habitation->nbHabitants = NB_HABITANTS_IMMEUBLE;
+            simcity->map.mapTile[habitation->coordXY->celluleX][habitation->coordXY->celluleY].typeBloc = TYPE_IMMEUBLE;
             break;
         }
 
         case 4: {//gratteciel
-            batiment->nbHabitants = NB_HABITANTS_GRATTECIEL;
-            simcity->map.mapTile[batiment->coordXY.celluleX][batiment->coordXY.celluleY].typeBloc = TYPE_GRATTE_CIEL;
+            habitation->nbHabitants = NB_HABITANTS_GRATTECIEL;
+            simcity->map.mapTile[habitation->coordXY->celluleX][habitation->coordXY->celluleY].typeBloc = TYPE_GRATTE_CIEL;
             break;
         }
 
         case 5:{//ruine
-            batiment->nbHabitants = NB_HABITANTS_RUINE;
-            //simcity->map.mapTile[batiment->coordXY.celluleX][batiment->coordXY.celluleY].typeBloc = TYPE_RUINE;
+            habitation->nbHabitants = NB_HABITANTS_RUINE;
+            //simcity->map.mapTile[habitation->coordXY->celluleX][habitation->coordXY->celluleY].typeBloc = TYPE_RUINE;
             break;
         }
 
@@ -109,28 +112,28 @@ void miseAJourDonneesBatiment(Simcity* simcity, Batiment* batiment) {
     }
 }
 
-void regressionBatiment(Simcity* simcity, Batiment* batiment) {
-    if(batiment->compteurEvolution > 1 && batiment->compteurEvolution < 5) {
-        batiment->compteurEvolution--;
+void regressionHabitation(Simcity* simcity, Habitation* habitation) {
+    if(habitation->compteurEvolution > 1 && habitation->compteurEvolution < 5) {
+        habitation->compteurEvolution--;
     }
-    else if(batiment->compteurEvolution == 1) {
-        batiment->compteurEvolution = 5; //en ruine
+    else if(habitation->compteurEvolution == 1) {
+        habitation->compteurEvolution = 5; //en ruine
     }
-    miseAJourDonneesBatiment(simcity, batiment);
+    miseAJourDonneesHabitation(simcity, habitation);
 }
 
-void isEvolutionPossible(Simcity* simcity, Batiment* batiment) {
-    Batiment* batimentEvolue = batiment;
-    batimentEvolue->compteurEvolution++;
-    miseAJourDonneesBatiment(simcity, batimentEvolue);
-    if(simcity->capaciteEauRestante < batimentEvolue->capaciteEau && simcity->capaciteElecRestante < batimentEvolue->capaciteElectrique) {
-        batiment->evolutionPossible = FALSE;
-    }else{batiment->evolutionPossible = TRUE;}
+void isEvolutionPossible(Simcity* simcity, Habitation* habitation) {
+    Habitation* habitationEvolue = habitation;
+    habitationEvolue->compteurEvolution++;
+    miseAJourDonneesHabitation(simcity, habitationEvolue);
+    if(simcity->capaciteEauRestante < habitationEvolue->capaciteEau && simcity->capaciteElecRestante < habitationEvolue->capaciteElectrique) {
+        habitation->evolutionPossible = FALSE;
+    }else{habitation->evolutionPossible = TRUE;}
 }
 
 void nombreHabitantsTot(Simcity* simcity) {
     int nbHabitantsTot = 0;
-    for (int i = 0; i < simcity->nbHabititations; ++i) {
+    for (int i = 0; i < simcity->nbHabitations; ++i) {
         nbHabitantsTot += simcity->tabHabitation[i].nbHabitants;
     }
     simcity->nbHabitants = nbHabitantsTot;

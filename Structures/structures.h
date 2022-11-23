@@ -262,7 +262,7 @@ typedef struct {
     Graphe graphe;
 
     int argent;
-    int nbHabititations;
+    int nbHabitations;
     int nbInfrastructures;
     int nbHabitants;
     int capaciteEauRestante;
