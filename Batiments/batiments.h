@@ -14,6 +14,9 @@
 
 void initTabBatiments(Simcity* simcity);
 void construireBatiment(Simcity* simcity);
+void miseAJourDonneesBatiment(Simcity* simcity, Batiment* batiment);
+void regressionBatiment(Simcity* simcity, Batiment* batiment);
+void isEvolutionPossible(Simcity* simcity, Batiment* batiment);
 void nombreHabitantsTot(Simcity* simcity);
 void afficherNbHabitantsTot(Simcity simcity);
 

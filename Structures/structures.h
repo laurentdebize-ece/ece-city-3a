@@ -101,10 +101,8 @@ typedef struct {
 typedef struct PageMenuCapitalisteCommuniste {
     Bitmap tabSpriteMenu[NB_SPRITE_MENU_COMMUNISTE_CAPITALISTE];
     bool menuCapitalisteCommuniste;
-    bool capitaliste;
     bool capitalisteHover;
     bool capitalisteClique;
-    bool communiste;
     bool communisteHover;
     bool communisteClique;
 } PageMenuCapitalisteCommuniste;
@@ -173,16 +171,22 @@ typedef struct {
 typedef struct {
     CoordsXY coordXY;
     int typeBatiment;
+    int nbHabitants;
+
+    int compteurEvolution;
+    bool evolutionPossible;
+    bool regression;
+
     int prixTerrainVague;
     int prixPompier;
     int prixChateauEau;
     int prixElectricite;
     int prixRoute;
+
     int timerBatiment;
     bool timerCree;
     int dateCreation;
-    int compteurEvolution;
-    int nbHabitants;
+
     int capaciteElectrique;
     int capaciteEau;
 
@@ -249,11 +253,15 @@ typedef struct {
     int argent;
     int nbBatiments;
     int nbHabitants;
+    int capaciteEauRestante;
+    int capaciteElecRestante;
 
     bool dessin;
     bool endGame;
     bool outOfBorder;
     bool pause;
+    bool capitaliste;
+    bool communiste;
 
 } Simcity;
 

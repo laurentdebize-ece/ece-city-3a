@@ -60,13 +60,14 @@ void initDataMenuCommunisteCapitaliste (Simcity* simcity) {
     simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_CLIQUE].screenX = 262;
     simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_CLIQUE].screenY= 440;
 
-    simcity->pages.menuCapitalisteCommuniste.capitaliste = 0;
     simcity->pages.menuCapitalisteCommuniste.capitalisteHover = 0;
     simcity->pages.menuCapitalisteCommuniste.capitalisteClique = 0;
-    simcity->pages.menuCapitalisteCommuniste.communiste = 0;
     simcity->pages.menuCapitalisteCommuniste.communisteHover = 0;
     simcity->pages.menuCapitalisteCommuniste.communisteClique = 0;
     simcity->pages.menuCapitalisteCommuniste.menuCapitalisteCommuniste = 0;
+
+    simcity->capitaliste = FALSE;
+    simcity->communiste = FALSE;
 }
 
 void initDataMenuPrincipal(Simcity* simcity){
@@ -176,15 +177,16 @@ void calculHover(Simcity * simcity){
     }
 }
 
-
 void detectionCliqueMenuCapCom (Simcity* simcity){
 
     if(simcity->allegro.event.mouse.button == 1 && simcity->allegro.event.mouse.x >= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenX && simcity->allegro.event.mouse.x <= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenX + simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteLargeur && simcity->allegro.event.mouse.y >= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenY && simcity->allegro.event.mouse.y <= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenY + simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteHauteur){
         simcity->pages.menuCapitalisteCommuniste.capitalisteClique = 1;
         simcity->pages.menuCapitalisteCommuniste.menuCapitalisteCommuniste = 1;
+        simcity->capitaliste = TRUE;
     }else if(simcity->allegro.event.mouse.button == 1 && simcity->allegro.event.mouse.x >= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenX && simcity->allegro.event.mouse.x <= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenX + simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].spriteLargeur && simcity->allegro.event.mouse.y >= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenY && simcity->allegro.event.mouse.y <= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenY + simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].spriteHauteur){
-    simcity->pages.menuCapitalisteCommuniste.communisteClique = 1;
+        simcity->pages.menuCapitalisteCommuniste.communisteClique = 1;
         simcity->pages.menuCapitalisteCommuniste.menuCapitalisteCommuniste = 1;
+        simcity->communiste = TRUE;
 
     }else simcity->pages.menuCapitalisteCommuniste.communisteHover = false;
             simcity->pages.menuCapitalisteCommuniste.capitalisteHover = false;
