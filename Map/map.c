@@ -863,6 +863,7 @@ void poserBatiment(Simcity *simcity){
     poserElec(simcity);
     poserEau(simcity);
     poserPompier(simcity);
+    ecrire_graphe(simcity,"../Graphe/graphe_projet_ece_city.txt");
 }
 
 void tournerBatiment(Simcity *simcity){
@@ -882,3 +883,20 @@ void detruire(Simcity *simcity){
         simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc = TYPE_HERBE;
     }
 }
+
+
+void ecrire_graphe(Simcity *simcity, char *nomFichier){
+    FILE *fichierM = fopen(nomFichier, "w");
+    if (fichierM == NULL){
+        printf("Erreur lors de l'ouverture du fichier matrice.txt");
+        return;
+    }
+    for (int i = 0; i < NBCELLULEX; i++){
+        for(int j = 0; j < NBCELLULEY; j++){
+            fprintf(fichierM, "%d", simcity->graphe.grille[i][j].type);
+        }
+        fprintf(fichierM, "\n");
+    }
+    fclose(fichierM);
+}
+

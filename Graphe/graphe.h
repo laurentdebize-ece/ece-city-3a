@@ -46,7 +46,7 @@ typedef struct Graphe {
 */
 Graphe *lire_graphe(Graphe *graphe, char *nomFichier);
 void recupdonne(Graphe *graphe);
-void ecrire_graphe(Graphe *graphe, char *nomFichier);
+//void ecrire_graphe(Graphe *graphe, char *nomFichier);
 
 
 #endif //ECE_CITY_3A_GRAPHE_H

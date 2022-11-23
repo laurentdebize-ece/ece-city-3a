@@ -39,7 +39,7 @@ Graphe *lire_graphe( Graphe *graphe, char *nomFichier){
     fclose(fichierM);
     return graphe;
 }
-
+/*
 void ecrire_graphe(Graphe *graphe, char *nomFichier){
     FILE *fichierM = fopen(nomFichier, "w");
     if (fichierM == NULL){
@@ -68,4 +68,4 @@ void recupdonne(Graphe *graphe){
     ecrire_graphe(graphe, "../matrice.txt");
 
 }
-
+*/
