@@ -25,6 +25,7 @@ void initAll(Simcity* simcity){
     initCompteurs(simcity);
     initBanque(simcity);
     initTabBatiments(simcity);
+    initDataMenuCommunisteCapitaliste(simcity);
 }
 
 void boucleTest(Simcity* simcity){
@@ -155,11 +156,61 @@ void boucletestMenuPrincipal(Simcity* simcity){
     }
 }
 
+
+void boucletestMenuCommunisteCapitaliste(Simcity* simcity){
+    while (!simcity->pages.menuCapitalisteCommuniste.menuCapitalisteCommuniste) {
+
+        al_wait_for_event(simcity->allegro.queue, &simcity->allegro.event);
+
+
+        switch (simcity->allegro.event.type) {
+
+            case ALLEGRO_EVENT_DISPLAY_CLOSE:{
+                simcity->endGame = true;
+                simcity->pages.menuCapitalisteCommuniste.menuCapitalisteCommuniste = true;
+                break;
+            }
+            case ALLEGRO_EVENT_MOUSE_AXES:{
+                simcity->allegro.coordonneesSourisX = simcity->allegro.event.mouse.x;
+                simcity->allegro.coordonneesSourisY = simcity->allegro.event.mouse.y;
+                calculHoverComCap(simcity);
+                simcity->dessin = true;
+                break;
+            }
+            case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:{
+                switch (simcity->allegro.event.mouse.button) {
+                    case 1:{
+                        calculHoverComCap(simcity);
+                        detectionCliqueMenuCapCom(simcity);
+                        simcity->dessin = true;
+                        break;
+                    }
+                }
+                break;
+            }
+            case ALLEGRO_EVENT_MOUSE_BUTTON_UP:{
+                break;
+            }
+            case ALLEGRO_EVENT_TIMER:{
+
+                simcity->dessin = true;
+
+                if (simcity->dessin) {
+                    afficherMenuComCap(simcity);
+                    al_flip_display();
+                    simcity->dessin = false;
+                }
+                break;
+            }
+        }
+    }
+}
 // main antoine pour tester ses fonctions
 void mainAntoine() {
     Simcity simcity = {0};
     initAll(&simcity);
     boucletestMenuPrincipal(&simcity);
+    boucletestMenuCommunisteCapitaliste(&simcity);
     //simcity.toolBox.routeEnMain = 1;
     //simcity.toolBox.terrainVagueEnMain = 1;
     boucleTest(&simcity);
