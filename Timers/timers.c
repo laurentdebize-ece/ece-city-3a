@@ -57,56 +57,24 @@ void timerBatiment(Simcity* simcity) {
     if (compteurTimer%60 == 0) {
         modulo60 = TRUE;
     } else {modulo60 = FALSE;}
-    for (int i = 0; i < simcity->nbBatiments; ++i) {
-        if(simcity->tabBatiments[i].timerCree == TRUE) {
-            simcity->tabBatiments[i].timerBatiment = (int)compteurChrono - simcity->tabBatiments[i].dateCreation;
-            if(simcity->pause == 0 && simcity->tabBatiments[i].timerBatiment % 15 == 0 && modulo60 == TRUE && simcity->tabBatiments[i].compteurEvolution != 4) {
-                simcity->tabBatiments[i].compteurEvolution++;
-                switch (simcity->tabBatiments[i].compteurEvolution) {
-                    case 0: { //terrain vague
-                        simcity->tabBatiments[i].nbHabitants = NB_HABITANTS_TERRAINVAGUE;
-                        break;
-
-                    }
-                    case 1:{//cabane
-                        simcity->tabBatiments[i].nbHabitants = NB_HABITANTS_CABANE;
-                        simcity->map.mapTile[simcity->tabBatiments[i].coordXY.celluleX][simcity->tabBatiments[i].coordXY.celluleY].typeBloc = TYPE_CABANE;
-                        break;
-                    }
-
-                    case 2:{//maison
-                        simcity->tabBatiments[i].nbHabitants = NB_HABITANTS_MAISON;
-                        simcity->map.mapTile[simcity->tabBatiments[i].coordXY.celluleX][simcity->tabBatiments[i].coordXY.celluleY].typeBloc = TYPE_MAISON;
-
-                        break;
-                    }
-
-                    case 3:{//immeuble
-                        simcity->tabBatiments[i].nbHabitants = NB_HABITANTS_IMMEUBLE;
-                        simcity->map.mapTile[simcity->tabBatiments[i].coordXY.celluleX][simcity->tabBatiments[i].coordXY.celluleY].typeBloc = TYPE_IMMEUBLE;
-
-                        break;
-                    }
-
-                    case 4: {//gratteciel
-                        simcity->tabBatiments[i].nbHabitants = NB_HABITANTS_GRATTECIEL;
-                        simcity->map.mapTile[simcity->tabBatiments[i].coordXY.celluleX][simcity->tabBatiments[i].coordXY.celluleY].typeBloc = TYPE_GRATTE_CIEL;
-
-                        break;
-                    }
-
-                    /*case 5:{//ruine
-
-                        simcity->tabBatiments[i].nbHabitants = NB_HABITANTS_RUINE;
-                        break;
-                    }*/
-                    default:
-                        printf("ERREUR evolution batiment.\n");
-                        break;
+    for (int i = 0; i < simcity->nbHabitations; ++i) {
+        if(simcity->tabHabitation[i].timerCree == TRUE) {
+            simcity->tabHabitation[i].timerBatiment = (int)compteurChrono - simcity->tabHabitation[i].dateCreation;
+            if(simcity->pause == 0 && simcity->tabHabitation[i].timerBatiment % 15 == 0 && modulo60 == TRUE) {
+                if(simcity->communiste == TRUE) {
+                    isEvolutionPossible(simcity, &simcity->tabHabitation[i]);
                 }
-
-            }else if (simcity->pause == 0 && simcity->tabBatiments[i].timerBatiment % 15 == 0 && modulo60 == TRUE){
-                recevoirImpots(simcity, simcity->tabBatiments[i].nbHabitants);
+                if(simcity->tabHabitation[i].evolutionPossible == TRUE) {
+                    if(simcity->tabHabitation[i].compteurEvolution == 5) {
+                        simcity->tabHabitation[i].compteurEvolution = 0;
+                    }
+                    if(simcity->tabHabitation[i].compteurEvolution != 4) {
+                        simcity->tabHabitation[i].compteurEvolution++;
+                        printf("%d\n", simcity->tabHabitation[i].compteurEvolution);
+                        miseAJourDonneesHabitation(simcity, &simcity->tabHabitation[i]);
+                    }
+                }
+                recevoirImpots(simcity, simcity->tabHabitation[i].nbHabitants);
             }
         }
     }

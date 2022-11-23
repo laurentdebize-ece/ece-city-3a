@@ -19,10 +19,13 @@
 #define SCREEN_HAUTEUR 768 //const taille écran haut
 
 #define NBR_MAX_BAT 50 //const nombre max de batiments possible
+#define NBR_MAX_INFRA 15 //const nombre max de batiments possible
 
-enum BITMAP{BITMAP_MAP, BITMAP_TOOLBOX,BITMAP_BARRECOMPTEURS, BITMAP_BOUTON_PAUSE ,BITMAP_MENU_PRINCIPAL_INTRO, BITMAP_MENU_PRINCIPAL, BITMAP_BOUTTON_MENU_PRINCIPAL,NB_BITMAP};
+enum BITMAP{BITMAP_MAP, BITMAP_TOOLBOX,BITMAP_BARRECOMPTEURS, BITMAP_BOUTON_PAUSE ,BITMAP_MENU_PRINCIPAL_INTRO, BITMAP_MENU_PRINCIPAL, BITMAP_MENU_COMMUNISTE_CAPITALISTE, BITMAP_BOUTONS_MENU_COMMUNISTE_CAPITALISTE, BITMAP_BOUTTON_MENU_PRINCIPAL,NB_BITMAP};
 enum SPRITE_MAP {HERBE, HOVER_TILE, ROUTE, TERRAIN_VAGUE, CABANE, MAISON, IMMEUBLE, GRATTE_CIEL,ELEC_DROIT, ELEC_COTE, EAU_DROIT, EAU_COTE, POMPIER_DROIT, POMPIER_COTE,NB_SPRITE_MAP};
 enum SPRITE_MENU_PRINCIPAL { INTRO , FOND,LANCER, LANCER_HOVER, LANCER_CLIQUE, CHARGER, CHARGER_HOVER, CHARGER_CLIQUE, QUITTER, QUITTER_HOVER, QUITTER_CLIQUE,NB_SPRITE_MENU_PRINCIPAL};
+enum SPRITE_MENU_COMMUNISTE_CAPITALISTE { FOND2, COMMUNISTE, COMMUNISTE_HOVER, COMMUNISTE_CLIQUE, CAPITALISTE, CAPITALISTE_HOVER, CAPITALISTE_CLIQUE ,NB_SPRITE_MENU_COMMUNISTE_CAPITALISTE};
+
 enum SPRITE_BOITE_A_OUTIL {ROUTE_, ROUTE_HOVER, ROUTE_CLIQUE,MAISON_, MAISON_HOVER, MAISON_CLIQUE,ELEC, ELEC_HOVER, ELEC_CLIQUE, EAU, EAU_HOVER, EAU_CLIQUE, DETRUIRE, DETRUIRE_HOVER, DETRUIRE_CLIQUE, VUE1, VUE1_HOVER, VUE1_CLIQUE,VUE2, VUE2_HOVER, VUE2_CLIQUE, POMPIER, POMPIER_HOVER, POMPIER_CLIQUE, PAUSE, PAUSE_HOVER, PAUSE_CLIQUE, NB_SPRITE_TOOL_BOX};
 enum COLOR{ BLACK, WHITE, ORANGE};
 enum TYPE_BLOC{TYPE_HERBE,TYPE_ROUTE,TYPE_TERRAIN_VAGUE,TYPE_CABANE,TYPE_MAISON,TYPE_IMMEUBLE,TYPE_GRATTE_CIEL, TYPE_ELEC_DROIT, TYPE_ELEC_COTE, TYPE_EAU_DROIT, TYPE_EAU_COTE, TYPE_POMPIER_DROIT, TYPE_POMPIER_COTE, NB_TYPE_BLOC};
@@ -96,8 +99,18 @@ typedef struct {
 
 } PageMenuPrincipal;
 
+typedef struct PageMenuCapitalisteCommuniste {
+    Bitmap tabSpriteMenu[NB_SPRITE_MENU_COMMUNISTE_CAPITALISTE];
+    bool menuCapitalisteCommuniste;
+    bool capitalisteHover;
+    bool capitalisteClique;
+    bool communisteHover;
+    bool communisteClique;
+} PageMenuCapitalisteCommuniste;
+
 typedef struct {
     PageMenuPrincipal menuPrincipal;
+    PageMenuCapitalisteCommuniste menuCapitalisteCommuniste;
 }Pages;
 
 typedef struct {
@@ -157,18 +170,33 @@ typedef struct {
 } ToolBox;
 
 typedef struct {
-    CoordsXY coordXY;
+    CoordsXY coordXY[7];
     int typeBatiment;
+    int nbHabitants;
+
+    int compteurEvolution;
+    bool evolutionPossible;
+    bool regression;
+
     int prixTerrainVague;
     int prixPompier;
     int prixChateauEau;
     int prixElectricite;
     int prixRoute;
+
     int timerBatiment;
     bool timerCree;
+    bool isFeu;
     int dateCreation;
-    int compteurEvolution;
-    int nbHabitants;
+
+    int capaciteElectrique;
+    int capaciteEau;
+
+} Habitation;
+
+typedef struct {
+    CoordsXY coordXY[15];
+    int typeBatiment;
     int capaciteElectrique;
     int capaciteEau;
 
@@ -228,18 +256,24 @@ typedef struct {
     Pages pages;
     ToolBox toolBox;
     Timers timers;
-    Batiment tabBatiments[NBR_MAX_BAT];
+    Habitation tabHabitation[NBR_MAX_BAT];
+    Batiment tabInfrastructure[NBR_MAX_INFRA];
     Banque banque;
     Graphe graphe;
 
     int argent;
-    int nbBatiments;
+    int nbHabitations;
+    int nbInfrastructures;
     int nbHabitants;
+    int capaciteEauRestante;
+    int capaciteElecRestante;
 
     bool dessin;
     bool endGame;
     bool outOfBorder;
     bool pause;
+    bool capitaliste;
+    bool communiste;
 
 } Simcity;
 

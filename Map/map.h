@@ -30,6 +30,8 @@ void afficherMap(Simcity* simcity);
 void afficherHoverMap(Simcity* simcity);
 
 void detruire(Simcity *simcity);
-void ecrire_graphe(Simcity *simcity, char *nomFichier);
+
+void cliquer(Simcity* simcity);
+
 
 #endif

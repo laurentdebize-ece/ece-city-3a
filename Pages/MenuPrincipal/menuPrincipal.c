@@ -1,6 +1,75 @@
 #include "menuPrincipal.h"
 #include "../../Structures/structures.h"
 
+void initDataMenuCommunisteCapitaliste (Simcity* simcity) {
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[FOND2].image = &simcity->tabBitmap[BITMAP_MENU_COMMUNISTE_CAPITALISTE];
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[FOND2].spriteX = 0;
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[FOND2].spriteY = 0;
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[FOND2].spriteLargeur = 1024;
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[FOND2].spriteHauteur = 768;
+
+
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].image = &simcity->tabBitmap[BITMAP_BOUTONS_MENU_COMMUNISTE_CAPITALISTE];
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteX = 783;
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteY = 80;
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteLargeur = 500;
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteHauteur = 150;
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenX = 262;
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenY= 145;
+
+
+
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_HOVER].image = &simcity->tabBitmap[BITMAP_BOUTONS_MENU_COMMUNISTE_CAPITALISTE];
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_HOVER].spriteX = 783;
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_HOVER].spriteY = 254;
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_HOVER].spriteLargeur = 500;
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_HOVER].spriteHauteur = 155;
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_HOVER].screenX = 262;
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_HOVER].screenY= 145;
+
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_CLIQUE].image = &simcity->tabBitmap[BITMAP_BOUTONS_MENU_COMMUNISTE_CAPITALISTE];
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_CLIQUE].spriteX = 783;
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_CLIQUE].spriteY = 428;
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_CLIQUE].spriteLargeur = 500;
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_CLIQUE].spriteHauteur = 150;
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_CLIQUE].screenX = 262;
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_CLIQUE].screenY= 145;
+
+
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].image = &simcity->tabBitmap[BITMAP_BOUTONS_MENU_COMMUNISTE_CAPITALISTE];
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].spriteX = 160;
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].spriteY = 80;
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].spriteLargeur = 500;
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].spriteHauteur = 150;
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenX = 262;
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenY= 440;
+
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_HOVER].image = &simcity->tabBitmap[BITMAP_BOUTONS_MENU_COMMUNISTE_CAPITALISTE];
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_HOVER].spriteX = 160;
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_HOVER].spriteY = 254;
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_HOVER].spriteLargeur = 500;
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_HOVER].spriteHauteur = 155;
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_HOVER].screenX = 262;
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_HOVER].screenY= 440;
+
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_CLIQUE].image = &simcity->tabBitmap[BITMAP_BOUTONS_MENU_COMMUNISTE_CAPITALISTE];
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_CLIQUE].spriteX = 160;
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_CLIQUE].spriteY = 428;
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_CLIQUE].spriteLargeur = 500;
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_CLIQUE].spriteHauteur = 150;
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_CLIQUE].screenX = 262;
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_CLIQUE].screenY= 440;
+
+    simcity->pages.menuCapitalisteCommuniste.capitalisteHover = 0;
+    simcity->pages.menuCapitalisteCommuniste.capitalisteClique = 0;
+    simcity->pages.menuCapitalisteCommuniste.communisteHover = 0;
+    simcity->pages.menuCapitalisteCommuniste.communisteClique = 0;
+    simcity->pages.menuCapitalisteCommuniste.menuCapitalisteCommuniste = 0;
+
+    simcity->capitaliste = FALSE;
+    simcity->communiste = FALSE;
+}
+
 void initDataMenuPrincipal(Simcity* simcity){
     simcity->pages.menuPrincipal.tabSpriteMenu[INTRO].image = &simcity->tabBitmap[BITMAP_MENU_PRINCIPAL_INTRO];
     simcity->pages.menuPrincipal.tabSpriteMenu[INTRO].spriteX = 0;
@@ -81,6 +150,19 @@ void initDataMenuPrincipal(Simcity* simcity){
     simcity->pages.menuPrincipal.menuPrincipal = 0;
 }
 
+void calculHoverComCap (Simcity* simcity){
+    if(simcity->allegro.event.mouse.x >= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenX && simcity->allegro.event.mouse.x <= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenX + simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteLargeur && simcity->allegro.event.mouse.y >= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenY && simcity->allegro.event.mouse.y <= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenY+ simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteHauteur){
+        simcity->pages.menuCapitalisteCommuniste.capitalisteHover = true;
+
+    } else if(simcity->allegro.event.mouse.x >= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenX && simcity->allegro.event.mouse.x <= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenX + simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].spriteLargeur && simcity->allegro.event.mouse.y >= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenY && simcity->allegro.event.mouse.y <= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenY + simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].spriteHauteur){
+        simcity->pages.menuCapitalisteCommuniste.communisteHover = true;
+
+    } else {simcity->pages.menuCapitalisteCommuniste.capitalisteHover = false;
+            simcity->pages.menuCapitalisteCommuniste.communisteHover = false;
+
+    }
+}
+
 void calculHover(Simcity * simcity){
     if(simcity->allegro.event.mouse.x >= 262 && simcity->allegro.event.mouse.x <= 262 + simcity->pages.menuPrincipal.tabSpriteMenu[LANCER].spriteLargeur && simcity->allegro.event.mouse.y >= 80 && simcity->allegro.event.mouse.y <= 80 + simcity->pages.menuPrincipal.tabSpriteMenu[LANCER].spriteHauteur){
         simcity->pages.menuPrincipal.lancerHover = true;
@@ -94,6 +176,21 @@ void calculHover(Simcity * simcity){
         simcity->pages.menuPrincipal.quitterHover = false;
     }
 }
+
+void detectionCliqueMenuCapCom (Simcity* simcity){
+
+    if(simcity->allegro.event.mouse.button == 1 && simcity->allegro.event.mouse.x >= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenX && simcity->allegro.event.mouse.x <= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenX + simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteLargeur && simcity->allegro.event.mouse.y >= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenY && simcity->allegro.event.mouse.y <= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenY + simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteHauteur){
+        simcity->pages.menuCapitalisteCommuniste.capitalisteClique = 1;
+        simcity->pages.menuCapitalisteCommuniste.menuCapitalisteCommuniste = 1;
+        simcity->capitaliste = TRUE;
+    }else if(simcity->allegro.event.mouse.button == 1 && simcity->allegro.event.mouse.x >= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenX && simcity->allegro.event.mouse.x <= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenX + simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].spriteLargeur && simcity->allegro.event.mouse.y >= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenY && simcity->allegro.event.mouse.y <= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenY + simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].spriteHauteur){
+        simcity->pages.menuCapitalisteCommuniste.communisteClique = 1;
+        simcity->pages.menuCapitalisteCommuniste.menuCapitalisteCommuniste = 1;
+        simcity->communiste = TRUE;
+
+    }else simcity->pages.menuCapitalisteCommuniste.communisteHover = false;
+            simcity->pages.menuCapitalisteCommuniste.capitalisteHover = false;
+    }
 
 void detectionClique(Simcity * simcity){
     if (simcity->allegro.event.mouse.button == 1 && simcity->pages.menuPrincipal.menuPrincipalIntro){
@@ -113,6 +210,24 @@ void detectionClique(Simcity * simcity){
         simcity->pages.menuPrincipal.quitterClique = false;
     }
 }
+
+
+void afficherMenuComCap (Simcity* simcity){
+    al_draw_bitmap(*(simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[FOND2].image), 0,0,0);
+    al_draw_bitmap_region(*(simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].image), simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteX, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteY, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteLargeur, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteHauteur, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenX, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenY,0);
+    al_draw_bitmap_region(*(simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].image), simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].spriteX, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].spriteY, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].spriteLargeur, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].spriteHauteur, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenX, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenY,0);
+    if(simcity->pages.menuCapitalisteCommuniste.communisteHover){
+        al_draw_bitmap_region(*(simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_HOVER].image), simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_HOVER].spriteX, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_HOVER].spriteY, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_HOVER].spriteLargeur, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_HOVER].spriteHauteur, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_HOVER].screenX, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_HOVER].screenY,0);
+    }  if(simcity->pages.menuCapitalisteCommuniste.capitalisteHover){
+        al_draw_bitmap_region(*(simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_HOVER].image), simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_HOVER].spriteX, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_HOVER].spriteY, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_HOVER].spriteLargeur, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_HOVER].spriteHauteur, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_HOVER].screenX, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_HOVER].screenY,0);
+    } if(simcity->pages.menuCapitalisteCommuniste.communisteClique){
+        al_draw_bitmap_region(*(simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_CLIQUE].image), simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_CLIQUE].spriteX, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_CLIQUE].spriteY, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_CLIQUE].spriteLargeur, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_CLIQUE].spriteHauteur, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_CLIQUE].screenX, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_CLIQUE].screenY,0);
+    } if(simcity->pages.menuCapitalisteCommuniste.capitalisteClique){
+        al_draw_bitmap_region(*(simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_CLIQUE].image), simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_CLIQUE].spriteX, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_CLIQUE].spriteY, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_CLIQUE].spriteLargeur, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_CLIQUE].spriteHauteur, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_CLIQUE].screenX, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_CLIQUE].screenY,0);
+    }
+}
+
+
 
 void afficherMenuPrincipal(Simcity* simcity){
     if (simcity->pages.menuPrincipal.menuPrincipalIntro){

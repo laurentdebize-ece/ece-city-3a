@@ -49,6 +49,7 @@ void payerBanque(Simcity* simcity){
 }
 
 void recevoirImpots(Simcity* simcity, int nbHabitants) {
-        simcity->argent += nbHabitants * IMPOT;
-        printf("imp:%d, %d", nbHabitants*IMPOT, simcity->argent);
+    simcity->argent += (nbHabitants * IMPOT);
 }
+
+
