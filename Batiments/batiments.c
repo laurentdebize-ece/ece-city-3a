@@ -12,8 +12,8 @@ void initTabBatiments(Simcity* simcity) {
         simcity->tabHabitation[i].capaciteElectrique = 0;
         simcity->tabHabitation[i].capaciteEau = 0;
         for (int j = 0; j < NBR_MAX_HAB; ++j) {
-            simcity->tabHabitation->coordXY[j].celluleX = 0;
-            simcity->tabHabitation->coordXY[j].celluleY = 0;
+            simcity->tabHabitation->coordXY[j].celluleX = -1;
+            simcity->tabHabitation->coordXY[j].celluleY = -1;
         }
     }
     simcity->nbHabitations = 0;
