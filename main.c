@@ -98,7 +98,7 @@ void boucleTest(Simcity* simcity){
                     if (simcity->outOfBorder){
                         afficherHoverMap(simcity);
                     }
-                    afficherTimerTempsJeu(*simcity);
+                   //afficherTimerTempsJeu(simcity);
                     al_flip_display();
                     simcity->dessin = false;
                 }
@@ -212,13 +212,11 @@ void mainAntoine() {
     initAll(&simcity);
     boucletestMenuPrincipal(&simcity);
     boucletestMenuCommunisteCapitaliste(&simcity);
-    simcity.tabHabitation[0].isFeu = 1;
-    simcity.tabHabitation[1].isFeu = 1;
-
     //simcity.toolBox.routeEnMain = 1;
     //simcity.toolBox.terrainVagueEnMain = 1;
     boucleTest(&simcity);
     libererAll(&simcity);
+    printf("test");
 
 }
 

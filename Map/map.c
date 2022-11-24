@@ -148,9 +148,9 @@ void afficherMap(Simcity* simcity){
     al_clear_to_color(al_map_rgb(0,0,0));
     afficherToolbox(simcity);
     afficherBarreCompteurs(simcity);
-    afficherTimerDate(*simcity);
-    afficherArgent(*simcity);
-    afficherNbHabitantsTot(*simcity);
+    //afficherTimerDate(*simcity);
+    //afficherArgent(*simcity);
+    //afficherNbHabitantsTot(*simcity);
     for (int x = 0; x < NBCELLULEX; ++x) {
         for (int y = 0; y < NBCELLULEY; ++y) {
             if (simcity->map.mapTile[x][y].typeBloc == TYPE_HERBE){
@@ -195,7 +195,7 @@ void afficherMap(Simcity* simcity){
         }
     }
     afficherPrevision(simcity);
-    afficherIsFeu(simcity);
+    //afficherIsFeu(simcity);
 }
 
 void afficherHoverMap(Simcity* simcity){

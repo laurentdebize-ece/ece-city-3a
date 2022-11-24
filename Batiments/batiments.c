@@ -17,18 +17,6 @@ void initTabBatiments(Simcity* simcity) {
         }
     }
     simcity->nbHabitations = 0;//On initialise le nombre d'habitation
-
-    //Initialisation de la structure infrastructure
-    for (int i = 0; i < NBR_MAX_INFRA; ++i) {//On parcourt le tableau
-        simcity->tabInfrastructure[i].typeBatiment = 0;
-        simcity->tabInfrastructure[i].capaciteElectrique = 0;
-        simcity->tabInfrastructure[i].capaciteEau = 0;
-        for (int j = 0; j < NBR_COORDS_XY; ++j) {//On initialise les coordonnées
-            simcity->tabInfrastructure->coordXY[j].celluleX = 0;
-            simcity->tabInfrastructure->coordXY[j].celluleY = 0;
-        }
-    }
-    simcity->nbInfrastructures = 0;//On initialise le nombre d'habitation
 }
 
 ///Fonction permettant la construction d'une habitation
