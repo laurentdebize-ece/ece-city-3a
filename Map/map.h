@@ -6,7 +6,7 @@
 /* Structure d'un maillon */
 typedef struct maillon {
 
-    int num;
+    CoordsXY num;
     struct maillon *suiv;
 } t_maillon;
 
@@ -57,7 +57,7 @@ void cliquer(Simcity* simcity);
 
 
 //Graphe
-void BFSEau(Simcity* simcity);
+CoordsXY *BFSEau(Simcity* simcity);
 void *lire_graphe( Simcity *simcity);
 
 #endif

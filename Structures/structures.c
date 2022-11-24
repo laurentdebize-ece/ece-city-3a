@@ -28,6 +28,7 @@ void registerEvents(Simcity* simcity){
     al_register_event_source(simcity->allegro.queue, al_get_timer_event_source(simcity->allegro.timer));
 }
 
+///Fonction permettant l'initialisation de l'écran allegro
 void displayCreate(Simcity* simCity) {
     al_set_new_display_flags(ALLEGRO_WINDOWED);
     simCity->allegro.display = al_create_display(SCREEN_LARGEUR, SCREEN_HAUTEUR);
@@ -35,10 +36,12 @@ void displayCreate(Simcity* simCity) {
     al_set_window_position(simCity->allegro.display, 100, 0);
 }
 
+///Fonction permettant l'initialisation de la file d'évènements allegro
 void queueCreate(Simcity* simcity){
     simcity->allegro.queue = al_create_event_queue();
 }
 
+///Fonction permettant l'initialisation des timers allegro
 void timerCreate(Simcity* simcity){
     simcity->allegro.timer = al_create_timer(1/60.0f);
     simcity->allegro.chrono = al_create_timer(1);
@@ -46,15 +49,18 @@ void timerCreate(Simcity* simcity){
     al_start_timer(simcity->allegro.chrono);
 }
 
+///Fonction permettant l'initialisation des polices allegro
 void fontsCreate(Simcity* simcity) {
     simcity->allegro.fonts[0] =  al_load_font("../Sources/polices/barreCompteurs.ttf", 25, 0);
 }
 
+///Fonction permettant l'initialisation des couleurs allegro
 void colorCreate(Simcity* simcity) {
     simcity->allegro.color[BLACK] = al_map_rgb(0,0,0);
     simcity->allegro.color[WHITE] = al_map_rgb(255,255,255);
 }
 
+///Fonction permettant l'initialisation générale d'Allegro
 void initAllegroAll(Simcity* simcity){
     displayCreate(simcity);
     queueCreate(simcity);

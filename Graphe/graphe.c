@@ -7,8 +7,7 @@ int main() {
     recupdonne(graphe);
     return 0;
 }
-*/
-/*
+
 Graphe *lire_graphe( Graphe *graphe, char *nomFichier){
     FILE *fichierO = fopen(nomFichier, "r");
     FILE *fichierM = fopen("../ordre.txt", "w");
@@ -39,8 +38,8 @@ Graphe *lire_graphe( Graphe *graphe, char *nomFichier){
     fclose(fichierO);
     fclose(fichierM);
     return graphe;
-}*/
-/*
+}
+
 void ecrire_graphe(Graphe *graphe, char *nomFichier){
     FILE *fichierM = fopen(nomFichier, "w");
     if (fichierM == NULL){

@@ -20,9 +20,10 @@
 
 #define NBR_MAX_HAB 50 //const nombre max de batiments possible
 #define NBR_MAX_INFRA 15 //const nombre max de batiments possible
+#define NBR_COORDS_XY 7
 
 enum BITMAP{BITMAP_MAP, BITMAP_TOOLBOX,BITMAP_BARRECOMPTEURS, BITMAP_BOUTON_PAUSE ,BITMAP_MENU_PRINCIPAL_INTRO, BITMAP_MENU_PRINCIPAL, BITMAP_MENU_COMMUNISTE_CAPITALISTE, BITMAP_BOUTONS_MENU_COMMUNISTE_CAPITALISTE, BITMAP_BOUTTON_MENU_PRINCIPAL,NB_BITMAP};
-enum SPRITE_MAP {HERBE, HOVER_TILE, ROUTE, TERRAIN_VAGUE, CABANE, MAISON, IMMEUBLE, GRATTE_CIEL,ELEC_DROIT, ELEC_COTE, EAU_DROIT, EAU_COTE, POMPIER_DROIT, POMPIER_COTE,NB_SPRITE_MAP};
+enum SPRITE_MAP {HERBE, HOVER_TILE, FEU,  ROUTE, TERRAIN_VAGUE, CABANE, MAISON, IMMEUBLE, GRATTE_CIEL,ELEC_DROIT, ELEC_COTE, EAU_DROIT, EAU_COTE, POMPIER_DROIT, POMPIER_COTE,NB_SPRITE_MAP};
 enum SPRITE_MENU_PRINCIPAL { INTRO , FOND,LANCER, LANCER_HOVER, LANCER_CLIQUE, CHARGER, CHARGER_HOVER, CHARGER_CLIQUE, QUITTER, QUITTER_HOVER, QUITTER_CLIQUE,NB_SPRITE_MENU_PRINCIPAL};
 enum SPRITE_MENU_COMMUNISTE_CAPITALISTE { FOND2, COMMUNISTE, COMMUNISTE_HOVER, COMMUNISTE_CLIQUE, CAPITALISTE, CAPITALISTE_HOVER, CAPITALISTE_CLIQUE ,NB_SPRITE_MENU_COMMUNISTE_CAPITALISTE};
 
@@ -170,7 +171,7 @@ typedef struct {
 } ToolBox;
 
 typedef struct {
-    CoordsXY coordXY[7];
+    CoordsXY coordXY[NBR_COORDS_XY];
     int typeBatiment;
     int nbHabitants;
 
@@ -189,8 +190,11 @@ typedef struct {
     bool isFeu;
     int dateCreation;
 
-    int capaciteElectrique;
-    int capaciteEau;
+    int capaciteElectriqueMax;//correspond a combien d'elec elle a besoin
+    int capaciteEauMax;//correspond a combien d'eau elle a besoin
+
+    int capaciteElectriqueRecu;//correspond a combien d'elec elle recoit au final
+    int capaciteEauRecu;//correspond a combien d'eau elle recoit au final
 
 } Habitation;
 
@@ -199,6 +203,7 @@ typedef struct {
     int typeBatiment;
     int capaciteElectrique;
     int capaciteEau;
+    bool enFeu;
 
 } Batiment;
 
@@ -212,12 +217,14 @@ typedef struct {
 }Timers;
 
 typedef struct {
+    //Action d'acheter un batiment
     bool achatTerrainVague;
     bool achatPompier;
     bool achatChateauEau;
     bool achatElectricite;
     bool achatRoute;
 
+    //Prix des batiments
     int prixTerrainVague;
     int prixPompier;
     int prixChateauEau;
@@ -229,9 +236,11 @@ typedef struct {
 
 /////SOMMET/////
 typedef struct Cellule{
-    struct Arc* arc;
+    CoordsXY coordsXYCellule;
     enum TYPE_BLOC type;
-    CoordsXY coord;
+    char couleur;
+    Habitation habitation;
+    Batiment batiment;
 }Cellule;
 typedef struct Cellule *pCellule;
 
@@ -252,26 +261,28 @@ typedef struct {
     Allegro allegro;// Contient tous les éléments ALLEGRO
     ALLEGRO_BITMAP* tabBitmap[NB_BITMAP];
     InteractionExterieure interactionExterieure;
-    Map map; //carte du jeu
+    Map map;//carte du jeu
     Pages pages;
     ToolBox toolBox;
     Timers timers;
-    Habitation tabHabitation[NBR_MAX_HAB];
-    Batiment tabInfrastructure[NBR_MAX_INFRA];
+    Habitation tabHabitation[NBR_MAX_HAB];//Tableau contenant toutes les habitations et leurs informations
+    Batiment tabInfrastructure[NBR_MAX_INFRA];//Tableau contenant toutes les infrastructures et leurs informations
     Banque banque;
     Graphe graphe;
 
-    int argent;
-    int nbHabitations;
-    int nbInfrastructures;
-    int nbHabitants;
-    int capaciteEauRestante;
-    int capaciteElecRestante;
+    int argent;//Argent total du joueur
+    int nbHabitations;//Nombre d'habitations de la ville
+    int nbInfrastructures;//Nombre d'infrastructures de la ville
+    int nbHabitants;//Nombre d'habitants de la ville
+    int capaciteEauRestante;//Capacité en eau disponible
+    int capaciteElecRestante;//Capacité en électricité disponible
 
     bool dessin;
     bool endGame;
     bool outOfBorder;
     bool pause;
+
+    //Mode de jeu
     bool capitaliste;
     bool communiste;
 
