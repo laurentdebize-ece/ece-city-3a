@@ -13,8 +13,8 @@ void initBanque(Simcity* simcity){
 }
 
 ///Fonction permettant d'afficher l'argent restant au joueur
-void afficherArgent(Simcity simcity) {
-    al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 440, 725, 0, " %d", simcity.argent);
+void afficherArgent(Simcity* simcity) {
+    al_draw_textf(simcity->allegro.fonts[0], simcity->allegro.color[BLACK], 440, 725, 0, " %d", simcity->argent);
 }
 
 bool isPayer(Simcity* simcity, int sommeARetirer){

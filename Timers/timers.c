@@ -88,43 +88,43 @@ void timerBatiment(Simcity* simcity) {
 }
 
 //Fonction permettant d'afficher la date fictive
-void afficherTimerDate(Simcity simcity) {
-    switch(simcity.timers.mois) {//On teste le mois dans lequel on est
+void afficherTimerDate(Simcity* simcity) {
+    switch(simcity->timers.mois) {//On teste le mois dans lequel on est
         case 1 ://Janvier
-            al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 820, 725, 0, "JANV %d", simcity.timers.annee);
+            al_draw_textf(simcity->allegro.fonts[0], simcity->allegro.color[BLACK], 820, 725, 0, "JANV %d", simcity->timers.annee);
             break;
         case 2 ://Février
-            al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 820, 725, 0, "FEV %d", simcity.timers.annee);
+            al_draw_textf(simcity->allegro.fonts[0], simcity->allegro.color[BLACK], 820, 725, 0, "FEV %d", simcity->timers.annee);
             break;
         case 3 ://Mars
-            al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 820, 725, 0, "MARS %d", simcity.timers.annee);
+            al_draw_textf(simcity->allegro.fonts[0], simcity->allegro.color[BLACK], 820, 725, 0, "MARS %d", simcity->timers.annee);
             break;
         case 4 ://Avril
-            al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 820, 725, 0, "AVR %d", simcity.timers.annee);
+            al_draw_textf(simcity->allegro.fonts[0], simcity->allegro.color[BLACK], 820, 725, 0, "AVR %d", simcity->timers.annee);
             break;
         case 5 ://Mai
-            al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 820, 725, 0, "MAI %d", simcity.timers.annee);
+            al_draw_textf(simcity->allegro.fonts[0], simcity->allegro.color[BLACK], 820, 725, 0, "MAI %d", simcity->timers.annee);
             break;
         case 6 ://Juin
-            al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 820, 725, 0, "JUIN %d", simcity.timers.annee);
+            al_draw_textf(simcity->allegro.fonts[0], simcity->allegro.color[BLACK], 820, 725, 0, "JUIN %d", simcity->timers.annee);
             break;
         case 7 ://Juillet
-            al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 820, 725, 0, "JUIL %d", simcity.timers.annee);
+            al_draw_textf(simcity->allegro.fonts[0], simcity->allegro.color[BLACK], 820, 725, 0, "JUIL %d", simcity->timers.annee);
             break;
         case 8 ://Août
-            al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 820, 725, 0, "AOUT %d", simcity.timers.annee);
+            al_draw_textf(simcity->allegro.fonts[0], simcity->allegro.color[BLACK], 820, 725, 0, "AOUT %d", simcity->timers.annee);
             break;
         case 9 ://Septembre
-            al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 820, 725, 0, "SEPT %d", simcity.timers.annee);
+            al_draw_textf(simcity->allegro.fonts[0], simcity->allegro.color[BLACK], 820, 725, 0, "SEPT %d", simcity->timers.annee);
             break;
         case 10 ://Octobre
-            al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 820, 725, 0, "OCT %d", simcity.timers.annee);
+            al_draw_textf(simcity->allegro.fonts[0], simcity->allegro.color[BLACK], 820, 725, 0, "OCT %d", simcity->timers.annee);
             break;
         case 11 ://Novembre
-            al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 820, 725, 0, "NOV %d", simcity.timers.annee);
+            al_draw_textf(simcity->allegro.fonts[0], simcity->allegro.color[BLACK], 820, 725, 0, "NOV %d", simcity->timers.annee);
             break;
         case 12 ://Décembre
-            al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 820, 725, 0, "DEC %d", simcity.timers.annee);
+            al_draw_textf(simcity->allegro.fonts[0], simcity->allegro.color[BLACK], 820, 725, 0, "DEC %d", simcity->timers.annee);
             break;
         default:
             printf("ERREUR numero mois.\n");//Message d'erreur de la date fictive

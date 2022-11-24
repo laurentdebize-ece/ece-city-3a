@@ -358,6 +358,6 @@ void nombreHabitantsTot(Simcity* simcity) {
 }
 
 ///Fonction affichant le nombre d'habitants total de la ville
-void afficherNbHabitantsTot(Simcity simcity) {
-    al_draw_textf(simcity.allegro.fonts[0], simcity.allegro.color[BLACK], 250, 725, 0, "%d",simcity.nbHabitants);
+void afficherNbHabitantsTot(Simcity* simcity) {
+    al_draw_textf(simcity->allegro.fonts[0], simcity->allegro.color[BLACK], 250, 725, 0, "%d",simcity->nbHabitants);
 }

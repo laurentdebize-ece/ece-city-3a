@@ -98,7 +98,7 @@ void boucleTest(Simcity* simcity){
                     if (simcity->outOfBorder){
                         afficherHoverMap(simcity);
                     }
-                   //afficherTimerTempsJeu(simcity);
+                   afficherTimerTempsJeu(simcity);
                     al_flip_display();
                     simcity->dessin = false;
                 }

@@ -9,7 +9,7 @@ void initCompteurs(Simcity* simcity);
 void timerDate(Simcity* simcity);
 void timerTempsJeu(Simcity* simcity);
 void timerBatiment(Simcity* simcity);
-void afficherTimerDate (Simcity simcity);
+void afficherTimerDate (Simcity* simcity);
 void afficherTimerTempsJeu(Simcity* simcity);
 void pauseTimerClavier(Simcity* simcity);
 void pauseTimerSouris(Simcity* simcity);

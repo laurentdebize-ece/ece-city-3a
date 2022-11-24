@@ -135,22 +135,22 @@ void afficherBarreCompteurs (Simcity* simcity) {
     al_draw_bitmap(simcity->tabBitmap[BITMAP_BARRECOMPTEURS],95, 620, 0);
 }
 
-void afficherIsFeu (Simcity* simcity) {
+/*void afficherIsFeu (Simcity* simcity) {
     for (int i = 0; i < NBR_MAX_HAB; ++i) {
         if (simcity->tabHabitation[i].isFeu == 1){
             al_draw_bitmap((simcity->tabBitmap[FEU]),simcity->tabHabitation[i].coordXY[0].screenX, simcity->tabHabitation[i].coordXY[0].screenY, 0);
         }
     }
-}
+}*/
 
 
 void afficherMap(Simcity* simcity){
     al_clear_to_color(al_map_rgb(0,0,0));
     afficherToolbox(simcity);
     afficherBarreCompteurs(simcity);
-    //afficherTimerDate(*simcity);
-    //afficherArgent(*simcity);
-    //afficherNbHabitantsTot(*simcity);
+    afficherTimerDate(simcity);
+    afficherArgent(simcity);
+    afficherNbHabitantsTot(simcity);
     for (int x = 0; x < NBCELLULEX; ++x) {
         for (int y = 0; y < NBCELLULEY; ++y) {
             if (simcity->map.mapTile[x][y].typeBloc == TYPE_HERBE){
