@@ -135,13 +135,13 @@ void afficherBarreCompteurs (Simcity* simcity) {
     al_draw_bitmap(simcity->tabBitmap[BITMAP_BARRECOMPTEURS],95, 620, 0);
 }
 
-/*void afficherIsFeu (Simcity* simcity) {
+void afficherIsFeu (Simcity* simcity) {
     for (int i = 0; i < NBR_MAX_HAB; ++i) {
         if (simcity->tabHabitation[i].isFeu == 1){
-            al_draw_bitmap((simcity->tabBitmap[FEU]),simcity->tabHabitation[i].coordXY[0].screenX, simcity->tabHabitation[i].coordXY[0].screenY, 0);
+            al_draw_bitmap((simcity->tabBitmap[BITMAP_FEU]),simcity->tabHabitation[i].coordXY[0].screenX, simcity->tabHabitation[i].coordXY[0].screenY, 0);
         }
     }
-}*/
+}
 
 
 void afficherMap(Simcity* simcity){
