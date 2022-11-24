@@ -18,7 +18,7 @@
 #define SCREEN_LARGEUR 1024 //const taille écran large
 #define SCREEN_HAUTEUR 768 //const taille écran haut
 
-#define NBR_MAX_BAT 50 //const nombre max de batiments possible
+#define NBR_MAX_HAB 50 //const nombre max de batiments possible
 #define NBR_MAX_INFRA 15 //const nombre max de batiments possible
 
 enum BITMAP{BITMAP_MAP, BITMAP_TOOLBOX,BITMAP_BARRECOMPTEURS, BITMAP_BOUTON_PAUSE ,BITMAP_MENU_PRINCIPAL_INTRO, BITMAP_MENU_PRINCIPAL, BITMAP_MENU_COMMUNISTE_CAPITALISTE, BITMAP_BOUTONS_MENU_COMMUNISTE_CAPITALISTE, BITMAP_BOUTTON_MENU_PRINCIPAL,NB_BITMAP};
@@ -256,7 +256,7 @@ typedef struct {
     Pages pages;
     ToolBox toolBox;
     Timers timers;
-    Habitation tabHabitation[NBR_MAX_BAT];
+    Habitation tabHabitation[NBR_MAX_HAB];
     Batiment tabInfrastructure[NBR_MAX_INFRA];
     Banque banque;
     Graphe graphe;

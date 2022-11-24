@@ -1,7 +1,7 @@
 #include "batiments.h"
 
 void initTabBatiments(Simcity* simcity) {
-    for (int i = 0; i < NBR_MAX_BAT; ++i) {
+    for (int i = 0; i < NBR_MAX_HAB; ++i) {
         simcity->tabHabitation[i].typeBatiment = 0;
         simcity->tabHabitation[i].evolutionPossible = TRUE;
         simcity->tabHabitation[i].compteurEvolution = 0;
@@ -11,7 +11,7 @@ void initTabBatiments(Simcity* simcity) {
         simcity->tabHabitation[i].nbHabitants = 0;
         simcity->tabHabitation[i].capaciteElectrique = 0;
         simcity->tabHabitation[i].capaciteEau = 0;
-        for (int j = 0; j < NBR_MAX_BAT; ++j) {
+        for (int j = 0; j < NBR_MAX_HAB; ++j) {
             simcity->tabHabitation->coordXY[j].celluleX = 0;
             simcity->tabHabitation->coordXY[j].celluleY = 0;
         }
