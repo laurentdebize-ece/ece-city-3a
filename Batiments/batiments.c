@@ -54,6 +54,7 @@ void construireHabitation(Simcity* simcity) {
         simcity->tabHabitation[simcity->nbHabitations].dateCreation = (int) al_get_timer_count(simcity->allegro.chrono);//On enregistre la date de création du batiment
 
         simcity->tabHabitation[simcity->nbHabitations].compteurEvolution = 0;//On initialise le compteur evolution à 0 (terrain vague)
+        printf("evol%d\n", simcity->tabHabitation[simcity->nbHabitations].compteurEvolution);
     }
     if(simcity->tabHabitation[simcity->nbHabitations].dateCreation != -1) {//Si le batiment a été créé (si il a une date de création)
         simcity->tabHabitation[simcity->nbHabitations].timerCree = TRUE;//Le timer est marqué comme créé
@@ -354,7 +355,7 @@ void nombreHabitantsTot(Simcity* simcity) {
     for (int i = 0; i < simcity->nbHabitations; ++i) {//On parcourt le tableau d'habitations
         nbHabitantsTot += simcity->tabHabitation[i].nbHabitants;//On ajoute à la variable tampon le nombre d'habitants de chaque habitation
     }
-    simcity->nbHabitants = nbHabitantsTot;//On met a jour le nombre d'habitant total de la ville dans la structure du jeu
+    simcity->nbHabitants = nbHabitantsTot;//On met à jour le nombre d'habitant total de la ville dans la structure du jeu
 }
 
 ///Fonction affichant le nombre d'habitants total de la ville

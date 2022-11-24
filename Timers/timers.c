@@ -1,6 +1,6 @@
 #include "timers.h"
 
-//Fonction permettant l'initialisation des compteurs du jeu
+///Fonction permettant l'initialisation des compteurs du jeu
 void initCompteurs(Simcity* simcity) {
     //Initialisation de la date fictive
     simcity->timers.mois = 1;
@@ -15,7 +15,7 @@ void initCompteurs(Simcity* simcity) {
     simcity->pause = 0;//Initialisation de la pause
 }
 
-//Fonction permettant de mettre à jour la date fictive
+///Fonction permettant de mettre à jour la date fictive
 void timerDate(Simcity* simcity) {
     long long compteurChrono = al_get_timer_count(simcity->allegro.chrono);//Récupération de la valeur du chrono (1sec)
     long long compteurTimer = al_get_timer_count(simcity->allegro.timer);//Récupération de la valeur du timer (1/60sec)
@@ -34,7 +34,7 @@ void timerDate(Simcity* simcity) {
     }
 }
 
-//Fonction permettant de mettre à jour le temps de jeu
+///Fonction permettant de mettre à jour le temps de jeu
 void timerTempsJeu(Simcity* simcity) {
     long long compteurChrono = al_get_timer_count(simcity->allegro.chrono);//Récupération de la valeur du chrono (1sec)
     long long compteurTimer = al_get_timer_count(simcity->allegro.timer);//Récupération de la valeur du timer (1/60sec)
@@ -44,6 +44,7 @@ void timerTempsJeu(Simcity* simcity) {
     } else {modulo60 = FALSE;}
     int secondes = (int)compteurChrono;//Initialisation d'une variable seconde égale aux secondes actuelles depuis le lancement du jeu
     int tampSecondes;//Initialisation d'une variable tampon
+    printf("min %d\n", simcity->timers.minutes);
     tampSecondes = secondes - (60*simcity->timers.minutes);//On réinitialise la variable tampon toutes les minutes
     simcity->timers.secondes = tampSecondes;//On met à jour les secondes dans la structure du jeu
     if (compteurChrono%60 == 0 &&  modulo60 == TRUE) {//Si le chrono est modulo 60 (= toutes les 60sec) et que le timer est modulo 60 (on change de seconde)
@@ -57,7 +58,7 @@ void timerTempsJeu(Simcity* simcity) {
     } else {simcity->timers.zeroDevantSecondes = TRUE;}
 }
 
-//Fonction permettant de mettre à jour le timer des bâtiments
+///Fonction permettant de mettre à jour le timer des bâtiments
 void timerBatiment(Simcity* simcity) {
     long long compteurChrono = al_get_timer_count(simcity->allegro.chrono);//Récupération de la valeur du chrono (1sec)
     long long compteurTimer = al_get_timer_count(simcity->allegro.timer);//Récupération de la valeur du timer (1/60sec)
@@ -87,7 +88,7 @@ void timerBatiment(Simcity* simcity) {
     }
 }
 
-//Fonction permettant d'afficher la date fictive
+///Fonction permettant d'afficher la date fictive
 void afficherTimerDate(Simcity* simcity) {
     switch(simcity->timers.mois) {//On teste le mois dans lequel on est
         case 1 ://Janvier
@@ -132,7 +133,7 @@ void afficherTimerDate(Simcity* simcity) {
     }
 }
 
-//Focntion permettant d'afficher le temps de jeu
+///Focntion permettant d'afficher le temps de jeu
 void afficherTimerTempsJeu(Simcity* simcity) {
     //Test pour les paramètres d'affichage permettant d'afficher des 0 devant les minutes et les secondes si celles-ci sont inférieures à 10
     if(simcity->timers.zeroDevantMinutes == TRUE && simcity->timers.zeroDevantSecondes == TRUE) {
@@ -149,7 +150,7 @@ void afficherTimerTempsJeu(Simcity* simcity) {
     }
 }
 
-//Fonction permettant la mise en pause à partir du clavier
+///Fonction permettant la mise en pause à partir du clavier
 void pauseTimerClavier(Simcity* simcity){
      if (simcity->allegro.event.keyboard.keycode == ALLEGRO_KEY_ESCAPE && simcity->pause){//Si la touche "escape" est enfoncée et que le jeu est en pause
         simcity->pause = !simcity->pause;//Le jeu reprend
@@ -160,7 +161,7 @@ void pauseTimerClavier(Simcity* simcity){
      }
 }
 
-//Fonction permettant la mise en pause à partir de la souris
+///Fonction permettant la mise en pause à partir de la souris
 void pauseTimerSouris(Simcity* simcity){
     if (!simcity->pause && simcity->toolBox.pauseEnMain){//Si le jeu n'est pas en pause et que l'on clique sur le bouton pause
         simcity->pause = !simcity->pause;//Le jeu est en pause
