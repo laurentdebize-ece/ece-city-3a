@@ -135,6 +135,15 @@ void afficherBarreCompteurs (Simcity* simcity) {
     al_draw_bitmap(simcity->tabBitmap[BITMAP_BARRECOMPTEURS],95, 620, 0);
 }
 
+void afficherIsFeu (Simcity* simcity) {
+    for (int i = 0; i < NBR_MAX_HAB; ++i) {
+        if (simcity->tabHabitation[i].isFeu == 1){
+            al_draw_bitmap((simcity->tabBitmap[FEU]),simcity->tabHabitation[i].coordXY[0].screenX, simcity->tabHabitation[i].coordXY[0].screenY, 0);
+        }
+    }
+}
+
+
 void afficherMap(Simcity* simcity){
     al_clear_to_color(al_map_rgb(0,0,0));
     afficherToolbox(simcity);
@@ -186,6 +195,7 @@ void afficherMap(Simcity* simcity){
         }
     }
     afficherPrevision(simcity);
+    afficherIsFeu(simcity);
 }
 
 void afficherHoverMap(Simcity* simcity){
@@ -205,6 +215,19 @@ void afficherPrevision(Simcity* simcity){
     afficherPrevEau(simcity);
     afficherPrevPompier(simcity);
 }
+
+
+
+
+
+void isFeu (Simcity* simcity, int i) {
+        if(rand() % 100 == 1){
+            simcity->tabHabitation[i].isFeu = 1;
+        }
+    }
+
+
+
 
 
 bool collerAlaRouteHab(Simcity* simcity){
@@ -878,18 +901,25 @@ void tournerBatiment(Simcity *simcity){
 void detruire(Simcity *simcity){
     if (simcity->allegro.event.mouse.button == 1 && simcity->toolBox.detruireEnMain && simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc != TYPE_HERBE){
         simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc = TYPE_HERBE;
+
     }
 }
 
 void cliquer(Simcity* simcity){
     for (int i = 0; i < NBR_MAX_HAB; ++i) {
         for (int j = 0; j < 8; ++j) {
-            if (simcity->allegro.event.mouse.button == 1 && simcity->tabHabitation[i].coordXY[j].celluleX == simcity->interactionExterieure.mouse.celluleXY.celluleX && simcity->tabHabitation[i].coordXY[j].celluleY == simcity->interactionExterieure.mouse.celluleXY.celluleY){
+            if (simcity->outOfBorder && simcity->allegro.event.mouse.button == 1 && simcity->tabHabitation[i].coordXY[j].celluleX == simcity->interactionExterieure.mouse.celluleXY.celluleX && simcity->tabHabitation[i].coordXY[j].celluleY == simcity->interactionExterieure.mouse.celluleXY.celluleY){
                 printf("Habitation : %d\n", i);
             }
         }
     }
-
+    for (int i = 0; i < NBR_MAX_INFRA; ++i) {
+        for (int j = 0; j < 16; ++j) {
+            if (simcity->outOfBorder && simcity->allegro.event.mouse.button == 1 && simcity->tabInfrastructure[i].coordXY[j].celluleX == simcity->interactionExterieure.mouse.celluleXY.celluleX && simcity->tabInfrastructure[i].coordXY[j].celluleY == simcity->interactionExterieure.mouse.celluleXY.celluleY){
+                printf("Infrastructure : %d\n", i);
+            }
+        }
+    }
 }
 
 void *lire_graphe( Simcity *simcity){

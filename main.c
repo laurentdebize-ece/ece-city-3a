@@ -30,8 +30,8 @@ void initAll(Simcity* simcity){
 
 void boucleTest(Simcity* simcity){
 
-    /*al_set_timer_count(simcity->allegro.timer, 0);
-    al_set_timer_count(simcity->allegro.chrono, 0);*/
+    al_set_timer_count(simcity->allegro.timer, 0);
+    al_set_timer_count(simcity->allegro.chrono, 0);
 
     while (!simcity->endGame) {
 
@@ -212,6 +212,9 @@ void mainAntoine() {
     initAll(&simcity);
     boucletestMenuPrincipal(&simcity);
     boucletestMenuCommunisteCapitaliste(&simcity);
+    simcity.tabHabitation[0].isFeu = 1;
+    simcity.tabHabitation[1].isFeu = 1;
+
     //simcity.toolBox.routeEnMain = 1;
     //simcity.toolBox.terrainVagueEnMain = 1;
     boucleTest(&simcity);
