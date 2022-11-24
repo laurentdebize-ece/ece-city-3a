@@ -882,7 +882,7 @@ void detruire(Simcity *simcity){
 }
 
 void cliquer(Simcity* simcity){
-    for (int i = 0; i < NBR_MAX_BAT; ++i) {
+    for (int i = 0; i < NBR_MAX_HAB; ++i) {
         for (int j = 0; j < 8; ++j) {
             if (simcity->allegro.event.mouse.button == 1 && simcity->tabHabitation[i].coordXY[j].celluleX == simcity->interactionExterieure.mouse.celluleXY.celluleX && simcity->tabHabitation[i].coordXY[j].celluleY == simcity->interactionExterieure.mouse.celluleXY.celluleY){
                 printf("Habitation : %d\n", i);
