@@ -212,6 +212,9 @@ void mainAntoine() {
     initAll(&simcity);
     boucletestMenuPrincipal(&simcity);
     boucletestMenuCommunisteCapitaliste(&simcity);
+    simcity.tabHabitation[0].isFeu = 1;
+    simcity.tabHabitation[1].isFeu = 1;
+
     //simcity.toolBox.routeEnMain = 1;
     //simcity.toolBox.terrainVagueEnMain = 1;
     boucleTest(&simcity);
