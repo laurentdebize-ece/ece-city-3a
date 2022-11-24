@@ -24,7 +24,7 @@ void initAll(Simcity* simcity){
     initDataMenuPrincipal(simcity);
     initCompteurs(simcity);
     initBanque(simcity);
-    initBatiments(simcity);
+    initTabBatiments(simcity);
     initDataMenuCommunisteCapitaliste(simcity);
 }
 

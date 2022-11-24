@@ -44,7 +44,7 @@ typedef struct Graphe {
     Cellule grille[LIGNES][COLONNES];
 }Graphe;
 */
-Graphe *lire_graphe(Graphe *graphe, char *nomFichier);
+void *lire_graphe(Simcity *simcity);
 void recupdonne(Graphe *graphe);
 //void ecrire_graphe(Graphe *graphe, char *nomFichier);
 

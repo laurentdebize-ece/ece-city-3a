@@ -14,7 +14,8 @@
 #define CAPACITE_EAU 5000 //Capacité du chateau d'eau
 #define CAPACITE_ELECTRIQUE 5000 //Capacité de la centrale électrique
 
-void initBatiments(Simcity* simcity);
+
+void initTabBatiments(Simcity* simcity);
 void construireBatiment(Simcity* simcity);
 void miseAJourDonneesHabitation(Simcity* simcity, Habitation* habitation);
 void regressionHabitation(Simcity* simcity, Habitation* habitation);

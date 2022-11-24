@@ -1,9 +1,7 @@
 #include "batiments.h"
 
-///Fonction permettant l'initialisation des batiments
-void initBatiments(Simcity* simcity) {
-    //Initialisation de la structure habitation
-    for (int i = 0; i < NBR_MAX_HAB; ++i) {//On parcourt le tableau
+void initTabBatiments(Simcity* simcity) {
+    for (int i = 0; i < NBR_MAX_HAB; ++i) {
         simcity->tabHabitation[i].typeBatiment = 0;
         simcity->tabHabitation[i].evolutionPossible = TRUE;
         simcity->tabHabitation[i].compteurEvolution = 0;
@@ -11,9 +9,9 @@ void initBatiments(Simcity* simcity) {
         simcity->tabHabitation[i].dateCreation = -1;
         simcity->tabHabitation[i].timerBatiment = 0;
         simcity->tabHabitation[i].nbHabitants = 0;
-        simcity->tabHabitation[i].capaciteElectrique = 0;
-        simcity->tabHabitation[i].capaciteEau = 0;
-        for (int j = 0; j < NBR_COORDS_XY; ++j) {//On initialise les coordonnées
+        simcity->tabHabitation[i].capaciteElectriqueRecu = 0;
+        simcity->tabHabitation[i].capaciteEauRecu = 0;
+        for (int j = 0; j < NBR_MAX_HAB; ++j) {
             simcity->tabHabitation->coordXY[j].celluleX = 0;
             simcity->tabHabitation->coordXY[j].celluleY = 0;
         }
@@ -75,7 +73,6 @@ void construireHabitation(Simcity* simcity) {
     simcity->nbHabitations++;//on ajoute une habitation suplémentaire au notre nombre d'habitation
 }
 
-///Fonction permettant la construction d'une infrastructure
 void construireInfrastructure(Simcity* simcity){
     if(simcity->banque.achatElectricite == 1 && simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_ELEC_COTE) {//Si on achète une centrale électrique
         simcity->tabInfrastructure[simcity->nbInfrastructures].typeBatiment = 2;//On met le type de batiment à 2 (centrale électrique)
@@ -285,14 +282,24 @@ void construireInfrastructure(Simcity* simcity){
 
         simcity->tabInfrastructure[simcity->nbInfrastructures].coordXY[15].celluleX = simcity->interactionExterieure.mouse.celluleXY.celluleX + 5;
         simcity->tabInfrastructure[simcity->nbInfrastructures].coordXY[15].celluleY = simcity->interactionExterieure.mouse.celluleXY.celluleY + 3;
+
+
+
+
+
+
+
+    }
+    if(simcity->banque.achatChateauEau == 1) {
+        simcity->tabInfrastructure[simcity->nbInfrastructures].typeBatiment = 3;
+        simcity->tabInfrastructure[simcity->nbInfrastructures].capaciteEau = CAPACITE_EAU;
     }
 }
 
-///Fonction permettant la mise à jour des informations des habitations
 void miseAJourDonneesHabitation(Simcity* simcity, Habitation* habitation) {
-    switch (habitation->compteurEvolution) {//On teste l'état d'évolution actuel du batiment
+    switch (habitation->compteurEvolution) {
         case 0: { //terrain vague
-            habitation->nbHabitants = NB_HABITANTS_TERRAINVAGUE;//On met à jour le nombre d'habitants
+            habitation->nbHabitants = NB_HABITANTS_TERRAINVAGUE;
             break;
 
         }
@@ -348,7 +355,7 @@ void isEvolutionPossible(Simcity* simcity, Habitation* habitation) {
     Habitation* habitationEvolue = habitation;//Création d'une variable tampon habitationEvolue
     habitationEvolue->compteurEvolution++;//habitationEvolue à une evolution à 1 stade de plus que l'habitation qu'on teste
     miseAJourDonneesHabitation(simcity, habitationEvolue);//On met à jour les données de habitationEvolue
-    if(simcity->capaciteEauRestante < habitationEvolue->capaciteEau || simcity->capaciteElecRestante < habitationEvolue->capaciteElectrique){//Si la capacité disponible en eau ou en électricité est inférieure à la capacité nécessaire àl'habitation
+    if(simcity->capaciteEauRestante < habitationEvolue->capaciteEauMax || simcity->capaciteElecRestante < habitationEvolue->capaciteElectriqueMax){//Si la capacité disponible en eau ou en électricité est inférieure à la capacité nécessaire àl'habitation
         habitation->evolutionPossible = FALSE;//Evolution de l'habitation testée impossible
     }else{habitation->evolutionPossible = TRUE;}//Evolution de l'habitation testée possible
 }

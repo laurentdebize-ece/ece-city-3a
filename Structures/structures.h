@@ -190,8 +190,11 @@ typedef struct {
     bool isFeu;
     int dateCreation;
 
-    int capaciteElectrique;
-    int capaciteEau;
+    int capaciteElectriqueMax;//correspond a combien d'elec elle a besoin
+    int capaciteEauMax;//correspond a combien d'eau elle a besoin
+
+    int capaciteElectriqueRecu;//correspond a combien d'elec elle recoit au final
+    int capaciteEauRecu;//correspond a combien d'eau elle recoit au final
 
 } Habitation;
 
@@ -233,9 +236,11 @@ typedef struct {
 
 /////SOMMET/////
 typedef struct Cellule{
-    struct Arc* arc;
+    CoordsXY coordsXYCellule;
     enum TYPE_BLOC type;
-    CoordsXY coord;
+    char couleur;
+    Habitation habitation;
+    Batiment batiment;
 }Cellule;
 typedef struct Cellule *pCellule;
 

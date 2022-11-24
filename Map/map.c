@@ -922,6 +922,10 @@ void cliquer(Simcity* simcity){
     }
 }
 
+
+////GRAPHE ////
+
+
 void *lire_graphe( Simcity *simcity){
     FILE *fichierM = fopen("../ordre.txt", "w");
     if (fichierM == NULL){
@@ -931,16 +935,22 @@ void *lire_graphe( Simcity *simcity){
     int ordre;
     fscanf(fichierM, "%d", &ordre);
     simcity->graphe.ordre = ordre;
+    for (int i = 0; i < NBCELLULEX ; i++){
+        for(int j = 0; j < NBCELLULEY; j++){
+            simcity->graphe.grille[i][j].type = 0;
+        }
+    }
     fclose(fichierM);
 }
 
 int fileVide(t_file *f) {
     return f->queue == NULL && f->tete == NULL;
 }
-void enfiler(t_file *f, int s0) {
+void enfiler(t_file *f, CoordsXY *s0) {
     pmaillon maillon = NULL;
     maillon = (pmaillon) malloc(sizeof(struct maillon));
-    maillon->num = s0;
+    maillon->num.celluleX = s0->celluleX;
+    maillon->num.celluleY = s0->celluleY;
     if (fileVide(f)) {
         f->queue = f->tete = maillon;
     } else {
@@ -948,8 +958,7 @@ void enfiler(t_file *f, int s0) {
         f->queue = maillon;
     }
 };
-
-int defiler(t_file *f) {
+CoordsXY defiler(t_file *f) {
 
     t_maillon *pMaillon = f->tete;
 
@@ -959,32 +968,88 @@ int defiler(t_file *f) {
     } else {
         f->tete = f->tete->suiv;
     }
-    int numSommet = pMaillon->num;
+    CoordsXY numSommet = pMaillon->num;
     free(pMaillon);
     return numSommet;
 };
+void reset_couleur(Simcity *simcity) {
+    for (int i = 0; i < NBCELLULEX; i++)
+        for(int j = 0; j < NBCELLULEX; j ++)
+        simcity->graphe.grille[i][j].couleur = 'B';
+}
 
-void BFSEau(Simcity* simcity){
+CoordsXY *BFSEau(Simcity* simcity){
+    //je recup l'ordre du graphe
     lire_graphe(simcity);
-    int *predecesseur = (int*) malloc(sizeof(int) * simcity->graphe.ordre);
+    //je mets toutes les cases du plateau à Blanc
+    reset_couleur(simcity);
+    //je crée mon tableau de predecesseur qui va prendre toutes les coordonnees des cases qui précèdent
+    CoordsXY predecesseur[simcity->graphe.ordre];
+   //je mets ce tableau a vide
     for(int i = 0; i < simcity->graphe.ordre; ++i){
-        predecesseur[i] = -1;
+        predecesseur[i].celluleX = -1;
+        predecesseur[i].celluleY = -1;
     }
-    t_file f ={NULL, NULL};// on init la file
+    // j'init la file
+    t_file f ={NULL, NULL};
     // on parcours tout le tableau de batiments
-    for(int i = 0; i < 50 ; ++i){
+    for(int i = 0; i < 16 ; ++i){ // remplacer 16 par la macro apres
+        //si dans le tab de Batiments, on trouve un chateau d'eau
         if(simcity->tabInfrastructure[i].typeBatiment == 3) {
-            enfiler(&f, 7);/////mettre la coordonnée du batiment dans le s0
-        }
-    }
-    while(!fileVide(&f)){
-        int s0 = defiler(&f);
-        for(int i = 0; i < simcity->graphe.ordre; ++i){
-            if(simcity->graphe.grille[s0][i].type == 1 && predecesseur[i] == -1){
-                predecesseur[i] = s0;
-                enfiler(&f, i);
+            //on marque la case en Gris
+            simcity->graphe.grille[simcity->tabInfrastructure[i].coordXY->celluleX][simcity->tabInfrastructure[i].coordXY->celluleY].couleur = 'G';
+            // on enfile dans notre queue la premiere case : s0 est identifié par les coordonnes de la case
+            enfiler(&f, simcity->tabInfrastructure[i].coordXY);
+            // je crée une variable K qui s'incrementera pour parcourir le tableau de predecesseur
+            int k = 0;
+            //tant que la file n'est pas vide :
+            while(f.tete != NULL){
+                // je recupere les coordonnes du premier element de ma file
+                CoordsXY num = defiler(&f);
+                //je parcours tout les voisins de la case
+                //si le voisin appartient bien au tableau et n'est pas de l'herbe et est marqué en Blanc
+                //je l'enfile dans la file
+                //je le marque en Gris
+                if(num.celluleY > 0 && simcity->graphe.grille[num.celluleX][num.celluleY-1].type != 0 && simcity->graphe.grille[num.celluleX][num.celluleY-1].couleur == 'B'){
+                    CoordsXY s1;
+                    s1.celluleX = num.celluleX;
+                    s1.celluleY = num.celluleY-1;
+                    predecesseur[k] = num;
+                    k++;
+                    enfiler(&f, &s1);
+                    simcity->graphe.grille[s1.celluleX][s1.celluleY].couleur = 'G';
+                }
+                if(num.celluleY < NBCELLULEY && simcity->graphe.grille[num.celluleX][num.celluleY+1].type != 0 && simcity->graphe.grille[num.celluleX][num.celluleY+1].couleur == 'B'){
+                    CoordsXY s1;
+                    s1.celluleX = num.celluleX;
+                    s1.celluleY = num.celluleY+1;
+                    predecesseur[k] = num;
+                    k++;
+                    enfiler(&f, &s1);
+                    simcity->graphe.grille[s1.celluleX][s1.celluleY].couleur = 'G';
+                }
+                if(num.celluleX > 0 && simcity->graphe.grille[num.celluleX-1][num.celluleY].type != 0 && simcity->graphe.grille[num.celluleX-1][num.celluleY].couleur == 'B'){
+                    CoordsXY s1;
+                    s1.celluleX = num.celluleX-1;
+                    s1.celluleY = num.celluleY;
+                    predecesseur[k] = num;
+                    k++;
+                    enfiler(&f, &s1);
+                    simcity->graphe.grille[s1.celluleX][s1.celluleY].couleur = 'G';
+                }
+                if( num.celluleX < NBCELLULEX && simcity->graphe.grille[num.celluleX+1][num.celluleY].type != 0 && simcity->graphe.grille[num.celluleX+1][num.celluleY].couleur == 'B'){
+                    CoordsXY s1;
+                    s1.celluleX = num.celluleX+1;
+                    s1.celluleY = num.celluleY;
+                    predecesseur[k] = num;
+                    k++;
+                    enfiler(&f, &s1);
+                    simcity->graphe.grille[s1.celluleX][s1.celluleY].couleur = 'G';
+                }
+                //je marque en Noir le sommet que j'ai fini de visiter
+                simcity->graphe.grille[num.celluleX][num.celluleY].couleur = 'N';
             }
         }
     }
-
+ return predecesseur;
 }
