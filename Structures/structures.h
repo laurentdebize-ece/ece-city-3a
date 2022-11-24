@@ -238,7 +238,7 @@ typedef struct {
 typedef struct Cellule{
     CoordsXY coordsXYCellule;
     enum TYPE_BLOC type;
-    char couleur;
+    int couleur;
     Habitation habitation;
     Batiment batiment;
 }Cellule;
