@@ -975,7 +975,7 @@ CoordsXY defiler(t_file *f) {
 };
 void reset_couleur(Simcity *simcity) {
     for (int i = 0; i < NBCELLULEX; i++)
-        for(int j = 0; j < NBCELLULEX; j ++)
+        for(int j = 0; j < NBCELLULEY; j ++)
         simcity->graphe.grille[i][j].couleur = 0 ;
 }
 
