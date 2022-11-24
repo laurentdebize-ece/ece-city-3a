@@ -928,7 +928,7 @@ void cliquer(Simcity* simcity){
 
 
 void *lire_graphe( Simcity *simcity){
-    FILE *fichierM = fopen("../ordre.txt", "w");
+    FILE *fichierM = fopen("../Graphe/ordre", "r");
     if (fichierM == NULL){
         printf("Erreur lors de l'ouverture du fichier matrice.txt");
         return NULL;
@@ -1049,8 +1049,13 @@ CoordsXY *BFSEau(Simcity* simcity){
                 }
                 //je marque en Noir le sommet que j'ai fini de visiter
                 simcity->graphe.grille[num.celluleX][num.celluleY].couleur = 2;
+                for(int l = 0; l < k; l++){
+                    printf("predecesseur de %d : %d %d\n", l, predecesseur[l].celluleX, predecesseur[l].celluleY);
+                }
             }
+            printf("prout");
         }
     }
+
  return predecesseur;
 }
