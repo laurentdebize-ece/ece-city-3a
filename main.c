@@ -89,8 +89,8 @@ void boucleTest(Simcity* simcity){
             case ALLEGRO_EVENT_TIMER:{
                 timerDate(simcity);
                 timerTempsJeu(simcity);
-                payerBanque(simcity);
                 timerBatiment(simcity);
+                payerBanque(simcity);
                 nombreHabitantsTot(simcity);
                 simcity->dessin = true;
 
@@ -220,7 +220,6 @@ void mainAntoine() {
     //simcity.toolBox.terrainVagueEnMain = 1;
     boucleTest(&simcity);
     libererAll(&simcity);
-    printf("test");
 
 }
 

@@ -46,7 +46,7 @@ void timerTempsJeu(Simcity* simcity) {
     } else {modulo60 = FALSE;}
     int secondes = (int)tempsJeu;//Initialisation d'une variable seconde égale aux secondes actuelles depuis le lancement du jeu
     int tampSecondes;//Initialisation d'une variable tampon
-    printf("min %d\n", simcity->timers.minutes);
+    //printf("min %d\n", simcity->timers.minutes);
     tampSecondes = secondes - (60*simcity->timers.minutes);//On réinitialise la variable tampon toutes les minutes
     simcity->timers.secondes = tampSecondes;//On met à jour les secondes dans la structure du jeu
     if (compteurChrono%60 == 0 &&  modulo60 == TRUE) {//Si le chrono est modulo 60 (= toutes les 60sec) et que le timer est modulo 60 (on change de seconde)
