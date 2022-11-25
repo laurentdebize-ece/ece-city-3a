@@ -24,5 +24,7 @@ void nombreHabitantsTot(Simcity* simcity);
 void afficherNbHabitantsTot(Simcity* simcity);
 void construireHabitation(Simcity* simcity);
 void construireInfrastructure(Simcity* simcity);
+void isFeu(Simcity* simcity);
+void afficherIsFeu(Simcity* simcity);
 
 #endif //ECE_CITY_3A_BATIMENTS_H

@@ -330,12 +330,12 @@ void miseAJourDonneesHabitation(Simcity* simcity, Habitation* habitation) {
 ///Fonction permettant la régression de l'habitation
 void regressionHabitation(Simcity* simcity, Habitation* habitation) {
     if(habitation->compteurEvolution > 1 && habitation->compteurEvolution < 5) {//Si le batiment n'est ni un terrain vague ni une ruine
-        habitation->compteurEvolution--;//On repasse à l'évolution antérieur du batiment
+        habitation->compteurEvolution--;//On repasse à l'évolution antérieure du batiment
     }
     else if(habitation->compteurEvolution == 1) {//Si le batiment est de type terrain vague
         habitation->compteurEvolution = 5;//Le batiment est en ruine
     }
-    miseAJourDonneesHabitation(simcity, habitation);//On met a jour les données du batiment
+    miseAJourDonneesHabitation(simcity, habitation);//On met à jour les données du batiment
 }
 
 ///Fonction testant si l'evolution du batiment est possible
@@ -356,8 +356,30 @@ void nombreHabitantsTot(Simcity* simcity) {
     }
     simcity->nbHabitants = nbHabitantsTot;//On met à jour le nombre d'habitant total de la ville dans la structure du jeu
 }
-
 ///Fonction affichant le nombre d'habitants total de la ville
 void afficherNbHabitantsTot(Simcity* simcity) {
     al_draw_textf(simcity->allegro.fonts[0], simcity->allegro.color[BLACK], 250, 725, 0, "%d",simcity->nbHabitants);
+}
+
+///Fonction permettant de mettre une habitation en feu
+void isFeu (Simcity* simcity) {
+    for (int i = 0; i < simcity->nbHabitations; ++i) {
+        if(simcity->tabHabitation[i].compteurEvolution >= 1 && simcity->tabHabitation[i].compteurEvolution < 5) {
+            if(rand() % 2 == 0){
+                simcity->tabHabitation[i].isFeu = 1;
+                simcity->tabHabitation[i].evolutionPossible = 0;
+            }
+        }
+    }
+}
+///Fonction permettant d'éteindre une habitation en feu
+/*void eteindreFeu(Simcity* simcity) {
+}*/
+///Fonction affichant le bâtiment en feu
+void afficherIsFeu(Simcity* simcity) {
+    for (int i = 0; i < simcity->nbHabitations; ++i) {
+        if (simcity->tabHabitation[i].isFeu == 1){
+            al_draw_bitmap((simcity->tabBitmap[BITMAP_FEU]),simcity->tabHabitation[i].coordXY[0].screenX, simcity->tabHabitation[i].coordXY[0].screenY, 0);
+        }
+    }
 }
