@@ -20,15 +20,12 @@
 
 #define NBR_MAX_HAB 50 //const nombre max de batiments possible
 #define NBR_MAX_INFRA 15 //const nombre max de batiments possible
-#define NBR_COORDS_XY_HAB 8 //const taille du contour d'une habitation
-#define NBR_COORDS_XY_INFRA 16 //const taille du contour d'une infrastructure
+#define NBR_COORDS_XY_HAB 7
 
-
-enum BITMAP{BITMAP_MAP, BITMAP_TOOLBOX,BITMAP_BARRECOMPTEURS, BITMAP_BOUTON_PAUSE ,BITMAP_MENU_PRINCIPAL_INTRO, BITMAP_MENU_PRINCIPAL, BITMAP_MENU_COMMUNISTE_CAPITALISTE, BITMAP_BOUTONS_MENU_COMMUNISTE_CAPITALISTE, BITMAP_BOUTON_AIDE, BITMAP_FEU, BITMAP_BOUTTON_MENU_PRINCIPAL, BITMAP_REGLES1, BITMAP_REGLES2, NB_BITMAP};
+enum BITMAP{BITMAP_MAP, BITMAP_TOOLBOX,BITMAP_BARRECOMPTEURS, BITMAP_BOUTON_PAUSE ,BITMAP_MENU_PRINCIPAL_INTRO, BITMAP_MENU_PRINCIPAL, BITMAP_MENU_COMMUNISTE_CAPITALISTE, BITMAP_BOUTONS_MENU_COMMUNISTE_CAPITALISTE, BITMAP_BOUTON_AIDE, BITMAP_FEU,  BITMAP_BOUTTON_MENU_PRINCIPAL,NB_BITMAP};
 enum SPRITE_MAP {HERBE, HOVER_TILE,  ROUTE, TERRAIN_VAGUE, CABANE, MAISON, IMMEUBLE, GRATTE_CIEL,ELEC_DROIT, ELEC_COTE, EAU_DROIT, EAU_COTE, POMPIER_DROIT, POMPIER_COTE,NB_SPRITE_MAP};
-enum SPRITE_MENU_PRINCIPAL {INTRO , FOND,LANCER, LANCER_HOVER, LANCER_CLIQUE, CHARGER, CHARGER_HOVER, CHARGER_CLIQUE, QUITTER, QUITTER_HOVER, QUITTER_CLIQUE, AIDE, AIDE_HOVER, AIDE_CLIQUE, NB_SPRITE_MENU_PRINCIPAL};
-enum SPRITE_MENU_COMMUNISTE_CAPITALISTE {FOND2, COMMUNISTE, COMMUNISTE_HOVER, COMMUNISTE_CLIQUE, CAPITALISTE, CAPITALISTE_HOVER, CAPITALISTE_CLIQUE ,NB_SPRITE_MENU_COMMUNISTE_CAPITALISTE};
-enum SPRITE_REGLES_JEU {REGLES1, REGLES2, BOUTON_PREC, BOUTON_SUIV, BOUTON_MENU, NB_SPRITE_REGLES_JEU};
+enum SPRITE_MENU_PRINCIPAL { INTRO , FOND,LANCER, LANCER_HOVER, LANCER_CLIQUE, CHARGER, CHARGER_HOVER, CHARGER_CLIQUE, QUITTER, QUITTER_HOVER, QUITTER_CLIQUE, AIDE, AIDE_HOVER, AIDE_CLIQUE, NB_SPRITE_MENU_PRINCIPAL};
+enum SPRITE_MENU_COMMUNISTE_CAPITALISTE { FOND2, COMMUNISTE, COMMUNISTE_HOVER, COMMUNISTE_CLIQUE, CAPITALISTE, CAPITALISTE_HOVER, CAPITALISTE_CLIQUE ,NB_SPRITE_MENU_COMMUNISTE_CAPITALISTE};
 
 enum SPRITE_BOITE_A_OUTIL {ROUTE_, ROUTE_HOVER, ROUTE_CLIQUE,MAISON_, MAISON_HOVER, MAISON_CLIQUE,ELEC, ELEC_HOVER, ELEC_CLIQUE, EAU, EAU_HOVER, EAU_CLIQUE, DETRUIRE, DETRUIRE_HOVER, DETRUIRE_CLIQUE, VUE1, VUE1_HOVER, VUE1_CLIQUE,VUE2, VUE2_HOVER, VUE2_CLIQUE, POMPIER, POMPIER_HOVER, POMPIER_CLIQUE, PAUSE, PAUSE_HOVER, PAUSE_CLIQUE, NB_SPRITE_TOOL_BOX};
 enum COLOR{ BLACK, WHITE, ORANGE};
@@ -39,21 +36,18 @@ typedef struct Element Element;
 
 
 typedef struct {
-    ALLEGRO_DISPLAY* display;//Ecran
-    ALLEGRO_EVENT_QUEUE* queue;//File d'évènements
-    ALLEGRO_FONT* fonts[5];//Tableau qui contient toutes les polices
-    ALLEGRO_EVENT event;//Evènement
-
-    //Coordonnées de la souris
+    ALLEGRO_DISPLAY* display;
+    ALLEGRO_EVENT_QUEUE* queue;
+    ALLEGRO_FONT* fonts[5];
+    ALLEGRO_EVENT event;
     int coordonneesSourisX;
     int coordonneesSourisY;
-
-    ALLEGRO_TIMER* timer;//Timer 1
-    ALLEGRO_TIMER* chrono;//Timer 2
+    ALLEGRO_TIMER* timer;
+    ALLEGRO_TIMER* chrono;
     int compteurSecondes; //Permet de savoir le nombre de secondes écoulées pour le chrono
     int compteur;
-    ALLEGRO_SAMPLE* music[10];//Tableau qui contient tous les sons du jeu
-    ALLEGRO_COLOR color[3];//Tableau qui contient toutes les couleurs du jeu
+    ALLEGRO_SAMPLE* music[10]; //tableau qui contient tous les sons du jeu
+    ALLEGRO_COLOR color[3];
 
 } Allegro;
 
@@ -94,6 +88,7 @@ typedef struct {
 } InteractionExterieure;
 
 typedef struct {
+
     Bitmap tabSpriteMenu[NB_SPRITE_MENU_PRINCIPAL];
     bool menuPrincipalIntro;
     bool menuPrincipal; //permet de rester dans la boucle de cette page
@@ -120,24 +115,10 @@ typedef struct PageMenuCapitalisteCommuniste {
     bool communisteHover;
     bool communisteClique;
 } PageMenuCapitalisteCommuniste;
-/*
-typedef struct {
-    Bitmap tabSpriteMenu[NB_SPRITE_REGLES_JEU];
-    bool menuReglesJeu;
-    bool ReglesJeu1;
-    bool ReglesJeu2;
-    bool retourMenuCLique;
-    bool retourMenuHover;
-    bool precedentClique;
-    bool precedentHover;
-    bool suivantClique;
-    bool suivantHover;
-}PageReglesJeu;*/
 
 typedef struct {
     PageMenuPrincipal menuPrincipal;
     PageMenuCapitalisteCommuniste menuCapitalisteCommuniste;
-    //PageReglesJeu reglesJeu;
 }Pages;
 
 typedef struct {
@@ -229,7 +210,7 @@ typedef struct {
 } Habitation;
 
 typedef struct {
-    CoordsXY coordXY[NBR_COORDS_XY_INFRA];
+    CoordsXY coordXY[15];
     int typeBatiment;
     int capaciteElectrique;
     int capaciteEau;
@@ -262,7 +243,6 @@ typedef struct {
     //Variables relatives au temps de jeu
     int secondes;//Secondes actuelles
     int minutes;//Minutes de jeu actuelles
-    int dateLancementTempsJeu;//Date à laquelle la partie commence
     bool zeroDevantMinutes;//Paramétrage de l'affichage du temps de jeu
     bool zeroDevantSecondes;//Paramétrage de l'affichage du temps de jeu
 

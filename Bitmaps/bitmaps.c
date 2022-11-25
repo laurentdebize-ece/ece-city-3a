@@ -12,11 +12,6 @@ void bitmapFeu (Simcity* simcity){
 void bitmapCreateMenuPrincipalIntro(Simcity* simcity){
     simcity->tabBitmap[BITMAP_MENU_PRINCIPAL_INTRO] = al_load_bitmap("../Sources/img/menuPrincipalIntro.png");
 }
-/*
-void bitmapCreateRegleJeu(Simcity* simcity) {
-    simcity->tabBitmap[BITMAP_REGLES1] = al_load_bitmap("../Sources/img/ReglesJeu/reglesJeu1.png");
-    simcity->tabBitmap[BITMAP_REGLES2] = al_load_bitmap("../Sources/img/ReglesJeu/reglesJeu2.png");
-}*/
 
 void bitmapCreateBoutonAide(Simcity* simcity){
     simcity->tabBitmap[BITMAP_BOUTON_AIDE] = al_load_bitmap("../Sources/img/bouton_aide.png");
@@ -61,7 +56,7 @@ void bitmapCreateAll(Simcity* simcity){
     bitmapCreateMenuCapitalisteCommuniste(simcity);
     bitmapCreateBoutonsMenuCapitalisteCommuniste(simcity);
     bitmapCreateBoutonAide(simcity);
-    //bitmapCreateRegleJeu(simcity);
+
     bitmapFeu(simcity);
 
 }
@@ -89,11 +84,6 @@ void libererBitmapMenuPrincipalIntro(Simcity* simcity){
 void libererBitmapBoutonMenuPrincipal(Simcity* simcity){
     al_destroy_bitmap(simcity->tabBitmap[BITMAP_BOUTTON_MENU_PRINCIPAL]);
 }
-/*
-void libererBitmapCreateRegleJeu(Simcity* simcity) {
-    al_destroy_bitmap(simcity->tabBitmap[BITMAP_REGLES1]);
-    al_destroy_bitmap(simcity->tabBitmap[BITMAP_REGLES2]);
-}*/
 
 void libererBitmapToolbox (Simcity* simcity){
     al_destroy_bitmap(simcity->tabBitmap[BITMAP_TOOLBOX]);
@@ -121,7 +111,6 @@ void libererBitmapAll(Simcity* simcity){
     libererBitmapMenuPrincipal(simcity);
     libererBitmapMenuPrincipalIntro(simcity);
     libererBitmapBoutonMenuPrincipal(simcity);
-    //libererBitmapCreateRegleJeu(simcity);
     libererBitmapToolbox(simcity);
     libererBitmapBarreCompteurs(simcity);
     libererBitmapBoutonPause(simcity);

@@ -57,10 +57,10 @@ void construireHabitation(Simcity* simcity) {
         simcity->tabHabitation[simcity->nbHabitations].compteurEvolution = 0;//On initialise le compteur evolution à 0 (terrain vague)
         printf("evol%d\n", simcity->tabHabitation[simcity->nbHabitations].compteurEvolution);
     }
-    if(simcity->tabHabitation[simcity->nbHabitations].dateCreation != -1) {//Si le batiment a été créé (s'il y a une date de création)
+    if(simcity->tabHabitation[simcity->nbHabitations].dateCreation != -1) {//Si le batiment a été créé (si il a une date de création)
         simcity->tabHabitation[simcity->nbHabitations].timerCree = TRUE;//Le timer est marqué comme créé
-    } else {printf("ERREUR lancement timer batiment.\n");}//Message d'erreur si problème dans la creation du bâtiment
-    simcity->nbHabitations++;//on ajoute une habitation supplémentaire à notre nombre d'habitations
+    } else {printf("ERREUR lancement timer batiment.\n");}//Message d'erreur si probleme dans la creation du batiment
+    simcity->nbHabitations++;//on ajoute une habitation suplémentaire à notre nombre d'habitation
 }
 
 void construireInfrastructure(Simcity* simcity){

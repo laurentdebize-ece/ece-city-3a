@@ -13,7 +13,6 @@
 #include "ToolBox/toolbox.h"
 #include "Banque/banque.h"
 #include "Batiments/batiments.h"
-#include "Pages/ReglesJeu/reglesJeu.h"
 
 
 void initAll(Simcity* simcity){
@@ -33,7 +32,8 @@ void initAll(Simcity* simcity){
 
 void boucleTest(Simcity* simcity){
 
-    simcity->timers.dateLancementTempsJeu = (int) al_get_timer_count(simcity->allegro.chrono);//Enregistrement de la date de lancement du jeu
+    /*al_set_timer_count(simcity->allegro.timer, 0);
+    al_set_timer_count(simcity->allegro.chrono, 0);*/
 
     while (!simcity->endGame) {
 
@@ -90,8 +90,8 @@ void boucleTest(Simcity* simcity){
             case ALLEGRO_EVENT_TIMER:{
                 timerDate(simcity);
                 timerTempsJeu(simcity);
-                timerBatiment(simcity);
                 payerBanque(simcity);
+                timerBatiment(simcity);
                 nombreHabitantsTot(simcity);
                 simcity->dessin = true;
 
@@ -213,68 +213,17 @@ void boucletestMenuCommunisteCapitaliste(Simcity* simcity){
         }
     }
 }
-
-/*
-void boucletestReglesJeu(Simcity* simcity){
-    while (!simcity->pages.menuPrincipal.aideClique) {
-
-        al_wait_for_event(simcity->allegro.queue, &simcity->allegro.event);
-
-
-        switch (simcity->allegro.event.type) {
-
-            case ALLEGRO_EVENT_DISPLAY_CLOSE:{
-                simcity->endGame = true;
-                simcity->pages.menuPrincipal.aideClique = true;
-                break;
-            }
-            case ALLEGRO_EVENT_MOUSE_AXES:{
-                simcity->allegro.coordonneesSourisX = simcity->allegro.event.mouse.x;
-                simcity->allegro.coordonneesSourisY = simcity->allegro.event.mouse.y;
-                calculHoverComCap(simcity);
-                simcity->dessin = true;
-                break;
-            }
-            case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:{
-                switch (simcity->allegro.event.mouse.button) {
-                    case 1:{
-                        //calculHoverComCap(simcity);
-                        //detectionCliqueMenuCapCom(simcity);
-                        //simcity->dessin = true;
-                        break;
-                    }
-                }
-                break;
-            }
-            case ALLEGRO_EVENT_MOUSE_BUTTON_UP:{
-                break;
-            }
-            case ALLEGRO_EVENT_TIMER:{
-
-                simcity->dessin = true;
-
-                if (simcity->dessin) {
-//                    afficherReglesJeu(simcity);
-                    al_flip_display();
-                    simcity->dessin = false;
-                }
-                break;
-            }
-        }
-    }
-}*/
-
 // main antoine pour tester ses fonctions
 void mainAntoine() {
     Simcity simcity = {0};
     initAll(&simcity);
     boucletestMenuPrincipal(&simcity);
     boucletestMenuCommunisteCapitaliste(&simcity);
-    //boucletestReglesJeu(&simcity);
     //simcity.toolBox.routeEnMain = 1;
     //simcity.toolBox.terrainVagueEnMain = 1;
     boucleTest(&simcity);
     libererAll(&simcity);
+    printf("test");
 
 }
 
