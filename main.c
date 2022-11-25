@@ -65,11 +65,11 @@ void boucleTest(Simcity* simcity){
             case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:{
                 switch (simcity->allegro.event.mouse.button) {
                     case 1:{
-                        poserBatiment(simcity);
                         detruire(simcity);
+                        poserBatiment(simcity);
                         detectionCliqueToolBox(simcity);
                         pauseTimerSouris(simcity);
-                        cliquer(simcity);
+                        //cliquer(simcity);
                         simcity->dessin = true;
                         break;
                     }
