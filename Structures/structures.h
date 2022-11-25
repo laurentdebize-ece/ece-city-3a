@@ -20,7 +20,8 @@
 
 #define NBR_MAX_HAB 50 //const nombre max de batiments possible
 #define NBR_MAX_INFRA 15 //const nombre max de batiments possible
-#define NBR_COORDS_XY_HAB 7
+#define NBR_COORDS_XY_HAB 8 //const taille du contour d'une habitation
+#define NBR_COORDS_XY_INFRA 16 //const taille du contour d'une infrastructure
 
 enum BITMAP{BITMAP_MAP, BITMAP_TOOLBOX,BITMAP_BARRECOMPTEURS, BITMAP_BOUTON_PAUSE ,BITMAP_MENU_PRINCIPAL_INTRO, BITMAP_MENU_PRINCIPAL, BITMAP_MENU_COMMUNISTE_CAPITALISTE, BITMAP_BOUTONS_MENU_COMMUNISTE_CAPITALISTE, BITMAP_BOUTTON_MENU_PRINCIPAL, BITMAP_FEU,NB_BITMAP};
 enum SPRITE_MAP {HERBE, HOVER_TILE,  ROUTE, TERRAIN_VAGUE, CABANE, MAISON, IMMEUBLE, GRATTE_CIEL,ELEC_DROIT, ELEC_COTE, EAU_DROIT, EAU_COTE, POMPIER_DROIT, POMPIER_COTE,NB_SPRITE_MAP};
@@ -32,18 +33,21 @@ enum COLOR{ BLACK, WHITE, ORANGE};
 enum TYPE_BLOC{TYPE_HERBE,TYPE_ROUTE,TYPE_TERRAIN_VAGUE,TYPE_CABANE,TYPE_MAISON,TYPE_IMMEUBLE,TYPE_GRATTE_CIEL, TYPE_ELEC_DROIT, TYPE_ELEC_COTE, TYPE_EAU_DROIT, TYPE_EAU_COTE, TYPE_POMPIER_DROIT, TYPE_POMPIER_COTE, NB_TYPE_BLOC};
 
 typedef struct {
-    ALLEGRO_DISPLAY* display;
-    ALLEGRO_EVENT_QUEUE* queue;
-    ALLEGRO_FONT* fonts[5];
-    ALLEGRO_EVENT event;
+    ALLEGRO_DISPLAY* display;//Ecran
+    ALLEGRO_EVENT_QUEUE* queue;//File d'évènements
+    ALLEGRO_FONT* fonts[5];//Tableau qui contient toutes les polices
+    ALLEGRO_EVENT event;//Evènement
+
+    //Coordonnées de la souris
     int coordonneesSourisX;
     int coordonneesSourisY;
-    ALLEGRO_TIMER* timer;
-    ALLEGRO_TIMER* chrono;
+
+    ALLEGRO_TIMER* timer;//Timer 1
+    ALLEGRO_TIMER* chrono;//Timer 2
     int compteurSecondes; //Permet de savoir le nombre de secondes écoulées pour le chrono
     int compteur;
-    ALLEGRO_SAMPLE* music[10]; //tableau qui contient tous les sons du jeu
-    ALLEGRO_COLOR color[3];
+    ALLEGRO_SAMPLE* music[10];//Tableau qui contient tous les sons du jeu
+    ALLEGRO_COLOR color[3];//Tableau qui contient toutes les couleurs du jeu
 
 } Allegro;
 
@@ -201,7 +205,7 @@ typedef struct {
 } Habitation;
 
 typedef struct {
-    CoordsXY coordXY[15];
+    CoordsXY coordXY[NBR_COORDS_XY_INFRA];
     int typeBatiment;
     int capaciteElectrique;
     int capaciteEau;
@@ -217,6 +221,7 @@ typedef struct {
     //Variables relatives au temps de jeu
     int secondes;//Secondes actuelles
     int minutes;//Minutes de jeu actuelles
+    int dateLancementTempsJeu;//Date à laquelle la partie commence
     bool zeroDevantMinutes;//Paramétrage de l'affichage du temps de jeu
     bool zeroDevantSecondes;//Paramétrage de l'affichage du temps de jeu
 
