@@ -38,8 +38,7 @@ void timerDate(Simcity* simcity) {
 void timerTempsJeu(Simcity* simcity) {
     long long compteurChrono = al_get_timer_count(simcity->allegro.chrono);//Récupération de la valeur du chrono (1sec)
     long long compteurTimer = al_get_timer_count(simcity->allegro.timer);//Récupération de la valeur du timer (1/60sec)
-    long long tempsJeu = compteurChrono - simcity->timers.dateLancementTempsJeu;
-    printf("%d", tempsJeu);
+    long long tempsJeu = compteurChrono - simcity->timers.dateLancementTempsJeu;//Calcul du temps de jeu en fonction de la date de lancement de la partie
     bool modulo60 = FALSE;//Initialisation d'un booléen test modulo60
     if (compteurTimer%60 == 0) {//Si le timer est modulo 60
         modulo60 = TRUE;//Le booléen test modulo60 est vrai
