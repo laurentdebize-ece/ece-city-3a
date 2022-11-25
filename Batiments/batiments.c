@@ -11,9 +11,9 @@ void initTabBatiments(Simcity* simcity) {
         simcity->tabHabitation[i].nbHabitants = 0;
         simcity->tabHabitation[i].capaciteElectriqueRecu = 0;
         simcity->tabHabitation[i].capaciteEauRecu = 0;
-        for (int j = 0; j < NBR_MAX_HAB; ++j) {
-            simcity->tabHabitation->coordXY[j].celluleX = -1;
-            simcity->tabHabitation->coordXY[j].celluleY = -1;
+        for (int j = 0; j < NBR_COORDS_XY_HAB; ++j) {
+            simcity->tabHabitation[i].coordXY[j].celluleX = -1;
+            simcity->tabHabitation[i].coordXY[j].celluleY = -1;
         }
     }
     simcity->nbHabitations = 0;//On initialise le nombre d'habitation
@@ -59,7 +59,7 @@ void construireHabitation(Simcity* simcity) {
     if(simcity->tabHabitation[simcity->nbHabitations].dateCreation != -1) {//Si le batiment a été créé (si il a une date de création)
         simcity->tabHabitation[simcity->nbHabitations].timerCree = TRUE;//Le timer est marqué comme créé
     } else {printf("ERREUR lancement timer batiment.\n");}//Message d'erreur si probleme dans la creation du batiment
-    simcity->nbHabitations++;//on ajoute une habitation suplémentaire au notre nombre d'habitation
+    simcity->nbHabitations++;//on ajoute une habitation suplémentaire à notre nombre d'habitation
 }
 
 void construireInfrastructure(Simcity* simcity){

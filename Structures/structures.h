@@ -20,7 +20,7 @@
 
 #define NBR_MAX_HAB 50 //const nombre max de batiments possible
 #define NBR_MAX_INFRA 15 //const nombre max de batiments possible
-#define NBR_COORDS_XY 7
+#define NBR_COORDS_XY_HAB 7
 
 enum BITMAP{BITMAP_MAP, BITMAP_TOOLBOX,BITMAP_BARRECOMPTEURS, BITMAP_BOUTON_PAUSE ,BITMAP_MENU_PRINCIPAL_INTRO, BITMAP_MENU_PRINCIPAL, BITMAP_MENU_COMMUNISTE_CAPITALISTE, BITMAP_BOUTONS_MENU_COMMUNISTE_CAPITALISTE, BITMAP_BOUTTON_MENU_PRINCIPAL, BITMAP_FEU,NB_BITMAP};
 enum SPRITE_MAP {HERBE, HOVER_TILE,  ROUTE, TERRAIN_VAGUE, CABANE, MAISON, IMMEUBLE, GRATTE_CIEL,ELEC_DROIT, ELEC_COTE, EAU_DROIT, EAU_COTE, POMPIER_DROIT, POMPIER_COTE,NB_SPRITE_MAP};
@@ -129,12 +129,10 @@ typedef struct {
     bool cliqueRoute;
     int compteurCheminsX, compteurCheminsY;
     int creationRouteX, creationRouteY;
-
-
 } Map;
 
 typedef struct {
-    Bitmap tabSpriteToolBox[NB_SPRITE_TOOL_BOX];
+    Bitmap tabSpriteToolBox[NB_SPRITE_TOOL_BOX];//Tableau regroupant les sprites de la ToolBox
     bool pauseEnMain;
     bool terrainVagueEnMain;
     bool routeEnMain;
@@ -171,30 +169,34 @@ typedef struct {
 } ToolBox;
 
 typedef struct {
-    CoordsXY coordXY[NBR_COORDS_XY];
-    int typeBatiment;
-    int nbHabitants;
+    CoordsXY coordXY[NBR_COORDS_XY_HAB];//Coordonnées du bâtiment
+    int typeBatiment;//Type de bâtiment (ici 1 car habitation)
+    int nbHabitants;//Nombre d'habitants actuel
 
-    int compteurEvolution;
-    bool evolutionPossible;
-    bool regression;
+    //Variables relatives à l'état d'évolution du bâtiment
+    int compteurEvolution;//Etat d'évolution actuelle
+    bool evolutionPossible;//Test "est-ce que le bâtiment peut évoluer ?"
+    bool regression;//Régression du bâtiment
 
+    //Variables relatives aux prix des différentes infrastructures
     int prixTerrainVague;
     int prixPompier;
     int prixChateauEau;
     int prixElectricite;
     int prixRoute;
 
-    int timerBatiment;
-    bool timerCree;
-    bool isFeu;
-    int dateCreation;
+    //Variables relatives au timer du bâtiment
+    int timerBatiment;//Timer du bâtiment (=temps écoulé depuis sa création)
+    bool timerCree;//Timer du bâtiment lancé (=bâtiment créé)
+    int dateCreation;//Date de création du bâtiment
+
+    bool isFeu;//Test "le bâtiment est eb feu ?"
 
     int capaciteElectriqueMax;//correspond a combien d'elec elle a besoin
     int capaciteEauMax;//correspond a combien d'eau elle a besoin
 
-    int capaciteElectriqueRecu;//correspond a combien d'elec elle recoit au final
-    int capaciteEauRecu;//correspond a combien d'eau elle recoit au final
+    int capaciteElectriqueRecu;//quantité d'électricité reçue
+    int capaciteEauRecu;//quantité d'eau reçue
 
 } Habitation;
 
@@ -208,12 +210,16 @@ typedef struct {
 } Batiment;
 
 typedef struct {
-    int mois;
-    int annee;
-    int secondes;
-    int minutes;
-    bool zeroDevantMinutes;
-    bool zeroDevantSecondes;
+    //Variables relatives à la date fictive
+    int mois;//Mois actuel
+    int annee;//Année actuelle
+
+    //Variables relatives au temps de jeu
+    int secondes;//Secondes actuelles
+    int minutes;//Minutes de jeu actuelles
+    bool zeroDevantMinutes;//Paramétrage de l'affichage du temps de jeu
+    bool zeroDevantSecondes;//Paramétrage de l'affichage du temps de jeu
+
 }Timers;
 
 typedef struct {
