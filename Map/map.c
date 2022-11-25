@@ -908,6 +908,7 @@ void afficherPrevPompier(Simcity* simcity){
     }
 }
 
+
 // fonction generale pour poser les batiments
 void poserBatiment(Simcity *simcity){
     poserTerrainVague(simcity);
