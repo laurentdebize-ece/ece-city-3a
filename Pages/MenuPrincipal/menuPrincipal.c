@@ -262,6 +262,8 @@ void detectionClique(Simcity * simcity){
 
 
 
+
+
 void afficherMenuComCap (Simcity* simcity){
     al_draw_bitmap(*(simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[FOND2].image), 0,0,0);
     al_draw_bitmap_region(*(simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].image), simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteX, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteY, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteLargeur, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteHauteur, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenX, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenY,0);
