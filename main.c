@@ -26,6 +26,8 @@ void initAll(Simcity* simcity){
     initBanque(simcity);
     initTabBatiments(simcity);
     initDataMenuCommunisteCapitaliste(simcity);
+    initDataBoutonAide(simcity);
+
 }
 
 void boucleTest(Simcity* simcity){
@@ -125,6 +127,7 @@ void boucletestMenuPrincipal(Simcity* simcity){
                 simcity->allegro.coordonneesSourisX = simcity->allegro.event.mouse.x;
                 simcity->allegro.coordonneesSourisY = simcity->allegro.event.mouse.y;
                 calculHover(simcity);
+                calculHoverBoutonAide(simcity);
                 simcity->dessin = true;
                 break;
             }
@@ -133,6 +136,8 @@ void boucletestMenuPrincipal(Simcity* simcity){
                     case 1:{
                         calculHover(simcity);
                         detectionClique(simcity);
+                        calculHoverBoutonAide(simcity);
+                        detectionCliqueBoutonAide(simcity);
                         simcity->dessin = true;
                         break;
                     }

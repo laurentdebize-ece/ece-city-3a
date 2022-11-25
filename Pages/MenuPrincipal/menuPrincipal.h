@@ -11,5 +11,11 @@ void calculHover(Simcity * simcity);
 void detectionClique(Simcity * simcity);
 void afficherMenuPrincipal(Simcity* simcity);
 void afficherMenuComCap (Simcity* simcity);
+void initDataBoutonAide (Simcity* simcity);
+void calculHoverBoutonAide (Simcity* simcity);
+void detectionCliqueBoutonAide (Simcity* simcity);
+
+
+
 
 #endif

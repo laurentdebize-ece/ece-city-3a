@@ -135,6 +135,17 @@ void afficherBarreCompteurs (Simcity* simcity) {
     al_draw_bitmap(simcity->tabBitmap[BITMAP_BARRECOMPTEURS],95, 620, 0);
 }
 
+
+void isFeu (Simcity* simcity) {
+    for (int i = 0; i < simcity->nbHabitations; ++i) {
+
+        if(rand() % 2 == 1 && (simcity->tabHabitation[i].compteurEvolution =! 0) && (simcity->tabHabitation[i].compteurEvolution =! 5)){
+            simcity->tabHabitation[i].isFeu = 1;
+        }
+    }
+}
+
+
 void afficherIsFeu (Simcity* simcity) {
     for (int i = 0; i < NBR_MAX_HAB; ++i) {
         if (simcity->tabHabitation[i].isFeu == 1){
@@ -142,6 +153,8 @@ void afficherIsFeu (Simcity* simcity) {
         }
     }
 }
+
+
 
 
 void afficherMap(Simcity* simcity){
@@ -195,7 +208,6 @@ void afficherMap(Simcity* simcity){
         }
     }
     afficherPrevision(simcity);
-    //afficherIsFeu(simcity);
 }
 
 void afficherHoverMap(Simcity* simcity){
@@ -219,12 +231,6 @@ void afficherPrevision(Simcity* simcity){
 
 
 
-
-void isFeu (Simcity* simcity, int i) {
-        if(rand() % 100 == 1){
-            simcity->tabHabitation[i].isFeu = 1;
-        }
-    }
 
 
 
