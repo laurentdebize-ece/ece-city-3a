@@ -1,10 +1,6 @@
 #include "map.h"
-#include "../Structures/structures.h"
 #include "../Timers/timers.h"
-#include "../Banque/banque.h"
-#include "../Batiments//batiments.h"
 #include "../ToolBox/toolbox.h"
-#include "../Banque/banque.h"
 
 void initDataMap(Simcity* simcity){
     for (int x = 0; x < NBCELLULEX; ++x) {
@@ -12,8 +8,8 @@ void initDataMap(Simcity* simcity){
             simcity->map.mapTile[x][y].spriteLargeur = 20;
             simcity->map.mapTile[x][y].spriteHauteur = 20;
             simcity->map.mapTile[x][y].typeBloc = TYPE_HERBE;
-            simcity->map.mapTile[x][y].coordsXY.screenX = 110 + 20 * x;
-            simcity->map.mapTile[x][y].coordsXY.screenY = 0 + 20 * y;
+            simcity->map.mapTile[x][y].coordsXY.screenX = 110 + 20 * (float)x;
+            simcity->map.mapTile[x][y].coordsXY.screenY = 0 + 20 * (float)y;
             simcity->map.mapTile[x][y].coordsXY.celluleX = x;
             simcity->map.mapTile[x][y].coordsXY.celluleY = y;
 
@@ -113,10 +109,10 @@ void bitmapSpriteInit(Simcity* simcity){
 void calculPositionSourisEnCelluleXY(Simcity* simcity) {
     for (int x = 0; x < NBCELLULEX; ++x) {
         for (int y = 0; y < NBCELLULEY; ++y) {
-            if (simcity->allegro.coordonneesSourisX >= simcity->map.mapTile[x][y].coordsXY.screenX && simcity->allegro.coordonneesSourisX <= simcity->map.mapTile[x][y].coordsXY.screenX + simcity->map.mapTile[x][y].spriteLargeur){
+            if ((float)simcity->allegro.coordonneesSourisX >= simcity->map.mapTile[x][y].coordsXY.screenX && (float)simcity->allegro.coordonneesSourisX <= simcity->map.mapTile[x][y].coordsXY.screenX + (float)simcity->map.mapTile[x][y].spriteLargeur){
                 simcity->interactionExterieure.mouse.celluleXY.celluleX = x;
             }
-            if (simcity->allegro.coordonneesSourisY >= simcity->map.mapTile[x][y].coordsXY.screenY && simcity->allegro.coordonneesSourisY <= simcity->map.mapTile[x][y].coordsXY.screenY + simcity->map.mapTile[x][y].spriteHauteur){
+            if ((float)simcity->allegro.coordonneesSourisY >= simcity->map.mapTile[x][y].coordsXY.screenY && (float)simcity->allegro.coordonneesSourisY <= simcity->map.mapTile[x][y].coordsXY.screenY + (float)simcity->map.mapTile[x][y].spriteHauteur){
                 simcity->interactionExterieure.mouse.celluleXY.celluleY = y;
             }
         }
@@ -188,7 +184,7 @@ void afficherMap(Simcity* simcity){
                 al_draw_bitmap_region(*(simcity->map.spriteTile[ROUTE].image), simcity->map.spriteTile[ROUTE].spriteX, simcity->map.spriteTile[ROUTE].spriteY, simcity->map.spriteTile[ROUTE].spriteLargeur, simcity->map.spriteTile[ROUTE].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
             }
             else if (simcity->map.mapTile[x][y].typeBloc == TYPE_ELEC_DROIT){
-                al_draw_bitmap_region(*(simcity->map.spriteTile[ELEC_DROIT].image), simcity->map.spriteTile[ELEC_DROIT].spriteX, simcity->map.spriteTile[ELEC_DROIT].spriteY, simcity->map.spriteTile[ELEC_DROIT].spriteLargeur, simcity->map.spriteTile[ELEC_DROIT].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
+                al_draw_bitmap_region(*(simcity->map.spriteTile[ELEC_DROIT].image), simcity->map.spriteTile[ELEC_DROIT].spriteX, simcity->map.spriteTile[ELEC_DROIT].spriteY, simcity->map.spriteTile[ELEC_DROIT].spriteLargeur, simcity->map.spriteTile[ELEC_DROIT].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX, simcity->map.mapTile[x][y].coordsXY.screenY,0);
             }
             else if (simcity->map.mapTile[x][y].typeBloc == TYPE_ELEC_COTE){
                 al_draw_bitmap_region(*(simcity->map.spriteTile[ELEC_COTE].image), simcity->map.spriteTile[ELEC_COTE].spriteX, simcity->map.spriteTile[ELEC_COTE].spriteY, simcity->map.spriteTile[ELEC_COTE].spriteLargeur, simcity->map.spriteTile[ELEC_COTE].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);

@@ -55,7 +55,6 @@ void construireHabitation(Simcity* simcity) {
         simcity->tabHabitation[simcity->nbHabitations].dateCreation = (int) al_get_timer_count(simcity->allegro.chrono);//On enregistre la date de création du batiment
 
         simcity->tabHabitation[simcity->nbHabitations].compteurEvolution = 0;//On initialise le compteur evolution à 0 (terrain vague)
-        printf("evol%d\n", simcity->tabHabitation[simcity->nbHabitations].compteurEvolution);
     }
     if(simcity->tabHabitation[simcity->nbHabitations].dateCreation != -1) {//Si le batiment a été créé (si il a une date de création)
         simcity->tabHabitation[simcity->nbHabitations].timerCree = TRUE;//Le timer est marqué comme créé

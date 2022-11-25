@@ -1,5 +1,4 @@
 #include "bitmaps.h"
-#include "../Structures/structures.h"
 
 void bitmapCreateMap(Simcity* simcity){
     simcity->tabBitmap[BITMAP_MAP] = al_load_bitmap("../Sources/img/tiles.png");

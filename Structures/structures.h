@@ -20,7 +20,8 @@
 
 #define NBR_MAX_HAB 50 //const nombre max de batiments possible
 #define NBR_MAX_INFRA 15 //const nombre max de batiments possible
-#define NBR_COORDS_XY_HAB 7
+#define NBR_COORDS_XY_HAB 8 //taille du contour d'une habitation
+#define NBR_COORDS_XY_INFRA 16 //taille du contour d'une infrastructure
 
 enum BITMAP{BITMAP_MAP, BITMAP_TOOLBOX,BITMAP_BARRECOMPTEURS, BITMAP_BOUTON_PAUSE ,BITMAP_MENU_PRINCIPAL_INTRO, BITMAP_MENU_PRINCIPAL, BITMAP_MENU_COMMUNISTE_CAPITALISTE, BITMAP_BOUTONS_MENU_COMMUNISTE_CAPITALISTE, BITMAP_BOUTON_AIDE, BITMAP_FEU,  BITMAP_BOUTTON_MENU_PRINCIPAL,NB_BITMAP};
 enum SPRITE_MAP {HERBE, HOVER_TILE,  ROUTE, TERRAIN_VAGUE, CABANE, MAISON, IMMEUBLE, GRATTE_CIEL,ELEC_DROIT, ELEC_COTE, EAU_DROIT, EAU_COTE, POMPIER_DROIT, POMPIER_COTE,NB_SPRITE_MAP};
@@ -53,13 +54,13 @@ typedef struct {
 
 typedef struct {
     ALLEGRO_BITMAP** image;//pointeur sur sprite de skin de personnages
-    int spriteX, spriteY, spriteHauteur, spriteLargeur;//Position de l'image dans le sprite
-    int screenX, screenY, screenXFixe, screenYFixe;//Position sur l'écran
+    float spriteX, spriteY, spriteHauteur, spriteLargeur;//Position de l'image dans le sprite
+    float screenX, screenY, screenXFixe, screenYFixe;//Position sur l'écran
 
 } Bitmap;
 
 typedef struct {
-    int screenX, screenY; //Position sur l'écran
+    float screenX, screenY; //Position sur l'écran
     int celluleX, celluleY; //Position transcrite en cellule (en fonction des tailles de tuile)
 
 } CoordsXY;
@@ -210,7 +211,7 @@ typedef struct {
 } Habitation;
 
 typedef struct {
-    CoordsXY coordXY[15];
+    CoordsXY coordXY[NBR_COORDS_XY_INFRA];
     int typeBatiment;
     int capaciteElectrique;
     int capaciteEau;
