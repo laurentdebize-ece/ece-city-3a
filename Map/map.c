@@ -208,6 +208,7 @@ void afficherMap(Simcity* simcity){
         }
     }
     afficherPrevision(simcity);
+    //afficherIsFeu(simcity);
 }
 
 void afficherHoverMap(Simcity* simcity){
@@ -227,14 +228,6 @@ void afficherPrevision(Simcity* simcity){
     afficherPrevEau(simcity);
     afficherPrevPompier(simcity);
 }
-
-
-
-
-
-
-
-
 
 bool collerAlaRouteHab(Simcity* simcity){
 
@@ -933,7 +926,9 @@ void detruire(Simcity *simcity){
 void cliquer(Simcity* simcity){
     for (int i = 0; i < NBR_MAX_HAB; ++i) {
         for (int j = 0; j < 8; ++j) {
-            if (simcity->outOfBorder && simcity->allegro.event.mouse.button == 1 && simcity->tabHabitation[i].coordXY[j].celluleX == simcity->interactionExterieure.mouse.celluleXY.celluleX && simcity->tabHabitation[i].coordXY[j].celluleY == simcity->interactionExterieure.mouse.celluleXY.celluleY){
+            if (simcity->outOfBorder && simcity->allegro.event.mouse.button == 1
+            && simcity->tabHabitation[i].coordXY[j].celluleX == simcity->interactionExterieure.mouse.celluleXY.celluleX
+            && simcity->tabHabitation[i].coordXY[j].celluleY == simcity->interactionExterieure.mouse.celluleXY.celluleY){
                 printf("Habitation : %d\n", i);
             }
         }
@@ -966,11 +961,10 @@ void *lire_graphe( Simcity *simcity){
 int fileVide(t_file *f) {
     return f->queue == NULL && f->tete == NULL;
 }
-void enfiler(t_file *f, CoordsXY *s0) {
+void enfiler(t_file *f, CaseBFS *caseBFS) {
     pmaillon maillon = NULL;
     maillon = (pmaillon) malloc(sizeof(struct maillon));
-    maillon->num.celluleX = s0->celluleX;
-    maillon->num.celluleY = s0->celluleY;
+    maillon->caseBfs = *caseBFS;
     if (fileVide(f)) {
         f->queue = f->tete = maillon;
     } else {
@@ -978,7 +972,7 @@ void enfiler(t_file *f, CoordsXY *s0) {
         f->queue = maillon;
     }
 };
-CoordsXY defiler(t_file *f) {
+CaseBFS defiler(t_file *f) {
 
     t_maillon *pMaillon = f->tete;
 
@@ -988,7 +982,7 @@ CoordsXY defiler(t_file *f) {
     } else {
         f->tete = f->tete->suiv;
     }
-    CoordsXY numSommet = pMaillon->num;
+    CaseBFS numSommet = pMaillon->caseBfs;
     free(pMaillon);
     return numSommet;
 };
@@ -998,81 +992,158 @@ void reset_couleur(Simcity *simcity) {
         simcity->graphe.grille[i][j].couleur = 0 ;
 }
 
-CoordsXY *BFSEau(Simcity* simcity){
+ListeAdj *initListAdj(){
+        ListeAdj *listeAdj = malloc(sizeof(*listeAdj));
+        listeAdj->premier = NULL;
+        listeAdj->dernier = NULL;
+        return listeAdj;
+}
+
+void insertionListeAdj(ListeAdj *listeAdj, Habitation *MaMaison, int distance){
+    Element *nouveauMaillon = malloc(sizeof(Element));
+
+    nouveauMaillon->MaMaison = MaMaison;
+    nouveauMaillon->distanceAMonBatiment = distance;
+    nouveauMaillon->suivant = NULL;
+
+    if (listeAdj->premier == NULL){
+        listeAdj->premier = nouveauMaillon;
+    } else {
+        listeAdj->dernier->suivant = nouveauMaillon;
+    }
+    listeAdj->dernier = nouveauMaillon;
+}
+
+//si on pose une nouvelle habitation, on refait le BFS et donc les nouveaux chemins possibles
+//on doit donc avant ca clear la liste chainée pour pas avoir de doublons
+void clearListeAdj(ListeAdj *liste){
+    while(liste->premier != NULL){
+        Element *aSupprimer = liste->premier;
+        liste->premier = liste->premier->suivant;
+        free(aSupprimer);
+    }
+}
+
+void BFSEau(Simcity* simcity){
     //je recup l'ordre du graphe
     lire_graphe(simcity);
-    //je mets toutes les cases du plateau à Blanc
-    reset_couleur(simcity);
-    //je crée mon tableau de predecesseur qui va prendre toutes les coordonnees des cases qui précèdent
-    CoordsXY predecesseur[simcity->graphe.ordre];
-   //je mets ce tableau a vide
-    for(int i = 0; i < simcity->graphe.ordre; ++i){
-        predecesseur[i].celluleX = -1;
-        predecesseur[i].celluleY = -1;
-    }
     // j'init la file
     t_file f ={NULL, NULL};
-    // on parcours tout le tableau de batiments
-    for(int i = 0; i < 16 ; ++i){ // remplacer 16 par la macro apres
+    // on parcourt tout le tableau de batiments
+    for(int i = 0; i < 16; ++i){ // remplacer 16 par la macro apres
+        //je remets toutes les cases du plateau à Blanc
+        reset_couleur(simcity);
+
         //si dans le tab de Batiments, on trouve un chateau d'eau
-        if(simcity->tabInfrastructure[i].typeBatiment == 3) {
+        if (simcity->tabInfrastructure[i].typeBatiment == 3) {
+            CaseBFS departS = { .distance = 0, .coordsXy = simcity->tabInfrastructure[i].coordXY[0] };
+            //on recup la liste d'adja dans la struct du bat pour lequel on lance le BFS
+            ListeAdj* listeAdj = simcity->tabInfrastructure[i].adjacence;
+            clearListeAdj(listeAdj);
             //on marque la case en Gris
             simcity->graphe.grille[simcity->tabInfrastructure[i].coordXY->celluleX][simcity->tabInfrastructure[i].coordXY->celluleY].couleur = 1;
             // on enfile dans notre queue la premiere case : s0 est identifié par les coordonnes de la case
-            enfiler(&f, simcity->tabInfrastructure[i].coordXY);
-            // je crée une variable K qui s'incrementera pour parcourir le tableau de predecesseur
-            int k = 0;
-            //tant que la file n'est pas vide :
-            while(f.tete != NULL){
-                // je recupere les coordonnes du premier element de ma file
-                CoordsXY num = defiler(&f);
-                //je parcours tout les voisins de la case
-                //si le voisin appartient bien au tableau et n'est pas de l'herbe et est marqué en Blanc
-                //je l'enfile dans la file
-                //je le marque en Gris
-                if(num.celluleY > 0 && simcity->graphe.grille[num.celluleX][num.celluleY-1].type != 0 && simcity->graphe.grille[num.celluleX][num.celluleY-1].couleur == 0){
-                    CoordsXY s1;
-                    s1.celluleX = num.celluleX;
-                    s1.celluleY = num.celluleY-1;
-                    predecesseur[k] = num;
-                    k++;
-                    enfiler(&f, &s1);
-                    simcity->graphe.grille[s1.celluleX][s1.celluleY].couleur = 1;
-                }
-                if(num.celluleY < NBCELLULEY && simcity->graphe.grille[num.celluleX][num.celluleY+1].type != 0 && simcity->graphe.grille[num.celluleX][num.celluleY+1].couleur == 0){
-                    CoordsXY s1;
-                    s1.celluleX = num.celluleX;
-                    s1.celluleY = num.celluleY+1;
-                    predecesseur[k] = num;
-                    k++;
-                    enfiler(&f, &s1);
-                    simcity->graphe.grille[s1.celluleX][s1.celluleY].couleur = 1;
-                }
-                if(num.celluleX > 0 && simcity->graphe.grille[num.celluleX-1][num.celluleY].type != 0 && simcity->graphe.grille[num.celluleX-1][num.celluleY].couleur == 0){
-                    CoordsXY s1;
-                    s1.celluleX = num.celluleX-1;
-                    s1.celluleY = num.celluleY;
-                    predecesseur[k] = num;
-                    k++;
-                    enfiler(&f, &s1);
-                    simcity->graphe.grille[s1.celluleX][s1.celluleY].couleur = 1;
-                }
-                if( num.celluleX < NBCELLULEX && simcity->graphe.grille[num.celluleX+1][num.celluleY].type != 0 && simcity->graphe.grille[num.celluleX+1][num.celluleY].couleur == 0){
-                    CoordsXY s1;
-                    s1.celluleX = num.celluleX+1;
-                    s1.celluleY = num.celluleY;
-                    predecesseur[k] = num;
-                    k++;
-                    enfiler(&f, &s1);
-                    simcity->graphe.grille[s1.celluleX][s1.celluleY].couleur = 1;
+            enfiler(&f, &departS);
+
+           //tant que la file n'est pas vide :
+            while(f.tete != NULL) {
+                // je récupère les coordonnes du premier element de ma file
+                CaseBFS num = defiler(&f);
+
+                // si couleur == 2 on ne visite pas
+                if (simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY].couleur == 2)
+                    continue;
+
+                Cellule celluleActuelle = simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY];
+                //printf("coords %d %d %d \n", num.coordsXy.celluleX, num.coordsXy.celluleY, celluleActuelle.type);
+                //enum TYPE_BLOC{TYPE_HERBE,TYPE_ROUTE,TYPE_TERRAIN_VAGUE,TYPE_CABANE,TYPE_MAISON,TYPE_IMMEUBLE,TYPE_GRATTE_CIEL, TYPE_ELEC_DROIT, TYPE_ELEC_COTE, TYPE_EAU_DROIT, TYPE_EAU_COTE, TYPE_POMPIER_DROIT, TYPE_POMPIER_COTE, NB_TYPE_BLOC};
+                switch(celluleActuelle.type){
+
+                    case TYPE_EAU_COTE :
+                    case TYPE_EAU_DROIT :
+                    {
+                        enfilerVoisin(simcity, num, &f);
+                    }
+                        break;
+                    case TYPE_ROUTE :
+                    {
+                        enfilerVoisin(simcity, num, &f);
+                    }
+                        break;
+                    case TYPE_TERRAIN_VAGUE :
+                    case TYPE_CABANE :
+                    case TYPE_MAISON :
+                    case TYPE_IMMEUBLE :
+                    case TYPE_GRATTE_CIEL :
+                        {
+                            for (int i = 0; i < NBR_MAX_HAB; ++i) {
+                                for (int j = 0; j < 8; ++j) {
+                                    if (simcity->tabHabitation[i].coordXY[j].celluleX == num.coordsXy.celluleX
+                                    && simcity->tabHabitation[i].coordXY[j].celluleY == num.coordsXy.celluleY) {
+                                        for (int k = 0; k < 8; ++k) {
+                                            CoordsXY coords = simcity->tabHabitation[i].coordXY[k];
+                                            simcity->graphe.grille[coords.celluleX][coords.celluleY].couleur = 2;
+                                        }
+                                        insertionListeAdj(listeAdj, &simcity->tabHabitation[i], num.distance);
+                                    }
+                                }
+                            }
+                        }
+                            break;
                 }
                 //je marque en Noir le sommet que j'ai fini de visiter
-                simcity->graphe.grille[num.celluleX][num.celluleY].couleur = 2;
-                for(int l = 0; l < k; l++){
-                    printf("predecesseur de %d : %d %d\n", l, predecesseur[l].celluleX, predecesseur[l].celluleY);
-                }
+                simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY].couleur = 2;
+            }
+
+            struct Element *actuel = listeAdj->premier;
+            while (actuel != NULL)
+            {
+                printf("Habitation %x | Distance %d \n", actuel->MaMaison, actuel->distanceAMonBatiment);
+                actuel = actuel->suivant;
             }
         }
     }
-    return predecesseur;
+}
+
+
+void enfilerVoisin(Simcity *simcity, CaseBFS num, t_file *f){
+    //je parcours tous les voisins de la case
+    //si le voisin appartient bien au tableau et n'est pas de l'herbe et est marqué en Blanc
+    //je l'enfile dans la file
+    //je le marque en Gris
+    if (num.coordsXy.celluleY-1 > 0 && simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY-1].type != TYPE_HERBE && simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY-1].couleur == 0){
+        CaseBFS s1;
+        s1.coordsXy.celluleX = num.coordsXy.celluleX;
+        s1.coordsXy.celluleY = num.coordsXy.celluleY-1;
+        s1.distance = num.distance + 1;
+        enfiler(f, &s1);
+        simcity->graphe.grille[s1.coordsXy.celluleX][s1.coordsXy.celluleY].couleur = 1;
+    }
+
+    if (num.coordsXy.celluleY < NBCELLULEY && simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY+1].type != TYPE_HERBE && simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY+1].couleur == 0){
+        CaseBFS s1;
+        s1.coordsXy.celluleX = num.coordsXy.celluleX;
+        s1.coordsXy.celluleY = num.coordsXy.celluleY+1;
+        s1.distance = num.distance + 1;
+        enfiler(f, &s1);
+        simcity->graphe.grille[s1.coordsXy.celluleX][s1.coordsXy.celluleY].couleur = 1;
+    }
+
+    if (num.coordsXy.celluleX-1 > 0 && simcity->graphe.grille[num.coordsXy.celluleX-1][num.coordsXy.celluleY].type != TYPE_HERBE && simcity->graphe.grille[num.coordsXy.celluleX-1][num.coordsXy.celluleY].couleur == 0){
+        CaseBFS s1;
+        s1.coordsXy.celluleX = num.coordsXy.celluleX-1;
+        s1.coordsXy.celluleY = num.coordsXy.celluleY;
+        s1.distance = num.distance + 1;
+        enfiler(f, &s1);
+        simcity->graphe.grille[s1.coordsXy.celluleX][s1.coordsXy.celluleY].couleur = 1;
+    }
+
+    if (num.coordsXy.celluleX < NBCELLULEX && simcity->graphe.grille[num.coordsXy.celluleX+1][num.coordsXy.celluleY].type != TYPE_HERBE && simcity->graphe.grille[num.coordsXy.celluleX+1][num.coordsXy.celluleY].couleur == 0){
+        CaseBFS s1;
+        s1.coordsXy.celluleX = num.coordsXy.celluleX+1;
+        s1.coordsXy.celluleY = num.coordsXy.celluleY;
+        s1.distance = num.distance + 1;
+        enfiler(f, &s1);
+        simcity->graphe.grille[s1.coordsXy.celluleX][s1.coordsXy.celluleY].couleur = 1;
+    }
 }

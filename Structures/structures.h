@@ -31,6 +31,10 @@ enum SPRITE_BOITE_A_OUTIL {ROUTE_, ROUTE_HOVER, ROUTE_CLIQUE,MAISON_, MAISON_HOV
 enum COLOR{ BLACK, WHITE, ORANGE};
 enum TYPE_BLOC{TYPE_HERBE,TYPE_ROUTE,TYPE_TERRAIN_VAGUE,TYPE_CABANE,TYPE_MAISON,TYPE_IMMEUBLE,TYPE_GRATTE_CIEL, TYPE_ELEC_DROIT, TYPE_ELEC_COTE, TYPE_EAU_DROIT, TYPE_EAU_COTE, TYPE_POMPIER_DROIT, TYPE_POMPIER_COTE, NB_TYPE_BLOC};
 
+typedef struct ListeAdj ListeAdj;
+typedef struct Element Element;
+
+
 typedef struct {
     ALLEGRO_DISPLAY* display;
     ALLEGRO_EVENT_QUEUE* queue;
@@ -171,6 +175,8 @@ typedef struct {
 
 } ToolBox;
 
+
+
 typedef struct {
     CoordsXY coordXY[NBR_COORDS_XY_HAB];//Coordonnées du bâtiment
     int typeBatiment;//Type de bâtiment (ici 1 car habitation)
@@ -209,8 +215,25 @@ typedef struct {
     int capaciteElectrique;
     int capaciteEau;
     bool enFeu;
-
+    ListeAdj *adjacence;//liste des adjacents du batiment (centrale ou chateau)
 } Batiment;
+
+///liste chainée pour les adjacences depuis la centrale
+
+struct Element{
+
+    int distanceAMonBatiment;
+    Habitation* MaMaison;//habitation sur laquelle pointe mon element de ma liste chainée d'adjacence de la centrale
+    struct Element *suivant;
+};
+
+
+//structure de controle pour prendre le 1er element
+
+struct ListeAdj {
+    Element *premier;
+    Element *dernier;
+};
 
 typedef struct {
     //Variables relatives à la date fictive
@@ -245,11 +268,18 @@ typedef struct {
 
 /////SOMMET/////
 typedef struct Cellule{
+
+    int *pointeursurHabitation;
+    int *pointeursurBatiment;
+
     CoordsXY coordsXYCellule;
+    struct Cellule* suivant;
     enum TYPE_BLOC type;
     int couleur;
+    //si ma case = maison, alors pointeur vers structurs maison posée dessus
     Habitation habitation;
     Batiment batiment;
+
 }Cellule;
 typedef struct Cellule *pCellule;
 

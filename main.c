@@ -194,6 +194,7 @@ void boucletestMenuCommunisteCapitaliste(Simcity* simcity){
                 }
                 break;
             }
+
             case ALLEGRO_EVENT_MOUSE_BUTTON_UP:{
                 break;
             }
@@ -208,6 +209,7 @@ void boucletestMenuCommunisteCapitaliste(Simcity* simcity){
                 }
                 break;
             }
+
         }
     }
 }

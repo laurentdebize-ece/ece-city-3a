@@ -1,4 +1,5 @@
 #include "batiments.h"
+#include "../Map/map.h"
 
 void initTabBatiments(Simcity* simcity) {
     for (int i = 0; i < NBR_MAX_HAB; ++i) {
@@ -68,6 +69,7 @@ void construireInfrastructure(Simcity* simcity){
         simcity->tabInfrastructure[simcity->nbInfrastructures].capaciteElectrique = CAPACITE_ELECTRIQUE;//On initialise sa capacité électrique de départ
 
         //On enregistre les coordonnées du batiment
+        simcity->tabInfrastructure[simcity->nbInfrastructures].adjacence = initListAdj();
         simcity->tabInfrastructure[simcity->nbInfrastructures].coordXY[0].celluleX = simcity->interactionExterieure.mouse.celluleXY.celluleX;
         simcity->tabInfrastructure[simcity->nbInfrastructures].coordXY[0].celluleY = simcity->interactionExterieure.mouse.celluleXY.celluleY;
 
@@ -117,6 +119,7 @@ void construireInfrastructure(Simcity* simcity){
         simcity->tabInfrastructure[simcity->nbInfrastructures].coordXY[15].celluleY = simcity->interactionExterieure.mouse.celluleXY.celluleY + 5;
 
     }else if (simcity->banque.achatElectricite == 1 && simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_ELEC_DROIT){
+        simcity->tabInfrastructure[simcity->nbInfrastructures].adjacence = initListAdj();
         simcity->tabInfrastructure[simcity->nbInfrastructures].typeBatiment = 2;
         simcity->tabInfrastructure[simcity->nbInfrastructures].capaciteElectrique = CAPACITE_ELECTRIQUE;
 
@@ -169,6 +172,8 @@ void construireInfrastructure(Simcity* simcity){
         simcity->tabInfrastructure[simcity->nbInfrastructures].coordXY[15].celluleY = simcity->interactionExterieure.mouse.celluleXY.celluleY + 3;
     }
     if(simcity->banque.achatChateauEau == 1 && simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_EAU_COTE) {
+
+        simcity->tabInfrastructure[simcity->nbInfrastructures].adjacence = initListAdj();
         simcity->tabInfrastructure[simcity->nbInfrastructures].typeBatiment = 3;
         simcity->tabInfrastructure[simcity->nbInfrastructures].capaciteEau = CAPACITE_EAU;
 
@@ -223,6 +228,7 @@ void construireInfrastructure(Simcity* simcity){
     }else if (simcity->banque.achatChateauEau == 1 && simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_EAU_DROIT){
         simcity->tabInfrastructure[simcity->nbInfrastructures].typeBatiment = 3;
         simcity->tabInfrastructure[simcity->nbInfrastructures].capaciteEau = CAPACITE_EAU;
+        simcity->tabInfrastructure[simcity->nbInfrastructures].adjacence = initListAdj();
 
         simcity->tabInfrastructure[simcity->nbInfrastructures].coordXY[0].celluleX = simcity->interactionExterieure.mouse.celluleXY.celluleX;
         simcity->tabInfrastructure[simcity->nbInfrastructures].coordXY[0].celluleY = simcity->interactionExterieure.mouse.celluleXY.celluleY;
@@ -271,12 +277,6 @@ void construireInfrastructure(Simcity* simcity){
 
         simcity->tabInfrastructure[simcity->nbInfrastructures].coordXY[15].celluleX = simcity->interactionExterieure.mouse.celluleXY.celluleX + 5;
         simcity->tabInfrastructure[simcity->nbInfrastructures].coordXY[15].celluleY = simcity->interactionExterieure.mouse.celluleXY.celluleY + 3;
-
-
-
-
-
-
 
     }
     if(simcity->banque.achatChateauEau == 1) {

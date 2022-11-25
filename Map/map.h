@@ -2,11 +2,14 @@
 #define ECE_CITY_3A_MAP_H
 
 #include "../Structures/structures.h"
+typedef struct CaseBFS{
+    int distance;
+    CoordsXY coordsXy;
+}CaseBFS;
 
 /* Structure d'un maillon */
 typedef struct maillon {
-
-    CoordsXY num;
+    CaseBFS caseBfs;
     struct maillon *suiv;
 } t_maillon;
 
@@ -17,6 +20,8 @@ typedef struct file {
     t_maillon *tete;
     t_maillon *queue;
 } t_file;
+
+
 
 
 void initDataMap(Simcity* simcity);
@@ -57,7 +62,35 @@ void cliquer(Simcity* simcity);
 
 
 //Graphe
-CoordsXY *BFSEau(Simcity* simcity);
+void BFSEau(Simcity* simcity);
 void *lire_graphe( Simcity *simcity);
+void reset_couleur(Simcity *simcity);
+
+CaseBFS defiler(t_file *f);
+void enfiler(t_file *f,  CaseBFS *caseBFS);
+int fileVide(t_file *f);
+
+void clearListeAdj(ListeAdj *liste);
+void insertionListeAdj(ListeAdj *listeAdj, Habitation *MaMaison, int distance);
+ListeAdj *initListAdj();
+void enfilerVoisin(Simcity *simcity, CaseBFS num, t_file *f);
+
+
+struct AdjMaillon_t {
+    Habitation *habitation;
+    int distance;
+    struct AdjMaillon_t *suiv;
+};
+
+typedef struct AdjacencyList {
+    struct AdjMaillon_t *tete;
+    struct AdjMaillon_t *queue;
+} AdjacencyList;
+
+AdjacencyList* allocListe();
+void insertionAdjListe(AdjacencyList *listeAdj, Habitation *MaMaison, int distance);
+void clearAdjListe(AdjacencyList *liste);
+
+
 
 #endif
