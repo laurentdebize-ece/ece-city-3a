@@ -91,6 +91,4 @@ AdjacencyList* allocListe();
 void insertionAdjListe(AdjacencyList *listeAdj, Habitation *MaMaison, int distance);
 void clearAdjListe(AdjacencyList *liste);
 
-
-
 #endif

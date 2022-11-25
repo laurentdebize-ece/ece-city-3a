@@ -1030,7 +1030,7 @@ void BFSEau(Simcity* simcity){
     // j'init la file
     t_file f ={NULL, NULL};
     // on parcourt tout le tableau de batiments
-    for(int i = 0; i < 16; ++i){ // remplacer 16 par la macro apres
+    for(int i = 0; i < NBR_MAX_INFRA ; ++i){ // remplacer 16 par la macro apres
         //je remets toutes les cases du plateau à Blanc
         reset_couleur(simcity);
 
