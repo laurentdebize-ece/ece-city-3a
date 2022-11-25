@@ -354,7 +354,7 @@ void nombreHabitantsTot(Simcity* simcity) {
     for (int i = 0; i < simcity->nbHabitations; ++i) {//On parcourt le tableau d'habitations
         nbHabitantsTot += simcity->tabHabitation[i].nbHabitants;//On ajoute à la variable tampon le nombre d'habitants de chaque habitation
     }
-    simcity->nbHabitants = nbHabitantsTot;//On met à jour le nombre d'habitant total de la ville dans la structure du jeu
+    simcity->nbHabitants = nbHabitantsTot;//On met à jour le nombre d'habitants total de la ville dans la structure du jeu
 }
 ///Fonction affichant le nombre d'habitants total de la ville
 void afficherNbHabitantsTot(Simcity* simcity) {
@@ -363,11 +363,11 @@ void afficherNbHabitantsTot(Simcity* simcity) {
 
 ///Fonction permettant de mettre une habitation en feu
 void isFeu (Simcity* simcity) {
-    for (int i = 0; i < simcity->nbHabitations; ++i) {
-        if(simcity->tabHabitation[i].compteurEvolution >= 1 && simcity->tabHabitation[i].compteurEvolution < 5) {
-            if(rand() % 2 == 0){
-                simcity->tabHabitation[i].isFeu = 1;
-                simcity->tabHabitation[i].evolutionPossible = 0;
+    for (int i = 0; i < simcity->nbHabitations; ++i) {//On parcourt le tableau d'habitations
+        if(simcity->tabHabitation[i].compteurEvolution >= 1 && simcity->tabHabitation[i].compteurEvolution < 5) {//Si le bâtiment d'est ni un terrain vague ni une ruine
+            if(rand() % 2 == 0){//Il a une chance sur ... de prendre feu
+                simcity->tabHabitation[i].isFeu = 1;//On déclare le bâtiment en feu
+                simcity->tabHabitation[i].evolutionPossible = 0;//Le bâtiment ne peut plus évoluer
             }
         }
     }
@@ -377,9 +377,9 @@ void isFeu (Simcity* simcity) {
 }*/
 ///Fonction affichant le bâtiment en feu
 void afficherIsFeu(Simcity* simcity) {
-    for (int i = 0; i < simcity->nbHabitations; ++i) {
-        if (simcity->tabHabitation[i].isFeu == 1){
-            al_draw_bitmap((simcity->tabBitmap[BITMAP_FEU]),simcity->tabHabitation[i].coordXY[0].screenX, simcity->tabHabitation[i].coordXY[0].screenY, 0);
+    for (int i = 0; i < simcity->nbHabitations; ++i) {//On parcourt le tableau d'habitations
+        if (simcity->tabHabitation[i].isFeu == 1){//Si le bâtiment est déclaré en feu
+            al_draw_bitmap((simcity->tabBitmap[BITMAP_FEU]),simcity->tabHabitation[i].coordXY[0].screenX, simcity->tabHabitation[i].coordXY[0].screenY, 0);//On affiche des flammes par dessus
         }
     }
 }
