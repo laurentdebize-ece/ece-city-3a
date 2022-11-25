@@ -29,7 +29,7 @@ enum SPRITE_MENU_PRINCIPAL { INTRO , FOND,LANCER, LANCER_HOVER, LANCER_CLIQUE, C
 enum SPRITE_MENU_COMMUNISTE_CAPITALISTE { FOND2, COMMUNISTE, COMMUNISTE_HOVER, COMMUNISTE_CLIQUE, CAPITALISTE, CAPITALISTE_HOVER, CAPITALISTE_CLIQUE ,NB_SPRITE_MENU_COMMUNISTE_CAPITALISTE};
 
 enum SPRITE_BOITE_A_OUTIL {ROUTE_, ROUTE_HOVER, ROUTE_CLIQUE,MAISON_, MAISON_HOVER, MAISON_CLIQUE,ELEC, ELEC_HOVER, ELEC_CLIQUE, EAU, EAU_HOVER, EAU_CLIQUE, DETRUIRE, DETRUIRE_HOVER, DETRUIRE_CLIQUE, VUE1, VUE1_HOVER, VUE1_CLIQUE,VUE2, VUE2_HOVER, VUE2_CLIQUE, POMPIER, POMPIER_HOVER, POMPIER_CLIQUE, PAUSE, PAUSE_HOVER, PAUSE_CLIQUE, NB_SPRITE_TOOL_BOX};
-enum COLOR{ BLACK, WHITE, ORANGE};
+enum COLOR{ BLACK, WHITE};
 enum TYPE_BLOC{TYPE_HERBE,TYPE_ROUTE,TYPE_TERRAIN_VAGUE,TYPE_CABANE,TYPE_MAISON,TYPE_IMMEUBLE,TYPE_GRATTE_CIEL, TYPE_ELEC_DROIT, TYPE_ELEC_COTE, TYPE_EAU_DROIT, TYPE_EAU_COTE, TYPE_POMPIER_DROIT, TYPE_POMPIER_COTE, NB_TYPE_BLOC};
 
 typedef struct ListeAdj ListeAdj;
@@ -37,18 +37,22 @@ typedef struct Element Element;
 
 
 typedef struct {
-    ALLEGRO_DISPLAY* display;
-    ALLEGRO_EVENT_QUEUE* queue;
-    ALLEGRO_FONT* fonts[5];
-    ALLEGRO_EVENT event;
-    int coordonneesSourisX;
-    int coordonneesSourisY;
-    ALLEGRO_TIMER* timer;
-    ALLEGRO_TIMER* chrono;
-    int compteurSecondes; //Permet de savoir le nombre de secondes écoulées pour le chrono
+    ALLEGRO_DISPLAY* display;//écran
+    ALLEGRO_EVENT_QUEUE* queue;//file d'évènements
+    ALLEGRO_FONT* fonts[5];//polices
+    ALLEGRO_EVENT event;//évènement
+    ALLEGRO_SAMPLE* music[10];//tableau qui contient tous les sons du jeu
+    ALLEGRO_COLOR color[2];//tableau qui contient toutes les couleurs du jeu
+
+    //Variables relatives aux coordonnées de la souris
+    int coordonneesSourisX;//coordonnées selon x
+    int coordonneesSourisY;//coordonnées selon y
+
+    //Variables relatives aux timers
+    ALLEGRO_TIMER* timer;//timer 1
+    ALLEGRO_TIMER* chrono;//timer 2
+    int compteurSecondes;//Permet de savoir le nombre de secondes écoulées pour le chrono
     int compteur;
-    ALLEGRO_SAMPLE* music[10]; //tableau qui contient tous les sons du jeu
-    ALLEGRO_COLOR color[3];
 
 } Allegro;
 
@@ -211,11 +215,10 @@ typedef struct {
 } Habitation;
 
 typedef struct {
-    CoordsXY coordXY[NBR_COORDS_XY_INFRA];
-    int typeBatiment;
-    int capaciteElectrique;
-    int capaciteEau;
-    bool enFeu;
+    CoordsXY coordXY[NBR_COORDS_XY_INFRA];//coordonnées de l'infrastructure
+    int typeBatiment;//type d'infrastructure
+    int capaciteElectrique;//capacité électrique (si centrale électrique)
+    int capaciteEau;//capacité en eau (si château d'eau)
     ListeAdj *adjacence;//liste des adjacents du batiment (centrale ou chateau)
 } Batiment;
 
