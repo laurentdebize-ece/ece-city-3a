@@ -962,6 +962,8 @@ int fileVide(t_file *f) {
     return f->queue == NULL && f->tete == NULL;
 }
 void enfiler(t_file *f, CaseBFS *caseBFS) {
+
+
     pmaillon maillon = NULL;
     maillon = (pmaillon) malloc(sizeof(struct maillon));
     maillon->caseBfs = *caseBFS;
