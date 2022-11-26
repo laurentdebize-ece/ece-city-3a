@@ -294,7 +294,7 @@ void BFSEau(Simcity* simcity){
     // j'init la file
     t_file f ={NULL, NULL};
     // on parcourt tout le tableau de batiments
-    for(int i = 0; i < NBR_MAX_INFRA ; ++i){ // remplacer 16 par la macro apres
+    for(int i = 0; i < simcity->nbInfrastructures ; ++i){ // remplacer 16 par la macro apres
         //je remets toutes les cases du plateau à Blanc
         reset_couleur(simcity);
 
@@ -342,7 +342,7 @@ void BFSEau(Simcity* simcity){
                     case TYPE_IMMEUBLE :
                     case TYPE_GRATTE_CIEL :
                     {
-                        for (int i = 0; i < NBR_MAX_HAB; ++i) {
+                        for (int i = 0; i < simcity->nbHabitations; ++i) {
                             for (int j = 0; j < 8; ++j) {
                                 if (simcity->tabHabitation[i].coordXY[j].celluleX == num.coordsXy.celluleX
                                     && simcity->tabHabitation[i].coordXY[j].celluleY == num.coordsXy.celluleY) {
@@ -384,7 +384,7 @@ void BFSElec(Simcity* simcity){
     // j'init la file
     t_file f ={NULL, NULL};
     // on parcourt tout le tableau de batiments
-    for(int i = 0; i < NBR_MAX_INFRA ; ++i){ // remplacer 16 par la macro apres
+    for(int i = 0; i < simcity->nbInfrastructures ; ++i){ // remplacer 16 par la macro apres
         //je remets toutes les cases du plateau à Blanc
         reset_couleur(simcity);
 
@@ -432,7 +432,7 @@ void BFSElec(Simcity* simcity){
                     case TYPE_IMMEUBLE :
                     case TYPE_GRATTE_CIEL :
                     {
-                        for (int i = 0; i < NBR_MAX_HAB; ++i) {
+                        for (int i = 0; i < simcity->nbHabitations; ++i) {
                             for (int j = 0; j < 8; ++j) {
                                 if (simcity->tabHabitation[i].coordXY[j].celluleX == num.coordsXy.celluleX
                                     && simcity->tabHabitation[i].coordXY[j].celluleY == num.coordsXy.celluleY) {
@@ -474,7 +474,7 @@ void BFSPompier(Simcity* simcity){
     // j'init la file
     t_file f ={NULL, NULL};
     // on parcourt tout le tableau de batiments
-    for(int i = 0; i < NBR_MAX_INFRA ; ++i){ // remplacer 16 par la macro apres
+    for(int i = 0; i < simcity->nbInfrastructures ; ++i){ // remplacer 16 par la macro apres
         //je remets toutes les cases du plateau à Blanc
         reset_couleur(simcity);
 
@@ -522,7 +522,7 @@ void BFSPompier(Simcity* simcity){
                     case TYPE_IMMEUBLE :
                     case TYPE_GRATTE_CIEL :
                     {
-                        for (int i = 0; i < NBR_MAX_HAB; ++i) {
+                        for (int i = 0; i < simcity->nbHabitations; ++i) {
                             for (int j = 0; j < 8; ++j) {
                                 if (simcity->tabHabitation[i].coordXY[j].celluleX == num.coordsXy.celluleX
                                     && simcity->tabHabitation[i].coordXY[j].celluleY == num.coordsXy.celluleY) {
@@ -564,7 +564,7 @@ void BFSPompier(Simcity* simcity){
 
 
 void calculCapaciteElec(Simcity* simcity){
-    for(int i = 0; i < NBR_MAX_INFRA ; ++i){
+    for(int i = 0; i < simcity->nbInfrastructures ; ++i){
         if (simcity->tabInfrastructure[i].typeBatiment == 2) {
             ListeAdj* listeAdj = simcity->tabInfrastructure[i].adjacence;
             struct Element *actuel = listeAdj->premier;
@@ -577,7 +577,7 @@ void calculCapaciteElec(Simcity* simcity){
     }
 }
 void calculCapaciteEau(Simcity* simcity){
-    for(int i = 0; i < NBR_MAX_INFRA ; ++i){
+    for(int i = 0; i < simcity->nbInfrastructures ; ++i){
         if (simcity->tabInfrastructure[i].typeBatiment == 3) {
             ListeAdj* listeAdj = simcity->tabInfrastructure[i].adjacence;
             struct Element *actuel = listeAdj->premier;
