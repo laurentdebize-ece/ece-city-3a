@@ -121,6 +121,7 @@ void boucletestMenuPrincipal(Simcity* simcity){
             case ALLEGRO_EVENT_DISPLAY_CLOSE:{
                 simcity->endGame = true;
                 simcity->pages.menuPrincipal.menuPrincipal = true;
+                simcity->pages.menuCapitalisteCommuniste.menuCapitalisteCommuniste = true;
                 break;
             }
             case ALLEGRO_EVENT_MOUSE_AXES:{
@@ -174,6 +175,7 @@ void boucletestMenuCommunisteCapitaliste(Simcity* simcity){
             case ALLEGRO_EVENT_DISPLAY_CLOSE:{
                 simcity->endGame = true;
                 simcity->pages.menuCapitalisteCommuniste.menuCapitalisteCommuniste = true;
+                simcity->pages.menuPrincipal.menuPrincipal = true;
                 break;
             }
             case ALLEGRO_EVENT_MOUSE_AXES:{
