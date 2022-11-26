@@ -162,43 +162,43 @@ void afficherMap(Simcity* simcity){
            if (simcity->map.mapTile[x][y].typeBloc == TYPE_HERBE){
                 al_draw_bitmap_region(*(simcity->map.spriteTile[HERBE].image), simcity->map.spriteTile[HERBE].spriteX, simcity->map.spriteTile[HERBE].spriteY, simcity->map.spriteTile[HERBE].spriteLargeur, simcity->map.spriteTile[HERBE].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
            }
-            else if (simcity->map.mapTile[x][y].typeBloc == TYPE_TERRAIN_VAGUE){
+           else if (simcity->map.mapTile[x][y].typeBloc == TYPE_TERRAIN_VAGUE){
                 al_draw_bitmap_region(*(simcity->map.spriteTile[TERRAIN_VAGUE].image), simcity->map.spriteTile[TERRAIN_VAGUE].spriteX, simcity->map.spriteTile[TERRAIN_VAGUE].spriteY, simcity->map.spriteTile[TERRAIN_VAGUE].spriteLargeur, simcity->map.spriteTile[TERRAIN_VAGUE].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
             }
-            else if (simcity->map.mapTile[x][y].typeBloc == TYPE_CABANE){
+           else if (simcity->map.mapTile[x][y].typeBloc == TYPE_CABANE){
                 al_draw_bitmap_region(*(simcity->map.spriteTile[CABANE].image), simcity->map.spriteTile[CABANE].spriteX, simcity->map.spriteTile[CABANE].spriteY, simcity->map.spriteTile[CABANE].spriteLargeur, simcity->map.spriteTile[CABANE].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
             }
-            else if (simcity->map.mapTile[x][y].typeBloc == TYPE_MAISON){
+           else if (simcity->map.mapTile[x][y].typeBloc == TYPE_MAISON){
                 al_draw_bitmap_region(*(simcity->map.spriteTile[MAISON].image), simcity->map.spriteTile[MAISON].spriteX, simcity->map.spriteTile[MAISON].spriteY, simcity->map.spriteTile[MAISON].spriteLargeur, simcity->map.spriteTile[MAISON].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
             }
-            else if (simcity->map.mapTile[x][y].typeBloc == TYPE_IMMEUBLE){
+           else if (simcity->map.mapTile[x][y].typeBloc == TYPE_IMMEUBLE){
                 al_draw_bitmap_region(*(simcity->map.spriteTile[IMMEUBLE].image), simcity->map.spriteTile[IMMEUBLE].spriteX, simcity->map.spriteTile[IMMEUBLE].spriteY, simcity->map.spriteTile[IMMEUBLE].spriteLargeur, simcity->map.spriteTile[IMMEUBLE].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
             }
-            else if (simcity->map.mapTile[x][y].typeBloc == TYPE_GRATTE_CIEL){
+           else if (simcity->map.mapTile[x][y].typeBloc == TYPE_GRATTE_CIEL){
                 al_draw_bitmap_region(*(simcity->map.spriteTile[GRATTE_CIEL].image), simcity->map.spriteTile[GRATTE_CIEL].spriteX, simcity->map.spriteTile[GRATTE_CIEL].spriteY, simcity->map.spriteTile[GRATTE_CIEL].spriteLargeur, simcity->map.spriteTile[GRATTE_CIEL].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
             }
-            else if (simcity->map.mapTile[x][y].typeBloc == TYPE_ROUTE){
+           else if (simcity->map.mapTile[x][y].typeBloc == TYPE_ROUTE){
                 al_draw_bitmap_region(*(simcity->map.spriteTile[ROUTE].image), simcity->map.spriteTile[ROUTE].spriteX, simcity->map.spriteTile[ROUTE].spriteY, simcity->map.spriteTile[ROUTE].spriteLargeur, simcity->map.spriteTile[ROUTE].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
             }
-            else if (simcity->map.mapTile[x][y].typeBloc == TYPE_ELEC_DROIT){
+           else if (simcity->map.mapTile[x][y].typeBloc == TYPE_ELEC_DROIT){
                 al_draw_bitmap_region(*(simcity->map.spriteTile[ELEC_DROIT].image), simcity->map.spriteTile[ELEC_DROIT].spriteX, simcity->map.spriteTile[ELEC_DROIT].spriteY, simcity->map.spriteTile[ELEC_DROIT].spriteLargeur, simcity->map.spriteTile[ELEC_DROIT].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX, simcity->map.mapTile[x][y].coordsXY.screenY,0);
             }
-            else if (simcity->map.mapTile[x][y].typeBloc == TYPE_ELEC_COTE){
+           else if (simcity->map.mapTile[x][y].typeBloc == TYPE_ELEC_COTE){
                 al_draw_bitmap_region(*(simcity->map.spriteTile[ELEC_COTE].image), simcity->map.spriteTile[ELEC_COTE].spriteX, simcity->map.spriteTile[ELEC_COTE].spriteY, simcity->map.spriteTile[ELEC_COTE].spriteLargeur, simcity->map.spriteTile[ELEC_COTE].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
             }
-            else if (simcity->map.mapTile[x][y].typeBloc == TYPE_EAU_DROIT){
+           else if (simcity->map.mapTile[x][y].typeBloc == TYPE_EAU_DROIT){
                 al_draw_bitmap_region(*(simcity->map.spriteTile[EAU_DROIT].image), simcity->map.spriteTile[EAU_DROIT].spriteX, simcity->map.spriteTile[EAU_DROIT].spriteY, simcity->map.spriteTile[EAU_DROIT].spriteLargeur, simcity->map.spriteTile[EAU_DROIT].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
             }
-            else if (simcity->map.mapTile[x][y].typeBloc == TYPE_EAU_COTE){
+           else if (simcity->map.mapTile[x][y].typeBloc == TYPE_EAU_COTE){
                 al_draw_bitmap_region(*(simcity->map.spriteTile[EAU_COTE].image), simcity->map.spriteTile[EAU_COTE].spriteX, simcity->map.spriteTile[EAU_COTE].spriteY, simcity->map.spriteTile[EAU_COTE].spriteLargeur, simcity->map.spriteTile[EAU_COTE].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
             }
-            else if (simcity->map.mapTile[x][y].typeBloc == TYPE_POMPIER_DROIT){
+           else if (simcity->map.mapTile[x][y].typeBloc == TYPE_POMPIER_DROIT){
                 al_draw_bitmap_region(*(simcity->map.spriteTile[POMPIER_DROIT].image), simcity->map.spriteTile[POMPIER_DROIT].spriteX, simcity->map.spriteTile[POMPIER_DROIT].spriteY, simcity->map.spriteTile[POMPIER_DROIT].spriteLargeur, simcity->map.spriteTile[POMPIER_DROIT].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
             }
-            else if (simcity->map.mapTile[x][y].typeBloc == TYPE_POMPIER_COTE){
+           else if (simcity->map.mapTile[x][y].typeBloc == TYPE_POMPIER_COTE){
                 al_draw_bitmap_region(*(simcity->map.spriteTile[POMPIER_COTE].image), simcity->map.spriteTile[POMPIER_COTE].spriteX, simcity->map.spriteTile[POMPIER_COTE].spriteY, simcity->map.spriteTile[POMPIER_COTE].spriteLargeur, simcity->map.spriteTile[POMPIER_COTE].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
             }
-            else if (simcity->map.mapTile[x][y].typeBloc == TYPE_RUINE){
+           else if (simcity->map.mapTile[x][y].typeBloc == TYPE_RUINE){
                 al_draw_bitmap(simcity->tabBitmap[BITMAP_TILE_RUINE], simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
             }
         }
