@@ -1,5 +1,4 @@
 #include "menuPrincipal.h"
-#include "../../Structures/structures.h"
 
 void initDataBoutonAide (Simcity* simcity){
     simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].image = &simcity->tabBitmap[BITMAP_BOUTON_AIDE];
@@ -26,9 +25,6 @@ void initDataBoutonAide (Simcity* simcity){
     simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_CLIQUE].screenX = 885;
     simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_CLIQUE].screenY = 30;
 }
-
-
-
 
 void initDataMenuCommunisteCapitaliste (Simcity* simcity) {
     simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[FOND2].image = &simcity->tabBitmap[BITMAP_MENU_COMMUNISTE_CAPITALISTE];
@@ -180,7 +176,7 @@ void initDataMenuPrincipal(Simcity* simcity){
 }
 
 void calculHoverBoutonAide (Simcity* simcity){
-     if(simcity->allegro.event.mouse.x >= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_HOVER].screenX && simcity->allegro.event.mouse.x <= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_HOVER].screenX + simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_HOVER].spriteLargeur && simcity->allegro.event.mouse.y >= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_HOVER].screenY && simcity->allegro.event.mouse.y <= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_HOVER].screenY+ simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_HOVER].spriteHauteur){
+     if((float)simcity->allegro.event.mouse.x >= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_HOVER].screenX && (float)simcity->allegro.event.mouse.x <= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_HOVER].screenX + simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_HOVER].spriteLargeur &&(float) simcity->allegro.event.mouse.y >= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_HOVER].screenY && (float)simcity->allegro.event.mouse.y <= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_HOVER].screenY+ simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_HOVER].spriteHauteur){
         simcity->pages.menuPrincipal.aideHover = true;
 
     }else {
@@ -188,12 +184,11 @@ void calculHoverBoutonAide (Simcity* simcity){
     }
     }
 
-
-        void calculHoverComCap (Simcity* simcity){
-    if(simcity->allegro.event.mouse.x >= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenX && simcity->allegro.event.mouse.x <= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenX + simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteLargeur && simcity->allegro.event.mouse.y >= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenY && simcity->allegro.event.mouse.y <= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenY+ simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteHauteur){
+void calculHoverComCap (Simcity* simcity){
+    if((float)simcity->allegro.event.mouse.x >= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenX && (float)simcity->allegro.event.mouse.x <= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenX + simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteLargeur && (float)simcity->allegro.event.mouse.y >= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenY && (float)simcity->allegro.event.mouse.y <= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenY+ simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteHauteur){
         simcity->pages.menuCapitalisteCommuniste.capitalisteHover = true;
 
-    } else if(simcity->allegro.event.mouse.x >= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenX && simcity->allegro.event.mouse.x <= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenX + simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].spriteLargeur && simcity->allegro.event.mouse.y >= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenY && simcity->allegro.event.mouse.y <= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenY + simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].spriteHauteur){
+    } else if((float)simcity->allegro.event.mouse.x >= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenX && (float)simcity->allegro.event.mouse.x <= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenX + simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].spriteLargeur && (float)simcity->allegro.event.mouse.y >= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenY && (float)simcity->allegro.event.mouse.y <= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenY + simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].spriteHauteur){
         simcity->pages.menuCapitalisteCommuniste.communisteHover = true;
 
     } else {simcity->pages.menuCapitalisteCommuniste.capitalisteHover = false;
@@ -203,11 +198,11 @@ void calculHoverBoutonAide (Simcity* simcity){
 }
 
 void calculHover(Simcity * simcity){
-    if(simcity->allegro.event.mouse.x >= 262 && simcity->allegro.event.mouse.x <= 262 + simcity->pages.menuPrincipal.tabSpriteMenu[LANCER].spriteLargeur && simcity->allegro.event.mouse.y >= 80 && simcity->allegro.event.mouse.y <= 80 + simcity->pages.menuPrincipal.tabSpriteMenu[LANCER].spriteHauteur){
+    if(simcity->allegro.event.mouse.x >= 262 && (float)simcity->allegro.event.mouse.x <= 262 + simcity->pages.menuPrincipal.tabSpriteMenu[LANCER].spriteLargeur && simcity->allegro.event.mouse.y >= 80 &&(float) simcity->allegro.event.mouse.y <= 80 + simcity->pages.menuPrincipal.tabSpriteMenu[LANCER].spriteHauteur){
         simcity->pages.menuPrincipal.lancerHover = true;
-    } else if(simcity->allegro.event.mouse.x >= 262 && simcity->allegro.event.mouse.x <= 262 + simcity->pages.menuPrincipal.tabSpriteMenu[CHARGER].spriteLargeur && simcity->allegro.event.mouse.y >= 310 && simcity->allegro.event.mouse.y <= 310 + simcity->pages.menuPrincipal.tabSpriteMenu[CHARGER].spriteHauteur){
+    } else if(simcity->allegro.event.mouse.x >= 262 && (float)simcity->allegro.event.mouse.x <= 262 + simcity->pages.menuPrincipal.tabSpriteMenu[CHARGER].spriteLargeur && simcity->allegro.event.mouse.y >= 310 && (float)simcity->allegro.event.mouse.y <= 310 + simcity->pages.menuPrincipal.tabSpriteMenu[CHARGER].spriteHauteur){
         simcity->pages.menuPrincipal.chargerHover = true;
-    } else if(simcity->allegro.event.mouse.x >= 262 && simcity->allegro.event.mouse.x <= 262 + simcity->pages.menuPrincipal.tabSpriteMenu[QUITTER].spriteLargeur && simcity->allegro.event.mouse.y >= 540 && simcity->allegro.event.mouse.y <= 540 + simcity->pages.menuPrincipal.tabSpriteMenu[QUITTER].spriteHauteur){
+    } else if(simcity->allegro.event.mouse.x >= 262 && (float)simcity->allegro.event.mouse.x <= 262 + simcity->pages.menuPrincipal.tabSpriteMenu[QUITTER].spriteLargeur && simcity->allegro.event.mouse.y >= 540 && (float)simcity->allegro.event.mouse.y <= 540 + simcity->pages.menuPrincipal.tabSpriteMenu[QUITTER].spriteHauteur){
         simcity->pages.menuPrincipal.quitterHover = true;
     }else {
         simcity->pages.menuPrincipal.lancerHover = false;
@@ -217,22 +212,28 @@ void calculHover(Simcity * simcity){
 }
 
 void detectionCliqueBoutonAide (Simcity* simcity){
-    if(simcity->allegro.event.mouse.button == 1 && simcity->allegro.event.mouse.x >= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].screenX && simcity->allegro.event.mouse.x <= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].screenX + simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].spriteLargeur && simcity->allegro.event.mouse.y >= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].screenY && simcity->allegro.event.mouse.y <= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].screenY + simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].spriteHauteur){
-simcity->pages.menuPrincipal.aideClique = 1;
+    if(simcity->allegro.event.mouse.button == 1 && (float)simcity->allegro.event.mouse.x >= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].screenX && (float)simcity->allegro.event.mouse.x <= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].screenX + simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].spriteLargeur && (float)simcity->allegro.event.mouse.y >= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].screenY && (float)simcity->allegro.event.mouse.y <= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].screenY + simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].spriteHauteur){
+        simcity->pages.menuPrincipal.aideClique = 1;
+    }else { simcity->pages.menuPrincipal.aideClique = false;}
+}
 
-    }else { simcity->pages.menuPrincipal.aideClique = false;
-
+///AUGUSTIN
+void detectionCliqueBoutonAideQuitter (Simcity* simcity){
+    if(simcity->allegro.event.mouse.button == 1 && (float)simcity->allegro.event.mouse.x >= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].screenX && (float)simcity->allegro.event.mouse.x <= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].screenX + simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].spriteLargeur && (float)simcity->allegro.event.mouse.y >= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].screenY && (float)simcity->allegro.event.mouse.y <= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].screenY + simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].spriteHauteur){
+        simcity->pages.menuPrincipal.aideClique = false;
+        simcity->pages.menuPrincipal.menuPrincipal = 1;
+    }else {
+        simcity->pages.menuPrincipal.aideClique = 1;
     }
-    }
-
+}
 
 void detectionCliqueMenuCapCom (Simcity* simcity){
 
-    if(simcity->allegro.event.mouse.button == 1 && simcity->allegro.event.mouse.x >= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenX && simcity->allegro.event.mouse.x <= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenX + simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteLargeur && simcity->allegro.event.mouse.y >= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenY && simcity->allegro.event.mouse.y <= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenY + simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteHauteur){
+    if(simcity->allegro.event.mouse.button == 1 && (float)simcity->allegro.event.mouse.x >= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenX && (float)simcity->allegro.event.mouse.x <= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenX + simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteLargeur && (float)simcity->allegro.event.mouse.y >= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenY && (float)simcity->allegro.event.mouse.y <= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenY + simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteHauteur){
         simcity->pages.menuCapitalisteCommuniste.capitalisteClique = 1;
         simcity->pages.menuCapitalisteCommuniste.menuCapitalisteCommuniste = 1;
         simcity->capitaliste = TRUE;
-    }else if(simcity->allegro.event.mouse.button == 1 && simcity->allegro.event.mouse.x >= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenX && simcity->allegro.event.mouse.x <= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenX + simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].spriteLargeur && simcity->allegro.event.mouse.y >= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenY && simcity->allegro.event.mouse.y <= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenY + simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].spriteHauteur){
+    }else if(simcity->allegro.event.mouse.button == 1 && (float)simcity->allegro.event.mouse.x >= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenX && (float)simcity->allegro.event.mouse.x <= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenX + simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].spriteLargeur && (float)simcity->allegro.event.mouse.y >= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenY && (float)simcity->allegro.event.mouse.y <= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenY + simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].spriteHauteur){
         simcity->pages.menuCapitalisteCommuniste.communisteClique = 1;
         simcity->pages.menuCapitalisteCommuniste.menuCapitalisteCommuniste = 1;
         simcity->communiste = TRUE;
@@ -244,12 +245,12 @@ void detectionCliqueMenuCapCom (Simcity* simcity){
 void detectionClique(Simcity * simcity){
     if (simcity->allegro.event.mouse.button == 1 && simcity->pages.menuPrincipal.menuPrincipalIntro){
         simcity->pages.menuPrincipal.menuPrincipalIntro = 0;
-    }else if(simcity->allegro.event.mouse.button == 1 && simcity->allegro.event.mouse.x >= 262 && simcity->allegro.event.mouse.x <= 262 + simcity->pages.menuPrincipal.tabSpriteMenu[LANCER].spriteLargeur && simcity->allegro.event.mouse.y >= 80 && simcity->allegro.event.mouse.y <= 80 + simcity->pages.menuPrincipal.tabSpriteMenu[LANCER].spriteHauteur){
+    }else if(simcity->allegro.event.mouse.button == 1 && simcity->allegro.event.mouse.x >= 262 && (float)simcity->allegro.event.mouse.x <= 262 + simcity->pages.menuPrincipal.tabSpriteMenu[LANCER].spriteLargeur && simcity->allegro.event.mouse.y >= 80 && (float)simcity->allegro.event.mouse.y <= 80 + simcity->pages.menuPrincipal.tabSpriteMenu[LANCER].spriteHauteur){
         simcity->pages.menuPrincipal.lancerClique = true;
         simcity->pages.menuPrincipal.menuPrincipal = 1;
-    } else if(simcity->allegro.event.mouse.button == 1 && simcity->allegro.event.mouse.x >= 262 && simcity->allegro.event.mouse.x <= 262 + simcity->pages.menuPrincipal.tabSpriteMenu[CHARGER].spriteLargeur && simcity->allegro.event.mouse.y >= 310 && simcity->allegro.event.mouse.y <= 310 + simcity->pages.menuPrincipal.tabSpriteMenu[CHARGER].spriteHauteur){
+    } else if(simcity->allegro.event.mouse.button == 1 && simcity->allegro.event.mouse.x >= 262 && (float)simcity->allegro.event.mouse.x <= 262 + simcity->pages.menuPrincipal.tabSpriteMenu[CHARGER].spriteLargeur && simcity->allegro.event.mouse.y >= 310 && (float)simcity->allegro.event.mouse.y <= 310 + simcity->pages.menuPrincipal.tabSpriteMenu[CHARGER].spriteHauteur){
         simcity->pages.menuPrincipal.chargerClique = true;
-    } else if(simcity->allegro.event.mouse.button == 1 && simcity->allegro.event.mouse.x >= 262 && simcity->allegro.event.mouse.x <= 262 + simcity->pages.menuPrincipal.tabSpriteMenu[QUITTER].spriteLargeur && simcity->allegro.event.mouse.y >= 540 && simcity->allegro.event.mouse.y <= 540 + simcity->pages.menuPrincipal.tabSpriteMenu[QUITTER].spriteHauteur){
+    } else if(simcity->allegro.event.mouse.button == 1 && simcity->allegro.event.mouse.x >= 262 && (float)simcity->allegro.event.mouse.x <= 262 + simcity->pages.menuPrincipal.tabSpriteMenu[QUITTER].spriteLargeur && simcity->allegro.event.mouse.y >= 540 && (float)simcity->allegro.event.mouse.y <= 540 + simcity->pages.menuPrincipal.tabSpriteMenu[QUITTER].spriteHauteur){
         simcity->pages.menuPrincipal.quitterClique = true;
         simcity->endGame = 1;
         simcity->pages.menuPrincipal.menuPrincipal = 1;
@@ -412,6 +413,14 @@ void afficherMenuPrincipal(Simcity* simcity){
                                   simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_CLIQUE].spriteHauteur,
                                   simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_CLIQUE].screenX,
                                   simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_CLIQUE].screenY, 0);
+            ///AUGUSTIN
+            al_draw_bitmap_region(*(simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_QUITTER].image),
+                                  simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_QUITTER].spriteX,
+                                  simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_QUITTER].spriteY,
+                                  simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_QUITTER].spriteLargeur,
+                                  simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_QUITTER].spriteHauteur,
+                                  simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_QUITTER].screenX,
+                                  simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_QUITTER].screenY, 0);
 
         }
     }

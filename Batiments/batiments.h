@@ -16,7 +16,6 @@
 
 
 void initTabBatiments(Simcity* simcity);
-void construireBatiment(Simcity* simcity);
 void miseAJourDonneesHabitation(Simcity* simcity, Habitation* habitation);
 void regressionHabitation(Simcity* simcity, Habitation* habitation);
 void isEvolutionPossible(Simcity* simcity, Habitation* habitation);
@@ -24,5 +23,8 @@ void nombreHabitantsTot(Simcity* simcity);
 void afficherNbHabitantsTot(Simcity* simcity);
 void construireHabitation(Simcity* simcity);
 void construireInfrastructure(Simcity* simcity);
+void isFeu(Simcity* simcity);
+void afficherIsFeu(Simcity* simcity);
+//void eteindreFeu(Simcity* simcity);
 
 #endif //ECE_CITY_3A_BATIMENTS_H

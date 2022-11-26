@@ -82,6 +82,7 @@ void timerBatiment(Simcity* simcity) {
                         miseAJourDonneesHabitation(simcity, &simcity->tabHabitation[i]);//On met à jour les données du bâtiment
                     }
                 }
+                isFeu(simcity);
                 recevoirImpots(simcity, simcity->tabHabitation[i].nbHabitants);//On reçoit les impôts
             }
         }

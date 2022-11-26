@@ -55,12 +55,11 @@ void construireHabitation(Simcity* simcity) {
         simcity->tabHabitation[simcity->nbHabitations].dateCreation = (int) al_get_timer_count(simcity->allegro.chrono);//On enregistre la date de création du batiment
 
         simcity->tabHabitation[simcity->nbHabitations].compteurEvolution = 0;//On initialise le compteur evolution à 0 (terrain vague)
-        printf("evol%d\n", simcity->tabHabitation[simcity->nbHabitations].compteurEvolution);
     }
-    if(simcity->tabHabitation[simcity->nbHabitations].dateCreation != -1) {//Si le batiment a été créé (si il a une date de création)
+    if(simcity->tabHabitation[simcity->nbHabitations].dateCreation != -1) {//Si le batiment a été créé (s'il a une date de création)
         simcity->tabHabitation[simcity->nbHabitations].timerCree = TRUE;//Le timer est marqué comme créé
     } else {printf("ERREUR lancement timer batiment.\n");}//Message d'erreur si probleme dans la creation du batiment
-    simcity->nbHabitations++;//on ajoute une habitation suplémentaire à notre nombre d'habitation
+    simcity->nbHabitations++;//on ajoute une habitation suplémentaire à notre nombre d'habitations
 }
 
 void construireInfrastructure(Simcity* simcity){
@@ -331,12 +330,12 @@ void miseAJourDonneesHabitation(Simcity* simcity, Habitation* habitation) {
 ///Fonction permettant la régression de l'habitation
 void regressionHabitation(Simcity* simcity, Habitation* habitation) {
     if(habitation->compteurEvolution > 1 && habitation->compteurEvolution < 5) {//Si le batiment n'est ni un terrain vague ni une ruine
-        habitation->compteurEvolution--;//On repasse à l'évolution antérieur du batiment
+        habitation->compteurEvolution--;//On repasse à l'évolution antérieure du batiment
     }
     else if(habitation->compteurEvolution == 1) {//Si le batiment est de type terrain vague
         habitation->compteurEvolution = 5;//Le batiment est en ruine
     }
-    miseAJourDonneesHabitation(simcity, habitation);//On met a jour les données du batiment
+    miseAJourDonneesHabitation(simcity, habitation);//On met à jour les données du batiment
 }
 
 ///Fonction testant si l'evolution du batiment est possible
@@ -355,10 +354,32 @@ void nombreHabitantsTot(Simcity* simcity) {
     for (int i = 0; i < simcity->nbHabitations; ++i) {//On parcourt le tableau d'habitations
         nbHabitantsTot += simcity->tabHabitation[i].nbHabitants;//On ajoute à la variable tampon le nombre d'habitants de chaque habitation
     }
-    simcity->nbHabitants = nbHabitantsTot;//On met à jour le nombre d'habitant total de la ville dans la structure du jeu
+    simcity->nbHabitants = nbHabitantsTot;//On met à jour le nombre d'habitants total de la ville dans la structure du jeu
 }
-
 ///Fonction affichant le nombre d'habitants total de la ville
 void afficherNbHabitantsTot(Simcity* simcity) {
     al_draw_textf(simcity->allegro.fonts[0], simcity->allegro.color[BLACK], 250, 725, 0, "%d",simcity->nbHabitants);
+}
+
+///Fonction permettant de mettre une habitation en feu
+void isFeu (Simcity* simcity) {
+    for (int i = 0; i < simcity->nbHabitations; ++i) {//On parcourt le tableau d'habitations
+        if(simcity->tabHabitation[i].compteurEvolution >= 1 && simcity->tabHabitation[i].compteurEvolution < 5) {//Si le bâtiment d'est ni un terrain vague ni une ruine
+            if(rand() % 2 == 0){//Il a une chance sur ... de prendre feu
+                simcity->tabHabitation[i].isFeu = 1;//On déclare le bâtiment en feu
+                simcity->tabHabitation[i].evolutionPossible = 0;//Le bâtiment ne peut plus évoluer
+            }
+        }
+    }
+}
+///Fonction permettant d'éteindre une habitation en feu
+/*void eteindreFeu(Simcity* simcity) {
+}*/
+///Fonction affichant le bâtiment en feu
+void afficherIsFeu(Simcity* simcity) {
+    for (int i = 0; i < simcity->nbHabitations; ++i) {//On parcourt le tableau d'habitations
+        if (simcity->tabHabitation[i].isFeu == 1){//Si le bâtiment est déclaré en feu
+            al_draw_bitmap((simcity->tabBitmap[BITMAP_FEU]),simcity->tabHabitation[i].coordXY[0].screenX, simcity->tabHabitation[i].coordXY[0].screenY, 0);//On affiche des flammes par dessus
+        }
+    }
 }
