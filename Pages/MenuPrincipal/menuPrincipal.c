@@ -369,6 +369,7 @@ void detectionClique(Simcity * simcity){
         simcity->pages.menuPrincipal.quitterClique = true;
         simcity->endGame = 1;
         simcity->pages.menuPrincipal.menuPrincipal = 1;
+        simcity->pages.menuCapitalisteCommuniste.menuCapitalisteCommuniste = true;
     } else {
         simcity->pages.menuPrincipal.lancerClique = false;
         simcity->pages.menuPrincipal.chargerClique = false;

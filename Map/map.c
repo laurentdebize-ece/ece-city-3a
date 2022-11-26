@@ -14,7 +14,6 @@ void initDataMap(Simcity* simcity){
             simcity->map.mapTile[x][y].coordsXY.celluleY = y;
             simcity->map.mapTile[x][y].typeElec = FALSE;
             simcity->map.mapTile[x][y].typeEau = FALSE;
-
         }
     }
     bitmapSpriteInit(simcity);
@@ -904,7 +903,7 @@ void tournerBatiment(Simcity *simcity){
     }
 }
 
-void detruire(Simcity *simcity){
+void detruire(Simcity *simcity){ // reinitialise toutes les données du batiment detruit
     if (simcity->allegro.event.mouse.button == 1 && simcity->toolBox.detruireEnMain == 1 && (simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_MAISON || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_TERRAIN_VAGUE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_CABANE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_IMMEUBLE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_GRATTE_CIEL)){
         for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 3 ; ++x) {
             for (int y = simcity->interactionExterieure.mouse.celluleXY.celluleY; y < simcity->interactionExterieure.mouse.celluleXY.celluleY + 3; ++y) {
