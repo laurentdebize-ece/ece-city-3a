@@ -61,9 +61,8 @@ void enfilerVoisin(Simcity *simcity, CaseBFS num, t_file *f);
 
 //affichage des niveaux -1 et -2
 void niveau1Eau(Simcity *simcity);
-void afficherReseauEau(Simcity *simcity, int x, int y );
 void niveau2Elec(Simcity *simcity);
-void afficherReseauElec(Simcity *simcity, int x, int y );
+
 
 
 #endif

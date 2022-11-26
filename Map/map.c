@@ -105,17 +105,18 @@ void bitmapSpriteInit(Simcity* simcity){
     simcity->map.spriteTile[POMPIER_COTE].spriteX = 375;
     simcity->map.spriteTile[POMPIER_COTE].spriteY = 3;
 
+    ///A MODIFIER
     simcity->map.spriteTile[EAU_RESEAU].image = &simcity->tabBitmap[BITMAP_MAP];
     simcity->map.spriteTile[EAU_RESEAU].spriteLargeur = 20;
     simcity->map.spriteTile[EAU_RESEAU].spriteHauteur = 20;
-    simcity->map.spriteTile[EAU_RESEAU].spriteX = 8;//modif 5 en fonction d'où se trouve la case dans le figma
-    simcity->map.spriteTile[EAU_RESEAU].spriteY = 70;//modif 30 en fonction d'où se trouve la case dans le figma
+    simcity->map.spriteTile[EAU_RESEAU].spriteX = 4;
+    simcity->map.spriteTile[EAU_RESEAU].spriteY = 58;
 
     simcity->map.spriteTile[ELEC_RESEAU].image = &simcity->tabBitmap[BITMAP_MAP];
     simcity->map.spriteTile[ELEC_RESEAU].spriteLargeur = 20;
     simcity->map.spriteTile[ELEC_RESEAU].spriteHauteur = 20;
-    simcity->map.spriteTile[ELEC_RESEAU].spriteX = 5;//modif 5 en fonction d'où se trouve la case dans le figma
-    simcity->map.spriteTile[ELEC_RESEAU].spriteY = 30;//modif 30 en fonction d'où se trouve la case dans le figma
+    simcity->map.spriteTile[ELEC_RESEAU].spriteX = 32;
+    simcity->map.spriteTile[ELEC_RESEAU].spriteY = 30;
 }
 
 void calculPositionSourisEnCelluleXY(Simcity* simcity) {
@@ -142,7 +143,7 @@ void outOfBorder(Simcity* simcity){
 void afficherBarreCompteurs (Simcity* simcity) {
     al_draw_bitmap(simcity->tabBitmap[BITMAP_BARRECOMPTEURS],95, 620, 0);
 }
-
+/*
 /*
 void isFeu (Simcity* simcity) { // Fonction pour mettre aléatoirement une maison en feu
     for (int i = 0; i < simcity->nbHabitations; ++i) { // On parcours le tableau d'habitation
@@ -163,7 +164,7 @@ void afficherIsFeu (Simcity* simcity) { // permet d'afficher sur la map les mais
 
 
 
-
+*/
 void afficherMap(Simcity* simcity){
     al_clear_to_color(al_map_rgb(0,0,0));
     afficherToolbox(simcity);
@@ -178,9 +179,11 @@ void afficherMap(Simcity* simcity){
 
     for (int x = 0; x < NBCELLULEX; ++x) {
         for (int y = 0; y < NBCELLULEY; ++y) {
-            if (simcity->map.mapTile[x][y].typeBloc == TYPE_HERBE){
+
+            //permet de dessiner l'herbe de toute la map
+           if (simcity->map.mapTile[x][y].typeBloc == TYPE_HERBE){
                 al_draw_bitmap_region(*(simcity->map.spriteTile[HERBE].image), simcity->map.spriteTile[HERBE].spriteX, simcity->map.spriteTile[HERBE].spriteY, simcity->map.spriteTile[HERBE].spriteLargeur, simcity->map.spriteTile[HERBE].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
-            }
+           }
             else if (simcity->map.mapTile[x][y].typeBloc == TYPE_TERRAIN_VAGUE){
                 al_draw_bitmap_region(*(simcity->map.spriteTile[TERRAIN_VAGUE].image), simcity->map.spriteTile[TERRAIN_VAGUE].spriteX, simcity->map.spriteTile[TERRAIN_VAGUE].spriteY, simcity->map.spriteTile[TERRAIN_VAGUE].spriteLargeur, simcity->map.spriteTile[TERRAIN_VAGUE].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
             }
@@ -1125,6 +1128,7 @@ void BFSEau(Simcity* simcity){
                     case TYPE_ROUTE :
                     {
                         simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY].eau = TRUE;
+                        simcity->map.mapTile[num.coordsXy.celluleX][num.coordsXy.celluleY].typeBloc = TYPE_EAU_RESEAU;
                         enfilerVoisin(simcity, num, &f);
                     }
                         break;
@@ -1215,6 +1219,7 @@ void BFSElec(Simcity* simcity){
                     case TYPE_ROUTE :
                     {
                         simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY].elec = TRUE;
+                        simcity->map.mapTile[num.coordsXy.celluleX][num.coordsXy.celluleY].typeBloc = TYPE_ELEC_RESEAU;
                         enfilerVoisin(simcity, num, &f);
                     }
                         break;
@@ -1262,14 +1267,29 @@ void BFSElec(Simcity* simcity){
 }
 
 //reseau d'eau
-void afficherReseauEau(Simcity *simcity, int x, int y ){
 
-}
 void niveau1Eau(Simcity *simcity){
-    for (int i = 0; i < NBCELLULEX; ++i) {
-        for (int j = 0; j < NBCELLULEY; ++j) {
-            if (simcity->graphe.grille[i][j].eau == TRUE){
-                afficherReseauEau(simcity, i, j);
+    for (int x = 0; x < NBCELLULEX; ++x) {
+        for (int y = 0; y < NBCELLULEY; ++y) {
+            if (simcity->map.mapTile[x][y].typeBloc == TYPE_HERBE){
+                al_draw_bitmap_region(*(simcity->map.spriteTile[HERBE].image)
+                                      , simcity->map.spriteTile[HERBE].spriteX
+                                      , simcity->map.spriteTile[HERBE].spriteY
+                                      , simcity->map.spriteTile[HERBE].spriteLargeur
+                                      , simcity->map.spriteTile[HERBE].spriteHauteur
+                                      ,simcity->map.mapTile[x][y].coordsXY.screenX
+                                      ,simcity->map.mapTile[x][y].coordsXY.screenY
+                                      ,0);
+            }
+            if (simcity->map.mapTile[x][y].typeBloc == TYPE_EAU_RESEAU){
+                al_draw_bitmap_region(*(simcity->map.spriteTile[EAU_RESEAU].image)
+                                      , simcity->map.spriteTile[EAU_RESEAU].spriteX
+                                      , simcity->map.spriteTile[EAU_RESEAU].spriteY
+                                      , simcity->map.spriteTile[EAU_RESEAU].spriteLargeur
+                                      , simcity->map.spriteTile[EAU_RESEAU].spriteHauteur
+                                      ,simcity->map.mapTile[x][y].coordsXY.screenX
+                                      ,simcity->map.mapTile[x][y].coordsXY.screenY
+                                      ,0);
             }
         }
     }
@@ -1277,14 +1297,29 @@ void niveau1Eau(Simcity *simcity){
 
 
 //reseau d'electricite
-void afficherReseauElec(Simcity *simcity, int x, int y ){
 
-}
 void niveau2Elec(Simcity *simcity){
-    for (int i = 0; i < NBCELLULEX; ++i) {
-        for (int j = 0; j < NBCELLULEY; ++j) {
-            if (simcity->graphe.grille[i][j].elec == TRUE){
-                afficherReseauElec(simcity, i, j);
+    for (int x = 0; x < NBCELLULEX; ++x) {
+        for (int y = 0; y < NBCELLULEY; ++y) {
+            if (simcity->map.mapTile[x][y].typeBloc == TYPE_HERBE){
+                al_draw_bitmap_region(*(simcity->map.spriteTile[HERBE].image)
+                        , simcity->map.spriteTile[HERBE].spriteX
+                        , simcity->map.spriteTile[HERBE].spriteY
+                        , simcity->map.spriteTile[HERBE].spriteLargeur
+                        , simcity->map.spriteTile[HERBE].spriteHauteur
+                        ,simcity->map.mapTile[x][y].coordsXY.screenX
+                        ,simcity->map.mapTile[x][y].coordsXY.screenY
+                        ,0);
+            }
+            if (simcity->map.mapTile[x][y].typeBloc == TYPE_ELEC_RESEAU){
+                al_draw_bitmap_region(*(simcity->map.spriteTile[ELEC_RESEAU].image)
+                        , simcity->map.spriteTile[ELEC_RESEAU].spriteX
+                        , simcity->map.spriteTile[ELEC_RESEAU].spriteY
+                        , simcity->map.spriteTile[ELEC_RESEAU].spriteLargeur
+                        , simcity->map.spriteTile[ELEC_RESEAU].spriteHauteur
+                        ,simcity->map.mapTile[x][y].coordsXY.screenX
+                        ,simcity->map.mapTile[x][y].coordsXY.screenY
+                        ,0);
             }
         }
     }
