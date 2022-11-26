@@ -1,7 +1,6 @@
 #ifndef ECE_CITY_3A_STRUCTURES_H
 #define ECE_CITY_3A_STRUCTURES_H
 
-
 #include <stdio.h>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_font.h>
@@ -33,8 +32,8 @@ enum COLOR{ BLACK, WHITE};
 enum TYPE_BLOC{TYPE_HERBE,TYPE_ROUTE,TYPE_TERRAIN_VAGUE,TYPE_CABANE,TYPE_MAISON,TYPE_IMMEUBLE,TYPE_GRATTE_CIEL, TYPE_ELEC_DROIT, TYPE_ELEC_COTE, TYPE_EAU_DROIT, TYPE_EAU_COTE, TYPE_POMPIER_DROIT, TYPE_POMPIER_COTE, TYPE_RUINE, NB_TYPE_BLOC};
 
 typedef struct ListeAdj ListeAdj;
-typedef struct Element Element;
 
+typedef struct Element Element;
 
 typedef struct {
     ALLEGRO_DISPLAY* display;//écran
@@ -182,8 +181,6 @@ typedef struct {
 
 } ToolBox;
 
-
-
 typedef struct {
     CoordsXY coordXY[NBR_COORDS_XY_HAB];//Coordonnées du bâtiment
     int typeBatiment;//Type de bâtiment (ici 1 car habitation)
@@ -224,19 +221,6 @@ typedef struct {
     ListeAdj *adjacence;//liste des adjacents du batiment (centrale ou chateau)
 } Batiment;
 
-///liste chainée pour les adjacences depuis la centrale
-struct Element{
-    int distanceAMonBatiment;
-    Habitation* MaMaison;//habitation sur laquelle pointe mon element de ma liste chainée d'adjacence de la centrale
-    struct Element *suivant;
-};
-
-//structure de controle pour prendre le 1er element
-struct ListeAdj {
-    Element *premier;
-    Element *dernier;
-};
-
 typedef struct {
     //Variables relatives à la date fictive
     int mois;//Mois actuel
@@ -267,6 +251,19 @@ typedef struct {
 
 }Banque;
 
+
+///liste chainée pour les adjacences depuis la centrale
+struct Element{
+    int distanceAMonBatiment;
+    Habitation* MaMaison;//habitation sur laquelle pointe mon element de ma liste chainée d'adjacence de la centrale
+    struct Element *suivant;
+};
+
+//structure de controle pour prendre le 1er element
+struct ListeAdj {
+    Element *premier;
+    Element *dernier;
+};
 
 /////SOMMET/////
 typedef struct Cellule{
@@ -301,7 +298,6 @@ typedef struct Graphe {
 }Graphe;
 
 ////MAILLON DE MA FILE ET CASEBFS QUI PERMET D4ETRE STOKE DANS LA FILE
-
 typedef struct CaseBFS{
     int distance;
     CoordsXY coordsXy;
@@ -312,7 +308,6 @@ typedef struct maillon {
     CaseBFS caseBfs;
     struct maillon *suiv;
 } t_maillon;
-
 typedef t_maillon *pmaillon;
 
 /* Structure d'une file */
@@ -320,7 +315,6 @@ typedef struct file {
     t_maillon *tete;
     t_maillon *queue;
 } t_file;
-
 
 typedef struct {
     Allegro allegro;// Contient tous les éléments ALLEGRO
@@ -353,7 +347,6 @@ typedef struct {
 
 } Simcity;
 
-
 void installAllegro();
 void declarerAllegro(Simcity* simcity);
 void registerEvents(Simcity* simcity);
@@ -368,6 +361,7 @@ void libererTimer(Simcity* simcity);
 void libererQueue(Simcity* simcity);
 void libererFonts(Simcity* simcity);
 void libererAll(Simcity* simcity);
+
 
 
 #endif

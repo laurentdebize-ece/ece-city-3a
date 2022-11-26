@@ -49,6 +49,7 @@ typedef struct Graphe {
 //Graphe
 void BFSEau(Simcity* simcity);
 void BFSElec(Simcity* simcity);
+void BFSPompier(Simcity* simcity);
 void *lire_graphe( Simcity *simcity);
 void reset_couleur(Simcity *simcity);
 
@@ -67,8 +68,9 @@ void enfilerVoisin(Simcity *simcity, CaseBFS num, t_file *f);
 void niveau1Eau(Simcity *simcity);
 void niveau2Elec(Simcity *simcity);
 
-
-
+//calcul des capacités de chaque maison
+void calculCapaciteElec(Simcity *simcity);
+void calculCapaciteEau(Simcity *simcity);
 
 void *lire_graphe(Simcity *simcity);
 void recupdonne(Graphe *graphe);

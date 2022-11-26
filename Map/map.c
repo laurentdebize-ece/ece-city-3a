@@ -853,6 +853,7 @@ void poserPompier(Simcity *simcity){
                 }
             }
             simcity->banque.achatPompier = 1;
+            construireInfrastructure(simcity);
         } else if (!simcity->toolBox.pompierDroit) {
             simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc = TYPE_POMPIER_COTE;
             for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 4; ++x) {
@@ -865,6 +866,7 @@ void poserPompier(Simcity *simcity){
                 }
             }
             simcity->banque.achatPompier = 1;
+            construireInfrastructure(simcity);
         }
     }
 }
@@ -888,6 +890,7 @@ void poserBatiment(Simcity *simcity){
     poserPompier(simcity);
     BFSEau(simcity);
     BFSElec(simcity);
+    BFSPompier(simcity);
 }
 
 void tournerBatiment(Simcity *simcity){
