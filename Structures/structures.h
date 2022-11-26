@@ -24,13 +24,13 @@
 #define NBR_COORDS_XY_INFRA 16 //taille du contour d'une infrastructure
 
 enum BITMAP{BITMAP_MAP, BITMAP_TOOLBOX,BITMAP_BARRECOMPTEURS, BITMAP_BOUTON_PAUSE ,BITMAP_MENU_PRINCIPAL_INTRO, BITMAP_MENU_PRINCIPAL, BITMAP_MENU_COMMUNISTE_CAPITALISTE, BITMAP_BOUTONS_MENU_COMMUNISTE_CAPITALISTE, BITMAP_BOUTON_AIDE, BITMAP_FEU,  BITMAP_BOUTTON_MENU_PRINCIPAL,NB_BITMAP};
-enum SPRITE_MAP {HERBE, HOVER_TILE,  ROUTE, TERRAIN_VAGUE, CABANE, MAISON, IMMEUBLE, GRATTE_CIEL,ELEC_DROIT, ELEC_COTE, EAU_DROIT, EAU_COTE, POMPIER_DROIT, POMPIER_COTE,NB_SPRITE_MAP};
+enum SPRITE_MAP {HERBE, HOVER_TILE,  ROUTE, TERRAIN_VAGUE, CABANE, MAISON, IMMEUBLE, GRATTE_CIEL,ELEC_DROIT, ELEC_COTE, EAU_DROIT, EAU_COTE, POMPIER_DROIT, POMPIER_COTE,NB_SPRITE_MAP, EAU_RESEAU, ELEC_RESEAU};
 enum SPRITE_MENU_PRINCIPAL { INTRO , FOND,LANCER, LANCER_HOVER, LANCER_CLIQUE, CHARGER, CHARGER_HOVER, CHARGER_CLIQUE, QUITTER, QUITTER_HOVER, QUITTER_CLIQUE, AIDE, AIDE_HOVER, AIDE_CLIQUE, NB_SPRITE_MENU_PRINCIPAL};
 enum SPRITE_MENU_COMMUNISTE_CAPITALISTE { FOND2, COMMUNISTE, COMMUNISTE_HOVER, COMMUNISTE_CLIQUE, CAPITALISTE, CAPITALISTE_HOVER, CAPITALISTE_CLIQUE ,NB_SPRITE_MENU_COMMUNISTE_CAPITALISTE};
 
 enum SPRITE_BOITE_A_OUTIL {ROUTE_, ROUTE_HOVER, ROUTE_CLIQUE,MAISON_, MAISON_HOVER, MAISON_CLIQUE,ELEC, ELEC_HOVER, ELEC_CLIQUE, EAU, EAU_HOVER, EAU_CLIQUE, DETRUIRE, DETRUIRE_HOVER, DETRUIRE_CLIQUE, VUE1, VUE1_HOVER, VUE1_CLIQUE,VUE2, VUE2_HOVER, VUE2_CLIQUE, POMPIER, POMPIER_HOVER, POMPIER_CLIQUE, PAUSE, PAUSE_HOVER, PAUSE_CLIQUE, NB_SPRITE_TOOL_BOX};
 enum COLOR{ BLACK, WHITE};
-enum TYPE_BLOC{TYPE_HERBE,TYPE_ROUTE,TYPE_TERRAIN_VAGUE,TYPE_CABANE,TYPE_MAISON,TYPE_IMMEUBLE,TYPE_GRATTE_CIEL, TYPE_ELEC_DROIT, TYPE_ELEC_COTE, TYPE_EAU_DROIT, TYPE_EAU_COTE, TYPE_POMPIER_DROIT, TYPE_POMPIER_COTE, NB_TYPE_BLOC};
+enum TYPE_BLOC{TYPE_HERBE,TYPE_ROUTE,TYPE_TERRAIN_VAGUE,TYPE_CABANE,TYPE_MAISON,TYPE_IMMEUBLE,TYPE_GRATTE_CIEL, TYPE_ELEC_DROIT, TYPE_ELEC_COTE, TYPE_EAU_DROIT, TYPE_EAU_COTE, TYPE_POMPIER_DROIT, TYPE_POMPIER_COTE, NB_TYPE_BLOC, TYPE_EAU_RESEAU, TYPE_ELEC_RESEAU};
 
 typedef struct ListeAdj ListeAdj;
 typedef struct Element Element;
@@ -223,17 +223,13 @@ typedef struct {
 } Batiment;
 
 ///liste chainée pour les adjacences depuis la centrale
-
 struct Element{
-
     int distanceAMonBatiment;
     Habitation* MaMaison;//habitation sur laquelle pointe mon element de ma liste chainée d'adjacence de la centrale
     struct Element *suivant;
 };
 
-
 //structure de controle pour prendre le 1er element
-
 struct ListeAdj {
     Element *premier;
     Element *dernier;
@@ -273,10 +269,12 @@ typedef struct {
 /////SOMMET/////
 typedef struct Cellule{
 
-    int *pointeursurHabitation;
-    int *pointeursurBatiment;
-
     CoordsXY coordsXYCellule;
+
+    bool eau;
+    bool elec;
+
+
     struct Cellule* suivant;
     enum TYPE_BLOC type;
     int couleur;
@@ -299,6 +297,28 @@ typedef struct Graphe {
     int ordre;
     Cellule grille[NBCELLULEX][NBCELLULEY];
 }Graphe;
+
+////MAILLON DE MA FILE ET CASEBFS QUI PERMET D4ETRE STOKE DANS LA FILE
+
+typedef struct CaseBFS{
+    int distance;
+    CoordsXY coordsXy;
+}CaseBFS;
+
+/* Structure d'un maillon */
+typedef struct maillon {
+    CaseBFS caseBfs;
+    struct maillon *suiv;
+} t_maillon;
+
+typedef t_maillon *pmaillon;
+
+/* Structure d'une file */
+typedef struct file {
+    t_maillon *tete;
+    t_maillon *queue;
+} t_file;
+
 
 typedef struct {
     Allegro allegro;// Contient tous les éléments ALLEGRO

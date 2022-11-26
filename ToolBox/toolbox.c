@@ -365,10 +365,10 @@ void afficherToolbox (Simcity* simcity){
     }else if (simcity->toolBox.detruireClique){
         al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[DETRUIRE_CLIQUE].image),simcity->toolBox.tabSpriteToolBox[DETRUIRE_CLIQUE].spriteX,simcity->toolBox.tabSpriteToolBox[DETRUIRE_CLIQUE].spriteY,simcity->toolBox.tabSpriteToolBox[DETRUIRE_CLIQUE].spriteLargeur,simcity->toolBox.tabSpriteToolBox[DETRUIRE_CLIQUE].spriteHauteur,simcity->toolBox.tabSpriteToolBox[DETRUIRE_CLIQUE].screenX,simcity->toolBox.tabSpriteToolBox[DETRUIRE_CLIQUE].screenY,0);
 
-    }else if (simcity->toolBox.vue1Clique){
+    }else if (simcity->toolBox.vue1Clique){/// ICI POUR AFFICHER EAU
         al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[VUE1_CLIQUE].image),simcity->toolBox.tabSpriteToolBox[VUE1_CLIQUE].spriteX,simcity->toolBox.tabSpriteToolBox[VUE1_CLIQUE].spriteY,simcity->toolBox.tabSpriteToolBox[VUE1_CLIQUE].spriteLargeur,simcity->toolBox.tabSpriteToolBox[VUE1_CLIQUE].spriteHauteur,simcity->toolBox.tabSpriteToolBox[VUE1_CLIQUE].screenX,simcity->toolBox.tabSpriteToolBox[VUE1_CLIQUE].screenY,0);
 
-    }else if (simcity->toolBox.vue2Clique){
+    }else if (simcity->toolBox.vue2Clique){/// ICI POUR AFFICHER ELEC
         al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[VUE2_CLIQUE].image),simcity->toolBox.tabSpriteToolBox[VUE2_CLIQUE].spriteX,simcity->toolBox.tabSpriteToolBox[VUE2_CLIQUE].spriteY,simcity->toolBox.tabSpriteToolBox[VUE2_CLIQUE].spriteLargeur,simcity->toolBox.tabSpriteToolBox[VUE2_CLIQUE].spriteHauteur,simcity->toolBox.tabSpriteToolBox[VUE2_CLIQUE].screenX,simcity->toolBox.tabSpriteToolBox[VUE2_CLIQUE].screenY,0);
 
     }else if (simcity->toolBox.pompierClique){

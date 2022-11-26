@@ -85,7 +85,6 @@ void timerBatiment(Simcity* simcity) {
                 }
                 isRegressionPossible(simcity, &simcity->tabHabitation[i]);
                 if(simcity->tabHabitation[i].regression = TRUE) {
-
                 }
                 isFeu(simcity);
                 recevoirImpots(simcity, simcity->tabHabitation[i].nbHabitants);//On reçoit les impôts

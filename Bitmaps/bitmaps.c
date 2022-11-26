@@ -44,6 +44,7 @@ void bitmapCreateBoutonsPause(Simcity* simcity){
     simcity->tabBitmap[BITMAP_BOUTON_PAUSE] = al_load_bitmap("../Sources/img/boutonPause.png");
 }
 
+
 void bitmapCreateAll(Simcity* simcity){
     bitmapCreateMap(simcity);
     bitmapCreateMenuPrincipal(simcity);
@@ -118,4 +119,5 @@ void libererBitmapAll(Simcity* simcity){
     libererBitmapBoutonAide(simcity);
     libererBitmapFeu(simcity);
 }
+
 
