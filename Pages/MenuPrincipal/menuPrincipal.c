@@ -26,9 +26,6 @@ void initDataBoutonAide (Simcity* simcity){ // Une fois notre bitmap charger, on
     simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_CLIQUE].screenY = 30;
 }
 
-
-
-
 void initDataMenuCommunisteCapitaliste (Simcity* simcity) { // Une fois ces paramètres posés, cela nous permet de les appeler clairement et facilement sans calculer dans les fonctions
     simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[FOND2].image = &simcity->tabBitmap[BITMAP_MENU_COMMUNISTE_CAPITALISTE];
     simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[FOND2].spriteX = 0;
