@@ -45,6 +45,7 @@ void timerTempsJeu(Simcity* simcity) {
     } else {modulo60 = FALSE;}
     int secondes = (int)compteurChrono;//Initialisation d'une variable seconde égale aux secondes actuelles depuis le lancement du jeu
     int tampSecondes;//Initialisation d'une variable tampon
+    //printf("min %d\n", simcity->timers.minutes);
     tampSecondes = secondes - (60*simcity->timers.minutes);//On réinitialise la variable tampon toutes les minutes
     simcity->timers.secondes = tampSecondes;//On met à jour les secondes dans la structure du jeu
     if (compteurChrono%60 == 0 &&  modulo60 == TRUE) {//Si le chrono est modulo 60 (= toutes les 60sec) et que le timer est modulo 60 (on change de seconde)
@@ -69,9 +70,9 @@ void timerBatiment(Simcity* simcity) {
     for (int i = 0; i < simcity->nbHabitations; ++i) {//On parcourt le tableau d'habitations
         if(simcity->tabHabitation[i].timerCree == TRUE) {//Si le bâtiment est créé
             simcity->tabHabitation[i].timerBatiment = (int)compteurChrono - simcity->tabHabitation[i].dateCreation;
-            if(simcity->pause == 0 && simcity->tabHabitation[i].timerBatiment % 15 == 0 && modulo60 == TRUE) {//Si on est pas en pause, toutes les 15 secondes
+            if(simcity->pause == 0 && simcity->tabHabitation[i].timerBatiment % 15 == 0 && modulo60 == TRUE) {//Si on n'est pas en pause, toutes les 15 secondes
                 if(simcity->communiste == TRUE) {//Si on joue en mode communiste
-                    isEvolutionPossible(simcity, &simcity->tabHabitation[i]);//On teste si l'évolution est possible
+                    isEvolutionPossible(simcity, &simcity->tabHabitation[i]);//On teste si l'évolution est possible par rapport aux capacités
                 }
                 if(simcity->tabHabitation[i].evolutionPossible == TRUE) {//Si l'évolution est possible
                     if(simcity->tabHabitation[i].compteurEvolution == 5) {//Si le bâtiment est une ruine
@@ -81,6 +82,9 @@ void timerBatiment(Simcity* simcity) {
                         simcity->tabHabitation[i].compteurEvolution++;//Le bâtiment passe à l'évolution supérieure
                         miseAJourDonneesHabitation(simcity, &simcity->tabHabitation[i]);//On met à jour les données du bâtiment
                     }
+                }
+                isRegressionPossible(simcity, &simcity->tabHabitation[i]);
+                if(simcity->tabHabitation[i].regression = TRUE) {
                 }
                 isFeu(simcity);
                 recevoirImpots(simcity, simcity->tabHabitation[i].nbHabitants);//On reçoit les impôts

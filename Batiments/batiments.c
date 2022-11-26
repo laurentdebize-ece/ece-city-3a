@@ -327,18 +327,26 @@ void miseAJourDonneesHabitation(Simcity* simcity, Habitation* habitation) {
     }
 }
 
+///Fonction testant si le bâtiment doit régresser
+void isRegressionPossible(Simcity* simcity, Habitation* habitation) {
+    if(simcity->capaciteEauRestante < habitation->capaciteEauMax || simcity->capaciteElecRestante < habitation->capaciteElectriqueMax){//Si la capacité disponible en eau ou en électricité est inférieure à la capacité nécessaire àl'habitation
+        habitation->regression = TRUE;//Evolution de l'habitation testée impossible
+    }else{habitation->regression = FALSE;}//Evolution de l'habitation testée possible
+}
+
 ///Fonction permettant la régression de l'habitation
 void regressionHabitation(Simcity* simcity, Habitation* habitation) {
     if(habitation->compteurEvolution > 1 && habitation->compteurEvolution < 5) {//Si le batiment n'est ni un terrain vague ni une ruine
         habitation->compteurEvolution--;//On repasse à l'évolution antérieure du batiment
     }
-    else if(habitation->compteurEvolution == 1) {//Si le batiment est de type terrain vague
+    else if(habitation->compteurEvolution == 1) {//Si le batiment est de type cabane
         habitation->compteurEvolution = 5;//Le batiment est en ruine
     }
     miseAJourDonneesHabitation(simcity, habitation);//On met à jour les données du batiment
+    habitation->regression = FALSE;
 }
 
-///Fonction testant si l'evolution du batiment est possible
+///Fonction testant si l'evolution du batiment est possible par rapport aux capacités
 void isEvolutionPossible(Simcity* simcity, Habitation* habitation) {
     Habitation* habitationEvolue = habitation;//Création d'une variable tampon habitationEvolue
     habitationEvolue->compteurEvolution++;//habitationEvolue à une evolution à 1 stade de plus que l'habitation qu'on teste

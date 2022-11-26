@@ -17,6 +17,7 @@
 
 void initTabBatiments(Simcity* simcity);
 void miseAJourDonneesHabitation(Simcity* simcity, Habitation* habitation);
+void isRegressionPossible(Simcity* simcity, Habitation* habitation);
 void regressionHabitation(Simcity* simcity, Habitation* habitation);
 void isEvolutionPossible(Simcity* simcity, Habitation* habitation);
 void nombreHabitantsTot(Simcity* simcity);
