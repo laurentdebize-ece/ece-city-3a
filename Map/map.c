@@ -158,7 +158,6 @@ void afficherMap(Simcity* simcity){
 
     for (int x = 0; x < NBCELLULEX; ++x) {
         for (int y = 0; y < NBCELLULEY; ++y) {
-
             //permet de dessiner l'herbe de toute la map
            if (simcity->map.mapTile[x][y].typeBloc == TYPE_HERBE){
                 al_draw_bitmap_region(*(simcity->map.spriteTile[HERBE].image), simcity->map.spriteTile[HERBE].spriteX, simcity->map.spriteTile[HERBE].spriteY, simcity->map.spriteTile[HERBE].spriteLargeur, simcity->map.spriteTile[HERBE].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
@@ -199,9 +198,11 @@ void afficherMap(Simcity* simcity){
             else if (simcity->map.mapTile[x][y].typeBloc == TYPE_POMPIER_COTE){
                 al_draw_bitmap_region(*(simcity->map.spriteTile[POMPIER_COTE].image), simcity->map.spriteTile[POMPIER_COTE].spriteX, simcity->map.spriteTile[POMPIER_COTE].spriteY, simcity->map.spriteTile[POMPIER_COTE].spriteLargeur, simcity->map.spriteTile[POMPIER_COTE].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
             }
-
+            else if (simcity->map.mapTile[x][y].typeBloc == TYPE_RUINE){
+                al_draw_bitmap(simcity->tabBitmap[BITMAP_TILE_RUINE], simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
             }
         }
+    }
 
     if(modeNiveauEau){
         niveau1Eau(simcity);
@@ -261,7 +262,7 @@ void poserTerrainVague(Simcity* simcity){
             for (int y = simcity->interactionExterieure.mouse.celluleXY.celluleY; y < simcity->interactionExterieure.mouse.celluleXY.celluleY + 3; ++y) {
                 simcity->graphe.grille[x][y].type = TYPE_TERRAIN_VAGUE;
                 if (simcity->interactionExterieure.mouse.celluleXY.celluleX == x && simcity->interactionExterieure.mouse.celluleXY.celluleY == y){
-                    simcity->map.mapTile[x][y].typeBloc = TYPE_TERRAIN_VAGUE;
+                    simcity->graphe.grille[x][y].type = TYPE_TERRAIN_VAGUE;
                 }else{
                     simcity->map.mapTile[x][y].typeBloc = -1; // permet de ne pas faire bug l'affchage des maisons
                 }

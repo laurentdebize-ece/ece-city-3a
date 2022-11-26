@@ -317,7 +317,7 @@ void miseAJourDonneesHabitation(Simcity* simcity, Habitation* habitation) {
 
         case 5:{//ruine
             habitation->nbHabitants = NB_HABITANTS_RUINE;//On met à jour le nombre d'habitants
-            //simcity->map.mapTile[habitation->coordXY->celluleX][habitation->coordXY->celluleY].typeBloc = TYPE_RUINE;//On affiche la tile correspondante
+            simcity->map.mapTile[habitation->coordXY->celluleX][habitation->coordXY->celluleY].typeBloc = TYPE_RUINE;//On affiche la tile correspondante
             break;
         }
 
@@ -369,20 +369,21 @@ void afficherNbHabitantsTot(Simcity* simcity) {
     al_draw_textf(simcity->allegro.fonts[0], simcity->allegro.color[BLACK], 250, 725, 0, "%d",simcity->nbHabitants);
 }
 
+///Fonction permettant d'éteindre une habitation en feu
+/*
+void eteindreFeu(Habitation* habitation) {
+    habitation->isFeu = 0;
+    habitation->compteurEvolution = 5;
+}*/
 ///Fonction permettant de mettre une habitation en feu
-void isFeu (Simcity* simcity) {
-    for (int i = 0; i < simcity->nbHabitations; ++i) {//On parcourt le tableau d'habitations
-        if(simcity->tabHabitation[i].compteurEvolution >= 1 && simcity->tabHabitation[i].compteurEvolution < 5) {//Si le bâtiment d'est ni un terrain vague ni une ruine
-            if(rand() % 2 == 0){//Il a une chance sur ... de prendre feu
-                simcity->tabHabitation[i].isFeu = 1;//On déclare le bâtiment en feu
-                simcity->tabHabitation[i].evolutionPossible = 0;//Le bâtiment ne peut plus évoluer
-            }
+void isFeu (Habitation* habitation) {
+    if(habitation->compteurEvolution >= 1 && habitation->compteurEvolution < 5) {//Si le bâtiment d'est ni un terrain vague ni une ruine
+        if (rand() % 2 == 0) {//Il a une chance sur 10 de prendre feu
+            habitation->isFeu = 1;//On déclare le bâtiment en feu
+            habitation->evolutionPossible = FALSE;//Le bâtiment ne peut plus évoluer
         }
     }
 }
-///Fonction permettant d'éteindre une habitation en feu
-/*void eteindreFeu(Simcity* simcity) {
-}*/
 ///Fonction affichant le bâtiment en feu
 void afficherIsFeu(Simcity* simcity) {
     for (int i = 0; i < simcity->nbHabitations; ++i) {//On parcourt le tableau d'habitations

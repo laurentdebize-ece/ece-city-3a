@@ -2,6 +2,7 @@
 #define ECE_CITY_3A_BATIMENTS_H
 
 #include "../Structures/structures.h"
+#include "../Graphe/graphe.h"
 
 //Nombre d'habitants en fonction du type de batiment
 #define NB_HABITANTS_TERRAINVAGUE 0
@@ -24,7 +25,7 @@ void nombreHabitantsTot(Simcity* simcity);
 void afficherNbHabitantsTot(Simcity* simcity);
 void construireHabitation(Simcity* simcity);
 void construireInfrastructure(Simcity* simcity);
-void isFeu(Simcity* simcity);
+void isFeu(Habitation* habitation);
 void afficherIsFeu(Simcity* simcity);
 //void eteindreFeu(Simcity* simcity);
 

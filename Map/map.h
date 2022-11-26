@@ -2,6 +2,7 @@
 #define ECE_CITY_3A_MAP_H
 
 #include "../Structures/structures.h"
+#include "../Graphe/graphe.h"
 
 void initDataMap(Simcity* simcity);
 void bitmapSpriteInit(Simcity* simcity);
@@ -34,7 +35,7 @@ void afficherPrevPompier(Simcity* simcity);
 void afficherPrevision(Simcity* simcity);
 void afficherMap(Simcity* simcity);
 void afficherHoverMap(Simcity* simcity);
-void isFeu(Simcity* simcity);
+void isFeu(Habitation* habitation);
 void afficherIsFeu (Simcity* simcity) ;
 
 void detruire(Simcity *simcity);
