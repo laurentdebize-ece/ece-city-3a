@@ -517,9 +517,9 @@ void testNbCasernes(Simcity* simcity, Habitation* habitation) {
 
 ///Fonction permettant d'éteindre une habitation en feu
 void eteindreFeuMettreRuine(Simcity* simcity, Habitation* habitation) {
-
     if(habitation->isFeuRuine == TRUE) {//Si le bâtiment doit tomber en ruine
         habitation->isFeu = 0;//On éteint le feu
+        habitation->isFeuRuine = FALSE;
         habitation->compteurEvolution = 5;//On met le bâtiment au stade de ruine
         miseAJourDonneesHabitation(simcity, habitation);//On met à jour les données du bâtiment
     }
@@ -527,7 +527,7 @@ void eteindreFeuMettreRuine(Simcity* simcity, Habitation* habitation) {
 ///Fonction permettant de mettre une habitation en feu
 void isFeu (Habitation* habitation) {
         if(habitation->compteurEvolution >= 1 && habitation->compteurEvolution < 5) {//Si le bâtiment d'est ni un terrain vague ni une ruine
-            if (rand() % 2 == 0) {//Il a une chance sur 10 de prendre feu
+            if (rand() % 10 == 0) {//Il a une chance sur 10 de prendre feu
                 habitation->isFeu = 1;//On déclare le bâtiment en feu
                 habitation->evolutionPossible = FALSE;//Le bâtiment ne peut plus évoluer
             }
