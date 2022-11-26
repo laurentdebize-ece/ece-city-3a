@@ -87,9 +87,6 @@ void niveau1Eau(Simcity *simcity){
                         ,0);
             }
             if (simcity->map.mapTile[x][y].typeEau == 1 ){
-                printf("prout");
-
-                //////PROBLEME ICI
                 al_draw_bitmap_region(*(simcity->map.spriteTile[EAU_RESEAU].image)
                         , simcity->map.spriteTile[EAU_RESEAU].spriteX
                         , simcity->map.spriteTile[EAU_RESEAU].spriteY
