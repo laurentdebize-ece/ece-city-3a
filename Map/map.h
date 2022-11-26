@@ -42,27 +42,4 @@ void detruire(Simcity *simcity);
 void cliquer(Simcity* simcity);
 
 
-//Graphe
-void BFSEau(Simcity* simcity);
-void BFSElec(Simcity* simcity);
-void *lire_graphe( Simcity *simcity);
-void reset_couleur(Simcity *simcity);
-
-//file BFS
-CaseBFS defiler(t_file *f);
-void enfiler(t_file *f,  CaseBFS *caseBFS);
-int fileVide(t_file *f);
-
-//liste d'adjacence pour stocker les habitations reliées aux CE
-void clearListeAdj(ListeAdj *liste);
-void insertionListeAdj(ListeAdj *listeAdj, Habitation *MaMaison, int distance);
-ListeAdj *initListAdj();
-void enfilerVoisin(Simcity *simcity, CaseBFS num, t_file *f);
-
-//affichage des niveaux -1 et -2
-void niveau1Eau(Simcity *simcity);
-void niveau2Elec(Simcity *simcity);
-
-
-
 #endif
