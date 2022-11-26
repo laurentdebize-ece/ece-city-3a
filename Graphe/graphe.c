@@ -146,7 +146,6 @@ int fileVide(t_file *f) {
 }
 void enfiler(t_file *f, CaseBFS *caseBFS) {
 
-
     pmaillon maillon = NULL;
     maillon = (pmaillon) malloc(sizeof(struct maillon));
     maillon->caseBfs = *caseBFS;
@@ -191,38 +190,78 @@ void enfilerVoisin(Simcity *simcity, CaseBFS num, t_file *f){
     //si le voisin appartient bien au tableau et n'est pas de l'herbe et est marqué en Blanc
     //je l'enfile dans la file
     //je le marque en Gris
-    if (num.coordsXy.celluleY-1 > 0 && simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY-1].type != TYPE_HERBE && simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY-1].couleur == 0){
+    if (num.coordsXy.celluleY-1 > 0 && simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY-1].type != TYPE_HERBE
+    && simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY-1].couleur == 0){
         CaseBFS s1;
         s1.coordsXy.celluleX = num.coordsXy.celluleX;
         s1.coordsXy.celluleY = num.coordsXy.celluleY-1;
-        s1.distance = num.distance + 1;
+        if(simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY-1].type == TYPE_POMPIER_DROIT
+        || simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY-1].type == TYPE_POMPIER_COTE
+        ||simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY-1].type == TYPE_EAU_COTE
+        ||simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY-1].type == TYPE_EAU_DROIT
+        ||simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY-1].type == TYPE_ELEC_COTE
+        ||simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY-1].type == TYPE_ELEC_DROIT){
+            s1.distance = num.distance ;
+        }else {
+            s1.distance = num.distance + 1;
+        }
         enfiler(f, &s1);
         simcity->graphe.grille[s1.coordsXy.celluleX][s1.coordsXy.celluleY].couleur = 1;
     }
 
-    if (num.coordsXy.celluleY < NBCELLULEY && simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY+1].type != TYPE_HERBE && simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY+1].couleur == 0){
+    if (num.coordsXy.celluleY < NBCELLULEY && simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY+1].type != TYPE_HERBE
+    && simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY+1].couleur == 0){
         CaseBFS s1;
         s1.coordsXy.celluleX = num.coordsXy.celluleX;
         s1.coordsXy.celluleY = num.coordsXy.celluleY+1;
-        s1.distance = num.distance + 1;
+        if(simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY-1].type == TYPE_POMPIER_DROIT
+           || simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY-1].type == TYPE_POMPIER_COTE
+           ||simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY-1].type == TYPE_EAU_COTE
+           ||simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY-1].type == TYPE_EAU_DROIT
+           ||simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY-1].type == TYPE_ELEC_COTE
+           ||simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY-1].type == TYPE_ELEC_DROIT){
+            s1.distance = num.distance ;
+        }else {
+            s1.distance = num.distance + 1;
+        }
         enfiler(f, &s1);
         simcity->graphe.grille[s1.coordsXy.celluleX][s1.coordsXy.celluleY].couleur = 1;
     }
 
-    if (num.coordsXy.celluleX-1 > 0 && simcity->graphe.grille[num.coordsXy.celluleX-1][num.coordsXy.celluleY].type != TYPE_HERBE && simcity->graphe.grille[num.coordsXy.celluleX-1][num.coordsXy.celluleY].couleur == 0){
+    if (num.coordsXy.celluleX-1 > 0 && simcity->graphe.grille[num.coordsXy.celluleX-1][num.coordsXy.celluleY].type != TYPE_HERBE
+    && simcity->graphe.grille[num.coordsXy.celluleX-1][num.coordsXy.celluleY].couleur == 0){
         CaseBFS s1;
         s1.coordsXy.celluleX = num.coordsXy.celluleX-1;
         s1.coordsXy.celluleY = num.coordsXy.celluleY;
-        s1.distance = num.distance + 1;
+        if(simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY-1].type == TYPE_POMPIER_DROIT
+           || simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY-1].type == TYPE_POMPIER_COTE
+           ||simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY-1].type == TYPE_EAU_COTE
+           ||simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY-1].type == TYPE_EAU_DROIT
+           ||simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY-1].type == TYPE_ELEC_COTE
+           ||simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY-1].type == TYPE_ELEC_DROIT){
+            s1.distance = num.distance ;
+        }else {
+            s1.distance = num.distance + 1;
+        }
         enfiler(f, &s1);
         simcity->graphe.grille[s1.coordsXy.celluleX][s1.coordsXy.celluleY].couleur = 1;
     }
 
-    if (num.coordsXy.celluleX < NBCELLULEX && simcity->graphe.grille[num.coordsXy.celluleX+1][num.coordsXy.celluleY].type != TYPE_HERBE && simcity->graphe.grille[num.coordsXy.celluleX+1][num.coordsXy.celluleY].couleur == 0){
+    if (num.coordsXy.celluleX < NBCELLULEX && simcity->graphe.grille[num.coordsXy.celluleX+1][num.coordsXy.celluleY].type != TYPE_HERBE
+    && simcity->graphe.grille[num.coordsXy.celluleX+1][num.coordsXy.celluleY].couleur == 0){
         CaseBFS s1;
         s1.coordsXy.celluleX = num.coordsXy.celluleX+1;
         s1.coordsXy.celluleY = num.coordsXy.celluleY;
-        s1.distance = num.distance + 1;
+        if(simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY-1].type == TYPE_POMPIER_DROIT
+             || simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY-1].type == TYPE_POMPIER_COTE
+             ||simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY-1].type == TYPE_EAU_COTE
+             ||simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY-1].type == TYPE_EAU_DROIT
+             ||simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY-1].type == TYPE_ELEC_COTE
+             ||simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY-1].type == TYPE_ELEC_DROIT){
+            s1.distance = num.distance ;
+        }else {
+            s1.distance = num.distance + 1;
+        }
         enfiler(f, &s1);
         simcity->graphe.grille[s1.coordsXy.celluleX][s1.coordsXy.celluleY].couleur = 1;
     }
@@ -261,7 +300,7 @@ void BFSEau(Simcity* simcity){
 
         //si dans le tab de Batiments, on trouve un chateau d'eau : typeBatiment = 3
         if (simcity->tabInfrastructure[i].typeBatiment == 3) {
-            CaseBFS departS = { .distance = 0, .coordsXy = simcity->tabInfrastructure[i].coordXY[0] };
+            CaseBFS departS = { .distance = 1, .coordsXy = simcity->tabInfrastructure[i].coordXY[0] };
             //on recup la liste d'adja dans la struct du bat pour lequel on lance le BFS
             ListeAdj* listeAdj = simcity->tabInfrastructure[i].adjacence;
             clearListeAdj(listeAdj);
@@ -351,7 +390,7 @@ void BFSElec(Simcity* simcity){
 
         //si dans le tab de Batiments, on trouve une centrale electrique : typeBatiment = 2
         if (simcity->tabInfrastructure[i].typeBatiment == 2) {
-            CaseBFS departS = { .distance = 0, .coordsXy = simcity->tabInfrastructure[i].coordXY[0] };
+            CaseBFS departS = { .distance = 1, .coordsXy = simcity->tabInfrastructure[i].coordXY[0] };
             //on recup la liste d'adja dans la struct du bat pour lequel on lance le BFS
             ListeAdj* listeAdj = simcity->tabInfrastructure[i].adjacence;
             clearListeAdj(listeAdj);
@@ -441,7 +480,7 @@ void BFSPompier(Simcity* simcity){
 
         //si dans le tab de Batiments, on trouve une caserne de pompier : typebatiment = 4
         if (simcity->tabInfrastructure[i].typeBatiment == 4) { /////4
-            CaseBFS departS = { .distance = 0, .coordsXy = simcity->tabInfrastructure[i].coordXY[0] };
+            CaseBFS departS = { .distance = 1, .coordsXy = simcity->tabInfrastructure[i].coordXY[0] };
             //on recup la liste d'adja dans la struct du bat pour lequel on lance le BFS
             ListeAdj* listeAdj = simcity->tabInfrastructure[i].adjacence;
             clearListeAdj(listeAdj);
