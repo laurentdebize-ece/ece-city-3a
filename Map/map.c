@@ -238,7 +238,6 @@ bool collerAlaRouteHab(Simcity* simcity){
                return true;
     }
     return false;
-
 }
 
 int isTerrainVaguePossible(Simcity* simcity){
@@ -848,7 +847,7 @@ void poserPompier(Simcity *simcity){
                         simcity->interactionExterieure.mouse.celluleXY.celluleY == y) {
 
                     } else {
-                        simcity->map.mapTile[x][y].typeBloc = -3; // permet de ne pas faire bug l'affchage des maisons
+                        simcity->map.mapTile[x][y].typeBloc = -3; // permet de ne pas faire bug l'affichage des maisons
                     }
                 }
             }

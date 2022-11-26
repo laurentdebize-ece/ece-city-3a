@@ -215,7 +215,7 @@ typedef struct {
 
 typedef struct {
     CoordsXY coordXY[NBR_COORDS_XY_INFRA];//coordonnées de l'infrastructure
-    int typeBatiment;//type d'infrastructure
+    int typeBatiment;//type d'infrastructure - Electricité(2) - Eau(3) - Pompiers(4)
     int capaciteElectrique;//capacité électrique (si centrale électrique)
     int capaciteEau;//capacité en eau (si château d'eau)
     ListeAdj *adjacence;//liste des adjacents du batiment (centrale ou chateau)
