@@ -2,27 +2,6 @@
 #define ECE_CITY_3A_MAP_H
 
 #include "../Structures/structures.h"
-typedef struct CaseBFS{
-    int distance;
-    CoordsXY coordsXy;
-}CaseBFS;
-
-/* Structure d'un maillon */
-typedef struct maillon {
-    CaseBFS caseBfs;
-    struct maillon *suiv;
-} t_maillon;
-
-typedef t_maillon *pmaillon;
-
-/* Structure d'une file */
-typedef struct file {
-    t_maillon *tete;
-    t_maillon *queue;
-} t_file;
-
-
-
 
 void initDataMap(Simcity* simcity);
 void bitmapSpriteInit(Simcity* simcity);
@@ -63,32 +42,26 @@ void cliquer(Simcity* simcity);
 
 //Graphe
 void BFSEau(Simcity* simcity);
+void BFSElec(Simcity* simcity);
 void *lire_graphe( Simcity *simcity);
 void reset_couleur(Simcity *simcity);
 
+//file BFS
 CaseBFS defiler(t_file *f);
 void enfiler(t_file *f,  CaseBFS *caseBFS);
 int fileVide(t_file *f);
 
+//liste d'adjacence pour stocker les habitations reliées aux CE
 void clearListeAdj(ListeAdj *liste);
 void insertionListeAdj(ListeAdj *listeAdj, Habitation *MaMaison, int distance);
 ListeAdj *initListAdj();
 void enfilerVoisin(Simcity *simcity, CaseBFS num, t_file *f);
 
+//affichage des niveaux -1 et -2
+void niveau1Eau(Simcity *simcity);
+void afficherReseauEau(Simcity *simcity, int x, int y );
+void niveau2Elec(Simcity *simcity);
+void afficherReseauElec(Simcity *simcity, int x, int y );
 
-struct AdjMaillon_t {
-    Habitation *habitation;
-    int distance;
-    struct AdjMaillon_t *suiv;
-};
-
-typedef struct AdjacencyList {
-    struct AdjMaillon_t *tete;
-    struct AdjMaillon_t *queue;
-} AdjacencyList;
-
-AdjacencyList* allocListe();
-void insertionAdjListe(AdjacencyList *listeAdj, Habitation *MaMaison, int distance);
-void clearAdjListe(AdjacencyList *liste);
 
 #endif

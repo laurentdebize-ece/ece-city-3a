@@ -1,10 +1,6 @@
 #include "map.h"
-#include "../Structures/structures.h"
 #include "../Timers/timers.h"
-#include "../Banque/banque.h"
-#include "../Batiments//batiments.h"
 #include "../ToolBox/toolbox.h"
-#include "../Banque/banque.h"
 
 void initDataMap(Simcity* simcity){
     for (int x = 0; x < NBCELLULEX; ++x) {
@@ -108,6 +104,18 @@ void bitmapSpriteInit(Simcity* simcity){
     simcity->map.spriteTile[POMPIER_COTE].spriteHauteur = 120;
     simcity->map.spriteTile[POMPIER_COTE].spriteX = 375;
     simcity->map.spriteTile[POMPIER_COTE].spriteY = 3;
+
+    simcity->map.spriteTile[EAU_RESEAU].image = &simcity->tabBitmap[BITMAP_MAP];
+    simcity->map.spriteTile[EAU_RESEAU].spriteLargeur = 20;
+    simcity->map.spriteTile[EAU_RESEAU].spriteHauteur = 20;
+    simcity->map.spriteTile[EAU_RESEAU].spriteX = 8;//modif 5 en fonction d'où se trouve la case dans le figma
+    simcity->map.spriteTile[EAU_RESEAU].spriteY = 70;//modif 30 en fonction d'où se trouve la case dans le figma
+
+    simcity->map.spriteTile[ELEC_RESEAU].image = &simcity->tabBitmap[BITMAP_MAP];
+    simcity->map.spriteTile[ELEC_RESEAU].spriteLargeur = 20;
+    simcity->map.spriteTile[ELEC_RESEAU].spriteHauteur = 20;
+    simcity->map.spriteTile[ELEC_RESEAU].spriteX = 5;//modif 5 en fonction d'où se trouve la case dans le figma
+    simcity->map.spriteTile[ELEC_RESEAU].spriteY = 30;//modif 30 en fonction d'où se trouve la case dans le figma
 }
 
 void calculPositionSourisEnCelluleXY(Simcity* simcity) {
@@ -135,7 +143,6 @@ void afficherBarreCompteurs (Simcity* simcity) {
     al_draw_bitmap(simcity->tabBitmap[BITMAP_BARRECOMPTEURS],95, 620, 0);
 }
 
-
 void isFeu (Simcity* simcity) {
     for (int i = 0; i < simcity->nbHabitations; ++i) {
 
@@ -145,7 +152,6 @@ void isFeu (Simcity* simcity) {
     }
 }
 
-
 void afficherIsFeu (Simcity* simcity) {
     for (int i = 0; i < NBR_MAX_HAB; ++i) {
         if (simcity->tabHabitation[i].isFeu == 1){
@@ -154,9 +160,6 @@ void afficherIsFeu (Simcity* simcity) {
     }
 }
 
-
-
-
 void afficherMap(Simcity* simcity){
     al_clear_to_color(al_map_rgb(0,0,0));
     afficherToolbox(simcity);
@@ -164,6 +167,11 @@ void afficherMap(Simcity* simcity){
     afficherTimerDate(simcity);
     afficherArgent(simcity);
     afficherNbHabitantsTot(simcity);
+
+
+    bool modeNiveauEau = simcity->toolBox.vue1EnMain;
+    bool modeNiveauElectricite = simcity->toolBox.vue2EnMain;
+
     for (int x = 0; x < NBCELLULEX; ++x) {
         for (int y = 0; y < NBCELLULEY; ++y) {
             if (simcity->map.mapTile[x][y].typeBloc == TYPE_HERBE){
@@ -884,6 +892,7 @@ void poserBatiment(Simcity *simcity){
     poserEau(simcity);
     poserPompier(simcity);
     BFSEau(simcity);
+    BFSElec(simcity);
 }
 
 void tournerBatiment(Simcity *simcity){
@@ -1026,88 +1035,6 @@ void clearListeAdj(ListeAdj *liste){
     }
 }
 
-void BFSEau(Simcity* simcity){
-    //je recup l'ordre du graphe
-    lire_graphe(simcity);
-    // j'init la file
-    t_file f ={NULL, NULL};
-    // on parcourt tout le tableau de batiments
-    for(int i = 0; i < NBR_MAX_INFRA ; ++i){ // remplacer 16 par la macro apres
-        //je remets toutes les cases du plateau à Blanc
-        reset_couleur(simcity);
-
-        //si dans le tab de Batiments, on trouve un chateau d'eau
-        if (simcity->tabInfrastructure[i].typeBatiment == 3) {
-            CaseBFS departS = { .distance = 0, .coordsXy = simcity->tabInfrastructure[i].coordXY[0] };
-            //on recup la liste d'adja dans la struct du bat pour lequel on lance le BFS
-            ListeAdj* listeAdj = simcity->tabInfrastructure[i].adjacence;
-            clearListeAdj(listeAdj);
-            //on marque la case en Gris
-            simcity->graphe.grille[simcity->tabInfrastructure[i].coordXY->celluleX][simcity->tabInfrastructure[i].coordXY->celluleY].couleur = 1;
-            // on enfile dans notre queue la premiere case : s0 est identifié par les coordonnes de la case
-            enfiler(&f, &departS);
-
-           //tant que la file n'est pas vide :
-            while(f.tete != NULL) {
-                // je récupère les coordonnes du premier element de ma file
-                CaseBFS num = defiler(&f);
-
-                // si couleur == 2 on ne visite pas
-                if (simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY].couleur == 2)
-                    continue;
-
-                Cellule celluleActuelle = simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY];
-                //printf("coords %d %d %d \n", num.coordsXy.celluleX, num.coordsXy.celluleY, celluleActuelle.type);
-                //enum TYPE_BLOC{TYPE_HERBE,TYPE_ROUTE,TYPE_TERRAIN_VAGUE,TYPE_CABANE,TYPE_MAISON,TYPE_IMMEUBLE,TYPE_GRATTE_CIEL, TYPE_ELEC_DROIT, TYPE_ELEC_COTE, TYPE_EAU_DROIT, TYPE_EAU_COTE, TYPE_POMPIER_DROIT, TYPE_POMPIER_COTE, NB_TYPE_BLOC};
-                switch(celluleActuelle.type){
-
-                    case TYPE_EAU_COTE :
-                    case TYPE_EAU_DROIT :
-                    {
-                        enfilerVoisin(simcity, num, &f);
-                    }
-                        break;
-                    case TYPE_ROUTE :
-                    {
-                        enfilerVoisin(simcity, num, &f);
-                    }
-                        break;
-                    case TYPE_TERRAIN_VAGUE :
-                    case TYPE_CABANE :
-                    case TYPE_MAISON :
-                    case TYPE_IMMEUBLE :
-                    case TYPE_GRATTE_CIEL :
-                        {
-                            for (int i = 0; i < NBR_MAX_HAB; ++i) {
-                                for (int j = 0; j < 8; ++j) {
-                                    if (simcity->tabHabitation[i].coordXY[j].celluleX == num.coordsXy.celluleX
-                                    && simcity->tabHabitation[i].coordXY[j].celluleY == num.coordsXy.celluleY) {
-                                        for (int k = 0; k < 8; ++k) {
-                                            CoordsXY coords = simcity->tabHabitation[i].coordXY[k];
-                                            simcity->graphe.grille[coords.celluleX][coords.celluleY].couleur = 2;
-                                        }
-                                        insertionListeAdj(listeAdj, &simcity->tabHabitation[i], num.distance);
-                                    }
-                                }
-                            }
-                        }
-                            break;
-                }
-                //je marque en Noir le sommet que j'ai fini de visiter
-                simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY].couleur = 2;
-            }
-
-            struct Element *actuel = listeAdj->premier;
-            while (actuel != NULL)
-            {
-                printf("Habitation %x | Distance %d \n", actuel->MaMaison, actuel->distanceAMonBatiment);
-                actuel = actuel->suivant;
-            }
-        }
-    }
-}
-
-
 void enfilerVoisin(Simcity *simcity, CaseBFS num, t_file *f){
     //je parcours tous les voisins de la case
     //si le voisin appartient bien au tableau et n'est pas de l'herbe et est marqué en Blanc
@@ -1147,5 +1074,214 @@ void enfilerVoisin(Simcity *simcity, CaseBFS num, t_file *f){
         s1.distance = num.distance + 1;
         enfiler(f, &s1);
         simcity->graphe.grille[s1.coordsXy.celluleX][s1.coordsXy.celluleY].couleur = 1;
+    }
+}
+
+void BFSEau(Simcity* simcity){
+    //je recup l'ordre du graphe
+    lire_graphe(simcity);
+    // j'init la file
+    t_file f ={NULL, NULL};
+    // on parcourt tout le tableau de batiments
+    for(int i = 0; i < NBR_MAX_INFRA ; ++i){ // remplacer 16 par la macro apres
+        //je remets toutes les cases du plateau à Blanc
+        reset_couleur(simcity);
+
+        //si dans le tab de Batiments, on trouve un chateau d'eau : typeBatiment = 3
+        if (simcity->tabInfrastructure[i].typeBatiment == 3) {
+            CaseBFS departS = { .distance = 0, .coordsXy = simcity->tabInfrastructure[i].coordXY[0] };
+            //on recup la liste d'adja dans la struct du bat pour lequel on lance le BFS
+            ListeAdj* listeAdj = simcity->tabInfrastructure[i].adjacence;
+            clearListeAdj(listeAdj);
+            //on marque la case en Gris
+            simcity->graphe.grille[simcity->tabInfrastructure[i].coordXY->celluleX][simcity->tabInfrastructure[i].coordXY->celluleY].couleur = 1;
+            // on enfile dans notre queue la premiere case : s0 est identifié par les coordonnes de la case
+            enfiler(&f, &departS);
+
+           //tant que la file n'est pas vide :
+            while(f.tete != NULL) {
+                // je récupère les coordonnes du premier element de ma file
+                CaseBFS num = defiler(&f);
+
+                // si couleur == 2 on ne visite pas
+                if (simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY].couleur == 2)
+                    continue;
+
+                Cellule celluleActuelle = simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY];
+                //printf("coords %d %d %d \n", num.coordsXy.celluleX, num.coordsXy.celluleY, celluleActuelle.type);
+                //enum TYPE_BLOC{TYPE_HERBE,TYPE_ROUTE,TYPE_TERRAIN_VAGUE,TYPE_CABANE,TYPE_MAISON,TYPE_IMMEUBLE,TYPE_GRATTE_CIEL, TYPE_ELEC_DROIT, TYPE_ELEC_COTE, TYPE_EAU_DROIT, TYPE_EAU_COTE, TYPE_POMPIER_DROIT, TYPE_POMPIER_COTE, NB_TYPE_BLOC};
+                switch(celluleActuelle.type){
+
+                    case TYPE_EAU_COTE :
+                    case TYPE_EAU_DROIT :
+                    {
+                        enfilerVoisin(simcity, num, &f);
+                    }
+                        break;
+                    case TYPE_ROUTE :
+                    {
+                        simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY].eau = TRUE;
+                        enfilerVoisin(simcity, num, &f);
+                    }
+                        break;
+                    case TYPE_TERRAIN_VAGUE :
+                    case TYPE_CABANE :
+                    case TYPE_MAISON :
+                    case TYPE_IMMEUBLE :
+                    case TYPE_GRATTE_CIEL :
+                        {
+                            for (int i = 0; i < NBR_MAX_HAB; ++i) {
+                                for (int j = 0; j < 8; ++j) {
+                                    if (simcity->tabHabitation[i].coordXY[j].celluleX == num.coordsXy.celluleX
+                                    && simcity->tabHabitation[i].coordXY[j].celluleY == num.coordsXy.celluleY) {
+                                        for (int k = 0; k < 8; ++k) {
+                                            CoordsXY coords = simcity->tabHabitation[i].coordXY[k];
+                                            simcity->graphe.grille[coords.celluleX][coords.celluleY].couleur = 2;
+                                        }
+                                        insertionListeAdj(listeAdj, &simcity->tabHabitation[i], num.distance);
+                                    }
+                                }
+                            }
+                        }
+                            break;
+                }
+                //je marque en Noir le sommet que j'ai fini de visiter
+                simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY].couleur = 2;
+            }
+
+            struct Element *actuel = listeAdj->premier;
+
+            while (actuel != NULL)
+            {
+                printf("Habitation %x | Distance %d \n", actuel->MaMaison, actuel->distanceAMonBatiment);
+                actuel = actuel->suivant;
+            }
+        }
+    }
+    for(int i = 0; i < NBCELLULEX; i++){
+        for(int j = 0; j < NBCELLULEY; j++){
+            if(simcity->graphe.grille[i][j].eau == TRUE){
+                printf("eau %d %d \n", i, j);
+            }
+        }
+    }
+}
+
+void BFSElec(Simcity* simcity){
+    //je recup l'ordre du graphe
+    lire_graphe(simcity);
+    // j'init la file
+    t_file f ={NULL, NULL};
+    // on parcourt tout le tableau de batiments
+    for(int i = 0; i < NBR_MAX_INFRA ; ++i){ // remplacer 16 par la macro apres
+        //je remets toutes les cases du plateau à Blanc
+        reset_couleur(simcity);
+
+        //si dans le tab de Batiments, on trouve une centrale electrique : typeBatiment = 2
+        if (simcity->tabInfrastructure[i].typeBatiment == 2) {
+            CaseBFS departS = { .distance = 0, .coordsXy = simcity->tabInfrastructure[i].coordXY[0] };
+            //on recup la liste d'adja dans la struct du bat pour lequel on lance le BFS
+            ListeAdj* listeAdj = simcity->tabInfrastructure[i].adjacence;
+            clearListeAdj(listeAdj);
+            //on marque la case en Gris
+            simcity->graphe.grille[simcity->tabInfrastructure[i].coordXY->celluleX][simcity->tabInfrastructure[i].coordXY->celluleY].couleur = 1;
+            // on enfile dans notre queue la premiere case : s0 est identifié par les coordonnes de la case
+            enfiler(&f, &departS);
+
+            //tant que la file n'est pas vide :
+            while(f.tete != NULL) {
+                // je récupère les coordonnes du premier element de ma file
+                CaseBFS num = defiler(&f);
+
+                // si couleur == 2 on ne visite pas
+                if (simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY].couleur == 2)
+                    continue;
+
+                Cellule celluleActuelle = simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY];
+                //printf("coords %d %d %d \n", num.coordsXy.celluleX, num.coordsXy.celluleY, celluleActuelle.type);
+                //enum TYPE_BLOC{TYPE_HERBE,TYPE_ROUTE,TYPE_TERRAIN_VAGUE,TYPE_CABANE,TYPE_MAISON,TYPE_IMMEUBLE,TYPE_GRATTE_CIEL, TYPE_ELEC_DROIT, TYPE_ELEC_COTE, TYPE_EAU_DROIT, TYPE_EAU_COTE, TYPE_POMPIER_DROIT, TYPE_POMPIER_COTE, NB_TYPE_BLOC};
+                switch(celluleActuelle.type){
+
+                    case TYPE_ELEC_COTE :
+                    case TYPE_ELEC_DROIT :
+                    {
+                        enfilerVoisin(simcity, num, &f);
+                    }
+                        break;
+                    case TYPE_ROUTE :
+                    {
+                        simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY].elec = TRUE;
+                        enfilerVoisin(simcity, num, &f);
+                    }
+                        break;
+                    case TYPE_TERRAIN_VAGUE :
+                    case TYPE_CABANE :
+                    case TYPE_MAISON :
+                    case TYPE_IMMEUBLE :
+                    case TYPE_GRATTE_CIEL :
+                    {
+                        for (int i = 0; i < NBR_MAX_HAB; ++i) {
+                            for (int j = 0; j < 8; ++j) {
+                                if (simcity->tabHabitation[i].coordXY[j].celluleX == num.coordsXy.celluleX
+                                    && simcity->tabHabitation[i].coordXY[j].celluleY == num.coordsXy.celluleY) {
+                                    for (int k = 0; k < 8; ++k) {
+                                        CoordsXY coords = simcity->tabHabitation[i].coordXY[k];
+                                        simcity->graphe.grille[coords.celluleX][coords.celluleY].couleur = 2;
+                                    }
+                                    insertionListeAdj(listeAdj, &simcity->tabHabitation[i], num.distance);
+                                }
+                            }
+                        }
+                    }
+                        break;
+                }
+                //je marque en Noir le sommet que j'ai fini de visiter
+                simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY].couleur = 2;
+            }
+
+            struct Element *actuel = listeAdj->premier;
+
+            while (actuel != NULL)
+            {
+                printf("Habitation %x | Distance %d \n", actuel->MaMaison, actuel->distanceAMonBatiment);
+                actuel = actuel->suivant;
+            }
+        }
+    }
+    for(int i = 0; i < NBCELLULEX; i++){
+        for(int j = 0; j < NBCELLULEY; j++){
+            if(simcity->graphe.grille[i][j].elec == TRUE){
+                printf("elec %d %d \n", i, j);
+            }
+        }
+    }
+}
+
+//reseau d'eau
+void afficherReseauEau(Simcity *simcity, int x, int y ){
+
+}
+void niveau1Eau(Simcity *simcity){
+    for (int i = 0; i < NBCELLULEX; ++i) {
+        for (int j = 0; j < NBCELLULEY; ++j) {
+            if (simcity->graphe.grille[i][j].eau == TRUE){
+                afficherReseauEau(simcity, i, j);
+            }
+        }
+    }
+}
+
+
+//reseau d'electricite
+void afficherReseauElec(Simcity *simcity, int x, int y ){
+
+}
+void niveau2Elec(Simcity *simcity){
+    for (int i = 0; i < NBCELLULEX; ++i) {
+        for (int j = 0; j < NBCELLULEY; ++j) {
+            if (simcity->graphe.grille[i][j].elec == TRUE){
+                afficherReseauElec(simcity, i, j);
+            }
+        }
     }
 }

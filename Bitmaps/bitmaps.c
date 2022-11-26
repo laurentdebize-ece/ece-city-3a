@@ -120,3 +120,4 @@ void libererBitmapAll(Simcity* simcity){
     libererBitmapFeu(simcity);
 }
 
+
