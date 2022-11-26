@@ -889,7 +889,7 @@ void poserBatiment(Simcity *simcity){
     poserPompier(simcity);
     BFSEau(simcity);
     BFSElec(simcity);
-    BFSPompier(simcity);
+    //BFSPompier(simcity);
 }
 
 void tournerBatiment(Simcity *simcity){

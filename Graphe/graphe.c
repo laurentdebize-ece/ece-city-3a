@@ -509,11 +509,12 @@ void BFSPompier(Simcity* simcity){
                 printf("Habitation %x | Distance %d \n", actuel->MaMaison, actuel->distanceAMonBatiment);
 
                 if (actuel->distanceAMonBatiment > 20 && actuel->MaMaison->isFeu == TRUE) {
-                    //INSERT ICI LA FONCTION QUI FAIT BRULER LA MAISON ET REGRESSER A ETAT DE RUINE
+                    actuel->MaMaison->isFeu = TRUE;
+                    actuel->MaMaison->isFeuRuine = TRUE;
                     printf("L'habitation %d ne peut pas etre sauvee car elle se trouve a une distance de %d de la caserne \n", actuel->MaMaison, actuel->distanceAMonBatiment);
                 }
                 if (actuel->distanceAMonBatiment < 20 && actuel->MaMaison->isFeu == TRUE) {
-                    //INSERT ICI LA FONCTION QUI VA ARRETER LINCENDIE DE L'HABITATION
+                    actuel->MaMaison->isFeu = FALSE;
                     printf("L'habitation %d va etre sauvee car elle se trouve a une distance de %d de la caserne \n", actuel->MaMaison, actuel->distanceAMonBatiment);
                 }
                 actuel = actuel->suivant;

@@ -12,6 +12,8 @@ void initTabBatiments(Simcity* simcity) {
         simcity->tabHabitation[i].nbHabitants = 0;
         simcity->tabHabitation[i].capaciteElectriqueRecu = 0;
         simcity->tabHabitation[i].capaciteEauRecu = 0;
+        simcity->tabHabitation[i].isFeu = FALSE;
+        simcity->tabHabitation[i].isFeuRuine =FALSE;
         for (int j = 0; j < NBR_COORDS_XY_HAB; ++j) {
             simcity->tabHabitation[i].coordXY[j].celluleX = -1;
             simcity->tabHabitation[i].coordXY[j].celluleY = -1;
@@ -501,19 +503,23 @@ void afficherNbHabitantsTot(Simcity* simcity) {
 }
 
 ///Fonction permettant d'éteindre une habitation en feu
-/*
-void eteindreFeu(Habitation* habitation) {
-    habitation->isFeu = 0;
-    habitation->compteurEvolution = 5;
-}*/
+
+void eteindreFeuMettreRuine(Habitation* habitation) {
+    if(habitation->isFeuRuine == TRUE) {
+        habitation->isFeu = 0;
+        habitation->compteurEvolution = 5;
+    }
+}
 ///Fonction permettant de mettre une habitation en feu
 void isFeu (Habitation* habitation) {
-    if(habitation->compteurEvolution >= 1 && habitation->compteurEvolution < 5) {//Si le bâtiment d'est ni un terrain vague ni une ruine
-        if (rand() % 2 == 0) {//Il a une chance sur 10 de prendre feu
-            habitation->isFeu = 1;//On déclare le bâtiment en feu
-            habitation->evolutionPossible = FALSE;//Le bâtiment ne peut plus évoluer
+   // if(habitation->isFeuPossible == TRUE) {
+        if(habitation->compteurEvolution >= 1 && habitation->compteurEvolution < 5) {//Si le bâtiment d'est ni un terrain vague ni une ruine
+            if (rand() % 2 == 0) {//Il a une chance sur 10 de prendre feu
+                habitation->isFeu = 1;//On déclare le bâtiment en feu
+                habitation->evolutionPossible = FALSE;//Le bâtiment ne peut plus évoluer
+            }
         }
-    }
+    //}
 }
 ///Fonction affichant le bâtiment en feu
 void afficherIsFeu(Simcity* simcity) {

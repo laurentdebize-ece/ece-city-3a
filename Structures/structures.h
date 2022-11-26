@@ -204,6 +204,7 @@ typedef struct {
     int dateCreation;//Date de création du bâtiment
 
     bool isFeu;//Test "le bâtiment est eb feu ?"
+    bool isFeuRuine;
 
     int capaciteElectriqueMax;//correspond a combien d'elec elle a besoin
     int capaciteEauMax;//correspond a combien d'eau elle a besoin
