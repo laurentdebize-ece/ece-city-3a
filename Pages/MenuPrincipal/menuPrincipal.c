@@ -26,9 +26,6 @@ void initDataBoutonAide (Simcity* simcity){
     simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_CLIQUE].screenY = 30;
 }
 
-
-
-
 void initDataMenuCommunisteCapitaliste (Simcity* simcity) {
     simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[FOND2].image = &simcity->tabBitmap[BITMAP_MENU_COMMUNISTE_CAPITALISTE];
     simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[FOND2].spriteX = 0;
@@ -187,8 +184,7 @@ void calculHoverBoutonAide (Simcity* simcity){
     }
     }
 
-
-        void calculHoverComCap (Simcity* simcity){
+void calculHoverComCap (Simcity* simcity){
     if((float)simcity->allegro.event.mouse.x >= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenX && (float)simcity->allegro.event.mouse.x <= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenX + simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteLargeur && (float)simcity->allegro.event.mouse.y >= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenY && (float)simcity->allegro.event.mouse.y <= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenY+ simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteHauteur){
         simcity->pages.menuCapitalisteCommuniste.capitalisteHover = true;
 
@@ -217,13 +213,19 @@ void calculHover(Simcity * simcity){
 
 void detectionCliqueBoutonAide (Simcity* simcity){
     if(simcity->allegro.event.mouse.button == 1 && (float)simcity->allegro.event.mouse.x >= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].screenX && (float)simcity->allegro.event.mouse.x <= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].screenX + simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].spriteLargeur && (float)simcity->allegro.event.mouse.y >= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].screenY && (float)simcity->allegro.event.mouse.y <= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].screenY + simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].spriteHauteur){
-simcity->pages.menuPrincipal.aideClique = 1;
+        simcity->pages.menuPrincipal.aideClique = 1;
+    }else { simcity->pages.menuPrincipal.aideClique = false;}
+}
 
-    }else { simcity->pages.menuPrincipal.aideClique = false;
-
+///AUGUSTIN
+void detectionCliqueBoutonAideQuitter (Simcity* simcity){
+    if(simcity->allegro.event.mouse.button == 1 && (float)simcity->allegro.event.mouse.x >= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].screenX && (float)simcity->allegro.event.mouse.x <= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].screenX + simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].spriteLargeur && (float)simcity->allegro.event.mouse.y >= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].screenY && (float)simcity->allegro.event.mouse.y <= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].screenY + simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].spriteHauteur){
+        simcity->pages.menuPrincipal.aideClique = false;
+        simcity->pages.menuPrincipal.menuPrincipal = 1;
+    }else {
+        simcity->pages.menuPrincipal.aideClique = 1;
     }
-    }
-
+}
 
 void detectionCliqueMenuCapCom (Simcity* simcity){
 
@@ -411,6 +413,14 @@ void afficherMenuPrincipal(Simcity* simcity){
                                   simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_CLIQUE].spriteHauteur,
                                   simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_CLIQUE].screenX,
                                   simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_CLIQUE].screenY, 0);
+            ///AUGUSTIN
+            al_draw_bitmap_region(*(simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_QUITTER].image),
+                                  simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_QUITTER].spriteX,
+                                  simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_QUITTER].spriteY,
+                                  simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_QUITTER].spriteLargeur,
+                                  simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_QUITTER].spriteHauteur,
+                                  simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_QUITTER].screenX,
+                                  simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_QUITTER].screenY, 0);
 
         }
     }
