@@ -105,7 +105,6 @@ void bitmapSpriteInit(Simcity* simcity){
     simcity->map.spriteTile[POMPIER_COTE].spriteX = 375;
     simcity->map.spriteTile[POMPIER_COTE].spriteY = 3;
 
-    ///A MODIFIER
     simcity->map.spriteTile[EAU_RESEAU].image = &simcity->tabBitmap[BITMAP_MAP];
     simcity->map.spriteTile[EAU_RESEAU].spriteLargeur = 20;
     simcity->map.spriteTile[EAU_RESEAU].spriteHauteur = 20;
@@ -143,28 +142,70 @@ void outOfBorder(Simcity* simcity){
 void afficherBarreCompteurs (Simcity* simcity) {
     al_draw_bitmap(simcity->tabBitmap[BITMAP_BARRECOMPTEURS],95, 620, 0);
 }
-/*
-/*
-void isFeu (Simcity* simcity) { // Fonction pour mettre aléatoirement une maison en feu
-    for (int i = 0; i < simcity->nbHabitations; ++i) { // On parcours le tableau d'habitation
-        if(rand() % 1 == 0 && (simcity->tabHabitation[i].compteurEvolution =! 0) || (simcity->tabHabitation[i].compteurEvolution =! 5)){
-            simcity->tabHabitation[i].isFeu = 1; // si notre tirage au sort est vérifier, et que l'habitation est ni en ruines ni un terrain vague, alors elle prend feu
-        }else{simcity->tabHabitation[i].isFeu = FALSE;} // sinon, pas en feu
+
+//reseau d'eau
+
+void niveau1Eau(Simcity *simcity){
+    for (int x = 0; x < NBCELLULEX; ++x) {
+        for (int y = 0; y < NBCELLULEY; ++y) {
+            if (simcity->map.mapTile[x][y].typeBloc == TYPE_HERBE){
+                al_draw_bitmap_region(*(simcity->map.spriteTile[HERBE].image)
+                        , simcity->map.spriteTile[HERBE].spriteX
+                        , simcity->map.spriteTile[HERBE].spriteY
+                        , simcity->map.spriteTile[HERBE].spriteLargeur
+                        , simcity->map.spriteTile[HERBE].spriteHauteur
+                        ,simcity->map.mapTile[x][y].coordsXY.screenX
+                        ,simcity->map.mapTile[x][y].coordsXY.screenY
+                        ,0);
+            }
+            if (simcity->map.mapTile[x][y].typeBloc == TYPE_EAU_RESEAU){
+                al_draw_bitmap_region(*(simcity->map.spriteTile[EAU_RESEAU].image)
+                        , simcity->map.spriteTile[EAU_RESEAU].spriteX
+                        , simcity->map.spriteTile[EAU_RESEAU].spriteY
+                        , simcity->map.spriteTile[EAU_RESEAU].spriteLargeur
+                        , simcity->map.spriteTile[EAU_RESEAU].spriteHauteur
+                        ,simcity->map.mapTile[x][y].coordsXY.screenX
+                        ,simcity->map.mapTile[x][y].coordsXY.screenY
+                        ,0);
+            }
+        }
     }
 }
 
 
-void afficherIsFeu (Simcity* simcity) { // permet d'afficher sur la map les maisons en feu
-    for (int i = 0; i < NBR_MAX_HAB; ++i) {
-        if (simcity->tabHabitation[i].isFeu == 1){
-            al_draw_bitmap((simcity->tabBitmap[BITMAP_FEU]),simcity->tabHabitation[i].coordXY[0].screenX, simcity->tabHabitation[i].coordXY[0].screenY, 0);
+//reseau d'electricite
+
+void niveau2Elec(Simcity *simcity){
+    for (int x = 0; x < NBCELLULEX; ++x) {
+        for (int y = 0; y < NBCELLULEY; ++y) {
+            if (simcity->map.mapTile[x][y].typeBloc == TYPE_HERBE){
+                al_draw_bitmap_region(*(simcity->map.spriteTile[HERBE].image)
+                        , simcity->map.spriteTile[HERBE].spriteX
+                        , simcity->map.spriteTile[HERBE].spriteY
+                        , simcity->map.spriteTile[HERBE].spriteLargeur
+                        , simcity->map.spriteTile[HERBE].spriteHauteur
+                        ,simcity->map.mapTile[x][y].coordsXY.screenX
+                        ,simcity->map.mapTile[x][y].coordsXY.screenY
+                        ,0);
+            }
+            if (simcity->map.mapTile[x][y].typeBloc == TYPE_ELEC_RESEAU){
+                al_draw_bitmap_region(*(simcity->map.spriteTile[ELEC_RESEAU].image)
+                        , simcity->map.spriteTile[ELEC_RESEAU].spriteX
+                        , simcity->map.spriteTile[ELEC_RESEAU].spriteY
+                        , simcity->map.spriteTile[ELEC_RESEAU].spriteLargeur
+                        , simcity->map.spriteTile[ELEC_RESEAU].spriteHauteur
+                        ,simcity->map.mapTile[x][y].coordsXY.screenX
+                        ,simcity->map.mapTile[x][y].coordsXY.screenY
+                        ,0);
+            }
         }
     }
-}*/
+}
 
 
 
-*/
+
+
 void afficherMap(Simcity* simcity){
     al_clear_to_color(al_map_rgb(0,0,0));
     afficherToolbox(simcity);
@@ -172,6 +213,8 @@ void afficherMap(Simcity* simcity){
     afficherTimerDate(simcity);
     afficherArgent(simcity);
     afficherNbHabitantsTot(simcity);
+    niveau2Elec(simcity);
+    niveau1Eau(simcity);
 
 
     bool modeNiveauEau = simcity->toolBox.vue1EnMain;
@@ -1266,61 +1309,3 @@ void BFSElec(Simcity* simcity){
     }
 }
 
-//reseau d'eau
-
-void niveau1Eau(Simcity *simcity){
-    for (int x = 0; x < NBCELLULEX; ++x) {
-        for (int y = 0; y < NBCELLULEY; ++y) {
-            if (simcity->map.mapTile[x][y].typeBloc == TYPE_HERBE){
-                al_draw_bitmap_region(*(simcity->map.spriteTile[HERBE].image)
-                                      , simcity->map.spriteTile[HERBE].spriteX
-                                      , simcity->map.spriteTile[HERBE].spriteY
-                                      , simcity->map.spriteTile[HERBE].spriteLargeur
-                                      , simcity->map.spriteTile[HERBE].spriteHauteur
-                                      ,simcity->map.mapTile[x][y].coordsXY.screenX
-                                      ,simcity->map.mapTile[x][y].coordsXY.screenY
-                                      ,0);
-            }
-            if (simcity->map.mapTile[x][y].typeBloc == TYPE_EAU_RESEAU){
-                al_draw_bitmap_region(*(simcity->map.spriteTile[EAU_RESEAU].image)
-                                      , simcity->map.spriteTile[EAU_RESEAU].spriteX
-                                      , simcity->map.spriteTile[EAU_RESEAU].spriteY
-                                      , simcity->map.spriteTile[EAU_RESEAU].spriteLargeur
-                                      , simcity->map.spriteTile[EAU_RESEAU].spriteHauteur
-                                      ,simcity->map.mapTile[x][y].coordsXY.screenX
-                                      ,simcity->map.mapTile[x][y].coordsXY.screenY
-                                      ,0);
-            }
-        }
-    }
-}
-
-
-//reseau d'electricite
-
-void niveau2Elec(Simcity *simcity){
-    for (int x = 0; x < NBCELLULEX; ++x) {
-        for (int y = 0; y < NBCELLULEY; ++y) {
-            if (simcity->map.mapTile[x][y].typeBloc == TYPE_HERBE){
-                al_draw_bitmap_region(*(simcity->map.spriteTile[HERBE].image)
-                        , simcity->map.spriteTile[HERBE].spriteX
-                        , simcity->map.spriteTile[HERBE].spriteY
-                        , simcity->map.spriteTile[HERBE].spriteLargeur
-                        , simcity->map.spriteTile[HERBE].spriteHauteur
-                        ,simcity->map.mapTile[x][y].coordsXY.screenX
-                        ,simcity->map.mapTile[x][y].coordsXY.screenY
-                        ,0);
-            }
-            if (simcity->map.mapTile[x][y].typeBloc == TYPE_ELEC_RESEAU){
-                al_draw_bitmap_region(*(simcity->map.spriteTile[ELEC_RESEAU].image)
-                        , simcity->map.spriteTile[ELEC_RESEAU].spriteX
-                        , simcity->map.spriteTile[ELEC_RESEAU].spriteY
-                        , simcity->map.spriteTile[ELEC_RESEAU].spriteLargeur
-                        , simcity->map.spriteTile[ELEC_RESEAU].spriteHauteur
-                        ,simcity->map.mapTile[x][y].coordsXY.screenX
-                        ,simcity->map.mapTile[x][y].coordsXY.screenY
-                        ,0);
-            }
-        }
-    }
-}
