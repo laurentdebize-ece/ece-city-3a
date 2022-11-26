@@ -365,7 +365,7 @@ void BFSEau(Simcity* simcity){
 
             while (actuel != NULL)
             {
-                printf("Habitation %x | Distance %d \n", actuel->MaMaison, actuel->distanceAMonBatiment);
+                //printf("Habitation %x | Distance %d \n", actuel->MaMaison, actuel->distanceAMonBatiment);
                 actuel = actuel->suivant;
             }
         }
@@ -373,7 +373,7 @@ void BFSEau(Simcity* simcity){
     for(int i = 0; i < NBCELLULEX; i++){
         for(int j = 0; j < NBCELLULEY; j++){
             if(simcity->graphe.grille[i][j].eau == TRUE){
-                printf("eau %d %d \n", i, j);
+                //printf("eau %d %d \n", i, j);
             }
         }
     }
@@ -455,7 +455,7 @@ void BFSElec(Simcity* simcity){
 
             while (actuel != NULL)
             {
-                printf("Habitation %x | Distance %d \n", actuel->MaMaison, actuel->distanceAMonBatiment);
+                //printf("Habitation %x | Distance %d \n", actuel->MaMaison, actuel->distanceAMonBatiment);
                 actuel = actuel->suivant;
             }
         }
@@ -463,7 +463,7 @@ void BFSElec(Simcity* simcity){
     for(int i = 0; i < NBCELLULEX; i++){
         for(int j = 0; j < NBCELLULEY; j++){
             if(simcity->graphe.grille[i][j].elec == TRUE){
-                printf("elec %d %d \n", i, j);
+                //printf("elec %d %d \n", i, j);
             }
         }
     }
@@ -550,11 +550,11 @@ void BFSPompier(Simcity* simcity){
                 if (actuel->distanceAMonBatiment > 20 && actuel->MaMaison->isFeu == TRUE) {
                     actuel->MaMaison->isFeu = TRUE;
                     actuel->MaMaison->isFeuRuine = TRUE;
-                    printf("L'habitation %d ne peut pas etre sauvee car elle se trouve a une distance de %d de la caserne \n", actuel->MaMaison, actuel->distanceAMonBatiment);
+                    //printf("L'habitation %d ne peut pas etre sauvee car elle se trouve a une distance de %d de la caserne \n", actuel->MaMaison, actuel->distanceAMonBatiment);
                 }
                 if (actuel->distanceAMonBatiment < 20 && actuel->MaMaison->isFeu == TRUE) {
                     actuel->MaMaison->isFeu = FALSE;
-                    printf("L'habitation %d va etre sauvee car elle se trouve a une distance de %d de la caserne \n", actuel->MaMaison, actuel->distanceAMonBatiment);
+                    //printf("L'habitation %d va etre sauvee car elle se trouve a une distance de %d de la caserne \n", actuel->MaMaison, actuel->distanceAMonBatiment);
                 }
                 actuel = actuel->suivant;
             }

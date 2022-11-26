@@ -75,9 +75,9 @@ void timerBatiment(Simcity* simcity) {
                     isEvolutionPossible(simcity, &simcity->tabHabitation[i]);//On teste si l'évolution est possible par rapport aux capacités
                 }
                 if(simcity->tabHabitation[i].evolutionPossible == TRUE) {//Si l'évolution est possible
-                    if(simcity->tabHabitation[i].compteurEvolution == 5) {//Si le bâtiment est une ruine
-                        simcity->tabHabitation[i].compteurEvolution = 0;//On met le bâtiment à l'état de terrain vague
-                    }
+                    //if(simcity->tabHabitation[i].compteurEvolution == 5) {//Si le bâtiment est une ruine
+                    //    simcity->tabHabitation[i].compteurEvolution = 0;//On met le bâtiment à l'état de terrain vague
+                   // }
                     if(simcity->tabHabitation[i].compteurEvolution != 4) {//Si le bâtiment n'est pas une ruine
                         simcity->tabHabitation[i].compteurEvolution++;//Le bâtiment passe à l'évolution supérieure
                         miseAJourDonneesHabitation(simcity, &simcity->tabHabitation[i]);//On met à jour les données du bâtiment
@@ -89,6 +89,10 @@ void timerBatiment(Simcity* simcity) {
                 }
                 BFSPompier(simcity);
                 isFeu(&simcity->tabHabitation[i]);
+                if(simcity->tabHabitation[i].isFeu == TRUE) {
+                    eteindreFeuMettreRuine(simcity, &simcity->tabHabitation[i]);
+                }
+                printf("evol%d\n", simcity->tabHabitation[i].compteurEvolution);
                 recevoirImpots(simcity, simcity->tabHabitation[i].nbHabitants);//On reçoit les impôts
             }
         }

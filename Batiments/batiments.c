@@ -503,23 +503,30 @@ void afficherNbHabitantsTot(Simcity* simcity) {
 }
 
 ///Fonction permettant d'éteindre une habitation en feu
-
-void eteindreFeuMettreRuine(Habitation* habitation) {
-    if(habitation->isFeuRuine == TRUE) {
-        habitation->isFeu = 0;
-        habitation->compteurEvolution = 5;
+void eteindreFeuMettreRuine(Simcity* simcity, Habitation* habitation) {
+    int nbCasernePompier = 0;//Variable content le nombre de casernes sur le jeu
+    for (int i = 0; i < NBR_MAX_INFRA; ++i) {//On parcourt le tableau d'infrastructures
+        if(simcity->tabInfrastructure[i].typeBatiment == 4) {//Si l'infrastructure est une caserne
+            nbCasernePompier++;//On met +1 aux nombres de casernes
+        }
+    }
+    if(nbCasernePompier == 0) {//Si il n'y a pas de casernes sur le jeu
+        habitation->isFeuRuine = TRUE;//Le bâtiment doit tomber en ruine
+    }
+    if(habitation->isFeuRuine == TRUE) {//Si le bâtiment doit tomber en ruine
+        habitation->isFeu = 0;//On éteint le feu
+        habitation->compteurEvolution = 5;//On met le bâtiment au stade de ruine
+        miseAJourDonneesHabitation(simcity, habitation);//On met à jour les données du bâtiment
     }
 }
 ///Fonction permettant de mettre une habitation en feu
 void isFeu (Habitation* habitation) {
-   // if(habitation->isFeuPossible == TRUE) {
         if(habitation->compteurEvolution >= 1 && habitation->compteurEvolution < 5) {//Si le bâtiment d'est ni un terrain vague ni une ruine
             if (rand() % 2 == 0) {//Il a une chance sur 10 de prendre feu
                 habitation->isFeu = 1;//On déclare le bâtiment en feu
                 habitation->evolutionPossible = FALSE;//Le bâtiment ne peut plus évoluer
             }
         }
-    //}
 }
 ///Fonction affichant le bâtiment en feu
 void afficherIsFeu(Simcity* simcity) {

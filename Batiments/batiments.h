@@ -27,6 +27,6 @@ void construireHabitation(Simcity* simcity);
 void construireInfrastructure(Simcity* simcity);
 void isFeu(Habitation* habitation);
 void afficherIsFeu(Simcity* simcity);
-void eteindreFeuMettreRuine(Habitation* habitation);
+void eteindreFeuMettreRuine(Simcity* simcity, Habitation* habitation);
 
 #endif //ECE_CITY_3A_BATIMENTS_H
