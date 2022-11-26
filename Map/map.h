@@ -34,6 +34,8 @@ void afficherPrevPompier(Simcity* simcity);
 void afficherPrevision(Simcity* simcity);
 void afficherMap(Simcity* simcity);
 void afficherHoverMap(Simcity* simcity);
+void isFeu(Simcity* simcity);
+void afficherIsFeu (Simcity* simcity) ;
 
 void detruire(Simcity *simcity);
 

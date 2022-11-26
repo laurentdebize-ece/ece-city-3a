@@ -1,6 +1,6 @@
 #include "menuPrincipal.h"
 
-void initDataBoutonAide (Simcity* simcity){
+void initDataBoutonAide (Simcity* simcity){ // Une fois notre bitmap charger, on choisit une zone de l'image que l'on souhaite afficher et on l'a parametre ci dessous
     simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].image = &simcity->tabBitmap[BITMAP_BOUTON_AIDE];
     simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].spriteX = 20;
     simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].spriteY = 34;
@@ -26,7 +26,10 @@ void initDataBoutonAide (Simcity* simcity){
     simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_CLIQUE].screenY = 30;
 }
 
-void initDataMenuCommunisteCapitaliste (Simcity* simcity) {
+
+
+
+void initDataMenuCommunisteCapitaliste (Simcity* simcity) { // Une fois ces paramètres posés, cela nous permet de les appeler clairement et facilement sans calculer dans les fonctions
     simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[FOND2].image = &simcity->tabBitmap[BITMAP_MENU_COMMUNISTE_CAPITALISTE];
     simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[FOND2].spriteX = 0;
     simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[FOND2].spriteY = 0;
@@ -34,13 +37,13 @@ void initDataMenuCommunisteCapitaliste (Simcity* simcity) {
     simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[FOND2].spriteHauteur = 768;
 
 
-    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].image = &simcity->tabBitmap[BITMAP_BOUTONS_MENU_COMMUNISTE_CAPITALISTE];
-    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteX = 783;
-    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteY = 80;
-    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteLargeur = 500;
-    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteHauteur = 150;
-    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenX = 262;
-    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenY= 145;
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].image = &simcity->tabBitmap[BITMAP_BOUTONS_MENU_COMMUNISTE_CAPITALISTE]; // on dit qu'elle bitmap on veut initialiser
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteX = 783; // La position X de la partie de l'image sur la bitmap
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteY = 80;// La position Y de la partie de l'image sur la bitmap
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteLargeur = 500; // La largeur de la partie de l'image sur la bitmap
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteHauteur = 150; // Sa hauteur
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenX = 262; // Sa position X sur l'écran lorsqu'on l'a dessinera
+    simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenY= 145; // Sa position Y sur l'écran lorsqu'on l'a dessinera
 
 
 
@@ -175,19 +178,20 @@ void initDataMenuPrincipal(Simcity* simcity){
     simcity->pages.menuPrincipal.menuPrincipal = 0;
 }
 
-void calculHoverBoutonAide (Simcity* simcity){
+
+void calculHoverBoutonAide (Simcity* simcity){// Cette fonction permet de créer un surlignage du bouton lorsque nous passons la souris dessus
      if((float)simcity->allegro.event.mouse.x >= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_HOVER].screenX && (float)simcity->allegro.event.mouse.x <= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_HOVER].screenX + simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_HOVER].spriteLargeur &&(float) simcity->allegro.event.mouse.y >= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_HOVER].screenY && (float)simcity->allegro.event.mouse.y <= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_HOVER].screenY+ simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_HOVER].spriteHauteur){
-        simcity->pages.menuPrincipal.aideHover = true;
+        simcity->pages.menuPrincipal.aideHover = true;// Si notre souris est sur le bouton, on passe un booleen a 1, qui est récuperer dans l'affichage
 
     }else {
-        simcity->pages.menuPrincipal.aideHover = false;
+        simcity->pages.menuPrincipal.aideHover = false; // Sinon, le bool reste a trou et l'affichage reste le meme
     }
     }
 
-void calculHoverComCap (Simcity* simcity){
+
+void calculHoverComCap (Simcity* simcity){// Chaque hover est un surlignement et fonctionne de la même manière
     if((float)simcity->allegro.event.mouse.x >= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenX && (float)simcity->allegro.event.mouse.x <= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenX + simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteLargeur && (float)simcity->allegro.event.mouse.y >= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenY && (float)simcity->allegro.event.mouse.y <= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenY+ simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteHauteur){
         simcity->pages.menuCapitalisteCommuniste.capitalisteHover = true;
-
     } else if((float)simcity->allegro.event.mouse.x >= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenX && (float)simcity->allegro.event.mouse.x <= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenX + simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].spriteLargeur && (float)simcity->allegro.event.mouse.y >= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenY && (float)simcity->allegro.event.mouse.y <= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenY + simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].spriteHauteur){
         simcity->pages.menuCapitalisteCommuniste.communisteHover = true;
 
@@ -211,10 +215,11 @@ void calculHover(Simcity * simcity){
     }
 }
 
-void detectionCliqueBoutonAide (Simcity* simcity){
+
+void detectionCliqueBoutonAide (Simcity* simcity){// A l'image du hover, un effet de clique se fais sur le bouton sous certaines conditions
     if(simcity->allegro.event.mouse.button == 1 && (float)simcity->allegro.event.mouse.x >= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].screenX && (float)simcity->allegro.event.mouse.x <= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].screenX + simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].spriteLargeur && (float)simcity->allegro.event.mouse.y >= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].screenY && (float)simcity->allegro.event.mouse.y <= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].screenY + simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].spriteHauteur){
-        simcity->pages.menuPrincipal.aideClique = 1;
-    }else { simcity->pages.menuPrincipal.aideClique = false;}
+        simcity->pages.menuPrincipal.aideClique = 1;// Si on clique dans une zone défini, alors un bool passe a 1 et on le récupère dans la fonction d'affichage correspondant
+    }else { simcity->pages.menuPrincipal.aideClique = false;}// Sinon, on ne fais rien
 }
 
 ///AUGUSTIN
@@ -227,7 +232,7 @@ void detectionCliqueBoutonAideQuitter (Simcity* simcity){
     }
 }
 
-void detectionCliqueMenuCapCom (Simcity* simcity){
+void detectionCliqueMenuCapCom (Simcity* simcity){ // Chaque fonction clique fonctionne de la même manière
 
     if(simcity->allegro.event.mouse.button == 1 && (float)simcity->allegro.event.mouse.x >= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenX && (float)simcity->allegro.event.mouse.x <= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenX + simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteLargeur && (float)simcity->allegro.event.mouse.y >= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenY && (float)simcity->allegro.event.mouse.y <= simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenY + simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteHauteur){
         simcity->pages.menuCapitalisteCommuniste.capitalisteClique = 1;
@@ -263,17 +268,17 @@ void detectionClique(Simcity * simcity){
 
 
 
-void afficherMenuComCap (Simcity* simcity){
-    al_draw_bitmap(*(simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[FOND2].image), 0,0,0);
+void afficherMenuComCap (Simcity* simcity){ // Cette fonction recupère les booleéns et affiche les hover/cliques en conséquences
+    al_draw_bitmap(*(simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[FOND2].image), 0,0,0); // On commence par dessiner le menu
     al_draw_bitmap_region(*(simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].image), simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteX, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteY, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteLargeur, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].spriteHauteur, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenX, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE].screenY,0);
     al_draw_bitmap_region(*(simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].image), simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].spriteX, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].spriteY, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].spriteLargeur, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].spriteHauteur, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenX, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE].screenY,0);
-    if(simcity->pages.menuCapitalisteCommuniste.communisteHover){
+    if(simcity->pages.menuCapitalisteCommuniste.communisteHover){ // Si le bool est a 1, alors on dessine le hover/clique
         al_draw_bitmap_region(*(simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_HOVER].image), simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_HOVER].spriteX, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_HOVER].spriteY, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_HOVER].spriteLargeur, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_HOVER].spriteHauteur, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_HOVER].screenX, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_HOVER].screenY,0);
-    }  if(simcity->pages.menuCapitalisteCommuniste.capitalisteHover){
+    }  if(simcity->pages.menuCapitalisteCommuniste.capitalisteHover){// Si le bool est a 1, alors on dessine le hover/clique
         al_draw_bitmap_region(*(simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_HOVER].image), simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_HOVER].spriteX, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_HOVER].spriteY, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_HOVER].spriteLargeur, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_HOVER].spriteHauteur, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_HOVER].screenX, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_HOVER].screenY,0);
-    } if(simcity->pages.menuCapitalisteCommuniste.communisteClique){
+    } if(simcity->pages.menuCapitalisteCommuniste.communisteClique){// Si le bool est a 1, alors on dessine le hover/clique
         al_draw_bitmap_region(*(simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_CLIQUE].image), simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_CLIQUE].spriteX, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_CLIQUE].spriteY, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_CLIQUE].spriteLargeur, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_CLIQUE].spriteHauteur, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_CLIQUE].screenX, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[COMMUNISTE_CLIQUE].screenY,0);
-    } if(simcity->pages.menuCapitalisteCommuniste.capitalisteClique){
+    } if(simcity->pages.menuCapitalisteCommuniste.capitalisteClique){// Si le bool est a 1, alors on dessine le hover/clique
         al_draw_bitmap_region(*(simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_CLIQUE].image), simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_CLIQUE].spriteX, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_CLIQUE].spriteY, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_CLIQUE].spriteLargeur, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_CLIQUE].spriteHauteur, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_CLIQUE].screenX, simcity->pages.menuCapitalisteCommuniste.tabSpriteMenu[CAPITALISTE_CLIQUE].screenY,0);
     }
 }
@@ -414,13 +419,13 @@ void afficherMenuPrincipal(Simcity* simcity){
                                   simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_CLIQUE].screenX,
                                   simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_CLIQUE].screenY, 0);
             ///AUGUSTIN
-            al_draw_bitmap_region(*(simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_QUITTER].image),
+            /*al_draw_bitmap_region(*(simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_QUITTER].image),
                                   simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_QUITTER].spriteX,
                                   simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_QUITTER].spriteY,
                                   simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_QUITTER].spriteLargeur,
                                   simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_QUITTER].spriteHauteur,
                                   simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_QUITTER].screenX,
-                                  simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_QUITTER].screenY, 0);
+                                  simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_QUITTER].screenY, 0);*/
 
         }
     }

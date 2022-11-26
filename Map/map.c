@@ -143,22 +143,26 @@ void afficherBarreCompteurs (Simcity* simcity) {
     al_draw_bitmap(simcity->tabBitmap[BITMAP_BARRECOMPTEURS],95, 620, 0);
 }
 
-void isFeu (Simcity* simcity) {
-    for (int i = 0; i < simcity->nbHabitations; ++i) {
-
-        if(rand() % 2 == 1 && (simcity->tabHabitation[i].compteurEvolution =! 0) && (simcity->tabHabitation[i].compteurEvolution =! 5)){
-            simcity->tabHabitation[i].isFeu = 1;
-        }
+/*
+void isFeu (Simcity* simcity) { // Fonction pour mettre aléatoirement une maison en feu
+    for (int i = 0; i < simcity->nbHabitations; ++i) { // On parcours le tableau d'habitation
+        if(rand() % 1 == 0 && (simcity->tabHabitation[i].compteurEvolution =! 0) || (simcity->tabHabitation[i].compteurEvolution =! 5)){
+            simcity->tabHabitation[i].isFeu = 1; // si notre tirage au sort est vérifier, et que l'habitation est ni en ruines ni un terrain vague, alors elle prend feu
+        }else{simcity->tabHabitation[i].isFeu = FALSE;} // sinon, pas en feu
     }
 }
 
-void afficherIsFeu (Simcity* simcity) {
+
+void afficherIsFeu (Simcity* simcity) { // permet d'afficher sur la map les maisons en feu
     for (int i = 0; i < NBR_MAX_HAB; ++i) {
         if (simcity->tabHabitation[i].isFeu == 1){
             al_draw_bitmap((simcity->tabBitmap[BITMAP_FEU]),simcity->tabHabitation[i].coordXY[0].screenX, simcity->tabHabitation[i].coordXY[0].screenY, 0);
         }
     }
-}
+}*/
+
+
+
 
 void afficherMap(Simcity* simcity){
     al_clear_to_color(al_map_rgb(0,0,0));
