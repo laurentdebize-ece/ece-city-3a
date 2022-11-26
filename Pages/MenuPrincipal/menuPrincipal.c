@@ -1,5 +1,93 @@
 #include "menuPrincipal.h"
 
+void initDataMenuRegles (Simcity* simcity){
+    simcity->pages.menuRegles.tabSpriteMenu[FlECHE_RETOUR].image = &simcity->tabBitmap[BITMAP_FLECHES_MENU_REGLES];
+    simcity->pages.menuRegles.tabSpriteMenu[FlECHE_RETOUR].spriteX = 25;
+    simcity->pages.menuRegles.tabSpriteMenu[FlECHE_RETOUR].spriteY = 25;
+    simcity->pages.menuRegles.tabSpriteMenu[FlECHE_RETOUR].spriteHauteur = 60;
+    simcity->pages.menuRegles.tabSpriteMenu[FlECHE_RETOUR].spriteLargeur = 60;
+    simcity->pages.menuRegles.tabSpriteMenu[FlECHE_RETOUR].screenX = 0;
+    simcity->pages.menuRegles.tabSpriteMenu[FlECHE_RETOUR].screenY = 7;
+
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE].image = &simcity->tabBitmap[BITMAP_FLECHES_MENU_REGLES];
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE].spriteX = 318;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE].spriteY = 25;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE].spriteHauteur = 60;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE].spriteLargeur = 60;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE].screenX = 865;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE].screenY = 7;
+
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE].image = &simcity->tabBitmap[BITMAP_FLECHES_MENU_REGLES];
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE].spriteX = 208;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE].spriteY = 25;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE].spriteHauteur = 60;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE].spriteLargeur = 60;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE].screenX = 720;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE].screenY = 7;
+
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_RETOUR_HOVER].image = &simcity->tabBitmap[BITMAP_FLECHES_MENU_REGLES];
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_RETOUR_HOVER].spriteX = 25;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_RETOUR_HOVER].spriteY = 90;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_RETOUR_HOVER].spriteHauteur = 60;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_RETOUR_HOVER].spriteLargeur = 60;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_RETOUR_HOVER].screenX = 0;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_RETOUR_HOVER].screenY = 7;
+
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE_HOVER].image = &simcity->tabBitmap[BITMAP_FLECHES_MENU_REGLES];
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE_HOVER].spriteX = 318;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE_HOVER].spriteY = 90;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE_HOVER].spriteHauteur = 60;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE_HOVER].spriteLargeur = 60;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE_HOVER].screenX = 865;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE_HOVER].screenY = 7;
+
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE_HOVER].image = &simcity->tabBitmap[BITMAP_FLECHES_MENU_REGLES];
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE_HOVER].spriteX = 208;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE_HOVER].spriteY = 90;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE_HOVER].spriteHauteur = 60;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE_HOVER].spriteLargeur = 60;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE_HOVER].screenX = 720;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE_HOVER].screenY = 7;
+
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_RETOUR_CLIQUE].image = &simcity->tabBitmap[BITMAP_FLECHES_MENU_REGLES];
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_RETOUR_CLIQUE].spriteX = 25;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_RETOUR_CLIQUE].spriteY = 155;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_RETOUR_CLIQUE].spriteHauteur = 60;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_RETOUR_CLIQUE].spriteLargeur = 60;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_RETOUR_CLIQUE].screenX = 0;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_RETOUR_CLIQUE].screenY = 7;
+
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE_CLIQUE].image = &simcity->tabBitmap[BITMAP_FLECHES_MENU_REGLES];
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE_CLIQUE].spriteX = 318;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE_CLIQUE].spriteY = 155;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE_CLIQUE].spriteHauteur = 60;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE_CLIQUE].spriteLargeur = 60;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE_CLIQUE].screenX = 865;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE_CLIQUE].screenY = 7;
+
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE_CLIQUE].image = &simcity->tabBitmap[BITMAP_FLECHES_MENU_REGLES];
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE_CLIQUE].spriteX = 208;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE_CLIQUE].spriteY = 155;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE_CLIQUE].spriteHauteur = 60;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE_CLIQUE].spriteLargeur = 60;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE_CLIQUE].screenX = 720;
+    simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE_CLIQUE].screenY = 7;
+
+    simcity->pages.menuRegles.flecheRetourHover = 0;
+    simcity->pages.menuRegles.flecheRetourClique = 0;
+    simcity->pages.menuRegles.flecheDroiteHover = 0;
+    simcity->pages.menuRegles.flecheDroiteClique = 0;
+    simcity->pages.menuRegles.flecheGaucheHover = 0;
+    simcity->pages.menuRegles.flecheGaucheClique = 0;
+
+}
+
+
+
+
+
+
+
 void initDataBoutonAide (Simcity* simcity){ // Une fois notre bitmap charger, on choisit une zone de l'image que l'on souhaite afficher et on l'a parametre ci dessous
     simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].image = &simcity->tabBitmap[BITMAP_BOUTON_AIDE];
     simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].spriteX = 20;
@@ -24,6 +112,11 @@ void initDataBoutonAide (Simcity* simcity){ // Une fois notre bitmap charger, on
     simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_CLIQUE].spriteLargeur = 100;
     simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_CLIQUE].screenX = 885;
     simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_CLIQUE].screenY = 30;
+
+
+
+
+
 }
 
 void initDataMenuCommunisteCapitaliste (Simcity* simcity) { // Une fois ces paramètres posés, cela nous permet de les appeler clairement et facilement sans calculer dans les fonctions
@@ -175,6 +268,21 @@ void initDataMenuPrincipal(Simcity* simcity){
     simcity->pages.menuPrincipal.menuPrincipal = 0;
 }
 
+void calculHoverFlechesMenuRegles (Simcity* simcity){
+    if((float)simcity->allegro.event.mouse.x >= simcity->pages.menuRegles.tabSpriteMenu[FLECHE_RETOUR_HOVER].screenX && (float)simcity->allegro.event.mouse.x <= simcity->pages.menuRegles.tabSpriteMenu[FLECHE_RETOUR_HOVER].screenX + simcity->pages.menuRegles.tabSpriteMenu[FLECHE_RETOUR_HOVER].spriteLargeur && (float) simcity->allegro.event.mouse.y >= simcity->pages.menuRegles.tabSpriteMenu[FLECHE_RETOUR_HOVER].screenY && (float)simcity->allegro.event.mouse.y <= simcity->pages.menuRegles.tabSpriteMenu[FLECHE_RETOUR_HOVER].screenY + simcity->pages.menuRegles.tabSpriteMenu[FLECHE_RETOUR_HOVER].spriteHauteur){
+        simcity->pages.menuRegles.flecheRetourHover = true;
+    }else if((float)simcity->allegro.event.mouse.x >= simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE_HOVER].screenX && (float)simcity->allegro.event.mouse.x <= simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE_HOVER].screenX + simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE_HOVER].spriteLargeur && (float) simcity->allegro.event.mouse.y >= simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE_HOVER].screenY && (float)simcity->allegro.event.mouse.y <= simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE_HOVER].screenY + simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE_HOVER].spriteHauteur){
+        simcity->pages.menuRegles.flecheGaucheHover = true;
+    }else if((float)simcity->allegro.event.mouse.x >= simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE_HOVER].screenX && (float)simcity->allegro.event.mouse.x <= simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE_HOVER].screenX + simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE_HOVER].spriteLargeur && (float) simcity->allegro.event.mouse.y >= simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE_HOVER].screenY && (float)simcity->allegro.event.mouse.y <= simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE_HOVER].screenY + simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE_HOVER].spriteHauteur) {
+        simcity->pages.menuRegles.flecheDroiteHover = true;
+         }
+    else {simcity->pages.menuRegles.flecheDroiteHover = false;
+        simcity->pages.menuRegles.flecheGaucheHover = false;
+        simcity->pages.menuRegles.flecheRetourHover = false;
+
+    }
+    }
+
 
 void calculHoverBoutonAide (Simcity* simcity){// Cette fonction permet de créer un surlignage du bouton lorsque nous passons la souris dessus
      if((float)simcity->allegro.event.mouse.x >= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_HOVER].screenX && (float)simcity->allegro.event.mouse.x <= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_HOVER].screenX + simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_HOVER].spriteLargeur &&(float) simcity->allegro.event.mouse.y >= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_HOVER].screenY && (float)simcity->allegro.event.mouse.y <= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_HOVER].screenY+ simcity->pages.menuPrincipal.tabSpriteMenu[AIDE_HOVER].spriteHauteur){
@@ -215,19 +323,24 @@ void calculHover(Simcity * simcity){
 
 void detectionCliqueBoutonAide (Simcity* simcity){// A l'image du hover, un effet de clique se fais sur le bouton sous certaines conditions
     if(simcity->allegro.event.mouse.button == 1 && (float)simcity->allegro.event.mouse.x >= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].screenX && (float)simcity->allegro.event.mouse.x <= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].screenX + simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].spriteLargeur && (float)simcity->allegro.event.mouse.y >= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].screenY && (float)simcity->allegro.event.mouse.y <= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].screenY + simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].spriteHauteur){
-        simcity->pages.menuPrincipal.aideClique = 1;// Si on clique dans une zone défini, alors un bool passe a 1 et on le récupère dans la fonction d'affichage correspondant
+        simcity->pages.menuPrincipal.aideClique = true;// Si on clique dans une zone défini, alors un bool passe a 1 et on le récupère dans la fonction d'affichage correspondant
+        simcity->pages.menuRegles.menuRegles = false;
     }else { simcity->pages.menuPrincipal.aideClique = false;}// Sinon, on ne fais rien
 }
 
-///AUGUSTIN
-void detectionCliqueBoutonAideQuitter (Simcity* simcity){
-    if(simcity->allegro.event.mouse.button == 1 && (float)simcity->allegro.event.mouse.x >= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].screenX && (float)simcity->allegro.event.mouse.x <= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].screenX + simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].spriteLargeur && (float)simcity->allegro.event.mouse.y >= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].screenY && (float)simcity->allegro.event.mouse.y <= simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].screenY + simcity->pages.menuPrincipal.tabSpriteMenu[AIDE].spriteHauteur){
-        simcity->pages.menuPrincipal.aideClique = false;
-        simcity->pages.menuPrincipal.menuPrincipal = 1;
-    }else {
-        simcity->pages.menuPrincipal.aideClique = 1;
+void detectionCliqueMenuRegles (Simcity* simcity){
+    if(simcity->allegro.event.mouse.button == 1 && (float)simcity->allegro.event.mouse.x >= simcity->pages.menuRegles.tabSpriteMenu[FlECHE_RETOUR].screenX && (float)simcity->allegro.event.mouse.x <= simcity->pages.menuRegles.tabSpriteMenu[FlECHE_RETOUR].screenX + simcity->pages.menuRegles.tabSpriteMenu[FlECHE_RETOUR].spriteLargeur && (float)simcity->allegro.event.mouse.y >= simcity->pages.menuRegles.tabSpriteMenu[FlECHE_RETOUR].screenY && (float)simcity->allegro.event.mouse.y <= simcity->pages.menuRegles.tabSpriteMenu[FlECHE_RETOUR].screenY + simcity->pages.menuRegles.tabSpriteMenu[FlECHE_RETOUR].spriteHauteur){
+        simcity->pages.menuRegles.flecheRetourClique = 1;
+        simcity->pages.menuRegles.menuRegles = true;
+    }else if(simcity->allegro.event.mouse.button == 1 && (float)simcity->allegro.event.mouse.x >= simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE].screenX && (float)simcity->allegro.event.mouse.x <= simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE].screenX + simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE].spriteLargeur && (float)simcity->allegro.event.mouse.y >= simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE].screenY && (float)simcity->allegro.event.mouse.y <= simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE].screenY + simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE].spriteHauteur) {
+        simcity->pages.menuRegles.flecheGaucheClique = 1;
+     }else if(simcity->allegro.event.mouse.button == 1 && (float)simcity->allegro.event.mouse.x >= simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE].screenX && (float)simcity->allegro.event.mouse.x <= simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE].screenX + simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE].spriteLargeur && (float)simcity->allegro.event.mouse.y >= simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE].screenY && (float)simcity->allegro.event.mouse.y <= simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE].screenY + simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE].spriteHauteur) {
+        simcity->pages.menuRegles.flecheDroiteClique = 1;
+
+    }else simcity->pages.menuRegles.flecheDroiteClique = false;
+    simcity->pages.menuRegles.flecheGaucheClique = false;
+    simcity->pages.menuRegles.flecheRetourClique = false;
     }
-}
 
 void detectionCliqueMenuCapCom (Simcity* simcity){ // Chaque fonction clique fonctionne de la même manière
 
@@ -263,6 +376,29 @@ void detectionClique(Simcity * simcity){
     }
 }
 
+void afficherMenuAide (Simcity* simcity){
+    if(!simcity->pages.menuRegles.menuRegles){
+        al_clear_to_color(al_map_rgb(0,0,0));
+        al_draw_bitmap(simcity->tabBitmap[BITMAP_REGLE_1],0,0,0);
+        al_draw_bitmap_region(*(simcity->pages.menuRegles.tabSpriteMenu[FlECHE_RETOUR].image), simcity->pages.menuRegles.tabSpriteMenu[FlECHE_RETOUR].spriteX, simcity->pages.menuRegles.tabSpriteMenu[FlECHE_RETOUR].spriteY, simcity->pages.menuRegles.tabSpriteMenu[FlECHE_RETOUR].spriteLargeur, simcity->pages.menuRegles.tabSpriteMenu[FlECHE_RETOUR].spriteHauteur, simcity->pages.menuRegles.tabSpriteMenu[FlECHE_RETOUR].screenX, simcity->pages.menuRegles.tabSpriteMenu[FlECHE_RETOUR].screenY,0);
+        al_draw_bitmap_region(*(simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE].image), simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE].spriteX, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE].spriteY, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE].spriteLargeur, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE].spriteHauteur, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE].screenX, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE].screenY,0);
+        al_draw_bitmap_region(*(simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE].image), simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE].spriteX, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE].spriteY, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE].spriteLargeur, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE].spriteHauteur, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE].screenX, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE].screenY,0);
+        if(simcity->pages.menuRegles.flecheRetourHover) {
+            al_draw_bitmap_region(*(simcity->pages.menuRegles.tabSpriteMenu[FLECHE_RETOUR_HOVER].image), simcity->pages.menuRegles.tabSpriteMenu[FLECHE_RETOUR_HOVER].spriteX, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_RETOUR_HOVER].spriteY, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_RETOUR_HOVER].spriteLargeur, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_RETOUR_HOVER].spriteHauteur, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_RETOUR_HOVER].screenX, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_RETOUR_HOVER].screenY,0);
+        }if(simcity->pages.menuRegles.flecheDroiteHover){
+            al_draw_bitmap_region(*(simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE_HOVER].image), simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE_HOVER].spriteX, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE_HOVER].spriteY, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE_HOVER].spriteLargeur, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE_HOVER].spriteHauteur, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE_HOVER].screenX, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE_HOVER].screenY,0);
+        }if(simcity->pages.menuRegles.flecheGaucheHover){
+            al_draw_bitmap_region(*(simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE_HOVER].image), simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE_HOVER].spriteX, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE_HOVER].spriteY, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE_HOVER].spriteLargeur, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE_HOVER].spriteHauteur, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE_HOVER].screenX, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE_HOVER].screenY,0);
+        }if(simcity->pages.menuRegles.flecheGaucheClique){
+            al_draw_bitmap_region(*(simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE_CLIQUE].image), simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE_CLIQUE].spriteX, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE_CLIQUE].spriteY, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE_CLIQUE].spriteLargeur, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE_CLIQUE].spriteHauteur, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE_CLIQUE].screenX, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_GAUCHE_CLIQUE].screenY,0);
+        }if(simcity->pages.menuRegles.flecheRetourClique){
+            al_draw_bitmap_region(*(simcity->pages.menuRegles.tabSpriteMenu[FLECHE_RETOUR_CLIQUE].image), simcity->pages.menuRegles.tabSpriteMenu[FLECHE_RETOUR_CLIQUE].spriteX, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_RETOUR_CLIQUE].spriteY, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_RETOUR_CLIQUE].spriteLargeur, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_RETOUR_CLIQUE].spriteHauteur, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_RETOUR_CLIQUE].screenX, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_RETOUR_CLIQUE].screenY,0);
+        }if(simcity->pages.menuRegles.flecheDroiteClique){
+            al_draw_bitmap_region(*(simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE_CLIQUE].image), simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE_CLIQUE].spriteX, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE_CLIQUE].spriteY, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE_CLIQUE].spriteLargeur, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE_CLIQUE].spriteHauteur, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE_CLIQUE].screenX, simcity->pages.menuRegles.tabSpriteMenu[FLECHE_DROITE_CLIQUE].screenY,0);
+
+        }
+    }
+}
 
 
 void afficherMenuComCap (Simcity* simcity){ // Cette fonction recupère les booleéns et affiche les hover/cliques en conséquences
