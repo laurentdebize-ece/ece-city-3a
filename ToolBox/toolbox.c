@@ -337,8 +337,6 @@ void detectionCliqueToolBox(Simcity* simcity){
         simcity->toolBox.pompierEnMain = 0;
         simcity->toolBox.pauseEnMain = 0;
         simcity->toolBox.vue3EnMain = 0;
-
-
     }
 
 }

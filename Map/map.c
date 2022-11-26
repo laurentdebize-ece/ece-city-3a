@@ -905,24 +905,65 @@ void tournerBatiment(Simcity *simcity){
 }
 
 void detruire(Simcity *simcity){
-    if (simcity->allegro.event.mouse.button == 1 && simcity->toolBox.detruireEnMain == 1 && simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_MAISON || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_TERRAIN_VAGUE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_CABANE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_IMMEUBLE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_GRATTE_CIEL){
+    if (simcity->allegro.event.mouse.button == 1 && simcity->toolBox.detruireEnMain == 1 && (simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_MAISON || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_TERRAIN_VAGUE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_CABANE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_IMMEUBLE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_GRATTE_CIEL)){
         for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 3 ; ++x) {
             for (int y = simcity->interactionExterieure.mouse.celluleXY.celluleY; y < simcity->interactionExterieure.mouse.celluleXY.celluleY + 3; ++y) {
                 simcity->map.mapTile[x][y].typeBloc = TYPE_HERBE;
+                for (int i = 0; i < simcity->nbHabitations; ++i) {
+                    if (simcity->tabHabitation[i].coordXY[0].celluleX == simcity->interactionExterieure.mouse.celluleXY.celluleX && simcity->tabHabitation[i].coordXY[0].celluleY == simcity->interactionExterieure.mouse.celluleXY.celluleY){
+                        simcity->tabHabitation[i].typeBatiment = 0;
+                        simcity->tabHabitation[i].evolutionPossible = TRUE;
+                        simcity->tabHabitation[i].compteurEvolution = 0;
+                        simcity->tabHabitation[i].timerCree = 0;
+                        simcity->tabHabitation[i].dateCreation = -1;
+                        simcity->tabHabitation[i].timerBatiment = 0;
+                        simcity->tabHabitation[i].nbHabitants = 0;
+                        simcity->tabHabitation[i].capaciteElectriqueRecu = 0;
+                        simcity->tabHabitation[i].capaciteEauRecu = 0;
+                        simcity->tabHabitation[i].isFeu = FALSE;
+                        simcity->tabHabitation[i].isFeuRuine =FALSE;
+                        for (int j = 0; j < NBR_COORDS_XY_HAB; ++j) {
+                            simcity->tabHabitation[i].coordXY[j].celluleX = -1;
+                            simcity->tabHabitation[i].coordXY[j].celluleY = -1;
+                        }
+                    }
+                }
             }
         }
-    }
-    if (simcity->allegro.event.mouse.button == 1 && simcity->toolBox.detruireEnMain == 1 && simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_EAU_DROIT || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_ELEC_DROIT || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_POMPIER_DROIT){
+    }else if (simcity->allegro.event.mouse.button == 1 && simcity->toolBox.detruireEnMain == 1 && (simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_EAU_DROIT || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_ELEC_DROIT || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_POMPIER_DROIT)){
         for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 6 ; ++x) {
             for (int y = simcity->interactionExterieure.mouse.celluleXY.celluleY; y < simcity->interactionExterieure.mouse.celluleXY.celluleY + 4; ++y) {
                 simcity->map.mapTile[x][y].typeBloc = TYPE_HERBE;
+                for (int i = 0; i < simcity->nbInfrastructures; ++i) {
+                    if (simcity->tabInfrastructure[i].coordXY[0].celluleX == simcity->interactionExterieure.mouse.celluleXY.celluleX && simcity->tabInfrastructure[i].coordXY[0].celluleY == simcity->interactionExterieure.mouse.celluleXY.celluleY){
+                        simcity->tabInfrastructure[i].adjacence = 0;
+                        simcity->tabInfrastructure[i].typeBatiment = 0;
+                        simcity->tabInfrastructure[i].capaciteElectrique = 0;
+                        simcity->tabInfrastructure[i].capaciteEau = 0;
+                        for (int j = 0; j < NBR_COORDS_XY_INFRA; ++j) {
+                            simcity->tabInfrastructure[i].coordXY[j].celluleX = -1;
+                            simcity->tabInfrastructure[i].coordXY[j].celluleY = -1;
+                        }
+                    }
+                }
             }
         }
-    }
-    if (simcity->allegro.event.mouse.button == 1 && simcity->toolBox.detruireEnMain == 1 && simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_EAU_COTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_ELEC_COTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_POMPIER_COTE){
+    }else if (simcity->allegro.event.mouse.button == 1 && simcity->toolBox.detruireEnMain == 1 && (simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_EAU_COTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_ELEC_COTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_POMPIER_COTE)){
         for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 4 ; ++x) {
             for (int y = simcity->interactionExterieure.mouse.celluleXY.celluleY; y < simcity->interactionExterieure.mouse.celluleXY.celluleY + 6; ++y) {
                 simcity->map.mapTile[x][y].typeBloc = TYPE_HERBE;
+                for (int i = 0; i < simcity->nbInfrastructures; ++i) {
+                    if (simcity->tabInfrastructure[i].coordXY[0].celluleX == simcity->interactionExterieure.mouse.celluleXY.celluleX && simcity->tabInfrastructure[i].coordXY[0].celluleY == simcity->interactionExterieure.mouse.celluleXY.celluleY){
+                        simcity->tabInfrastructure[i].adjacence = 0;
+                        simcity->tabInfrastructure[i].typeBatiment = 0;
+                        simcity->tabInfrastructure[i].capaciteElectrique = 0;
+                        simcity->tabInfrastructure[i].capaciteEau = 0;
+                        for (int j = 0; j < NBR_COORDS_XY_INFRA; ++j) {
+                            simcity->tabInfrastructure[i].coordXY[j].celluleX = -1;
+                            simcity->tabInfrastructure[i].coordXY[j].celluleY = -1;
+                        }
+                    }
+                }
             }
         }
     }
