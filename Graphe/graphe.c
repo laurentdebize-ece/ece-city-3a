@@ -637,7 +637,7 @@ void calculCapaciteElec(Simcity* simcity) {
     }
 }*/
 
-void calculCapaTotEau(Simcity* simcity){
+void calculCapaTotEau(Simcity* simcity){ // permet de savoir la capacite totale utilise de l'eau
     for (int i = 0; i < simcity->nbInfrastructures; ++i) {
         if (simcity->tabInfrastructure[i].typeBatiment == 3){
             simcity->capaciteTotEauUtilise += simcity->tabInfrastructure[i].capaciteEauDonne;
@@ -645,7 +645,7 @@ void calculCapaTotEau(Simcity* simcity){
     }
 }
 
-void calculCapaTotElec(Simcity* simcity){
+void calculCapaTotElec(Simcity* simcity){// permet de savoir la capacite totale utilise de l'electricite
     for (int i = 0; i < simcity->nbInfrastructures; ++i) {
         if (simcity->tabInfrastructure[i].typeBatiment == 2){
             simcity->capaciteTotElecUtilise += simcity->tabInfrastructure[i].capaciteElectriqueDonne;
@@ -685,9 +685,7 @@ void calculCapaciteElec(Simcity* simcity){
 
     for (int i = 0; i < simcity->nbInfrastructures; ++i) {
         if (simcity->tabInfrastructure[i].typeBatiment == 2) { //si on a un chateau d'eau
-
             simcity->capaciteTotElecUtilise = 0;
-
             while(simcity->tabInfrastructure[i].adjacence->premier != NULL) { //tant que la liste n'est pas vide
 
                 if (simcity->tabInfrastructure[i].capaciteElectriqueDonne < CAPACITE_ELECTRIQUE && (simcity->tabInfrastructure[i].capaciteElectriqueMax - simcity->tabInfrastructure[i].capaciteElectriqueDonne) >= simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteElectriqueMax){ //si le chateau peut donner plus eau que ce qu'il manque à l'habitation
@@ -703,8 +701,9 @@ void calculCapaciteElec(Simcity* simcity){
                     simcity->tabInfrastructure[i].adjacence->premier->MaMaison->elecMax = TRUE;
                 }
                 simcity->tabInfrastructure[i].adjacence->premier = simcity->tabInfrastructure[i].adjacence->premier->suivant; //on regarde la suivante
-                calculCapaTotElec(simcity);
+
             }
+            calculCapaTotElec(simcity);
         }
     }
 }
