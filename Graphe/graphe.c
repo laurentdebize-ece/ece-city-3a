@@ -495,74 +495,77 @@ void BFSPompier(Simcity* simcity){
                 // je récupère les coordonnes du premier element de ma file
                 CaseBFS num = defiler(&f);
 
-                    // si couleur == 2 on ne visite pas
-                    if (simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY].couleur == 2)
-                        continue;
+                // si couleur == 2 on ne visite pas
+                if (simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY].couleur == 2)
+                    continue;
 
-                    Cellule celluleActuelle = simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY];
-                    //printf("coords %d %d %d \n", num.coordsXy.celluleX, num.coordsXy.celluleY, celluleActuelle.type);
-                    //enum TYPE_BLOC{TYPE_HERBE,TYPE_ROUTE,TYPE_TERRAIN_VAGUE,TYPE_CABANE,TYPE_MAISON,TYPE_IMMEUBLE,TYPE_GRATTE_CIEL, TYPE_ELEC_DROIT, TYPE_ELEC_COTE, TYPE_EAU_DROIT, TYPE_EAU_COTE, TYPE_POMPIER_DROIT, TYPE_POMPIER_COTE, NB_TYPE_BLOC};
-                    switch(celluleActuelle.type){
+                Cellule celluleActuelle = simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY];
+                //printf("coords %d %d %d \n", num.coordsXy.celluleX, num.coordsXy.celluleY, celluleActuelle.type);
+                //enum TYPE_BLOC{TYPE_HERBE,TYPE_ROUTE,TYPE_TERRAIN_VAGUE,TYPE_CABANE,TYPE_MAISON,TYPE_IMMEUBLE,TYPE_GRATTE_CIEL, TYPE_ELEC_DROIT, TYPE_ELEC_COTE, TYPE_EAU_DROIT, TYPE_EAU_COTE, TYPE_POMPIER_DROIT, TYPE_POMPIER_COTE, NB_TYPE_BLOC};
+                switch(celluleActuelle.type){
 
-                        case TYPE_POMPIER_COTE :
-                        case TYPE_POMPIER_DROIT :
-                        {
-                            enfilerVoisin(simcity, num, &f);
+                    case TYPE_POMPIER_COTE :
+                    case TYPE_POMPIER_DROIT :
+                    {
+                        enfilerVoisin(simcity, num, &f);
+                    }
+                        break;
+                    case TYPE_ROUTE :
+                    {
+                        if(num.distance < 20){
+                            simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY].pompier = TRUE;
+                            simcity->map.mapTile[num.coordsXy.celluleX][num.coordsXy.celluleY].typePompier = TRUE;
                         }
-                            break;
-                        case TYPE_ROUTE :
-                        {
-                            if(num.distance < 20){
-                                simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY].pompier = TRUE;
-                                simcity->map.mapTile[num.coordsXy.celluleX][num.coordsXy.celluleY].typePompier = TRUE;
-                            }
-                            enfilerVoisin(simcity, num, &f);
-                        }
-                            break;
-                        case TYPE_TERRAIN_VAGUE :
-                        case TYPE_CABANE :
-                        case TYPE_MAISON :
-                        case TYPE_IMMEUBLE :
-                        case TYPE_GRATTE_CIEL :
-                        {
-                            for (int i = 0; i < NBR_MAX_HAB; ++i) {
-                                for (int j = 0; j < 8; ++j) {
-                                    if (simcity->tabHabitation[i].coordXY[j].celluleX == num.coordsXy.celluleX
-                                        && simcity->tabHabitation[i].coordXY[j].celluleY == num.coordsXy.celluleY) {
-                                        for (int k = 0; k < 8; ++k) {
-                                            CoordsXY coords = simcity->tabHabitation[i].coordXY[k];
-                                            simcity->graphe.grille[coords.celluleX][coords.celluleY].couleur = 2;
-                                        }
+                        enfilerVoisin(simcity, num, &f);
+                    }
+                        break;
+                    case TYPE_TERRAIN_VAGUE :
+                    case TYPE_CABANE :
+                    case TYPE_MAISON :
+                    case TYPE_IMMEUBLE :
+                    case TYPE_GRATTE_CIEL :
+                    {
+                        for (int i = 0; i < NBR_MAX_HAB; ++i) {
+                            for (int j = 0; j < 8; ++j) {
+                                if (simcity->tabHabitation[i].coordXY[j].celluleX == num.coordsXy.celluleX
+                                    && simcity->tabHabitation[i].coordXY[j].celluleY == num.coordsXy.celluleY) {
+                                    for (int k = 0; k < 8; ++k) {
+                                        CoordsXY coords = simcity->tabHabitation[i].coordXY[k];
+                                        simcity->graphe.grille[coords.celluleX][coords.celluleY].couleur = 2;
+                                    }
+                                    if(num.distance < 20){
                                         insertionListeAdj(listeAdj, &simcity->tabHabitation[i], num.distance);
+                                        simcity->tabHabitation[i].pompier = TRUE;
                                     }
                                 }
                             }
                         }
-                            break;
                     }
-                    //je marque en Noir le sommet que j'ai fini de visiter
-                    simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY].couleur = 2;
+                    break;
+                }
+                //je marque en Noir le sommet que j'ai fini de visiter
+                simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY].couleur = 2;
 
             }
 
 
-            struct Element *actuel = listeAdj->premier;
+                struct Element *actuel = listeAdj->premier;
+/*
+                while (actuel != NULL)
+                {
+                    //printf("Habitation %x | Distance %d \n", actuel->MaMaison, actuel->distanceAMonBatiment);
 
-            while (actuel != NULL)
-            {
-                //printf("Habitation %x | Distance %d \n", actuel->MaMaison, actuel->distanceAMonBatiment);
-
-                if (actuel->distanceAMonBatiment > 20 && actuel->MaMaison->isFeu == TRUE) {
-                    actuel->MaMaison->isFeuRuine = TRUE;
-                    //printf("L'habitation %d ne peut pas etre sauvee car elle se trouve a une distance de %d de la caserne \n", actuel->MaMaison, actuel->distanceAMonBatiment);
+                    if (actuel->distanceAMonBatiment > 20 && actuel->MaMaison->isFeu == TRUE) {
+                        actuel->MaMaison->isFeuRuine = TRUE;
+                        //printf("L'habitation %d ne peut pas etre sauvee car elle se trouve a une distance de %d de la caserne \n", actuel->MaMaison, actuel->distanceAMonBatiment);
+                    }
+                    if (actuel->distanceAMonBatiment < 20 && actuel->MaMaison->isFeu == TRUE) {
+                        actuel->MaMaison->isFeu = FALSE;
+                        //printf("L'habitation %d va etre sauvee car elle se trouve a une distance de %d de la caserne \n", actuel->MaMaison, actuel->distanceAMonBatiment);
+                    }
+                    actuel = actuel->suivant;
                 }
-                if (actuel->distanceAMonBatiment < 20 && actuel->MaMaison->isFeu == TRUE) {
-                    actuel->MaMaison->isFeu = FALSE;
-                    //printf("L'habitation %d va etre sauvee car elle se trouve a une distance de %d de la caserne \n", actuel->MaMaison, actuel->distanceAMonBatiment);
-                }
-                actuel = actuel->suivant;
-            }
-
+*/
         }
 
     }

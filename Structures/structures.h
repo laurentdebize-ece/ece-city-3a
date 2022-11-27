@@ -222,6 +222,7 @@ typedef struct {
 
     bool isFeu;//Test "le bâtiment est eb feu ?"
     bool isFeuRuine;
+    bool pompier; // le batiment est dans la zone de perimetre du pompier
 
     int capaciteElectriqueMax;//correspond a combien d'elec elle a besoin
     int capaciteEauMax;//correspond a combien d'eau elle a besoin

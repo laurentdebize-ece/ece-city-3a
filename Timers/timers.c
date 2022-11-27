@@ -88,8 +88,16 @@ void timerBatiment(Simcity* simcity) {
                 if(simcity->tabHabitation[i].regression == TRUE) {
                     regressionHabitation(simcity, &simcity->tabHabitation[i]);
                 }
-                BFSPompier(simcity);
-                testNbCasernes(simcity, &simcity->tabHabitation[i]);
+                //j'ai modif ici
+                for(int l = 0; l < simcity->nbHabitations; ++l){
+                    if(simcity->tabHabitation[l].isFeu == TRUE && simcity->tabHabitation[l].pompier == TRUE) {
+                        simcity->tabHabitation[l].isFeu = FALSE;
+                    }
+                    else if(simcity->tabHabitation[l].isFeu == TRUE && simcity->tabHabitation[l].pompier == FALSE) {
+                        // on met en ruine la maison
+                        simcity->tabHabitation[l].isFeuRuine = TRUE;
+                    }
+                }
                 isFeu(&simcity->tabHabitation[i]);
                 if(simcity->tabHabitation[i].isFeu == TRUE) {
                     eteindreFeuMettreRuine(simcity, &simcity->tabHabitation[i]);
