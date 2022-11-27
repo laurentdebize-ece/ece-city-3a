@@ -895,9 +895,9 @@ void poserBatiment(Simcity *simcity){
     poserElec(simcity);
     poserEau(simcity);
     poserPompier(simcity);
-    BFSEau(simcity);
-    BFSElec(simcity);
-    BFSPompier(simcity);
+   // BFSEau(simcity);
+   // BFSElec(simcity);
+   // BFSPompier(simcity);
 
 }
 
