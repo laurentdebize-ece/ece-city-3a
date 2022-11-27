@@ -73,7 +73,7 @@ void timerBatiment(Simcity* simcity) {
             if(simcity->pause == 0 && simcity->tabHabitation[i].timerBatiment % 15 == 0 && modulo60 == TRUE) {//Si on n'est pas en pause, toutes les 15 secondes
                 if(simcity->tabHabitation[i].compteurEvolution == 5) {//Si le bâtiment est une ruine
                     simcity->tabHabitation[i].compteurEvolution = 0;//On met le bâtiment à l'état de terrain vague
-                    simcity->tabHabitation[i].evolutionPossible = TRUE;
+                    simcity->tabHabitation[i].evolutionPossible = TRUE;//L'évolution du bâtiment est possible
                 }
               //  if(simcity->communiste == TRUE) {//Si on joue en mode communiste
                //     isEvolutionPossible(simcity, &simcity->tabHabitation[i]);//On teste si l'évolution est possible par rapport aux capacités
@@ -84,10 +84,9 @@ void timerBatiment(Simcity* simcity) {
                         miseAJourDonneesHabitation(simcity, &simcity->tabHabitation[i]);//On met à jour les données du bâtiment
                     }
                 }
-                /*
-                 * isRegressionPossible(simcity, &simcity->tabHabitation[i]);
-                if(simcity->tabHabitation[i].regression == TRUE) {
-                    regressionHabitation(simcity, &simcity->tabHabitation[i]);
+              /*  isRegressionPossible(simcity, &simcity->tabHabitation[i]);//On teste si le bâtiment doit régresser
+                if(simcity->tabHabitation[i].regression == TRUE) {//S'il doit régresser
+                    regressionHabitation(simcity, &simcity->tabHabitation[i]);//On le fait régresser
                 }
                  */
                 //Boucle test pompier
@@ -102,8 +101,8 @@ void timerBatiment(Simcity* simcity) {
                     }
                 }
                 /////EUHHHHH
-                calculCapaciteEau(simcity);
-                isFeu(&simcity->tabHabitation[i]);
+                //calculCapaciteEau(simcity);
+                isFeu(&simcity->tabHabitation[i]);//On met en feu les habitations
                 recevoirImpots(simcity, simcity->tabHabitation[i].nbHabitants);//On reçoit les impôts
             }
         }

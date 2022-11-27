@@ -515,24 +515,11 @@ void afficherNbHabitantsTot(Simcity* simcity) {
     al_draw_textf(simcity->allegro.fonts[0], simcity->allegro.color[BLACK], 250, 725, 0, "%d",simcity->nbHabitants);
 }
 
-///Fonction permettant de vérifier si il y a une caserne sur le plateau
-void testNbCasernes(Simcity* simcity, Habitation* habitation) {
-    int nbCasernePompier = 0;//Variable content le nombre de casernes sur le jeu
-    for (int i = 0; i < NBR_MAX_INFRA; ++i) {//On parcourt le tableau d'infrastructures
-        if(simcity->tabInfrastructure[i].typeBatiment == 4) {//Si l'infrastructure est une caserne
-            nbCasernePompier++;//On met +1 aux nombres de casernes
-        }
-    }
-    if(nbCasernePompier == 0 && habitation->isFeu == TRUE) {//Si il n'y a pas de casernes sur le jeu
-        habitation->isFeuRuine = TRUE;//Le bâtiment doit tomber en ruine
-    }
-}
-
 ///Fonction permettant d'éteindre une habitation en feu
 void eteindreFeuMettreRuine(Simcity* simcity, Habitation* habitation) {
     if(habitation->isFeuRuine == TRUE) {//Si le bâtiment doit tomber en ruine
         habitation->isFeu = 0;//On éteint le feu
-        habitation->isFeuRuine = FALSE;
+        habitation->isFeuRuine = FALSE;//Le bâtiment ne doit plus tomber en ruine
         habitation->compteurEvolution = 5;//On met le bâtiment au stade de ruine
         miseAJourDonneesHabitation(simcity, habitation);//On met à jour les données du bâtiment
     }

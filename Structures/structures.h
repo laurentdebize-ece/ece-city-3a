@@ -11,6 +11,10 @@
 #include <allegro5/allegro_acodec.h>
 #include <allegro5/allegro_audio.h>
 
+
+
+/////////////////////////////////////// Déclaration des macros ///////////////////////////////////////
+
 #define NBCELLULEX 45 //const pour la map
 #define NBCELLULEY 35 //const pour la map
 
@@ -22,21 +26,32 @@
 #define NBR_COORDS_XY_HAB 8 //taille du contour d'une habitation
 #define NBR_COORDS_XY_INFRA 16 //taille du contour d'une infrastructure
 
+
+
+/////////////////////////////////////// Déclaration des Enum ///////////////////////////////////////
+
 enum BITMAP{BITMAP_MAP, BITMAP_TOOLBOX,BITMAP_BARRECOMPTEURS, BITMAP_BOUTON_PAUSE ,BITMAP_MENU_PRINCIPAL_INTRO, BITMAP_MENU_PRINCIPAL, BITMAP_MENU_COMMUNISTE_CAPITALISTE, BITMAP_BOUTONS_MENU_COMMUNISTE_CAPITALISTE, BITMAP_BOUTON_AIDE, BITMAP_FEU, BITMAP_BOUTTON_MENU_PRINCIPAL, BITMAP_TILE_RUINE,BITMAP_FLECHES_MENU_REGLES,BITMAP_REGLE_1,BITMAP_REGLE_2, NB_BITMAP};
 enum SPRITE_MAP {HERBE, HOVER_TILE,  ROUTE, TERRAIN_VAGUE, CABANE, MAISON, IMMEUBLE, GRATTE_CIEL,ELEC_DROIT, ELEC_COTE, EAU_DROIT, EAU_COTE, POMPIER_DROIT, POMPIER_COTE, EAU_RESEAU, ELEC_RESEAU, POMPIER_RESEAU, NB_SPRITE_MAP};
 enum SPRITE_MENU_PRINCIPAL { INTRO , FOND,LANCER, LANCER_HOVER, LANCER_CLIQUE, CHARGER, CHARGER_HOVER, CHARGER_CLIQUE, QUITTER, QUITTER_HOVER, QUITTER_CLIQUE, AIDE, AIDE_HOVER, AIDE_CLIQUE, NB_SPRITE_MENU_PRINCIPAL};
 enum SPRITE_MENU_COMMUNISTE_CAPITALISTE { FOND2, COMMUNISTE, COMMUNISTE_HOVER, COMMUNISTE_CLIQUE, CAPITALISTE, CAPITALISTE_HOVER, CAPITALISTE_CLIQUE ,NB_SPRITE_MENU_COMMUNISTE_CAPITALISTE};
 enum SPRITE_MENU_REGLES {REGLE1, REGLE2, FlECHE_RETOUR, FLECHE_GAUCHE, FLECHE_DROITE, FLECHE_RETOUR_HOVER, FLECHE_GAUCHE_HOVER, FLECHE_DROITE_HOVER, FLECHE_RETOUR_CLIQUE, FLECHE_GAUCHE_CLIQUE, FLECHE_DROITE_CLIQUE, NB_SPRITE_MENU_REGLES};
 
-enum SPRITE_BOITE_A_OUTIL {ROUTE_, ROUTE_HOVER, ROUTE_CLIQUE,MAISON_, MAISON_HOVER, MAISON_CLIQUE,ELEC, ELEC_HOVER, ELEC_CLIQUE, EAU, EAU_HOVER, EAU_CLIQUE, DETRUIRE, DETRUIRE_HOVER, DETRUIRE_CLIQUE, VUE1, VUE1_HOVER, VUE1_CLIQUE,VUE2, VUE2_HOVER, VUE2_CLIQUE, POMPIER, POMPIER_HOVER, POMPIER_CLIQUE, PAUSE, PAUSE_HOVER, PAUSE_CLIQUE, VUE_3, VUE_3_HOVER, VUE_3_CLIQUE, NB_SPRITE_TOOL_BOX};
+enum SPRITE_BOITE_A_OUTIL {ROUTE_, ROUTE_HOVER, ROUTE_CLIQUE,MAISON_, MAISON_HOVER, MAISON_CLIQUE,ELEC, ELEC_HOVER, ELEC_CLIQUE, EAU, EAU_HOVER, EAU_CLIQUE, DETRUIRE, DETRUIRE_HOVER, DETRUIRE_CLIQUE, VUE1, VUE1_HOVER, VUE1_CLIQUE,VUE2, VUE2_HOVER, VUE2_CLIQUE, POMPIER, POMPIER_HOVER, POMPIER_CLIQUE, PAUSE, PAUSE_HOVER, PAUSE_CLIQUE, VUE_3, VUE_3_HOVER, VUE_3_CLIQUE,INFO_ELEC, INFO_EAU, NB_SPRITE_TOOL_BOX};
 enum COLOR{ BLACK, WHITE};
 enum TYPE_BLOC{TYPE_HERBE,TYPE_ROUTE,TYPE_TERRAIN_VAGUE,TYPE_CABANE,TYPE_MAISON,TYPE_IMMEUBLE,TYPE_GRATTE_CIEL, TYPE_ELEC_DROIT, TYPE_ELEC_COTE, TYPE_EAU_DROIT, TYPE_EAU_COTE, TYPE_POMPIER_DROIT, TYPE_POMPIER_COTE, TYPE_RUINE, NB_TYPE_BLOC};
+
+
+
 
 typedef struct ListeAdj ListeAdj;
 
 typedef struct Element Element;
 
 typedef struct Batiment Batiment;
+
+
+
+/////////////////////////////////////// Structures Allegro ///////////////////////////////////////
 
 typedef struct {
     ALLEGRO_DISPLAY* display;//écran
@@ -62,30 +77,33 @@ typedef struct {
     ALLEGRO_BITMAP** image;//pointeur sur sprite de skin de personnages
     float spriteX, spriteY, spriteHauteur, spriteLargeur;//Position de l'image dans le sprite
     float screenX, screenY, screenXFixe, screenYFixe;//Position sur l'écran
-
 } Bitmap;
 
 typedef struct {
     float screenX, screenY; //Position sur l'écran
     int celluleX, celluleY; //Position transcrite en cellule (en fonction des tailles de tuile)
-
 } CoordsXY;
 
+
+
+/////////////////////////////////////// Structures des différentes interactions extérieures ///////////////////////////////////////
+
+///Structure des interactions liées à la souris
 typedef struct {
     CoordsXY celluleXY;
     int clic;
     bool outOfMapBorders;
     bool boolChangementDeCelluleIso;
     bool boolCliqueDeplacement;
-
 } Souris;
 
+///Structure des interactions liées au clavier
 typedef struct {
     bool tabTouches[10];//Permet de connaître quelle touche est enfoncée
     bool tab;
-
 } Clavier;
 
+///Structure des différentes interactions extérieures
 typedef struct {
     Clavier keyboard;
     Souris mouse;
@@ -94,52 +112,86 @@ typedef struct {
     int chronoTour;
 } InteractionExterieure;
 
-typedef struct {
 
-    Bitmap tabSpriteMenu[NB_SPRITE_MENU_PRINCIPAL];
+
+/////////////////////////////////////// Structures des différentes pages du jeu ///////////////////////////////////////
+
+///Structure de la page menu principal
+typedef struct {
+    Bitmap tabSpriteMenu[NB_SPRITE_MENU_PRINCIPAL];//Tableau regroupant les sprites du menu principal
     bool menuPrincipalIntro;
-    bool menuPrincipal; //permet de rester dans la boucle de cette page
+    bool menuPrincipal;//permet de rester dans la boucle de cette page
+
+    //Variables relatives au bouton lancer partie
     bool lancer;
     bool lancerHover;
     bool lancerClique;
+
+    //Variables relatives au bouton charger partie
     bool charger;
     bool chargerHover;
     bool chargerClique;
+
+    //Variables relatives au bouton quitter
     bool quitter;
     bool quitterHover;
     bool quitterClique;
+
+    //Variables relatives au bouton aide
     bool aide;
     bool aideHover;
     bool aideClique;
 
 } PageMenuPrincipal;
 
+///Structure de la page menu Capitaliste et Communiste
 typedef struct PageMenuCapitalisteCommuniste {
-    Bitmap tabSpriteMenu[NB_SPRITE_MENU_COMMUNISTE_CAPITALISTE];
-    bool menuCapitalisteCommuniste;
+    Bitmap tabSpriteMenu[NB_SPRITE_MENU_COMMUNISTE_CAPITALISTE];//Tableau regroupant les sprites du menu Capitaliste Communiste
+    bool menuCapitalisteCommuniste;//permet de rester dans la boucle de cette page
+
+    //Variables relatives au bouton Capitaliste
     bool capitalisteHover;
     bool capitalisteClique;
+
+    //Variables relatives au bouton Communiste
     bool communisteHover;
     bool communisteClique;
+
 } PageMenuCapitalisteCommuniste;
 
+///Structure de la page menu des règles du jeu
 typedef struct  PageMenuRegles {
     Bitmap tabSpriteMenu[NB_SPRITE_MENU_REGLES];
-    bool menuRegles;
+    bool menuRegles;//permet de rester dans la boucle de cette page
+    bool menuReglesPage1;
+    bool menuReglesPage2;
+
+    //Variables relatives au bouton Retour
     bool flecheRetourHover;
     bool flecheRetourClique;
+
+    //Variables relatives au bouton Flèche gauche
     bool flecheGaucheHover;
     bool flecheGaucheClique;
+
+    //Variables relatives au bouton Flèche droite
     bool flecheDroiteHover;
     bool flecheDroiteClique;
+
 } PageMenuRegles;
 
+///Structure des différentes pages du jeu
 typedef struct {
     PageMenuPrincipal menuPrincipal;
     PageMenuCapitalisteCommuniste menuCapitalisteCommuniste;
     PageMenuRegles menuRegles;
 }Pages;
 
+
+
+/////////////////////////////////////// Structures de la map ///////////////////////////////////////
+
+///Structure des tuiles de la map
 typedef struct {
     CoordsXY coordsXY;
     int spriteLargeur, spriteHauteur;
@@ -148,9 +200,9 @@ typedef struct {
     bool typeElec;
     bool typeEau;
     bool typePompier;
-
 } Tile;
 
+///Structure de la map
 typedef struct {
     Tile mapTile[NBCELLULEX][NBCELLULEY];//Tableau à 2 dimensions de Tuiles qui permet de générer la map
     CoordsXY Origine;
@@ -160,6 +212,7 @@ typedef struct {
     int creationRouteX, creationRouteY;
 } Map;
 
+///Structure de la ToolBox
 typedef struct {
     Bitmap tabSpriteToolBox[NB_SPRITE_TOOL_BOX];//Tableau regroupant les sprites de la ToolBox
     bool pauseEnMain;
@@ -214,6 +267,11 @@ struct Batiment{
 
 };
 
+
+
+/////////////////////////////////////// Structures des éléments du jeu ///////////////////////////////////////
+
+///Structure des habitations
 typedef struct {
     CoordsXY coordXY[NBR_COORDS_XY_HAB];//Coordonnées du bâtiment
     int typeBatiment;//Type de bâtiment (ici 1 car habitation)
@@ -252,6 +310,8 @@ typedef struct {
 } Habitation;
 
 
+
+///Structure des timers
 typedef struct {
     //Variables relatives à la date fictive
     int mois;//Mois actuel
@@ -265,6 +325,7 @@ typedef struct {
 
 }Timers;
 
+///Structure de la banque
 typedef struct {
     //Action d'acheter un batiment
     bool achatTerrainVague;
@@ -282,6 +343,9 @@ typedef struct {
 
 }Banque;
 
+
+
+/////////////////////////////////////// Structures des graphes ///////////////////////////////////////
 
 ///liste chainée pour les adjacences depuis la centrale
 struct Element{
@@ -304,7 +368,6 @@ typedef struct Cellule{
     bool eau;
     bool elec;
     bool pompier;
-
 
     struct Cellule* suivant;
     enum TYPE_BLOC type;
@@ -329,7 +392,7 @@ typedef struct Graphe {
     Cellule grille[NBCELLULEX][NBCELLULEY];
 }Graphe;
 
-////MAILLON DE MA FILE ET CASEBFS QUI PERMET D4ETRE STOKE DANS LA FILE
+////MAILLON DE MA FILE ET CASE BFS QUI PERMET D'ETRE STOKE DANS LA FILE
 typedef struct CaseBFS{
     int distance;
     CoordsXY coordsXy;
@@ -347,6 +410,10 @@ typedef struct file {
     t_maillon *tete;
     t_maillon *queue;
 } t_file;
+
+
+
+/////////////////////////////////////// Structures générale du jeu ///////////////////////////////////////
 
 typedef struct {
     Allegro allegro;// Contient tous les éléments ALLEGRO
@@ -366,7 +433,9 @@ typedef struct {
     int nbInfrastructures;//Nombre d'infrastructures de la ville
     int nbHabitants;//Nombre d'habitants de la ville
     int capaciteEauRestante;//Capacité en eau disponible
+    int capaciteTotEauUtilise;//Capacité en eau disponible
     int capaciteElecRestante;//Capacité en électricité disponible
+    int capaciteTotElecUtilise;//Capacité en électricité disponible
 
     bool dessin;
     bool endGame;
@@ -378,6 +447,10 @@ typedef struct {
     bool communiste;
 
 } Simcity;
+
+
+
+/////////////////////////////////////// Fonctions d'initialisation ///////////////////////////////////////
 
 void installAllegro();
 void declarerAllegro(Simcity* simcity);

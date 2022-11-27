@@ -242,6 +242,22 @@ void toolboxSpriteInit(Simcity* simcity){
     simcity->toolBox.tabSpriteToolBox[VUE_3_CLIQUE].spriteY = 267;
     simcity->toolBox.tabSpriteToolBox[VUE_3_CLIQUE].screenX = 11;
     simcity->toolBox.tabSpriteToolBox[VUE_3_CLIQUE].screenY = 207;
+
+    simcity->toolBox.tabSpriteToolBox[INFO_EAU].image = &simcity->tabBitmap[BITMAP_TOOLBOX];
+    simcity->toolBox.tabSpriteToolBox[INFO_EAU].spriteLargeur = 35;
+    simcity->toolBox.tabSpriteToolBox[INFO_EAU].spriteHauteur = 35;
+    simcity->toolBox.tabSpriteToolBox[INFO_EAU].spriteX = 107;
+    simcity->toolBox.tabSpriteToolBox[INFO_EAU].spriteY = 162;
+    simcity->toolBox.tabSpriteToolBox[INFO_EAU].screenX = -5;
+    simcity->toolBox.tabSpriteToolBox[INFO_EAU].screenY = 300;
+
+    simcity->toolBox.tabSpriteToolBox[INFO_ELEC].image = &simcity->tabBitmap[BITMAP_TOOLBOX];
+    simcity->toolBox.tabSpriteToolBox[INFO_ELEC].spriteLargeur = 35;
+    simcity->toolBox.tabSpriteToolBox[INFO_ELEC].spriteHauteur = 35;
+    simcity->toolBox.tabSpriteToolBox[INFO_ELEC].spriteX = 152;
+    simcity->toolBox.tabSpriteToolBox[INFO_ELEC].spriteY = 162;
+    simcity->toolBox.tabSpriteToolBox[INFO_ELEC].screenX = -5;
+    simcity->toolBox.tabSpriteToolBox[INFO_ELEC].screenY = 350;
 }
 
 void calculHoverToolBox(Simcity* simcity){
@@ -342,7 +358,7 @@ void detectionCliqueToolBox(Simcity* simcity){
 }
 
 void afficherToolbox (Simcity* simcity){
-    al_draw_filled_rectangle(0,0,111,280, al_map_rgb(105,105,105));
+    al_draw_filled_rectangle(0,0,111,400, al_map_rgb(105,105,105));
     al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[ROUTE_].image),simcity->toolBox.tabSpriteToolBox[ROUTE_].spriteX,simcity->toolBox.tabSpriteToolBox[ROUTE_].spriteY,simcity->toolBox.tabSpriteToolBox[ROUTE_].spriteLargeur,simcity->toolBox.tabSpriteToolBox[ROUTE_].spriteHauteur,simcity->toolBox.tabSpriteToolBox[ROUTE_].screenX,simcity->toolBox.tabSpriteToolBox[ROUTE_].screenY,0);
     al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[MAISON_].image),simcity->toolBox.tabSpriteToolBox[MAISON_].spriteX,simcity->toolBox.tabSpriteToolBox[MAISON_].spriteY,simcity->toolBox.tabSpriteToolBox[MAISON_].spriteLargeur,simcity->toolBox.tabSpriteToolBox[MAISON_].spriteHauteur,simcity->toolBox.tabSpriteToolBox[MAISON_].screenX,simcity->toolBox.tabSpriteToolBox[MAISON_].screenY,0);
     al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[ELEC].image),simcity->toolBox.tabSpriteToolBox[ELEC].spriteX,simcity->toolBox.tabSpriteToolBox[ELEC].spriteY,simcity->toolBox.tabSpriteToolBox[ELEC].spriteLargeur,simcity->toolBox.tabSpriteToolBox[ELEC].spriteHauteur,simcity->toolBox.tabSpriteToolBox[ELEC].screenX,simcity->toolBox.tabSpriteToolBox[ELEC].screenY,0);
@@ -353,6 +369,11 @@ void afficherToolbox (Simcity* simcity){
     al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[POMPIER].image),simcity->toolBox.tabSpriteToolBox[POMPIER].spriteX,simcity->toolBox.tabSpriteToolBox[POMPIER].spriteY,simcity->toolBox.tabSpriteToolBox[POMPIER].spriteLargeur,simcity->toolBox.tabSpriteToolBox[POMPIER].spriteHauteur,simcity->toolBox.tabSpriteToolBox[POMPIER].screenX,simcity->toolBox.tabSpriteToolBox[POMPIER].screenY,0);
     al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[PAUSE].image),simcity->toolBox.tabSpriteToolBox[PAUSE].spriteX,simcity->toolBox.tabSpriteToolBox[PAUSE].spriteY,simcity->toolBox.tabSpriteToolBox[PAUSE].spriteLargeur,simcity->toolBox.tabSpriteToolBox[PAUSE].spriteHauteur,simcity->toolBox.tabSpriteToolBox[PAUSE].screenX,simcity->toolBox.tabSpriteToolBox[PAUSE].screenY,0);
     al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[VUE_3].image),simcity->toolBox.tabSpriteToolBox[VUE_3].spriteX,simcity->toolBox.tabSpriteToolBox[VUE_3].spriteY,simcity->toolBox.tabSpriteToolBox[VUE_3].spriteLargeur,simcity->toolBox.tabSpriteToolBox[VUE_3].spriteHauteur,simcity->toolBox.tabSpriteToolBox[VUE_3].screenX,simcity->toolBox.tabSpriteToolBox[VUE_3].screenY,0);
+    al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[INFO_EAU].image),simcity->toolBox.tabSpriteToolBox[INFO_EAU].spriteX,simcity->toolBox.tabSpriteToolBox[INFO_EAU].spriteY,simcity->toolBox.tabSpriteToolBox[INFO_EAU].spriteLargeur,simcity->toolBox.tabSpriteToolBox[INFO_EAU].spriteHauteur,simcity->toolBox.tabSpriteToolBox[INFO_EAU].screenX,simcity->toolBox.tabSpriteToolBox[INFO_EAU].screenY,0);
+    al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[INFO_ELEC].image),simcity->toolBox.tabSpriteToolBox[INFO_ELEC].spriteX,simcity->toolBox.tabSpriteToolBox[INFO_ELEC].spriteY,simcity->toolBox.tabSpriteToolBox[INFO_ELEC].spriteLargeur,simcity->toolBox.tabSpriteToolBox[INFO_ELEC].spriteHauteur,simcity->toolBox.tabSpriteToolBox[INFO_ELEC].screenX,simcity->toolBox.tabSpriteToolBox[INFO_ELEC].screenY,0);
+    al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[BLACK], 28, 305, 0, ": %d", simcity->capaciteTotElecUtilise);
+    al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[BLACK], 28, 355, 0, ": %d", simcity->capaciteTotEauUtilise);
+
 
     if (simcity->toolBox.routeHover){
         al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[ROUTE_HOVER].image),simcity->toolBox.tabSpriteToolBox[ROUTE_HOVER].spriteX,simcity->toolBox.tabSpriteToolBox[ROUTE_HOVER].spriteY,simcity->toolBox.tabSpriteToolBox[ROUTE_HOVER].spriteLargeur,simcity->toolBox.tabSpriteToolBox[ROUTE_HOVER].spriteHauteur,simcity->toolBox.tabSpriteToolBox[ROUTE_HOVER].screenX,simcity->toolBox.tabSpriteToolBox[ROUTE_HOVER].screenY,0);
