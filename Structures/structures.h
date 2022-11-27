@@ -124,6 +124,8 @@ typedef struct PageMenuCapitalisteCommuniste {
 typedef struct  PageMenuRegles {
     Bitmap tabSpriteMenu[NB_SPRITE_MENU_REGLES];
     bool menuRegles;
+    bool menuReglesPage1;
+    bool menuReglesPage2;
     bool flecheRetourHover;
     bool flecheRetourClique;
     bool flecheGaucheHover;
