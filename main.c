@@ -1,6 +1,6 @@
 #include "BouclesJeu/bouclesJeu.h"
 
 int main(){
-    lancerPartie();
+    lancerJeu();
     return 0;
 }

@@ -253,7 +253,7 @@ void boucletestMenuCommunisteCapitaliste(Simcity* simcity){
 
 
 ///Fonction permettant le lancement de la partie
-void lancerPartie() {
+void lancerJeu() {
     //Initialisation de la structure du jeu
     Simcity simcity = {0};
     initAll(&simcity);

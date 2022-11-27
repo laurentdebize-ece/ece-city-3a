@@ -23,6 +23,6 @@ void boucletestMenuRegles(Simcity* simcity);
 void boucletestMenuPrincipal(Simcity* simcity);
 void boucletestMenuCommunisteCapitaliste(Simcity* simcity);
 
-void lancerPartie();
+void lancerJeu();
 
 #endif //ECE_CITY_3A_BOUCLESJEU_H
