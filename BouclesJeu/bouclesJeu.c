@@ -84,6 +84,7 @@ void boucleTest(Simcity* simcity){
                 BFSElec(simcity);
                 BFSPompier(simcity);
                 calculCapaciteEau(simcity);
+                calculCapaciteElec(simcity);
                 // ici : calculCapaciteElectricite(simcity);
                 simcity->dessin = true;//On met à jour la page
 
