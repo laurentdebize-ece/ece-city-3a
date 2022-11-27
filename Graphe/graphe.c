@@ -71,7 +71,6 @@ void recupdonne(Graphe *graphe){
 */
 
 //reseau d'eau
-
 void niveau1Eau(Simcity *simcity){
     for (int x = 0; x < NBCELLULEX; ++x) {
         for (int y = 0; y < NBCELLULEY; ++y) {
@@ -101,7 +100,13 @@ void niveau1Eau(Simcity *simcity){
         for (int j = 0; j < NBR_COORDS_XY_INFRA; ++j) {
             if (simcity->interactionExterieure.mouse.celluleXY.celluleX == simcity->tabInfrastructure[i].coordXY[j].celluleX && simcity->interactionExterieure.mouse.celluleXY.celluleY == simcity->tabInfrastructure[i].coordXY[j].celluleY && simcity->tabInfrastructure[i].typeBatiment == 3){
                 al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 400, 0, "Infra n°%d", i + 1);
-                al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 460, 0, "Reste Eau: %d", (simcity->tabInfrastructure[i].capaciteEauMax - simcity->tabInfrastructure[i].capaciteEauDonne));
+                al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 430, 0, "Reste Eau: %d", (simcity->tabInfrastructure[i].capaciteEauMax - simcity->tabInfrastructure[i].capaciteEauDonne));
+                for(int i = 0; i < simcity->nbHabitations; i++) {
+                    if (simcity->tabHabitation[i].capaciteEauRecu != 0) {
+                        al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 460 + i * 20, 0,
+                                      "Hab : %d, eau : %d ", i, simcity->tabHabitation[i].capaciteEauRecu);
+                    }
+                }
             }
         }
     }
@@ -137,7 +142,13 @@ void niveau2Elec(Simcity *simcity){
         for (int j = 0; j < NBR_COORDS_XY_INFRA; ++j) {
             if (simcity->interactionExterieure.mouse.celluleXY.celluleX == simcity->tabInfrastructure[i].coordXY[j].celluleX && simcity->interactionExterieure.mouse.celluleXY.celluleY == simcity->tabInfrastructure[i].coordXY[j].celluleY && simcity->tabInfrastructure[i].typeBatiment == 2){
                 al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 400, 0, "Infra n°%d", i + 1);
-                al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 460, 0, "Reste Elec: %d", (simcity->tabInfrastructure[i].capaciteElectriqueMax - simcity->tabInfrastructure[i].capaciteElectriqueDonne));
+                al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 430, 0, "Reste Elec: %d", (simcity->tabInfrastructure[i].capaciteElectriqueMax - simcity->tabInfrastructure[i].capaciteElectriqueDonne));
+                for(int i = 0; i < simcity->nbHabitations; i++) {
+                    if (simcity->tabHabitation[i].capaciteElectriqueRecu != 0) {
+                        al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 460 + i * 20, 0,
+                                      "Hab : %d, elec : %d ", i, simcity->tabHabitation[i].capaciteElectriqueRecu);
+                    }
+                }
             }
         }
     }
