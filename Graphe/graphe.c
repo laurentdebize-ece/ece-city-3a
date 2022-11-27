@@ -631,21 +631,21 @@ void BFSPompier(Simcity* simcity){
 }
 
 void partiellementAlimenteEau(Simcity* simcity){
-    for (int i = 0; i < simcity->nbHabitations; ++i) {
-        if (simcity->tabHabitation[i].capaciteEauMax == simcity->tabHabitation[i].capaciteEauRecu){
-            simcity->tabHabitation[i].partiellementEau = false;
+    for (int i = 0; i < simcity->nbHabitations; ++i) { // parcours les habitation
+        if (simcity->tabHabitation[i].capaciteEauMax == simcity->tabHabitation[i].capaciteEauRecu){ // si la capacite d'eau est max
+            simcity->tabHabitation[i].partiellementEau = false; // pas de carence en eau
         }else{
-            simcity->tabHabitation[i].partiellementEau = true;
+            simcity->tabHabitation[i].partiellementEau = true; // habitation est en carence en Eau
         }
     }
 }
 
 void partiellementAlimenteElec(Simcity* simcity){
-    for (int i = 0; i < simcity->nbHabitations; ++i) {
-        if (simcity->tabHabitation[i].capaciteElectriqueMax == simcity->tabHabitation[i].capaciteElectriqueRecu){
-            simcity->tabHabitation[i].partiellementElec = false;
+    for (int i = 0; i < simcity->nbHabitations; ++i) { // parcours les habs
+        if (simcity->tabHabitation[i].capaciteElectriqueMax == simcity->tabHabitation[i].capaciteElectriqueRecu){ // si la capacite d'electricite est max
+            simcity->tabHabitation[i].partiellementElec = false;// pas de carence d'electricite
         } else{
-            simcity->tabHabitation[i].partiellementElec = true;
+            simcity->tabHabitation[i].partiellementElec = true;// habitation est en carence d'Electricite
         }
     }
 }
@@ -677,8 +677,8 @@ void calculCapaciteEau(Simcity* simcity){
                         simcity->tabInfrastructure[i].capaciteEauDonne += (simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauMax - simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauRecu);
                         simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauRecu += (simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauMax - simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauRecu);
 
-                    }
-                    else if (simcity->tabInfrastructure[i].capaciteEauDonne < CAPACITE_EAU && (simcity->tabInfrastructure[i].capaciteEauMax - simcity->tabInfrastructure[i].capaciteEauDonne) <= (simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauMax - simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauRecu) && (simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauMax - simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauRecu) > 0) { //si la centrale ne peut pas donner plus d'electricité que ce qu'il manque à l'habitation
+                    }//si la centrale ne peut pas donner plus d'electricité que ce qu'il manque à l'habitation
+                    else if (simcity->tabInfrastructure[i].capaciteEauDonne < CAPACITE_EAU && (simcity->tabInfrastructure[i].capaciteEauMax - simcity->tabInfrastructure[i].capaciteEauDonne) <= (simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauMax - simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauRecu) && (simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauMax - simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauRecu) > 0) {
                         simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauRecu += (simcity->tabInfrastructure[i].capaciteEauMax - simcity->tabInfrastructure[i].capaciteEauDonne);
                         simcity->tabInfrastructure[i].capaciteEauDonne += (simcity->tabInfrastructure[i].capaciteEauMax - simcity->tabInfrastructure[i].capaciteEauDonne);
                     }
