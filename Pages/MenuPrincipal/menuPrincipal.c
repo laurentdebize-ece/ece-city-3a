@@ -1,5 +1,6 @@
 #include "menuPrincipal.h"
 
+
 void initDataMenuRegles (Simcity* simcity){
     simcity->pages.menuRegles.tabSpriteMenu[FlECHE_RETOUR].image = &simcity->tabBitmap[BITMAP_FLECHES_MENU_REGLES];
     simcity->pages.menuRegles.tabSpriteMenu[FlECHE_RETOUR].spriteX = 25;
