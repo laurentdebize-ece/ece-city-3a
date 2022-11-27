@@ -14,7 +14,10 @@ void afficherMenuComCap (Simcity* simcity);
 void initDataBoutonAide (Simcity* simcity);
 void calculHoverBoutonAide (Simcity* simcity);
 void detectionCliqueBoutonAide (Simcity* simcity);
-
+void afficherMenuAide (Simcity* simcity);
+void initDataMenuRegles (Simcity* simcity);
+void detectionCliqueMenuRegles (Simcity* simcity);
+void calculHoverFlechesMenuRegles (Simcity* simcity);
 
 
 

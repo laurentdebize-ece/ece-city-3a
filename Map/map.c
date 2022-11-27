@@ -14,7 +14,6 @@ void initDataMap(Simcity* simcity){
             simcity->map.mapTile[x][y].coordsXY.celluleY = y;
             simcity->map.mapTile[x][y].typeElec = FALSE;
             simcity->map.mapTile[x][y].typeEau = FALSE;
-
         }
     }
     bitmapSpriteInit(simcity);
@@ -169,43 +168,43 @@ void afficherMap(Simcity* simcity){
            if (simcity->map.mapTile[x][y].typeBloc == TYPE_HERBE){
                 al_draw_bitmap_region(*(simcity->map.spriteTile[HERBE].image), simcity->map.spriteTile[HERBE].spriteX, simcity->map.spriteTile[HERBE].spriteY, simcity->map.spriteTile[HERBE].spriteLargeur, simcity->map.spriteTile[HERBE].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
            }
-            else if (simcity->map.mapTile[x][y].typeBloc == TYPE_TERRAIN_VAGUE){
+           else if (simcity->map.mapTile[x][y].typeBloc == TYPE_TERRAIN_VAGUE){
                 al_draw_bitmap_region(*(simcity->map.spriteTile[TERRAIN_VAGUE].image), simcity->map.spriteTile[TERRAIN_VAGUE].spriteX, simcity->map.spriteTile[TERRAIN_VAGUE].spriteY, simcity->map.spriteTile[TERRAIN_VAGUE].spriteLargeur, simcity->map.spriteTile[TERRAIN_VAGUE].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
             }
-            else if (simcity->map.mapTile[x][y].typeBloc == TYPE_CABANE){
+           else if (simcity->map.mapTile[x][y].typeBloc == TYPE_CABANE){
                 al_draw_bitmap_region(*(simcity->map.spriteTile[CABANE].image), simcity->map.spriteTile[CABANE].spriteX, simcity->map.spriteTile[CABANE].spriteY, simcity->map.spriteTile[CABANE].spriteLargeur, simcity->map.spriteTile[CABANE].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
             }
-            else if (simcity->map.mapTile[x][y].typeBloc == TYPE_MAISON){
+           else if (simcity->map.mapTile[x][y].typeBloc == TYPE_MAISON){
                 al_draw_bitmap_region(*(simcity->map.spriteTile[MAISON].image), simcity->map.spriteTile[MAISON].spriteX, simcity->map.spriteTile[MAISON].spriteY, simcity->map.spriteTile[MAISON].spriteLargeur, simcity->map.spriteTile[MAISON].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
             }
-            else if (simcity->map.mapTile[x][y].typeBloc == TYPE_IMMEUBLE){
+           else if (simcity->map.mapTile[x][y].typeBloc == TYPE_IMMEUBLE){
                 al_draw_bitmap_region(*(simcity->map.spriteTile[IMMEUBLE].image), simcity->map.spriteTile[IMMEUBLE].spriteX, simcity->map.spriteTile[IMMEUBLE].spriteY, simcity->map.spriteTile[IMMEUBLE].spriteLargeur, simcity->map.spriteTile[IMMEUBLE].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
             }
-            else if (simcity->map.mapTile[x][y].typeBloc == TYPE_GRATTE_CIEL){
+           else if (simcity->map.mapTile[x][y].typeBloc == TYPE_GRATTE_CIEL){
                 al_draw_bitmap_region(*(simcity->map.spriteTile[GRATTE_CIEL].image), simcity->map.spriteTile[GRATTE_CIEL].spriteX, simcity->map.spriteTile[GRATTE_CIEL].spriteY, simcity->map.spriteTile[GRATTE_CIEL].spriteLargeur, simcity->map.spriteTile[GRATTE_CIEL].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
             }
-            else if (simcity->map.mapTile[x][y].typeBloc == TYPE_ROUTE){
+           else if (simcity->map.mapTile[x][y].typeBloc == TYPE_ROUTE){
                 al_draw_bitmap_region(*(simcity->map.spriteTile[ROUTE].image), simcity->map.spriteTile[ROUTE].spriteX, simcity->map.spriteTile[ROUTE].spriteY, simcity->map.spriteTile[ROUTE].spriteLargeur, simcity->map.spriteTile[ROUTE].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
             }
-            else if (simcity->map.mapTile[x][y].typeBloc == TYPE_ELEC_DROIT){
+           else if (simcity->map.mapTile[x][y].typeBloc == TYPE_ELEC_DROIT){
                 al_draw_bitmap_region(*(simcity->map.spriteTile[ELEC_DROIT].image), simcity->map.spriteTile[ELEC_DROIT].spriteX, simcity->map.spriteTile[ELEC_DROIT].spriteY, simcity->map.spriteTile[ELEC_DROIT].spriteLargeur, simcity->map.spriteTile[ELEC_DROIT].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX, simcity->map.mapTile[x][y].coordsXY.screenY,0);
             }
-            else if (simcity->map.mapTile[x][y].typeBloc == TYPE_ELEC_COTE){
+           else if (simcity->map.mapTile[x][y].typeBloc == TYPE_ELEC_COTE){
                 al_draw_bitmap_region(*(simcity->map.spriteTile[ELEC_COTE].image), simcity->map.spriteTile[ELEC_COTE].spriteX, simcity->map.spriteTile[ELEC_COTE].spriteY, simcity->map.spriteTile[ELEC_COTE].spriteLargeur, simcity->map.spriteTile[ELEC_COTE].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
             }
-            else if (simcity->map.mapTile[x][y].typeBloc == TYPE_EAU_DROIT){
+           else if (simcity->map.mapTile[x][y].typeBloc == TYPE_EAU_DROIT){
                 al_draw_bitmap_region(*(simcity->map.spriteTile[EAU_DROIT].image), simcity->map.spriteTile[EAU_DROIT].spriteX, simcity->map.spriteTile[EAU_DROIT].spriteY, simcity->map.spriteTile[EAU_DROIT].spriteLargeur, simcity->map.spriteTile[EAU_DROIT].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
             }
-            else if (simcity->map.mapTile[x][y].typeBloc == TYPE_EAU_COTE){
+           else if (simcity->map.mapTile[x][y].typeBloc == TYPE_EAU_COTE){
                 al_draw_bitmap_region(*(simcity->map.spriteTile[EAU_COTE].image), simcity->map.spriteTile[EAU_COTE].spriteX, simcity->map.spriteTile[EAU_COTE].spriteY, simcity->map.spriteTile[EAU_COTE].spriteLargeur, simcity->map.spriteTile[EAU_COTE].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
             }
-            else if (simcity->map.mapTile[x][y].typeBloc == TYPE_POMPIER_DROIT){
+           else if (simcity->map.mapTile[x][y].typeBloc == TYPE_POMPIER_DROIT){
                 al_draw_bitmap_region(*(simcity->map.spriteTile[POMPIER_DROIT].image), simcity->map.spriteTile[POMPIER_DROIT].spriteX, simcity->map.spriteTile[POMPIER_DROIT].spriteY, simcity->map.spriteTile[POMPIER_DROIT].spriteLargeur, simcity->map.spriteTile[POMPIER_DROIT].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
             }
-            else if (simcity->map.mapTile[x][y].typeBloc == TYPE_POMPIER_COTE){
+           else if (simcity->map.mapTile[x][y].typeBloc == TYPE_POMPIER_COTE){
                 al_draw_bitmap_region(*(simcity->map.spriteTile[POMPIER_COTE].image), simcity->map.spriteTile[POMPIER_COTE].spriteX, simcity->map.spriteTile[POMPIER_COTE].spriteY, simcity->map.spriteTile[POMPIER_COTE].spriteLargeur, simcity->map.spriteTile[POMPIER_COTE].spriteHauteur,simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
             }
-            else if (simcity->map.mapTile[x][y].typeBloc == TYPE_RUINE){
+           else if (simcity->map.mapTile[x][y].typeBloc == TYPE_RUINE){
                 al_draw_bitmap(simcity->tabBitmap[BITMAP_TILE_RUINE], simcity->map.mapTile[x][y].coordsXY.screenX,simcity->map.mapTile[x][y].coordsXY.screenY,0);
             }
         }
@@ -913,25 +912,66 @@ void tournerBatiment(Simcity *simcity){
     }
 }
 
-void detruire(Simcity *simcity){
-    if (simcity->allegro.event.mouse.button == 1 && simcity->toolBox.detruireEnMain == 1 && simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_MAISON || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_TERRAIN_VAGUE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_CABANE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_IMMEUBLE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_GRATTE_CIEL){
+void detruire(Simcity *simcity){ // reinitialise toutes les données du batiment detruit
+    if (simcity->allegro.event.mouse.button == 1 && simcity->toolBox.detruireEnMain == 1 && (simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_MAISON || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_TERRAIN_VAGUE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_CABANE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_IMMEUBLE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_GRATTE_CIEL)){
         for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 3 ; ++x) {
             for (int y = simcity->interactionExterieure.mouse.celluleXY.celluleY; y < simcity->interactionExterieure.mouse.celluleXY.celluleY + 3; ++y) {
                 simcity->map.mapTile[x][y].typeBloc = TYPE_HERBE;
+                for (int i = 0; i < simcity->nbHabitations; ++i) {
+                    if (simcity->tabHabitation[i].coordXY[0].celluleX == simcity->interactionExterieure.mouse.celluleXY.celluleX && simcity->tabHabitation[i].coordXY[0].celluleY == simcity->interactionExterieure.mouse.celluleXY.celluleY){
+                        simcity->tabHabitation[i].typeBatiment = 0;
+                        simcity->tabHabitation[i].evolutionPossible = TRUE;
+                        simcity->tabHabitation[i].compteurEvolution = 0;
+                        simcity->tabHabitation[i].timerCree = 0;
+                        simcity->tabHabitation[i].dateCreation = -1;
+                        simcity->tabHabitation[i].timerBatiment = 0;
+                        simcity->tabHabitation[i].nbHabitants = 0;
+                        simcity->tabHabitation[i].capaciteElectriqueRecu = 0;
+                        simcity->tabHabitation[i].capaciteEauRecu = 0;
+                        simcity->tabHabitation[i].isFeu = FALSE;
+                        simcity->tabHabitation[i].isFeuRuine =FALSE;
+                        for (int j = 0; j < NBR_COORDS_XY_HAB; ++j) {
+                            simcity->tabHabitation[i].coordXY[j].celluleX = -1;
+                            simcity->tabHabitation[i].coordXY[j].celluleY = -1;
+                        }
+                    }
+                }
             }
         }
-    }
-    if (simcity->allegro.event.mouse.button == 1 && simcity->toolBox.detruireEnMain == 1 && simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_EAU_DROIT || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_ELEC_DROIT || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_POMPIER_DROIT){
+    }else if (simcity->allegro.event.mouse.button == 1 && simcity->toolBox.detruireEnMain == 1 && (simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_EAU_DROIT || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_ELEC_DROIT || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_POMPIER_DROIT)){
         for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 6 ; ++x) {
             for (int y = simcity->interactionExterieure.mouse.celluleXY.celluleY; y < simcity->interactionExterieure.mouse.celluleXY.celluleY + 4; ++y) {
                 simcity->map.mapTile[x][y].typeBloc = TYPE_HERBE;
+                for (int i = 0; i < simcity->nbInfrastructures; ++i) {
+                    if (simcity->tabInfrastructure[i].coordXY[0].celluleX == simcity->interactionExterieure.mouse.celluleXY.celluleX && simcity->tabInfrastructure[i].coordXY[0].celluleY == simcity->interactionExterieure.mouse.celluleXY.celluleY){
+                        simcity->tabInfrastructure[i].adjacence = 0;
+                        simcity->tabInfrastructure[i].typeBatiment = 0;
+                        simcity->tabInfrastructure[i].capaciteElectrique = 0;
+                        simcity->tabInfrastructure[i].capaciteEau = 0;
+                        for (int j = 0; j < NBR_COORDS_XY_INFRA; ++j) {
+                            simcity->tabInfrastructure[i].coordXY[j].celluleX = -1;
+                            simcity->tabInfrastructure[i].coordXY[j].celluleY = -1;
+                        }
+                    }
+                }
             }
         }
-    }
-    if (simcity->allegro.event.mouse.button == 1 && simcity->toolBox.detruireEnMain == 1 && simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_EAU_COTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_ELEC_COTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_POMPIER_COTE){
+    }else if (simcity->allegro.event.mouse.button == 1 && simcity->toolBox.detruireEnMain == 1 && (simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_EAU_COTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_ELEC_COTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_POMPIER_COTE)){
         for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 4 ; ++x) {
             for (int y = simcity->interactionExterieure.mouse.celluleXY.celluleY; y < simcity->interactionExterieure.mouse.celluleXY.celluleY + 6; ++y) {
                 simcity->map.mapTile[x][y].typeBloc = TYPE_HERBE;
+                for (int i = 0; i < simcity->nbInfrastructures; ++i) {
+                    if (simcity->tabInfrastructure[i].coordXY[0].celluleX == simcity->interactionExterieure.mouse.celluleXY.celluleX && simcity->tabInfrastructure[i].coordXY[0].celluleY == simcity->interactionExterieure.mouse.celluleXY.celluleY){
+                        simcity->tabInfrastructure[i].adjacence = 0;
+                        simcity->tabInfrastructure[i].typeBatiment = 0;
+                        simcity->tabInfrastructure[i].capaciteElectrique = 0;
+                        simcity->tabInfrastructure[i].capaciteEau = 0;
+                        for (int j = 0; j < NBR_COORDS_XY_INFRA; ++j) {
+                            simcity->tabInfrastructure[i].coordXY[j].celluleX = -1;
+                            simcity->tabInfrastructure[i].coordXY[j].celluleY = -1;
+                        }
+                    }
+                }
             }
         }
     }

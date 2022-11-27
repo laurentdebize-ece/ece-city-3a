@@ -27,6 +27,7 @@ void initAll(Simcity* simcity){
     initTabBatiments(simcity);
     initDataMenuCommunisteCapitaliste(simcity);
     initDataBoutonAide(simcity);
+    initDataMenuRegles(simcity);
 
 }
 
@@ -110,6 +111,57 @@ void boucleTest(Simcity* simcity){
     }
 }
 
+void boucletestMenuRegles(Simcity* simcity){
+    while (!simcity->pages.menuRegles.menuRegles) {
+
+        al_wait_for_event(simcity->allegro.queue, &simcity->allegro.event);
+
+
+        switch (simcity->allegro.event.type) {
+
+            case ALLEGRO_EVENT_DISPLAY_CLOSE:{
+                simcity->endGame = true;
+                simcity->pages.menuRegles.menuRegles = true;
+                break;
+            }
+            case ALLEGRO_EVENT_MOUSE_AXES:{
+                simcity->allegro.coordonneesSourisX = simcity->allegro.event.mouse.x;
+                simcity->allegro.coordonneesSourisY = simcity->allegro.event.mouse.y;
+                calculHoverFlechesMenuRegles(simcity);
+                simcity->dessin = true;
+                break;
+            }
+            case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:{
+                switch (simcity->allegro.event.mouse.button) {
+                    case 1:{
+                        calculHoverFlechesMenuRegles(simcity);
+                        detectionCliqueMenuRegles(simcity);
+                        simcity->dessin = true;
+                        break;
+                    }
+                }
+                break;
+            }
+
+            case ALLEGRO_EVENT_MOUSE_BUTTON_UP:{
+                break;
+            }
+            case ALLEGRO_EVENT_TIMER:{
+
+                simcity->dessin = true;
+
+                if (simcity->dessin) {
+                    afficherMenuAide(simcity);
+                    al_flip_display();
+                    simcity->dessin = false;
+                }
+                break;
+            }
+
+        }
+    }
+}
+
 void boucletestMenuPrincipal(Simcity* simcity){
     while (!simcity->pages.menuPrincipal.menuPrincipal) {
 
@@ -117,6 +169,8 @@ void boucletestMenuPrincipal(Simcity* simcity){
 
 
         switch (simcity->allegro.event.type) {
+
+
 
             case ALLEGRO_EVENT_DISPLAY_CLOSE:{
                 simcity->endGame = true;
@@ -139,6 +193,10 @@ void boucletestMenuPrincipal(Simcity* simcity){
                         detectionClique(simcity);
                         calculHoverBoutonAide(simcity);
                         detectionCliqueBoutonAide(simcity);
+                        if (simcity->pages.menuPrincipal.aideClique == true){
+                            boucletestMenuRegles(simcity);
+
+                        }
                         simcity->dessin = true;
                         break;
                     }
@@ -215,15 +273,17 @@ void boucletestMenuCommunisteCapitaliste(Simcity* simcity){
         }
     }
 }
+
 // main antoine pour tester ses fonctions
 void mainAntoine() {
     Simcity simcity = {0};
     initAll(&simcity);
     boucletestMenuPrincipal(&simcity);
-    boucletestMenuCommunisteCapitaliste(&simcity);
+   boucletestMenuCommunisteCapitaliste(&simcity);
+
     //simcity.toolBox.routeEnMain = 1;
     //simcity.toolBox.terrainVagueEnMain = 1;
-    boucleTest(&simcity);
+  boucleTest(&simcity);
     libererAll(&simcity);
     printf("test");
 
