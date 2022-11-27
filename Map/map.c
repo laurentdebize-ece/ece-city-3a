@@ -729,6 +729,7 @@ void poserElec(Simcity *simcity){
             simcity->banque.achatElectricite = 1;
             construireInfrastructure(simcity);
         }
+        simcity->capaciteTotElec += CAPACITE_ELECTRIQUE;
     }
 }
 
@@ -802,6 +803,7 @@ void poserEau(Simcity *simcity){
             simcity->banque.achatChateauEau = 1;
             construireInfrastructure(simcity);
         }
+        simcity->capaciteTotEau += CAPACITE_EAU;
     }
 }
 
