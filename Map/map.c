@@ -898,6 +898,7 @@ void poserBatiment(Simcity *simcity){
     BFSEau(simcity);
     BFSElec(simcity);
     BFSPompier(simcity);
+
 }
 
 void tournerBatiment(Simcity *simcity){
@@ -946,8 +947,8 @@ void detruire(Simcity *simcity){ // reinitialise toutes les données du batiment
                     if (simcity->tabInfrastructure[i].coordXY[0].celluleX == simcity->interactionExterieure.mouse.celluleXY.celluleX && simcity->tabInfrastructure[i].coordXY[0].celluleY == simcity->interactionExterieure.mouse.celluleXY.celluleY){
                         simcity->tabInfrastructure[i].adjacence = 0;
                         simcity->tabInfrastructure[i].typeBatiment = 0;
-                        simcity->tabInfrastructure[i].capaciteElectrique = 0;
-                        simcity->tabInfrastructure[i].capaciteEau = 0;
+                        simcity->tabInfrastructure[i].capaciteElectriqueDonne = 0;
+                        simcity->tabInfrastructure[i].capaciteEauDonne = 0;
                         for (int j = 0; j < NBR_COORDS_XY_INFRA; ++j) {
                             simcity->tabInfrastructure[i].coordXY[j].celluleX = -1;
                             simcity->tabInfrastructure[i].coordXY[j].celluleY = -1;
@@ -964,8 +965,8 @@ void detruire(Simcity *simcity){ // reinitialise toutes les données du batiment
                     if (simcity->tabInfrastructure[i].coordXY[0].celluleX == simcity->interactionExterieure.mouse.celluleXY.celluleX && simcity->tabInfrastructure[i].coordXY[0].celluleY == simcity->interactionExterieure.mouse.celluleXY.celluleY){
                         simcity->tabInfrastructure[i].adjacence = 0;
                         simcity->tabInfrastructure[i].typeBatiment = 0;
-                        simcity->tabInfrastructure[i].capaciteElectrique = 0;
-                        simcity->tabInfrastructure[i].capaciteEau = 0;
+                        simcity->tabInfrastructure[i].capaciteElectriqueDonne = 0;
+                        simcity->tabInfrastructure[i].capaciteEauDonne = 0;
                         for (int j = 0; j < NBR_COORDS_XY_INFRA; ++j) {
                             simcity->tabInfrastructure[i].coordXY[j].celluleX = -1;
                             simcity->tabInfrastructure[i].coordXY[j].celluleY = -1;

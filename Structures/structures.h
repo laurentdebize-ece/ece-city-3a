@@ -36,6 +36,8 @@ typedef struct ListeAdj ListeAdj;
 
 typedef struct Element Element;
 
+typedef struct Batiment Batiment;
+
 typedef struct {
     ALLEGRO_DISPLAY* display;//écran
     ALLEGRO_EVENT_QUEUE* queue;//file d'évènements
@@ -198,6 +200,20 @@ typedef struct {
 
 } ToolBox;
 
+struct Batiment{
+    CoordsXY coordXY[NBR_COORDS_XY_INFRA];//coordonnées de l'infrastructure
+    int typeBatiment;//type d'infrastructure - Electricité(2) - Eau(3) - Pompiers(4)
+
+    int capaciteElectriqueMax;//capacité électrique (si centrale électrique)
+    int capaciteEauMax;//capacité en eau (si château d'eau)
+
+    int capaciteElectriqueDonne;//capacité électrique (si centrale électrique)
+    int capaciteEauDonne;//capacité en eau (si château d'eau)
+
+    ListeAdj *adjacence;//liste des adjacents du batiment (centrale ou chateau)
+
+};
+
 typedef struct {
     CoordsXY coordXY[NBR_COORDS_XY_HAB];//Coordonnées du bâtiment
     int typeBatiment;//Type de bâtiment (ici 1 car habitation)
@@ -230,15 +246,11 @@ typedef struct {
     int capaciteElectriqueRecu;//quantité d'électricité reçue
     int capaciteEauRecu;//quantité d'eau reçue
 
+    bool elecMax;//capacité électrique max atteinte
+    bool eauMax;//capacité en eau max atteinte
+
 } Habitation;
 
-typedef struct {
-    CoordsXY coordXY[NBR_COORDS_XY_INFRA];//coordonnées de l'infrastructure
-    int typeBatiment;//type d'infrastructure - Electricité(2) - Eau(3) - Pompiers(4)
-    int capaciteElectrique;//capacité électrique (si centrale électrique)
-    int capaciteEau;//capacité en eau (si château d'eau)
-    ListeAdj *adjacence;//liste des adjacents du batiment (centrale ou chateau)
-} Batiment;
 
 typedef struct {
     //Variables relatives à la date fictive
