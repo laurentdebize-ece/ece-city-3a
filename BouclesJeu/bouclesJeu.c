@@ -23,7 +23,7 @@ void initAll(Simcity* simcity) {
 }
 
 ///Fonction contenant la boucle générale de la partie une fois qu'elle est lancée
-void boucleTest(Simcity* simcity){
+void boucleJeu(Simcity* simcity){
     while (!simcity->endGame) {//Tant que le jeu est en cours
 
         al_wait_for_event(simcity->allegro.queue, &simcity->allegro.event);
@@ -100,7 +100,7 @@ void boucleTest(Simcity* simcity){
 }
 
 ///Fonction permettant de lancer le menu des règles du jeu
-void boucletestMenuRegles(Simcity* simcity){
+void boucleMenuRegles(Simcity* simcity){
     while (!simcity->pages.menuRegles.menuRegles) {//Si on est sur la page Menu règles du jeu
 
         al_wait_for_event(simcity->allegro.queue, &simcity->allegro.event);
@@ -149,7 +149,7 @@ void boucletestMenuRegles(Simcity* simcity){
 }
 
 ///Fonction permettant de lancer le menu principal du jeu
-void boucletestMenuPrincipal(Simcity* simcity){
+void boucleMenuPrincipal(Simcity* simcity){
     while (!simcity->pages.menuPrincipal.menuPrincipal) {//Si on est sur la page Menu principal
 
         al_wait_for_event(simcity->allegro.queue, &simcity->allegro.event);
@@ -178,7 +178,7 @@ void boucletestMenuPrincipal(Simcity* simcity){
                         calculHoverBoutonAide(simcity);//Si la souris est sur le bouton aide
                         detectionCliqueBoutonAide(simcity);//Si la souris clic sur le bouton aide
                         if (simcity->pages.menuPrincipal.aideClique == true){//Si on a cliqué sur aide
-                            boucletestMenuRegles(simcity);//On affiche le menu Règles du jeu
+                            boucleMenuRegles(simcity);//On affiche le menu Règles du jeu
                         }
                         simcity->dessin = true;//On met à jour la page
                         break;
@@ -205,7 +205,7 @@ void boucletestMenuPrincipal(Simcity* simcity){
 }
 
 ///Fonction permettant de lancer le Communiste et Capitaliste
-void boucletestMenuCommunisteCapitaliste(Simcity* simcity){
+void boucleMenuCommunisteCapitaliste(Simcity* simcity){
     while (!simcity->pages.menuCapitalisteCommuniste.menuCapitalisteCommuniste) {
 
         al_wait_for_event(simcity->allegro.queue, &simcity->allegro.event);
@@ -261,9 +261,9 @@ void lancerJeu() {
     initAll(&simcity);
 
     //Lancement des différentes pages du jeu
-    boucletestMenuPrincipal(&simcity);
-    boucletestMenuCommunisteCapitaliste(&simcity);
-    boucleTest(&simcity);
+    boucleMenuPrincipal(&simcity);
+    boucleMenuCommunisteCapitaliste(&simcity);
+    boucleJeu(&simcity);
 
     //Libération de la structure du jeu
     libererAll(&simcity);

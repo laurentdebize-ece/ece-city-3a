@@ -18,10 +18,10 @@
 #include "../Batiments/batiments.h"
 
 void initAll(Simcity* simcity);
-void boucleTest(Simcity* simcity);
-void boucletestMenuRegles(Simcity* simcity);
-void boucletestMenuPrincipal(Simcity* simcity);
-void boucletestMenuCommunisteCapitaliste(Simcity* simcity);
+void boucleJeu(Simcity* simcity);
+void boucleMenuRegles(Simcity* simcity);
+void boucleMenuPrincipal(Simcity* simcity);
+void boucletMenuCommunisteCapitaliste(Simcity* simcity);
 
 void lancerJeu();
 
