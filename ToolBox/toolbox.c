@@ -19,13 +19,36 @@ void toolboxSpriteInit(Simcity* simcity){
 
 
     simcity->toolBox.tabSpriteToolBox[ROUTE_CLIQUE].image = &simcity->tabBitmap[BITMAP_TOOLBOX];
-    simcity->toolBox.tabSpriteToolBox[ROUTE_CLIQUE].spriteLargeur = 35;
-    simcity->toolBox.tabSpriteToolBox[ROUTE_CLIQUE].spriteHauteur = 35;
+    simcity->toolBox.tabSpriteToolBox[ROUTE_CLIQUE].spriteLargeur = 45;
+    simcity->toolBox.tabSpriteToolBox[ROUTE_CLIQUE].spriteHauteur = 45;
     simcity->toolBox.tabSpriteToolBox[ROUTE_CLIQUE].spriteX = 14;
     simcity->toolBox.tabSpriteToolBox[ROUTE_CLIQUE].spriteY = 116;
     simcity->toolBox.tabSpriteToolBox[ROUTE_CLIQUE].screenX = 11;
     simcity->toolBox.tabSpriteToolBox[ROUTE_CLIQUE].screenY = 20;
 
+    simcity->toolBox.tabSpriteToolBox[SAUVEGARDER].image = &simcity->tabBitmap[BITMAP_TOOLBOX];
+    simcity->toolBox.tabSpriteToolBox[SAUVEGARDER].spriteLargeur = 45;
+    simcity->toolBox.tabSpriteToolBox[SAUVEGARDER].spriteHauteur = 45;
+    simcity->toolBox.tabSpriteToolBox[SAUVEGARDER].spriteX = 82;
+    simcity->toolBox.tabSpriteToolBox[SAUVEGARDER].spriteY = 268;
+    simcity->toolBox.tabSpriteToolBox[SAUVEGARDER].screenX = 60;
+    simcity->toolBox.tabSpriteToolBox[SAUVEGARDER].screenY = 720;
+
+    simcity->toolBox.tabSpriteToolBox[SAUVEGARDER_HOVER].image = &simcity->tabBitmap[BITMAP_TOOLBOX];
+    simcity->toolBox.tabSpriteToolBox[SAUVEGARDER_HOVER].spriteLargeur = 45;
+    simcity->toolBox.tabSpriteToolBox[SAUVEGARDER_HOVER].spriteHauteur = 45;
+    simcity->toolBox.tabSpriteToolBox[SAUVEGARDER_HOVER].spriteX = 152;
+    simcity->toolBox.tabSpriteToolBox[SAUVEGARDER_HOVER].spriteY = 268;
+    simcity->toolBox.tabSpriteToolBox[SAUVEGARDER_HOVER].screenX = 60;
+    simcity->toolBox.tabSpriteToolBox[SAUVEGARDER_HOVER].screenY = 720;
+
+    simcity->toolBox.tabSpriteToolBox[SAUVEGARDER_CLIQUE].image = &simcity->tabBitmap[BITMAP_TOOLBOX];
+    simcity->toolBox.tabSpriteToolBox[SAUVEGARDER_CLIQUE].spriteLargeur = 35;
+    simcity->toolBox.tabSpriteToolBox[SAUVEGARDER_CLIQUE].spriteHauteur = 35;
+    simcity->toolBox.tabSpriteToolBox[SAUVEGARDER_CLIQUE].spriteX = 222;
+    simcity->toolBox.tabSpriteToolBox[SAUVEGARDER_CLIQUE].spriteY = 268;
+    simcity->toolBox.tabSpriteToolBox[SAUVEGARDER_CLIQUE].screenX = 60;
+    simcity->toolBox.tabSpriteToolBox[SAUVEGARDER_CLIQUE].screenY = 720;
 
     simcity->toolBox.tabSpriteToolBox[MAISON_].image = &simcity->tabBitmap[BITMAP_TOOLBOX];
     simcity->toolBox.tabSpriteToolBox[MAISON_].spriteLargeur = 35;
@@ -279,6 +302,8 @@ void calculHoverToolBox(Simcity* simcity){
         simcity->toolBox.pompierHover = 1;
     } else if ((float)simcity->allegro.event.mouse.x >= simcity->toolBox.tabSpriteToolBox[PAUSE].screenX && (float)simcity->allegro.event.mouse.x <= simcity->toolBox.tabSpriteToolBox[PAUSE].screenX + simcity->toolBox.tabSpriteToolBox[PAUSE].spriteLargeur && (float)simcity->allegro.event.mouse.y >= simcity->toolBox.tabSpriteToolBox[PAUSE].screenY && (float)simcity->allegro.event.mouse.y <= simcity->toolBox.tabSpriteToolBox[PAUSE].screenY + simcity->toolBox.tabSpriteToolBox[PAUSE].spriteHauteur ){
         simcity->toolBox.pauseHover = 1;
+    } else if ((float)simcity->allegro.event.mouse.x >= simcity->toolBox.tabSpriteToolBox[SAUVEGARDER].screenX && (float)simcity->allegro.event.mouse.x <= simcity->toolBox.tabSpriteToolBox[SAUVEGARDER].screenX + simcity->toolBox.tabSpriteToolBox[SAUVEGARDER].spriteLargeur && (float)simcity->allegro.event.mouse.y >= simcity->toolBox.tabSpriteToolBox[SAUVEGARDER].screenY && (float)simcity->allegro.event.mouse.y <= simcity->toolBox.tabSpriteToolBox[SAUVEGARDER].screenY + simcity->toolBox.tabSpriteToolBox[SAUVEGARDER].spriteHauteur ){
+        simcity->toolBox.sauvegarderHover = 1;
     } else if ((float)simcity->allegro.event.mouse.x >= simcity->toolBox.tabSpriteToolBox[VUE_3].screenX && (float)simcity->allegro.event.mouse.x <= simcity->toolBox.tabSpriteToolBox[VUE_3].screenX + simcity->toolBox.tabSpriteToolBox[VUE_3].spriteLargeur && (float)simcity->allegro.event.mouse.y >= simcity->toolBox.tabSpriteToolBox[VUE_3].screenY && (float)simcity->allegro.event.mouse.y <= simcity->toolBox.tabSpriteToolBox[VUE_3].screenY + simcity->toolBox.tabSpriteToolBox[VUE_3].spriteHauteur ){
         simcity->toolBox.vue3Hover = 1;
     }else{
@@ -292,6 +317,7 @@ void calculHoverToolBox(Simcity* simcity){
         simcity->toolBox.pompierHover = 0;
         simcity->toolBox.pauseHover = 0;
         simcity->toolBox.vue3Hover = 0;
+        simcity->toolBox.sauvegarderHover = 0;
 
     }
 
@@ -328,6 +354,9 @@ void detectionCliqueToolBox(Simcity* simcity){
     }else if (simcity->allegro.event.mouse.button == 1 && (float)simcity->allegro.event.mouse.x >= simcity->toolBox.tabSpriteToolBox[PAUSE].screenX && (float)simcity->allegro.event.mouse.x <= simcity->toolBox.tabSpriteToolBox[PAUSE].screenX + simcity->toolBox.tabSpriteToolBox[PAUSE].spriteLargeur && (float)simcity->allegro.event.mouse.y >= simcity->toolBox.tabSpriteToolBox[PAUSE].screenY && (float)simcity->allegro.event.mouse.y <= simcity->toolBox.tabSpriteToolBox[PAUSE].screenY + simcity->toolBox.tabSpriteToolBox[PAUSE].spriteHauteur ){
         simcity->toolBox.pauseClique = 1;
         simcity->toolBox.pauseEnMain = 1;
+    }else if (simcity->allegro.event.mouse.button == 1 && (float)simcity->allegro.event.mouse.x >= simcity->toolBox.tabSpriteToolBox[SAUVEGARDER].screenX && (float)simcity->allegro.event.mouse.x <= simcity->toolBox.tabSpriteToolBox[SAUVEGARDER].screenX + simcity->toolBox.tabSpriteToolBox[SAUVEGARDER].spriteLargeur && (float)simcity->allegro.event.mouse.y >= simcity->toolBox.tabSpriteToolBox[SAUVEGARDER].screenY && (float)simcity->allegro.event.mouse.y <= simcity->toolBox.tabSpriteToolBox[SAUVEGARDER].screenY + simcity->toolBox.tabSpriteToolBox[SAUVEGARDER].spriteHauteur ){
+        simcity->toolBox.sauvegarderClique = 1;
+      //  simcity->toolBox.sauvegarderEnmain = 1;
     }else if (simcity->allegro.event.mouse.button == 1 && (float)simcity->allegro.event.mouse.x >= simcity->toolBox.tabSpriteToolBox[VUE_3].screenX && (float)simcity->allegro.event.mouse.x <= simcity->toolBox.tabSpriteToolBox[VUE_3].screenX + simcity->toolBox.tabSpriteToolBox[VUE_3].spriteLargeur && (float)simcity->allegro.event.mouse.y >= simcity->toolBox.tabSpriteToolBox[VUE_3].screenY && (float)simcity->allegro.event.mouse.y <= simcity->toolBox.tabSpriteToolBox[VUE_3].screenY + simcity->toolBox.tabSpriteToolBox[VUE_3].spriteHauteur ){
         simcity->toolBox.vue3Clique = 1;
         simcity->toolBox.vue3EnMain = 1;
@@ -342,6 +371,7 @@ void detectionCliqueToolBox(Simcity* simcity){
         simcity->toolBox.pompierClique = 0;
         simcity->toolBox.pauseClique = 0;
         simcity->toolBox.vue3Clique = 0;
+        simcity->toolBox.sauvegarderClique = 0;
 
         simcity->toolBox.routeEnMain = 0;
         simcity->toolBox.terrainVagueEnMain = 0;
@@ -353,6 +383,7 @@ void detectionCliqueToolBox(Simcity* simcity){
         simcity->toolBox.pompierEnMain = 0;
         simcity->toolBox.pauseEnMain = 0;
         simcity->toolBox.vue3EnMain = 0;
+        //simcity->toolBox.sauvegarderEnmain = 0;
     }
 
 }
@@ -368,6 +399,7 @@ void afficherToolbox (Simcity* simcity){
     al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[VUE2].image),simcity->toolBox.tabSpriteToolBox[VUE2].spriteX,simcity->toolBox.tabSpriteToolBox[VUE2].spriteY,simcity->toolBox.tabSpriteToolBox[VUE2].spriteLargeur,simcity->toolBox.tabSpriteToolBox[VUE2].spriteHauteur,simcity->toolBox.tabSpriteToolBox[VUE2].screenX,simcity->toolBox.tabSpriteToolBox[VUE2].screenY,0);
     al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[POMPIER].image),simcity->toolBox.tabSpriteToolBox[POMPIER].spriteX,simcity->toolBox.tabSpriteToolBox[POMPIER].spriteY,simcity->toolBox.tabSpriteToolBox[POMPIER].spriteLargeur,simcity->toolBox.tabSpriteToolBox[POMPIER].spriteHauteur,simcity->toolBox.tabSpriteToolBox[POMPIER].screenX,simcity->toolBox.tabSpriteToolBox[POMPIER].screenY,0);
     al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[PAUSE].image),simcity->toolBox.tabSpriteToolBox[PAUSE].spriteX,simcity->toolBox.tabSpriteToolBox[PAUSE].spriteY,simcity->toolBox.tabSpriteToolBox[PAUSE].spriteLargeur,simcity->toolBox.tabSpriteToolBox[PAUSE].spriteHauteur,simcity->toolBox.tabSpriteToolBox[PAUSE].screenX,simcity->toolBox.tabSpriteToolBox[PAUSE].screenY,0);
+    al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[SAUVEGARDER].image),simcity->toolBox.tabSpriteToolBox[SAUVEGARDER].spriteX,simcity->toolBox.tabSpriteToolBox[SAUVEGARDER].spriteY,simcity->toolBox.tabSpriteToolBox[SAUVEGARDER].spriteLargeur,simcity->toolBox.tabSpriteToolBox[SAUVEGARDER].spriteHauteur,simcity->toolBox.tabSpriteToolBox[SAUVEGARDER].screenX,simcity->toolBox.tabSpriteToolBox[SAUVEGARDER].screenY,0);
     al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[VUE_3].image),simcity->toolBox.tabSpriteToolBox[VUE_3].spriteX,simcity->toolBox.tabSpriteToolBox[VUE_3].spriteY,simcity->toolBox.tabSpriteToolBox[VUE_3].spriteLargeur,simcity->toolBox.tabSpriteToolBox[VUE_3].spriteHauteur,simcity->toolBox.tabSpriteToolBox[VUE_3].screenX,simcity->toolBox.tabSpriteToolBox[VUE_3].screenY,0);
     al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[INFO_EAU].image),simcity->toolBox.tabSpriteToolBox[INFO_EAU].spriteX,simcity->toolBox.tabSpriteToolBox[INFO_EAU].spriteY,simcity->toolBox.tabSpriteToolBox[INFO_EAU].spriteLargeur,simcity->toolBox.tabSpriteToolBox[INFO_EAU].spriteHauteur,simcity->toolBox.tabSpriteToolBox[INFO_EAU].screenX,simcity->toolBox.tabSpriteToolBox[INFO_EAU].screenY,0);
     al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[INFO_ELEC].image),simcity->toolBox.tabSpriteToolBox[INFO_ELEC].spriteX,simcity->toolBox.tabSpriteToolBox[INFO_ELEC].spriteY,simcity->toolBox.tabSpriteToolBox[INFO_ELEC].spriteLargeur,simcity->toolBox.tabSpriteToolBox[INFO_ELEC].spriteHauteur,simcity->toolBox.tabSpriteToolBox[INFO_ELEC].screenX,simcity->toolBox.tabSpriteToolBox[INFO_ELEC].screenY,0);
@@ -386,6 +418,9 @@ void afficherToolbox (Simcity* simcity){
 
     }else if (simcity->toolBox.eauHover){
         al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[EAU_HOVER].image),simcity->toolBox.tabSpriteToolBox[EAU_HOVER].spriteX,simcity->toolBox.tabSpriteToolBox[EAU_HOVER].spriteY,simcity->toolBox.tabSpriteToolBox[EAU_HOVER].spriteLargeur,simcity->toolBox.tabSpriteToolBox[EAU_HOVER].spriteHauteur,simcity->toolBox.tabSpriteToolBox[EAU_HOVER].screenX,simcity->toolBox.tabSpriteToolBox[EAU_HOVER].screenY,0);
+
+    }else if (simcity->toolBox.sauvegarderHover){
+        al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[SAUVEGARDER_HOVER].image),simcity->toolBox.tabSpriteToolBox[SAUVEGARDER_HOVER].spriteX,simcity->toolBox.tabSpriteToolBox[SAUVEGARDER_HOVER].spriteY,simcity->toolBox.tabSpriteToolBox[SAUVEGARDER_HOVER].spriteLargeur,simcity->toolBox.tabSpriteToolBox[SAUVEGARDER_HOVER].spriteHauteur,simcity->toolBox.tabSpriteToolBox[SAUVEGARDER_HOVER].screenX,simcity->toolBox.tabSpriteToolBox[SAUVEGARDER_HOVER].screenY,0);
 
     }else if (simcity->toolBox.detruireHover){
         al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[DETRUIRE_HOVER].image),simcity->toolBox.tabSpriteToolBox[DETRUIRE_HOVER].spriteX,simcity->toolBox.tabSpriteToolBox[DETRUIRE_HOVER].spriteY,simcity->toolBox.tabSpriteToolBox[DETRUIRE_HOVER].spriteLargeur,simcity->toolBox.tabSpriteToolBox[DETRUIRE_HOVER].spriteHauteur,simcity->toolBox.tabSpriteToolBox[DETRUIRE_HOVER].screenX,simcity->toolBox.tabSpriteToolBox[DETRUIRE_HOVER].screenY,0);
@@ -428,8 +463,13 @@ void afficherToolbox (Simcity* simcity){
 
     }else if (simcity->toolBox.pompierClique){
         al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[POMPIER_CLIQUE].image),simcity->toolBox.tabSpriteToolBox[POMPIER_CLIQUE].spriteX,simcity->toolBox.tabSpriteToolBox[POMPIER_CLIQUE].spriteY,simcity->toolBox.tabSpriteToolBox[POMPIER_CLIQUE].spriteLargeur,simcity->toolBox.tabSpriteToolBox[POMPIER_CLIQUE].spriteHauteur,simcity->toolBox.tabSpriteToolBox[POMPIER_CLIQUE].screenX,simcity->toolBox.tabSpriteToolBox[POMPIER_CLIQUE].screenY,0);
+
     }else if (simcity->toolBox.pauseClique){
         al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[PAUSE_CLIQUE].image),simcity->toolBox.tabSpriteToolBox[PAUSE_CLIQUE].spriteX,simcity->toolBox.tabSpriteToolBox[PAUSE_CLIQUE].spriteY,simcity->toolBox.tabSpriteToolBox[PAUSE_CLIQUE].spriteLargeur,simcity->toolBox.tabSpriteToolBox[PAUSE_CLIQUE].spriteHauteur,simcity->toolBox.tabSpriteToolBox[PAUSE_CLIQUE].screenX - 4,simcity->toolBox.tabSpriteToolBox[PAUSE_CLIQUE].screenY,0);
+
+    }else if (simcity->toolBox.sauvegarderClique){
+        al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[SAUVEGARDER_CLIQUE].image),simcity->toolBox.tabSpriteToolBox[SAUVEGARDER_CLIQUE].spriteX,simcity->toolBox.tabSpriteToolBox[SAUVEGARDER_CLIQUE].spriteY,simcity->toolBox.tabSpriteToolBox[SAUVEGARDER_CLIQUE].spriteLargeur,simcity->toolBox.tabSpriteToolBox[SAUVEGARDER_CLIQUE].spriteHauteur,simcity->toolBox.tabSpriteToolBox[SAUVEGARDER_CLIQUE].screenX - 4,simcity->toolBox.tabSpriteToolBox[SAUVEGARDER_CLIQUE].screenY,0);
+
     }else if (simcity->toolBox.vue3Clique){
         al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[VUE_3_CLIQUE].image),simcity->toolBox.tabSpriteToolBox[VUE_3_CLIQUE].spriteX,simcity->toolBox.tabSpriteToolBox[VUE_3_CLIQUE].spriteY,simcity->toolBox.tabSpriteToolBox[VUE_3_CLIQUE].spriteLargeur,simcity->toolBox.tabSpriteToolBox[VUE_3_CLIQUE].spriteHauteur,simcity->toolBox.tabSpriteToolBox[VUE_3_CLIQUE].screenX,simcity->toolBox.tabSpriteToolBox[VUE_3_CLIQUE].screenY,0);
     }

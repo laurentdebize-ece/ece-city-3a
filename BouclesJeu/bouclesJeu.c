@@ -90,7 +90,7 @@ void boucleJeu(Simcity* simcity){
                         afficherHoverMap(simcity);//On affiche le contour de la map
                     }
                     afficherTimerTempsJeu(simcity);//On affiche le timer temps de jeu
-                    al_flip_display();//On rafraichi l'affichage
+                    al_flip_display();//On rafraichis l'affichage
                     simcity->dessin = false;//On ne doit pas mettre à jour la page
                 }
                 break;

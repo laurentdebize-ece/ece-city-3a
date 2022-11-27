@@ -2,10 +2,10 @@
 #include "../Timers/timers.h"
 #include "../ToolBox/toolbox.h"
 
-void initDataMap(Simcity* simcity){
-    for (int x = 0; x < NBCELLULEX; ++x) {
+void initDataMap(Simcity* simcity){ // Cette fonction initialise les paramètres de dessin de la map
+    for (int x = 0; x < NBCELLULEX; ++x) { //On parcours le tableau de case de la map
         for (int y = 0; y < NBCELLULEY ; ++y) {
-            simcity->map.mapTile[x][y].spriteLargeur = 20;
+            simcity->map.mapTile[x][y].spriteLargeur = 20; // Et on donne chaque caractéristique du carré d'herbe
             simcity->map.mapTile[x][y].spriteHauteur = 20;
             simcity->map.mapTile[x][y].typeBloc = TYPE_HERBE;
             simcity->map.mapTile[x][y].coordsXY.screenX = 110 + 20 * (float)x;
@@ -16,11 +16,11 @@ void initDataMap(Simcity* simcity){
             simcity->map.mapTile[x][y].typeEau = FALSE;
         }
     }
-    bitmapSpriteInit(simcity);
-    toolboxSpriteInit(simcity);
+    bitmapSpriteInit(simcity); // On appel aussi les initialisations des sprites de hover et de clique
+    toolboxSpriteInit(simcity); // Et l'initialisation de la toolbox
 }
 
-void bitmapSpriteInit(Simcity* simcity){
+void bitmapSpriteInit(Simcity* simcity){ // Fonction de paramètrage de chaque bitmap de la map, comprenant l'herbe, les maisons etc
 
     simcity->map.spriteTile[HERBE].image = &simcity->tabBitmap[BITMAP_MAP];
     simcity->map.spriteTile[HERBE].spriteLargeur = 20;
@@ -125,9 +125,9 @@ void bitmapSpriteInit(Simcity* simcity){
     simcity->map.spriteTile[POMPIER_RESEAU].spriteY = 58;
 }
 
-void calculPositionSourisEnCelluleXY(Simcity* simcity) {
-    for (int x = 0; x < NBCELLULEX; ++x) {
-        for (int y = 0; y < NBCELLULEY; ++y) {
+void calculPositionSourisEnCelluleXY(Simcity* simcity) { // Cette fonction calcul la postion de la souris sur la map
+    for (int x = 0; x < NBCELLULEX; ++x) { // On parcours le tableau de cellule de la map
+        for (int y = 0; y < NBCELLULEY; ++y) { // On parcours le tableau de cellule de la map
             if ((float)simcity->allegro.coordonneesSourisX >= simcity->map.mapTile[x][y].coordsXY.screenX && (float)simcity->allegro.coordonneesSourisX <= simcity->map.mapTile[x][y].coordsXY.screenX + (float)simcity->map.mapTile[x][y].spriteLargeur){
                 simcity->interactionExterieure.mouse.celluleXY.celluleX = x;
             }
@@ -146,23 +146,23 @@ void outOfBorder(Simcity* simcity){
     }
 }
 
-void afficherBarreCompteurs (Simcity* simcity) {
+void afficherBarreCompteurs (Simcity* simcity) { //Cette fonction affiche les compteurs
     al_draw_bitmap(simcity->tabBitmap[BITMAP_BARRECOMPTEURS],95, 620, 0);
 }
 
-void afficherMap(Simcity* simcity){
+void afficherMap(Simcity* simcity){ //Cette fonction affiche la map après avoir récupérer les fonctions d'affichage sous-jacente préalablement faites
     al_clear_to_color(al_map_rgb(0,0,0));
-    afficherToolbox(simcity);
-    afficherBarreCompteurs(simcity);
-    afficherTimerDate(simcity);
-    afficherArgent(simcity);
-    afficherNbHabitantsTot(simcity);
+    afficherToolbox(simcity);  // Cette fonction affiche la toolbox
+    afficherBarreCompteurs(simcity); // Cette fonction affiche les compteurs
+    afficherTimerDate(simcity); // Cette fonction affiche le timer
+    afficherArgent(simcity); // Cette fonction affiche l'argent
+    afficherNbHabitantsTot(simcity); // Cette fonction affiche le nombre d'habitant total
 
     bool modeNiveauEau = simcity->toolBox.vue1EnMain;
     bool modeNiveauElectricite = simcity->toolBox.vue2EnMain;
     bool modeNiveauPompier = simcity->toolBox.vue3EnMain;
 
-    for (int x = 0; x < NBCELLULEX; ++x) {
+    for (int x = 0; x < NBCELLULEX; ++x) { // On parcours le tableau de cellule
         for (int y = 0; y < NBCELLULEY; ++y) {
             //permet de dessiner l'herbe de toute la map
            if (simcity->map.mapTile[x][y].typeBloc == TYPE_HERBE){
@@ -223,7 +223,7 @@ void afficherMap(Simcity* simcity){
     afficherIsFeu(simcity);
 }
 
-void afficherHoverMap(Simcity* simcity){
+void afficherHoverMap(Simcity* simcity){ // Fonction qui affiche les hovers de chaque case d'herbes
     for (int x = 0; x < NBCELLULEX ; ++x) {
         for (int y = 0; y < NBCELLULEY; ++y) {
             if (simcity->interactionExterieure.mouse.celluleXY.celluleX == simcity->map.mapTile[x][y].coordsXY.celluleX && simcity->interactionExterieure.mouse.celluleXY.celluleY == simcity->map.mapTile[x][y].coordsXY.celluleY){
@@ -241,7 +241,7 @@ void afficherPrevision(Simcity* simcity){
     afficherPrevPompier(simcity);
 }
 
-int isTerrainVaguePossible(Simcity* simcity){
+int isTerrainVaguePossible(Simcity* simcity){ // fonction qui test si nous pouvons poser un terrain vague
     if (simcity->toolBox.terrainVagueEnMain == 1 && simcity->outOfBorder  && collerAlaRouteHab(simcity) && simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_HERBE){
         for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 3; ++x) {
             for (int y = simcity->interactionExterieure.mouse.celluleXY.celluleY; y < simcity->interactionExterieure.mouse.celluleXY.celluleY + 3; ++y) {
@@ -255,7 +255,7 @@ int isTerrainVaguePossible(Simcity* simcity){
     return 0;
 }
 
-void poserTerrainVague(Simcity* simcity){
+void poserTerrainVague(Simcity* simcity){ // Fonction qui récupère la fonction de test de possibilité de poser un terrain vague et qui nous permet de le poser si la fonction d'avant est ok
     if (simcity->allegro.event.mouse.button == 1 && isTerrainVaguePossible(simcity) && isPayer(simcity,simcity->banque.prixTerrainVague)){
         simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc = TYPE_TERRAIN_VAGUE;
         for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 3; ++x) {
@@ -273,34 +273,34 @@ void poserTerrainVague(Simcity* simcity){
     }
 }
 
-void afficherPrevTerrainVague(Simcity* simcity){
+void afficherPrevTerrainVague(Simcity* simcity){ // Permet de visualiser le terrain vague lorsqu'il est encore dans notre main
     if (simcity->toolBox.terrainVagueEnMain && isTerrainVaguePossible(simcity)){
         al_draw_bitmap_region(*(simcity->map.spriteTile[TERRAIN_VAGUE].image), simcity->map.spriteTile[TERRAIN_VAGUE].spriteX, simcity->map.spriteTile[TERRAIN_VAGUE].spriteY, simcity->map.spriteTile[TERRAIN_VAGUE].spriteLargeur, simcity->map.spriteTile[TERRAIN_VAGUE].spriteHauteur,simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].coordsXY.screenX,simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].coordsXY.screenY,0);
     }
 }
 
-int isRoutePossible(Simcity* simcity){
+int isRoutePossible(Simcity* simcity){ // Verifie que la route peut être posé
     if (simcity->toolBox.routeEnMain == 1 && simcity->outOfBorder && simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_HERBE){
         return 1;
     }
     return 0;
 }
 
-void nbBlocRouteX(Simcity* simcity){
+void nbBlocRouteX(Simcity* simcity){ // Verifie qu'on ne peut plus poser quoi que ce soit si il n'y as plus de place en X
     simcity->map.compteurCheminsX = simcity->map.creationRouteX - simcity->interactionExterieure.mouse.celluleXY.celluleX;
     if (simcity->map.compteurCheminsX < 0){
         simcity->map.compteurCheminsX = -simcity->map.compteurCheminsX;
     }
 }
 
-void nbBlocRouteY(Simcity* simcity){
+void nbBlocRouteY(Simcity* simcity){// Verifie qu'on ne peut plus poser quoi que ce soit si il n'y as plus de place en Y
     simcity->map.compteurCheminsY = simcity->map.creationRouteY - simcity->interactionExterieure.mouse.celluleXY.celluleY;
     if (simcity->map.compteurCheminsY < 0){
         simcity->map.compteurCheminsY = -simcity->map.compteurCheminsY;
     }
 }
 
-int routePossibleChemin(Simcity* simcity){
+int routePossibleChemin(Simcity* simcity){ // Sert à savoir si ce chemin est possible pour tracer la route
     nbBlocRouteX(simcity);
     nbBlocRouteY(simcity);
     if (simcity->map.creationRouteX < simcity->interactionExterieure.mouse.celluleXY.celluleX && simcity->map.creationRouteY < simcity->interactionExterieure.mouse.celluleXY.celluleY) {
@@ -375,7 +375,7 @@ int routePossibleChemin(Simcity* simcity){
     return 1;
 }
 
-void afficherPrevRoute(Simcity* simcity) {
+void afficherPrevRoute(Simcity* simcity) { // Permet de voir la route prévisionnelle lorsqu'elle est dans notre main
     if (routePossibleChemin(simcity) && simcity->map.cliqueRoute) {
         if (simcity->map.creationRouteX < simcity->interactionExterieure.mouse.celluleXY.celluleX &&
             simcity->map.creationRouteY < simcity->interactionExterieure.mouse.celluleXY.celluleY){
@@ -489,7 +489,7 @@ void afficherPrevRoute(Simcity* simcity) {
     }
 }
 
-void poserRoute(Simcity *simcity){
+void poserRoute(Simcity *simcity){ // Permet de poser la route une fois que le visuel nous va
     if (simcity->allegro.event.mouse.button == 1 && simcity->map.cliqueRoute) {
             if (routePossibleChemin(simcity)) {
                 if (simcity->map.creationRouteX < simcity->interactionExterieure.mouse.celluleXY.celluleX && simcity->map.creationRouteY < simcity->interactionExterieure.mouse.celluleXY.celluleY) {
@@ -569,7 +569,7 @@ void poserRoute(Simcity *simcity){
 }
 
 ////ICI METTRE LE SUCCESSEUR SI CONDITION REMPLIE
-bool collerAlaRouteElec(Simcity* simcity){
+bool collerAlaRouteElec(Simcity* simcity){ // Si le batiment est collé à la route, on peut le poser
     if (simcity->toolBox.elecDroit){
         for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 6; ++x) {
             if (simcity->map.mapTile[x][simcity->interactionExterieure.mouse.celluleXY.celluleY - 1].typeBloc == TYPE_ROUTE || simcity->map.mapTile[x][simcity->interactionExterieure.mouse.celluleXY.celluleY + 4].typeBloc == TYPE_ROUTE ){
@@ -596,7 +596,7 @@ bool collerAlaRouteElec(Simcity* simcity){
         return false;
     }
 }
-bool collerAlaRouteEau(Simcity* simcity){
+bool collerAlaRouteEau(Simcity* simcity){// Si le batiment est collé à la route, on peut le poser
     if (simcity->toolBox.eauDroit == 1){
         for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 6; ++x) {
             if (simcity->map.mapTile[x][simcity->interactionExterieure.mouse.celluleXY.celluleY - 1].typeBloc == TYPE_ROUTE || simcity->map.mapTile[x][simcity->interactionExterieure.mouse.celluleXY.celluleY + 4].typeBloc == TYPE_ROUTE ){
@@ -624,7 +624,7 @@ bool collerAlaRouteEau(Simcity* simcity){
     }
     return false;
 }
-bool collerAlaRoutPompier(Simcity* simcity){
+bool collerAlaRoutPompier(Simcity* simcity){// Si le batiment est collé à la route, on peut le poser
     if (simcity->toolBox.pompierDroit == 1){
         for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 6; ++x) {
             if (simcity->map.mapTile[x][simcity->interactionExterieure.mouse.celluleXY.celluleY - 1].typeBloc == TYPE_ROUTE || simcity->map.mapTile[x][simcity->interactionExterieure.mouse.celluleXY.celluleY + 4].typeBloc == TYPE_ROUTE ){
@@ -652,7 +652,7 @@ bool collerAlaRoutPompier(Simcity* simcity){
     }
     return false;
 }
-bool collerAlaRouteInfra(Simcity* simcity){
+bool collerAlaRouteInfra(Simcity* simcity){// Si le batiment est collé à la route, on peut le poser
     if (simcity->toolBox.elecEnMain){
         return collerAlaRouteElec(simcity);
     } else if (simcity->toolBox.eauEnMain){
@@ -661,7 +661,7 @@ bool collerAlaRouteInfra(Simcity* simcity){
         return collerAlaRoutPompier(simcity);
     }
 }
-bool collerAlaRouteHab(Simcity* simcity){
+bool collerAlaRouteHab(Simcity* simcity){// Si le batiment est collé à la route, on peut le poser
 
     if (simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX - 1][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_ROUTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY - 1].typeBloc == TYPE_ROUTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX + 3][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_ROUTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX + 2][simcity->interactionExterieure.mouse.celluleXY.celluleY - 1].typeBloc == TYPE_ROUTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX + 3][simcity->interactionExterieure.mouse.celluleXY.celluleY + 2].typeBloc == TYPE_ROUTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX + 2][simcity->interactionExterieure.mouse.celluleXY.celluleY + 3].typeBloc == TYPE_ROUTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY + 3].typeBloc == TYPE_ROUTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX - 1][simcity->interactionExterieure.mouse.celluleXY.celluleY + 2].typeBloc == TYPE_ROUTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX + 1][simcity->interactionExterieure.mouse.celluleXY.celluleY - 1].typeBloc == TYPE_ROUTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX - 1][simcity->interactionExterieure.mouse.celluleXY.celluleY + 1].typeBloc == TYPE_ROUTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX + 1][simcity->interactionExterieure.mouse.celluleXY.celluleY + 3].typeBloc == TYPE_ROUTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX + 3][simcity->interactionExterieure.mouse.celluleXY.celluleY + 1].typeBloc == TYPE_ROUTE){
         return true;
@@ -669,7 +669,7 @@ bool collerAlaRouteHab(Simcity* simcity){
     return false;
 }
 
-int isElecPossible(Simcity* simcity){
+int isElecPossible(Simcity* simcity){ // Verifie que nous pouvons poser une centrale elec
     if (simcity->toolBox.elecEnMain == 1 && simcity->outOfBorder && collerAlaRouteInfra(simcity) && simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_HERBE){
         if (simcity->toolBox.elecDroit){
             for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 6; ++x) {
@@ -696,7 +696,7 @@ int isElecPossible(Simcity* simcity){
     return 0;
 }
 
-void poserElec(Simcity *simcity){
+void poserElec(Simcity *simcity){ // Si psoer une centrale est possible, alors cette fonction nous permet de la poser
     if (simcity->allegro.event.mouse.button == 1 && simcity->toolBox.elecEnMain && isElecPossible(simcity) && isPayer(simcity,simcity->banque.prixElectricite)) {
         if (simcity->toolBox.elecDroit) {
             simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc = TYPE_ELEC_DROIT;
@@ -733,7 +733,7 @@ void poserElec(Simcity *simcity){
     }
 }
 
-void afficherPrevElec(Simcity* simcity){
+void afficherPrevElec(Simcity* simcity){ // Affiche la centrale lorsqu'elle est en main
     if (simcity->toolBox.elecEnMain && isElecPossible(simcity)){
         if (simcity->toolBox.elecDroit){
             al_draw_bitmap_region(*(simcity->map.spriteTile[ELEC_DROIT].image), simcity->map.spriteTile[ELEC_DROIT].spriteX, simcity->map.spriteTile[ELEC_DROIT].spriteY, simcity->map.spriteTile[ELEC_DROIT].spriteLargeur, simcity->map.spriteTile[ELEC_DROIT].spriteHauteur,simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].coordsXY.screenX,simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].coordsXY.screenY,0);
@@ -743,7 +743,7 @@ void afficherPrevElec(Simcity* simcity){
     }
 }
 
-int isEauPossible(Simcity* simcity){
+int isEauPossible(Simcity* simcity){ // Verifie que l'eau est possible a poser
     if (simcity->toolBox.eauEnMain == 1 && collerAlaRouteInfra(simcity) && simcity->outOfBorder && simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_HERBE){
         if (simcity->toolBox.eauDroit){
             for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 6; ++x) {
@@ -770,7 +770,7 @@ int isEauPossible(Simcity* simcity){
     return 0;
 }
 
-void poserEau(Simcity *simcity){
+void poserEau(Simcity *simcity){ // Permet de poser l'eau si cela est possible
     if (simcity->allegro.event.mouse.button == 1 && simcity->toolBox.eauEnMain && isEauPossible(simcity) && isPayer(simcity,simcity->banque.prixChateauEau)) {
         if (simcity->toolBox.eauDroit) {
                 simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc = TYPE_EAU_DROIT;
@@ -807,7 +807,7 @@ void poserEau(Simcity *simcity){
     }
 }
 
-void afficherPrevEau(Simcity* simcity){
+void afficherPrevEau(Simcity* simcity){// Permet d'afficher la citerne d'eau lorsqu'elle est en main
     if (simcity->toolBox.eauEnMain && isEauPossible(simcity)){
         if (simcity->toolBox.eauDroit){
             al_draw_bitmap_region(*(simcity->map.spriteTile[EAU_DROIT].image), simcity->map.spriteTile[EAU_DROIT].spriteX, simcity->map.spriteTile[EAU_DROIT].spriteY, simcity->map.spriteTile[EAU_DROIT].spriteLargeur, simcity->map.spriteTile[EAU_DROIT].spriteHauteur,simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].coordsXY.screenX,simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].coordsXY.screenY,0);
@@ -817,7 +817,7 @@ void afficherPrevEau(Simcity* simcity){
     }
 }
 
-int isPompierPossible(Simcity* simcity){
+int isPompierPossible(Simcity* simcity){ // Verifie que nous pouvons poser une caserne
     if (simcity->toolBox.pompierEnMain == 1 && collerAlaRouteInfra(simcity) && simcity->outOfBorder && simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_HERBE){
         if (simcity->toolBox.pompierDroit){
             for (int x = simcity->interactionExterieure.mouse.celluleXY.celluleX; x < simcity->interactionExterieure.mouse.celluleXY.celluleX + 6; ++x) {
@@ -844,7 +844,7 @@ int isPompierPossible(Simcity* simcity){
     return 0;
 }
 
-void poserPompier(Simcity *simcity){
+void poserPompier(Simcity *simcity){ // Permet de poser une caserne
     if (simcity->allegro.event.mouse.button == 1 && simcity->toolBox.pompierEnMain && isPompierPossible(simcity) && isPayer(simcity,simcity->banque.prixPompier)) {
         if (simcity->toolBox.pompierDroit) {
             simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc = TYPE_POMPIER_DROIT;
@@ -880,7 +880,7 @@ void poserPompier(Simcity *simcity){
     }
 }
 
-void afficherPrevPompier(Simcity* simcity){
+void afficherPrevPompier(Simcity* simcity){ // Permet de nous montrer la caserne en main avant la pose
     if (simcity->toolBox.pompierEnMain && isPompierPossible(simcity)){
         if (simcity->toolBox.pompierDroit){
             al_draw_bitmap_region(*(simcity->map.spriteTile[POMPIER_DROIT].image), simcity->map.spriteTile[POMPIER_DROIT].spriteX, simcity->map.spriteTile[POMPIER_DROIT].spriteY, simcity->map.spriteTile[POMPIER_DROIT].spriteLargeur, simcity->map.spriteTile[POMPIER_DROIT].spriteHauteur,simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].coordsXY.screenX,simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].coordsXY.screenY,0);
@@ -903,7 +903,7 @@ void poserBatiment(Simcity *simcity){
 
 }
 
-void tournerBatiment(Simcity *simcity){
+void tournerBatiment(Simcity *simcity){ // Tourne le batiment avec un clique droit lorsque celui ci est en main
     if (simcity->allegro.event.mouse.button == 2 && simcity->toolBox.elecEnMain){
         simcity->toolBox.elecDroit = !simcity->toolBox.elecDroit;
     }
@@ -978,4 +978,7 @@ void detruire(Simcity *simcity){ // reinitialise toutes les données du batiment
             }
         }
     }
+
 }
+
+
