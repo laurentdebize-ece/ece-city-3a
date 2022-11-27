@@ -85,9 +85,6 @@ void timerBatiment(Simcity* simcity) {
                 }
                 if(simcity->capitaliste== TRUE) {
                     isRegressionPossible(&simcity->tabHabitation[i]);//On teste si le bâtiment doit régresser
-                    if (simcity->tabHabitation[i].regression == TRUE) {//S'il doit régresser
-                        regressionHabitation(simcity, &simcity->tabHabitation[i]);//On le fait régresser
-                    }
                 }
 
                 //Boucle test pompier
@@ -108,6 +105,11 @@ void timerBatiment(Simcity* simcity) {
                 calculCapaciteElec(simcity);
                 isFeu(&simcity->tabHabitation[i]);//On met en feu les habitations
                 recevoirImpots(simcity, simcity->tabHabitation[i].nbHabitants);//On reçoit les impôts
+            }
+            if(simcity->pause == 0 && simcity->tabHabitation[i].timerBatiment % 17 == 0 && modulo60 == TRUE) {//Si le jeu n'est pas en pause et toutes les 17 secondes
+                if (simcity->tabHabitation[i].regression == TRUE) {//S'il doit régresser
+                    regressionHabitation(simcity, &simcity->tabHabitation[i]);//On le fait régresser
+                }
             }
         }
     }
