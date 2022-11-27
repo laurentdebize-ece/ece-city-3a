@@ -80,11 +80,7 @@ void boucleTest(Simcity* simcity){
                 payerBanque(simcity);//Acheter à la banque
                 timerBatiment(simcity);//Timer propre à chaque bâtiment
                 nombreHabitantsTot(simcity);//Calcul du nombre d'habitants de la ville
-                BFSEau(simcity);
-                BFSElec(simcity);
-                BFSPompier(simcity);
-                calculCapaciteEau(simcity);
-                calculCapaciteElec(simcity);
+
                 // ici : calculCapaciteElectricite(simcity);
                 simcity->dessin = true;//On met à jour la page
 
