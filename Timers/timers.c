@@ -100,8 +100,6 @@ void timerBatiment(Simcity* simcity) {
                         eteindreFeuMettreRuine(simcity, &simcity->tabHabitation[i]);//On met la maison en ruine
                     }
                 }
-                /////EUHHHHH
-                //calculCapaciteEau(simcity);
                 isFeu(&simcity->tabHabitation[i]);//On met en feu les habitations
                 recevoirImpots(simcity, simcity->tabHabitation[i].nbHabitants);//On reçoit les impôts
             }
