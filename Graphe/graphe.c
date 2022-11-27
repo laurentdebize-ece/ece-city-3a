@@ -631,20 +631,16 @@ void calculCapaciteElec(Simcity* simcity) {
 
 */
 void calculCapaciteEau(Simcity* simcity){
-    int deltaEauManquant = 0; //ce qu'il manque au batiment en eau
-    int deltaEauSurplus = 0; //ce que peut encore donner le chateau en eau
+
     for (int i = 0; i < NBR_MAX_INFRA; ++i) {
         if (simcity->tabInfrastructure[i].typeBatiment == 3) { //si on a un chateau d'eau
             //ListeAdj *HabitationAdj = simcity->tabInfrastructure[i].adjacence; //je récupère sa liste des habitations adjacentes au chateau d'eau que je regarde
 
             while(simcity->tabInfrastructure[i].adjacence->premier != NULL) { //tant que la liste n'est pas vide
 
-                deltaEauSurplus = (simcity->tabInfrastructure[i].capaciteEauMax - simcity->tabInfrastructure[i].capaciteEauDonne);
-                deltaEauManquant = (simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauMax - simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauRecu);
                 if (simcity->tabInfrastructure[i].capaciteEauDonne < CAPACITE_EAU && (simcity->tabInfrastructure[i].capaciteEauMax - simcity->tabInfrastructure[i].capaciteEauDonne) >= simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauMax) { //si le chateau peut donner plus eau que ce qu'il manque à l'habitation
                     simcity->tabInfrastructure[i].capaciteEauDonne += (simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauMax - simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauRecu);
                     simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauRecu += (simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauMax - simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauRecu);
-                    deltaEauSurplus -= deltaEauManquant;
                 }
                 else if (simcity->tabInfrastructure[i].capaciteEauDonne < CAPACITE_EAU && (simcity->tabInfrastructure[i].capaciteEauMax - simcity->tabInfrastructure[i].capaciteEauDonne) <= (simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauMax - simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauRecu) && (simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauMax - simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauRecu) > 0) { //si la centrale ne peut pas donner plus d'electricité que ce qu'il manque à l'habitation
                     // simcity->tabInfrastructure[i].capaciteEauDonne += deltaEauManquant;
