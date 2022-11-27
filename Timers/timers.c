@@ -45,7 +45,6 @@ void timerTempsJeu(Simcity* simcity) {
     } else {modulo60 = FALSE;}
     int secondes = (int)compteurChrono;//Initialisation d'une variable seconde égale aux secondes actuelles depuis le lancement du jeu
     int tampSecondes;//Initialisation d'une variable tampon
-    //printf("min %d\n", simcity->timers.minutes);
     tampSecondes = secondes - (60*simcity->timers.minutes);//On réinitialise la variable tampon toutes les minutes
     simcity->timers.secondes = tampSecondes;//On met à jour les secondes dans la structure du jeu
     if (compteurChrono%60 == 0 &&  modulo60 == TRUE) {//Si le chrono est modulo 60 (= toutes les 60sec) et que le timer est modulo 60 (on change de seconde)
@@ -78,7 +77,6 @@ void timerBatiment(Simcity* simcity) {
                 if(simcity->communiste == TRUE) {//Si on joue en mode communiste
                    isEvolutionPossible(simcity, &simcity->tabHabitation[i]);//On teste si l'évolution est possible par rapport aux capacités
                 }
-                //printf(" - %d\n", simcity->tabHabitation[i].evolutionPossible);
                 if(simcity->tabHabitation[i].evolutionPossible == TRUE) {//Si l'évolution est possible
                     if(simcity->tabHabitation[i].compteurEvolution < 4) {//Si le bâtiment n'est pas une ruine et n'est pas un gratte-ciel
                         simcity->tabHabitation[i].compteurEvolution++;//Le bâtiment passe à l'évolution supérieure

@@ -544,15 +544,11 @@ void isEvolutionPossible(Simcity* simcity, Habitation* habitation) {
     simcity->capaciteEauRestante = simcity->capaciteTotEau - simcity->capaciteTotEauUtilise;
     int eauBesoin = habitationEvolue.capaciteEauMax - habitation->capaciteEauMax;
     int elecBesoin = habitationEvolue.capaciteElectriqueMax - habitation->capaciteElectriqueMax;
-    printf("elecRestante%d\n", simcity->capaciteElecRestante);
-    printf("elecBesoin%d\n", elecBesoin);
-    if(simcity->capaciteEauRestante < eauBesoin /*|| simcity->capaciteElecRestante < elecBesoin*/) {
+    if(simcity->capaciteEauRestante < eauBesoin && simcity->capaciteElecRestante < elecBesoin) {
         habitation->evolutionPossible = FALSE;//Evolution de l'habitation testée impossible
-        printf("EvolPossibleFALSE\n");
     }
-    else /*if(simcity->capaciteEauRestante >= eauBesoin && simcity->capaciteElecRestante >= elecBesoin)*/ {
+    else{
         habitation->evolutionPossible = TRUE;
-        printf("EvolPossibleTRUE\n");
     }
 }
 

@@ -427,7 +427,6 @@ void BFSElec(Simcity* simcity){
 
         //si dans le tab de Batiments, on trouve une centrale electrique : typeBatiment = 2
         if (simcity->tabInfrastructure[i].typeBatiment == 2) {
-            printf("%d \n", i);
             CaseBFS departS = { .distance = 1, .coordsXy = simcity->tabInfrastructure[i].coordXY[0] };
             //on recup la liste d'adja dans la struct du bat pour lequel on lance le BFS
             ListeAdj* listeAdj = simcity->tabInfrastructure[i].adjacence;
