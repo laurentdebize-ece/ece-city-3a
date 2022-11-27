@@ -99,9 +99,9 @@ void niveau1Eau(Simcity *simcity){
     }
     for (int i = 0; i < simcity->nbInfrastructures; ++i) {
         for (int j = 0; j < NBR_COORDS_XY_INFRA; ++j) {
-            if (simcity->interactionExterieure.mouse.celluleXY.celluleX == simcity->tabInfrastructure[i].coordXY[j].celluleX && simcity->interactionExterieure.mouse.celluleXY.celluleY == simcity->tabInfrastructure[i].coordXY[j].celluleY){
+            if (simcity->interactionExterieure.mouse.celluleXY.celluleX == simcity->tabInfrastructure[i].coordXY[j].celluleX && simcity->interactionExterieure.mouse.celluleXY.celluleY == simcity->tabInfrastructure[i].coordXY[j].celluleY && simcity->tabInfrastructure[i].typeBatiment == 3){
                 al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 400, 0, "Infra n°%d", i + 1);
-                al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 460, 0, "Reste Elec: %d", (simcity->tabInfrastructure[i].capaciteEauMax - simcity->tabInfrastructure[i].capaciteEauDonne));
+                al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 460, 0, "Reste Eau: %d", (simcity->tabInfrastructure[i].capaciteEauMax - simcity->tabInfrastructure[i].capaciteEauDonne));
             }
         }
     }
@@ -130,6 +130,14 @@ void niveau2Elec(Simcity *simcity){
                 al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 400, 0, "Hab n°%d", i + 1);
                 al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 430, 0, "Hab : %d", simcity->tabHabitation[i].nbHabitants);
                 al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 460, 0, "Elec : %d",simcity->tabHabitation[i].capaciteElectriqueRecu);
+            }
+        }
+    }
+    for (int i = 0; i < simcity->nbInfrastructures; ++i) {
+        for (int j = 0; j < NBR_COORDS_XY_INFRA; ++j) {
+            if (simcity->interactionExterieure.mouse.celluleXY.celluleX == simcity->tabInfrastructure[i].coordXY[j].celluleX && simcity->interactionExterieure.mouse.celluleXY.celluleY == simcity->tabInfrastructure[i].coordXY[j].celluleY && simcity->tabInfrastructure[i].typeBatiment == 2){
+                al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 400, 0, "Infra n°%d", i + 1);
+                al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 460, 0, "Reste Elec: %d", (simcity->tabInfrastructure[i].capaciteEauMax - simcity->tabInfrastructure[i].capaciteEauDonne));
             }
         }
     }
@@ -647,7 +655,6 @@ void calculCapaciteEau(Simcity* simcity){
                     simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauRecu += (simcity->tabInfrastructure[i].capaciteEauMax - simcity->tabInfrastructure[i].capaciteEauDonne);
                     simcity->tabInfrastructure[i].capaciteEauDonne += (simcity->tabInfrastructure[i].capaciteEauMax - simcity->tabInfrastructure[i].capaciteEauDonne);
                 }
-
 
                 if(simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauRecu == simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauMax){
                     simcity->tabInfrastructure[i].adjacence->premier->MaMaison->eauMax = TRUE;
