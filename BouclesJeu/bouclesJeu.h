@@ -10,7 +10,7 @@
 #include "../Structures/structures.h"
 #include "../Map/map.h"
 #include "../Pages/MenuPrincipal/menuPrincipal.h"
-#include "/time.h"
+#include "time.h"
 #include "../Timers/timers.h"
 #include "../Batiments/batiments.h"
 #include "../ToolBox/toolbox.h"
