@@ -1,5 +1,7 @@
 #include "bitmaps.h"
 
+/////////////////////////////////////// Création des différentes Bitmaps ///////////////////////////////////////
+
 void bitmapCreateMap(Simcity* simcity){
     simcity->tabBitmap[BITMAP_MAP] = al_load_bitmap("../Sources/img/tiles.png");
 }
@@ -16,9 +18,7 @@ void bitmapCreateRegle2 (Simcity* simcity){
     simcity->tabBitmap[BITMAP_REGLE_2] = al_load_bitmap("../Sources/img/reglesJeu/reglesJeu2.png");
 }
 
-
-
-void bitmapFeu(Simcity* simcity){
+void bitmapCreateFeu(Simcity* simcity){
     simcity->tabBitmap[BITMAP_FEU] = al_load_bitmap("../Sources/img/Feu.png");
 }
 
@@ -62,7 +62,7 @@ void bitmapCreateBoutonsPause(Simcity* simcity){
     simcity->tabBitmap[BITMAP_BOUTON_PAUSE] = al_load_bitmap("../Sources/img/boutonPause.png");
 }
 
-
+///Fonction regroupant la création de toutes les Bitmaps
 void bitmapCreateAll(Simcity* simcity){
     bitmapCreateMap(simcity);
     bitmapCreateMenuPrincipal(simcity);
@@ -77,11 +77,13 @@ void bitmapCreateAll(Simcity* simcity){
     bitmapCreateTileRuine(simcity);
     bitmapCreateRegle1(simcity);
     bitmapCreateRegle2(simcity);
-    bitmapFeu(simcity);
+    bitmapCreateFeu(simcity);
     bitmapCreateFlechesMenuRegles(simcity);
 
 }
 
+
+/////////////////////////////////////// Libération des différentes Bitmaps ///////////////////////////////////////
 
 void libererBitmapFlecheRegles (Simcity* simcity){
     al_destroy_bitmap(simcity->tabBitmap[BITMAP_FLECHES_MENU_REGLES]);
@@ -94,7 +96,6 @@ void libererBitmapRegle1 (Simcity* simcity){
 void libererBitmapRegle2 (Simcity* simcity){
     al_destroy_bitmap(simcity->tabBitmap[BITMAP_REGLE_2]);
 }
-
 
 void libererBitmapMap(Simcity* simcity){
     al_destroy_bitmap(simcity->tabBitmap[BITMAP_MAP]);
@@ -144,6 +145,8 @@ void libererBitmapFeu (Simcity* simcity){
     al_destroy_bitmap(simcity->tabBitmap[BITMAP_FEU]);
 }
 
+
+///Fonction regroupant la libération de toutes les Bitmaps
 void libererBitmapAll(Simcity* simcity){
     libererBitmapMap(simcity);
     libererBitmapMenuPrincipal(simcity);
