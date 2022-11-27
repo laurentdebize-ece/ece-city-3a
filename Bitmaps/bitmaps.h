@@ -8,8 +8,7 @@ void bitmapCreateAll(Simcity* simcity);
 void libererBitmapAll(Simcity* simcity);
 
 
-void bitmapFeu (Simcity* simcity);
-
+void bitmapCreateFeu (Simcity* simcity);
 void bitmapCreateMap(Simcity* simcity);
 void bitmapCreateMenuPrincipalIntro(Simcity* simcity);
 void bitmapCreateBoutonAide(Simcity* simcity);

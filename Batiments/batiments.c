@@ -197,7 +197,7 @@ void construireInfrastructure(Simcity* simcity){
 
     if(simcity->banque.achatElectricite == 1 && simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_ELEC_COTE) {//Si on achète une centrale électrique
     simcity->tabInfrastructure[simcity->nbInfrastructures].typeBatiment = 2;//On met le type de batiment à 2 (centrale électrique)
-    simcity->tabInfrastructure[simcity->nbInfrastructures].capaciteElectrique = CAPACITE_ELECTRIQUE;//On initialise sa capacité électrique de départ
+    simcity->tabInfrastructure[simcity->nbInfrastructures].capaciteElectriqueMax = CAPACITE_ELECTRIQUE;//On initialise sa capacité électrique de départ
 
     //On enregistre les coordonnées du batiment
     simcity->tabInfrastructure[simcity->nbInfrastructures].adjacence = initListAdj();
@@ -253,7 +253,7 @@ void construireInfrastructure(Simcity* simcity){
     else if (simcity->banque.achatElectricite == 1 && simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_ELEC_DROIT){
         simcity->tabInfrastructure[simcity->nbInfrastructures].adjacence = initListAdj();
         simcity->tabInfrastructure[simcity->nbInfrastructures].typeBatiment = 2;
-        simcity->tabInfrastructure[simcity->nbInfrastructures].capaciteElectrique = CAPACITE_ELECTRIQUE;
+        simcity->tabInfrastructure[simcity->nbInfrastructures].capaciteElectriqueMax = CAPACITE_ELECTRIQUE;
 
         simcity->tabInfrastructure[simcity->nbInfrastructures].coordXY[0].celluleX = simcity->interactionExterieure.mouse.celluleXY.celluleX;
         simcity->tabInfrastructure[simcity->nbInfrastructures].coordXY[0].celluleY = simcity->interactionExterieure.mouse.celluleXY.celluleY;
@@ -308,7 +308,7 @@ void construireInfrastructure(Simcity* simcity){
 
         simcity->tabInfrastructure[simcity->nbInfrastructures].adjacence = initListAdj();
         simcity->tabInfrastructure[simcity->nbInfrastructures].typeBatiment = 3;
-        simcity->tabInfrastructure[simcity->nbInfrastructures].capaciteEau = CAPACITE_EAU;
+        simcity->tabInfrastructure[simcity->nbInfrastructures].capaciteEauMax = CAPACITE_EAU;
 
         simcity->tabInfrastructure[simcity->nbInfrastructures].coordXY[0].celluleX = simcity->interactionExterieure.mouse.celluleXY.celluleX;
         simcity->tabInfrastructure[simcity->nbInfrastructures].coordXY[0].celluleY = simcity->interactionExterieure.mouse.celluleXY.celluleY;
@@ -361,7 +361,7 @@ void construireInfrastructure(Simcity* simcity){
     }
     else if (simcity->banque.achatChateauEau == 1 && simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_EAU_DROIT){
         simcity->tabInfrastructure[simcity->nbInfrastructures].typeBatiment = 3;
-        simcity->tabInfrastructure[simcity->nbInfrastructures].capaciteEau = CAPACITE_EAU;
+        simcity->tabInfrastructure[simcity->nbInfrastructures].capaciteEauMax = CAPACITE_EAU;
         simcity->tabInfrastructure[simcity->nbInfrastructures].adjacence = initListAdj();
 
         simcity->tabInfrastructure[simcity->nbInfrastructures].coordXY[0].celluleX = simcity->interactionExterieure.mouse.celluleXY.celluleX;
@@ -422,35 +422,47 @@ void miseAJourDonneesHabitation(Simcity* simcity, Habitation* habitation) {
     switch (habitation->compteurEvolution) {
         case 0: { //terrain vague
             habitation->nbHabitants = NB_HABITANTS_TERRAINVAGUE;
+            habitation->capaciteEauMax = NB_HABITANTS_TERRAINVAGUE;
+            habitation->capaciteElectriqueMax = NB_HABITANTS_TERRAINVAGUE;
             break;
 
         }
         case 1: {//cabane
             habitation->nbHabitants = NB_HABITANTS_CABANE;//On met à jour le nombre d'habitants
+            habitation->capaciteEauMax = NB_HABITANTS_CABANE;
+            habitation->capaciteElectriqueMax = NB_HABITANTS_CABANE;
             simcity->map.mapTile[habitation->coordXY->celluleX][habitation->coordXY->celluleY].typeBloc = TYPE_CABANE;//On affiche la tile correspondante
             break;
         }
 
         case 2:{//maison
             habitation->nbHabitants = NB_HABITANTS_MAISON;//On met à jour le nombre d'habitants
+            habitation->capaciteEauMax = NB_HABITANTS_MAISON;
+            habitation->capaciteElectriqueMax = NB_HABITANTS_MAISON;
             simcity->map.mapTile[habitation->coordXY->celluleX][habitation->coordXY->celluleY].typeBloc = TYPE_MAISON;//On affiche la tile correspondante
             break;
         }
 
         case 3:{//immeuble
             habitation->nbHabitants = NB_HABITANTS_IMMEUBLE;//On met à jour le nombre d'habitants
+            habitation->capaciteEauMax = NB_HABITANTS_IMMEUBLE;
+            habitation->capaciteElectriqueMax = NB_HABITANTS_IMMEUBLE;
             simcity->map.mapTile[habitation->coordXY->celluleX][habitation->coordXY->celluleY].typeBloc = TYPE_IMMEUBLE;//On affiche la tile correspondante
             break;
         }
 
         case 4: {//gratteciel
             habitation->nbHabitants = NB_HABITANTS_GRATTECIEL;//On met à jour le nombre d'habitants
+            habitation->capaciteEauMax = NB_HABITANTS_GRATTECIEL;
+            habitation->capaciteElectriqueMax = NB_HABITANTS_GRATTECIEL;
             simcity->map.mapTile[habitation->coordXY->celluleX][habitation->coordXY->celluleY].typeBloc = TYPE_GRATTE_CIEL;//On affiche la tile correspondante
             break;
         }
 
         case 5:{//ruine
             habitation->nbHabitants = NB_HABITANTS_RUINE;//On met à jour le nombre d'habitants
+            habitation->capaciteEauMax = NB_HABITANTS_RUINE;
+            habitation->capaciteElectriqueMax = NB_HABITANTS_RUINE;
             simcity->map.mapTile[habitation->coordXY->celluleX][habitation->coordXY->celluleY].typeBloc = TYPE_RUINE;//On affiche la tile correspondante
             break;
         }

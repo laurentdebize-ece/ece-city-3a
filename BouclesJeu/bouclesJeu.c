@@ -80,6 +80,8 @@ void boucleTest(Simcity* simcity){
                 payerBanque(simcity);//Acheter à la banque
                 timerBatiment(simcity);//Timer propre à chaque bâtiment
                 nombreHabitantsTot(simcity);//Calcul du nombre d'habitants de la ville
+                calculCapaciteEau(simcity);
+                // ici : calculCapaciteElectricite(simcity);
                 simcity->dessin = true;//On met à jour la page
 
                 if (simcity->dessin) {//Si on doit mettre à jour la page
@@ -253,7 +255,7 @@ void boucletestMenuCommunisteCapitaliste(Simcity* simcity){
 
 
 ///Fonction permettant le lancement de la partie
-void lancerPartie() {
+void lancerJeu() {
     //Initialisation de la structure du jeu
     Simcity simcity = {0};
     initAll(&simcity);

@@ -75,19 +75,20 @@ void timerBatiment(Simcity* simcity) {
                     simcity->tabHabitation[i].compteurEvolution = 0;//On met le bâtiment à l'état de terrain vague
                     simcity->tabHabitation[i].evolutionPossible = TRUE;//L'évolution du bâtiment est possible
                 }
-                if(simcity->communiste == TRUE) {//Si on joue en mode communiste
-                    isEvolutionPossible(simcity, &simcity->tabHabitation[i]);//On teste si l'évolution est possible par rapport aux capacités
-                }
+              //  if(simcity->communiste == TRUE) {//Si on joue en mode communiste
+               //     isEvolutionPossible(simcity, &simcity->tabHabitation[i]);//On teste si l'évolution est possible par rapport aux capacités
+              //  }
                 if(simcity->tabHabitation[i].evolutionPossible == TRUE) {//Si l'évolution est possible
                     if(simcity->tabHabitation[i].compteurEvolution < 4) {//Si le bâtiment n'est pas une ruine et n'est pas un gratte-ciel
                         simcity->tabHabitation[i].compteurEvolution++;//Le bâtiment passe à l'évolution supérieure
                         miseAJourDonneesHabitation(simcity, &simcity->tabHabitation[i]);//On met à jour les données du bâtiment
                     }
                 }
-                isRegressionPossible(simcity, &simcity->tabHabitation[i]);//On teste si le bâtiment doit régresser
+              /*  isRegressionPossible(simcity, &simcity->tabHabitation[i]);//On teste si le bâtiment doit régresser
                 if(simcity->tabHabitation[i].regression == TRUE) {//S'il doit régresser
                     regressionHabitation(simcity, &simcity->tabHabitation[i]);//On le fait régresser
                 }
+                 */
                 //Boucle test pompier
                 for(int l = 0; l < simcity->nbHabitations; ++l){
                     if(simcity->tabHabitation[l].isFeu == TRUE && simcity->tabHabitation[l].pompier == TRUE) {//Si en feu et dans la zone pompiers

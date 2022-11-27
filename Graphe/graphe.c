@@ -394,6 +394,7 @@ void BFSEau(Simcity* simcity){
             }
         }
     }
+
 }
 void BFSElec(Simcity* simcity){
     //je recup l'ordre du graphe
@@ -591,29 +592,56 @@ void BFSPompier(Simcity* simcity){
 }
 
 
-void calculCapaciteElec(Simcity* simcity){
-    for(int i = 0; i < NBR_MAX_INFRA ; ++i){
-        if (simcity->tabInfrastructure[i].typeBatiment == 2) {
-            ListeAdj* listeAdj = simcity->tabInfrastructure[i].adjacence;
-            struct Element *actuel = listeAdj->premier;
-            while (actuel != NULL)
-            {
-              //  actuel->MaMaison->capaciteElec += 100;
-                actuel = actuel->suivant;
+
+/*
+void calculCapaciteElec(Simcity* simcity) {
+    int deltaElecManquant = 0; //ce qu'il manque au batiment en electricité
+    int deltaElecSurplus = 0; //ce que peut encore donner la centrale en electricité
+    for (int i = 0; i < NBR_MAX_INFRA; ++i) {
+        if (simcity->tabInfrastructure[i].typeBatiment == 2) { //si on a une centrale electrique
+            ListeAdj *HabitationAdj = simcity->tabInfrastructure[i].adjacence; //je recupere sa liste des habitation adjacente a la centrale electrique que je regarde
+            while(HabitationAdj->premier != NULL) { //tant que la liste n'est pas vide
+                deltaElecSurplus = simcity->tabInfrastructure[i].capaciteElectriqueMax - simcity->tabInfrastructure[i].capaciteElectriqueDonne;
+                deltaElecManquant = HabitationAdj->premier->MaMaison->capaciteElectriqueMax - HabitationAdj->premier->MaMaison->capaciteElectriqueRecu;
+                if (deltaElecManquant <= deltaElecSurplus) { //si la centrale peut donner plus d'electricité que ce qu'il manque a l'habitation
+                    HabitationAdj->premier->MaMaison->capaciteElectriqueRecu += deltaElecManquant;
+                    deltaElecSurplus -= deltaElecManquant;
+                    HabitationAdj->premier->MaMaison->isElec = TRUE;
+                } else { //si la centrale ne peut pas donner plus d'electricité que ce qu'il manque a l'habitation
+                    HabitationAdj->premier->MaMaison->capaciteElectriqueDonne += deltaElecSurplus;
+                    deltaElecSurplus = 0;
+                    HabitationAdj->premier->MaMaison->isElec = FALSE;
+                }
+                HabitationAdj->premier = HabitationAdj->premier->suivant;
             }
         }
     }
 }
+
+*/
 void calculCapaciteEau(Simcity* simcity){
-    for(int i = 0; i < NBR_MAX_INFRA ; ++i){
-        if (simcity->tabInfrastructure[i].typeBatiment == 3) {
-            ListeAdj* listeAdj = simcity->tabInfrastructure[i].adjacence;
-            struct Element *actuel = listeAdj->premier;
-            while (actuel != NULL)
-            {
-               // actuel->MaMaison->capaciteEau += 100;
-                actuel = actuel->suivant;
-            }
+    int deltaEauManquant = 0; //ce qu'il manque au batiment en eau
+    int deltaEauSurplus = 0; //ce que peut encore donner le chateau en eau
+    for (int i = 0; i < NBR_MAX_INFRA; ++i) {
+        if (simcity->tabInfrastructure[i].typeBatiment == 3) { //si on a un chateau d'eau
+            ListeAdj *HabitationAdj = simcity->tabInfrastructure[i].adjacence; //je récupère sa liste des habitations adjacentes au chateau d'eau que je regarde
+            while(HabitationAdj->premier != NULL) { //tant que la liste n'est pas vide
+                deltaEauSurplus = simcity->tabInfrastructure[i].capaciteEauMax - simcity->tabInfrastructure[i].capaciteEauDonne;
+                deltaEauManquant = HabitationAdj->premier->MaMaison->capaciteEauMax - HabitationAdj->premier->MaMaison->capaciteEauRecu;
+                if (deltaEauManquant <= deltaEauSurplus) { //si le chateau peut donner plus eau que ce qu'il manque à l'habitation
+                    HabitationAdj->premier->MaMaison->capaciteEauRecu += deltaEauManquant;
+                    deltaEauSurplus -= deltaEauManquant;
+                } else { //si la centrale ne peut pas donner plus d'electricité que ce qu'il manque à l'habitation
+                    HabitationAdj->premier->MaMaison->capaciteEauRecu += deltaEauSurplus;
+                    HabitationAdj->premier->MaMaison->eauMax = FALSE;
+                }
+                if(HabitationAdj->premier->MaMaison->capaciteEauRecu == HabitationAdj->premier->MaMaison->capaciteEauMax){
+                    HabitationAdj->premier->MaMaison->eauMax = TRUE;
+                }
+                printf("Habitation %x || capacite eau %d \n", HabitationAdj->premier->MaMaison, HabitationAdj->premier->MaMaison->capaciteEauRecu);
+
+                HabitationAdj->premier = HabitationAdj->premier->suivant; //on regarde la suivante
+                 }
         }
     }
 }
