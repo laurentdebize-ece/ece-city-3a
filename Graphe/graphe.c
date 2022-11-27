@@ -659,6 +659,7 @@ void calculCapaciteEau(Simcity* simcity){
                 }
 
                 simcity->tabInfrastructure[i].adjacence->premier = simcity->tabInfrastructure[i].adjacence->premier->suivant; //on regarde la suivante
+                simcity->capaciteTotEauUtilise = simcity->tabInfrastructure[i].capaciteEauDonne;
             }
         }
     }
@@ -684,6 +685,8 @@ void calculCapaciteElec(Simcity* simcity){
                     simcity->tabInfrastructure[i].adjacence->premier->MaMaison->elecMax = TRUE;
                 }
                 simcity->tabInfrastructure[i].adjacence->premier = simcity->tabInfrastructure[i].adjacence->premier->suivant; //on regarde la suivante
+                simcity->capaciteTotElecUtilise = simcity->tabInfrastructure[i].capaciteElectriqueDonne;
+
             }
         }
     }
