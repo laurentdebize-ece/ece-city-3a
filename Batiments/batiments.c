@@ -469,6 +469,8 @@ void miseAJourDonneesHabitation(Simcity* simcity, Habitation* habitation) {
             habitation->nbHabitants = NB_HABITANTS_RUINE;//On met à jour le nombre d'habitants
             habitation->capaciteEauMax = CAPACITE_EAU_RUINE;//On met à jour la capacité en eau
             habitation->capaciteElectriqueMax = CAPACITE_ELEC_RUINE;//On met à jour la capacité en électricité
+            habitation->capaciteEauRecu = 0;//On met à jour la capacité recue en eau
+            habitation->capaciteElectriqueRecu = 0;//On met à jour la capacité recue en électricité
             simcity->map.mapTile[habitation->coordXY->celluleX][habitation->coordXY->celluleY].typeBloc = TYPE_RUINE;//On affiche la tile correspondante
             break;
         }
