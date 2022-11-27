@@ -75,11 +75,14 @@ void timerBatiment(Simcity* simcity) {
                     simcity->tabHabitation[i].compteurEvolution = 0;//On met le bâtiment à l'état de terrain vague
                     simcity->tabHabitation[i].evolutionPossible = TRUE;//L'évolution du bâtiment est possible
                 }
-              //  if(simcity->communiste == TRUE) {//Si on joue en mode communiste
-               //     isEvolutionPossible(simcity, &simcity->tabHabitation[i]);//On teste si l'évolution est possible par rapport aux capacités
-              //  }
+                if(simcity->communiste == TRUE) {//Si on joue en mode communiste
+                   isEvolutionPossible(simcity, &simcity->tabHabitation[i]);//On teste si l'évolution est possible par rapport aux capacités
+                }
+                printf(" - %d\n", simcity->tabHabitation[i].evolutionPossible);
                 if(simcity->tabHabitation[i].evolutionPossible == TRUE) {//Si l'évolution est possible
+                    printf("aaaaa\n");
                     if(simcity->tabHabitation[i].compteurEvolution < 4) {//Si le bâtiment n'est pas une ruine et n'est pas un gratte-ciel
+                        printf("bbbbb\n");
                         simcity->tabHabitation[i].compteurEvolution++;//Le bâtiment passe à l'évolution supérieure
                         miseAJourDonneesHabitation(simcity, &simcity->tabHabitation[i]);//On met à jour les données du bâtiment
                     }
