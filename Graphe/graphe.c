@@ -71,6 +71,7 @@ void recupdonne(Graphe *graphe){
 */
 
 //reseau d'eau
+
 void niveau1Eau(Simcity *simcity){
     for (int x = 0; x < NBCELLULEX; ++x) {
         for (int y = 0; y < NBCELLULEY; ++y) {
@@ -90,12 +91,21 @@ void niveau1Eau(Simcity *simcity){
     for (int i = 0; i < simcity->nbHabitations; ++i) {
         for (int j = 0; j < NBR_COORDS_XY_HAB; ++j) {
             if (simcity->interactionExterieure.mouse.celluleXY.celluleX == simcity->tabHabitation[i].coordXY[j].celluleX && simcity->interactionExterieure.mouse.celluleXY.celluleY == simcity->tabHabitation[i].coordXY[j].celluleY){
-                printf("%d\n",i);
-                al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 400, 0, "Hab : %d", i);
-                al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 450, 0, "Eau : %d", simcity->tabHabitation[i].capaciteEauRecu);
+                al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 400, 0, "Hab n°%d", i + 1);
+                al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 430, 0, "Hab : %d", simcity->tabHabitation[i].nbHabitants);
+                al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 460, 0, "Eau : %d", simcity->tabHabitation[i].capaciteEauRecu);
             }
         }
     }
+    for (int i = 0; i < simcity->nbInfrastructures; ++i) {
+        for (int j = 0; j < NBR_COORDS_XY_INFRA; ++j) {
+            if (simcity->interactionExterieure.mouse.celluleXY.celluleX == simcity->tabInfrastructure[i].coordXY[j].celluleX && simcity->interactionExterieure.mouse.celluleXY.celluleY == simcity->tabInfrastructure[i].coordXY[j].celluleY){
+                al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 400, 0, "Infra n°%d", i + 1);
+                al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 460, 0, "Reste Elec: %d", (simcity->tabInfrastructure[i].capaciteEauMax - simcity->tabInfrastructure[i].capaciteEauDonne));
+            }
+        }
+    }
+
 }
 
 //reseau d'electricite
@@ -117,12 +127,13 @@ void niveau2Elec(Simcity *simcity){
     for (int i = 0; i < simcity->nbHabitations; ++i) {
         for (int j = 0; j < NBR_COORDS_XY_HAB; ++j) {
             if (simcity->interactionExterieure.mouse.celluleXY.celluleX == simcity->tabHabitation[i].coordXY[j].celluleX && simcity->interactionExterieure.mouse.celluleXY.celluleY == simcity->tabHabitation[i].coordXY[j].celluleY){
-                printf("%d\n",i);
-                al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 400, 0, "Hab : %d", i);
-                al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 450, 0, "Elec : %d",simcity->tabHabitation[i].capaciteElectriqueRecu);
+                al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 400, 0, "Hab n°%d", i + 1);
+                al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 430, 0, "Hab : %d", simcity->tabHabitation[i].nbHabitants);
+                al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 460, 0, "Elec : %d",simcity->tabHabitation[i].capaciteElectriqueRecu);
             }
         }
     }
+
 }
 //reseau de pompier
 void niveau3Pompier(Simcity *simcity){
@@ -624,31 +635,32 @@ void calculCapaciteEau(Simcity* simcity){
     int deltaEauSurplus = 0; //ce que peut encore donner le chateau en eau
     for (int i = 0; i < NBR_MAX_INFRA; ++i) {
         if (simcity->tabInfrastructure[i].typeBatiment == 3) { //si on a un chateau d'eau
-            ListeAdj *HabitationAdj = simcity->tabInfrastructure[i].adjacence; //je récupère sa liste des habitations adjacentes au chateau d'eau que je regarde
-            deltaEauSurplus = simcity->tabInfrastructure[i].capaciteEauMax - simcity->tabInfrastructure[i].capaciteEauDonne;
-            deltaEauManquant = HabitationAdj->premier->MaMaison->capaciteEauMax - HabitationAdj->premier->MaMaison->capaciteEauRecu;
+            //ListeAdj *HabitationAdj = simcity->tabInfrastructure[i].adjacence; //je récupère sa liste des habitations adjacentes au chateau d'eau que je regarde
 
-            while(HabitationAdj->premier != NULL) { //tant que la liste n'est pas vide
+            while(simcity->tabInfrastructure[i].adjacence->premier != NULL) { //tant que la liste n'est pas vide
+
+                deltaEauSurplus = simcity->tabInfrastructure[i].capaciteEauMax - simcity->tabInfrastructure[i].capaciteEauDonne;
+                deltaEauManquant = simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauMax - simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauRecu;
 
                     if (deltaEauManquant <= deltaEauSurplus && simcity->tabInfrastructure[i].capaciteEauDonne < CAPACITE_EAU) { //si le chateau peut donner plus eau que ce qu'il manque à l'habitation
                         simcity->tabInfrastructure[i].capaciteEauDonne += deltaEauManquant;
-                        HabitationAdj->premier->MaMaison->capaciteEauRecu += deltaEauManquant;
+                        simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauRecu += deltaEauManquant;
                         deltaEauSurplus -= deltaEauManquant;
                     }
 
                     else { //si la centrale ne peut pas donner plus d'electricité que ce qu'il manque à l'habitation
                        // simcity->tabInfrastructure[i].capaciteEauDonne += deltaEauManquant;
-                        HabitationAdj->premier->MaMaison->capaciteEauRecu += deltaEauSurplus;
-                        HabitationAdj->premier->MaMaison->eauMax = FALSE;
+                        simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauRecu += deltaEauSurplus;
+                        simcity->tabInfrastructure[i].adjacence->premier->MaMaison->eauMax = FALSE;
                     }
 
 
-                    if(HabitationAdj->premier->MaMaison->capaciteEauRecu == HabitationAdj->premier->MaMaison->capaciteEauMax){
-                        HabitationAdj->premier->MaMaison->eauMax = TRUE;
+                    if(simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauRecu == simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauMax){
+                        simcity->tabInfrastructure[i].adjacence->premier->MaMaison->eauMax = TRUE;
                     }
-                    printf("Habitation %x || capacite eau %d \n", HabitationAdj->premier->MaMaison, HabitationAdj->premier->MaMaison->capaciteEauRecu);
+                    //printf("Habitation %x || capacite eau %d \n", simcity->tabInfrastructure[i].adjacence->premier->MaMaison, simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauRecu);
 
-                    HabitationAdj->premier = HabitationAdj->premier->suivant; //on regarde la suivante
+                simcity->tabInfrastructure[i].adjacence->premier = simcity->tabInfrastructure[i].adjacence->premier->suivant; //on regarde la suivante
             }
         }
     }

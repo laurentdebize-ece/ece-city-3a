@@ -413,7 +413,7 @@ void construireInfrastructure(Simcity* simcity){
         simcity->tabInfrastructure[simcity->nbInfrastructures].coordXY[15].celluleY = simcity->interactionExterieure.mouse.celluleXY.celluleY + 3;
 
     }
-
+    simcity->nbInfrastructures ++;
 }
 
 
