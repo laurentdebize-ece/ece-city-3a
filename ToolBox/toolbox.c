@@ -371,8 +371,8 @@ void afficherToolbox (Simcity* simcity){
     al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[VUE_3].image),simcity->toolBox.tabSpriteToolBox[VUE_3].spriteX,simcity->toolBox.tabSpriteToolBox[VUE_3].spriteY,simcity->toolBox.tabSpriteToolBox[VUE_3].spriteLargeur,simcity->toolBox.tabSpriteToolBox[VUE_3].spriteHauteur,simcity->toolBox.tabSpriteToolBox[VUE_3].screenX,simcity->toolBox.tabSpriteToolBox[VUE_3].screenY,0);
     al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[INFO_EAU].image),simcity->toolBox.tabSpriteToolBox[INFO_EAU].spriteX,simcity->toolBox.tabSpriteToolBox[INFO_EAU].spriteY,simcity->toolBox.tabSpriteToolBox[INFO_EAU].spriteLargeur,simcity->toolBox.tabSpriteToolBox[INFO_EAU].spriteHauteur,simcity->toolBox.tabSpriteToolBox[INFO_EAU].screenX,simcity->toolBox.tabSpriteToolBox[INFO_EAU].screenY,0);
     al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[INFO_ELEC].image),simcity->toolBox.tabSpriteToolBox[INFO_ELEC].spriteX,simcity->toolBox.tabSpriteToolBox[INFO_ELEC].spriteY,simcity->toolBox.tabSpriteToolBox[INFO_ELEC].spriteLargeur,simcity->toolBox.tabSpriteToolBox[INFO_ELEC].spriteHauteur,simcity->toolBox.tabSpriteToolBox[INFO_ELEC].screenX,simcity->toolBox.tabSpriteToolBox[INFO_ELEC].screenY,0);
-    al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[BLACK], 28, 305, 0, ": %d", simcity->capaciteElecUtilise);
-    al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[BLACK], 28, 355, 0, ": %d", simcity->capaciteEauUtilise);
+    al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[BLACK], 28, 305, 0, ": %d", simcity->capaciteTotElecUtilise);
+    al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[BLACK], 28, 355, 0, ": %d", simcity->capaciteTotEauUtilise);
 
 
     if (simcity->toolBox.routeHover){

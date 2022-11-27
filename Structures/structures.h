@@ -356,9 +356,9 @@ typedef struct {
     int nbInfrastructures;//Nombre d'infrastructures de la ville
     int nbHabitants;//Nombre d'habitants de la ville
     int capaciteEauRestante;//Capacité en eau disponible
-    int capaciteEauUtilise;//Capacité en eau disponible
+    int capaciteTotEauUtilise;//Capacité en eau disponible
     int capaciteElecRestante;//Capacité en électricité disponible
-    int capaciteElecUtilise;//Capacité en électricité disponible
+    int capaciteTotElecUtilise;//Capacité en électricité disponible
 
     bool dessin;
     bool endGame;
