@@ -620,6 +620,26 @@ void BFSPompier(Simcity* simcity){
 
 }
 
+void partiellementAlimenteEau(Simcity* simcity){
+    for (int i = 0; i < simcity->nbHabitations; ++i) {
+        if (simcity->tabHabitation[i].capaciteEauMax == simcity->tabHabitation[i].capaciteEauRecu){
+            simcity->tabHabitation[i].partiellementEau = false;
+        }else{
+            simcity->tabHabitation[i].partiellementEau = true;
+        }
+    }
+}
+
+void partiellementAlimenteElec(Simcity* simcity){
+    for (int i = 0; i < simcity->nbHabitations; ++i) {
+        if (simcity->tabHabitation[i].capaciteElectriqueMax == simcity->tabHabitation[i].capaciteElectriqueRecu){
+            simcity->tabHabitation[i].partiellementElec = false;
+        } else{
+            simcity->tabHabitation[i].partiellementElec = true;
+        }
+    }
+}
+
 void calculCapaTotEau(Simcity* simcity){ // permet de savoir la capacite totale utilise de l'eau
     for (int i = 0; i < simcity->nbInfrastructures; ++i) {
         if (simcity->tabInfrastructure[i].typeBatiment == 3){

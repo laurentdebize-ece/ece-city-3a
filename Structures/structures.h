@@ -308,6 +308,8 @@ typedef struct {
 
     bool elecMax;//capacité électrique max atteinte
     bool eauMax;//capacité en eau max atteinte
+    bool partiellementEau;
+    bool partiellementElec;
 
 } Habitation;
 

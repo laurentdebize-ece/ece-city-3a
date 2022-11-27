@@ -78,6 +78,8 @@ void *lire_graphe(Simcity *simcity);
 void recupdonne(Graphe *graphe);
 //void ecrire_graphe(Graphe *graphe, char *nomFichier);
 
+void partiellementAlimenteEau(Simcity* simcity);
+void partiellementAlimenteElec(Simcity* simcity);
 
 
 #endif //ECE_CITY_3A_GRAPHE_H
