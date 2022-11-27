@@ -98,11 +98,11 @@ void timerBatiment(Simcity* simcity) {
                         eteindreFeuMettreRuine(simcity, &simcity->tabHabitation[i]);//On met la maison en ruine
                     }
                 }
-                BFSEau(simcity);
-                BFSElec(simcity);
-                BFSPompier(simcity);
-                calculCapaciteEau(simcity);
-                calculCapaciteElec(simcity);
+                BFSEau(simcity); // effectue un BFS pour l'eau
+                BFSElec(simcity); // effectue un BFS pour l'electricite
+                BFSPompier(simcity); // effectue un BFS pour les pompier
+                calculCapaciteEau(simcity); // calcul des capacite d'eau pour les habitations
+                calculCapaciteElec(simcity);// calcul des capacite d'electricite pour les habitations
                 isFeu(&simcity->tabHabitation[i]);//On met en feu les habitations
                 recevoirImpots(simcity, simcity->tabHabitation[i].nbHabitants);//On reçoit les impôts
             }
