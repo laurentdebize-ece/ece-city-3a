@@ -421,48 +421,48 @@ void construireInfrastructure(Simcity* simcity){
 void miseAJourDonneesHabitation(Simcity* simcity, Habitation* habitation) {
     switch (habitation->compteurEvolution) {
         case 0: { //terrain vague
-            habitation->nbHabitants = NB_HABITANTS_TERRAINVAGUE;
-            habitation->capaciteEauMax = NB_HABITANTS_TERRAINVAGUE;
-            habitation->capaciteElectriqueMax = NB_HABITANTS_TERRAINVAGUE;
+            habitation->nbHabitants = NB_HABITANTS_TERRAINVAGUE;//On met à jour le nombre d'habitants
+            habitation->capaciteEauMax = CAPACITE_EAU_TERRAINVAGUE;//On met à jour la capacité en eau
+            habitation->capaciteElectriqueMax = CAPACITE_ELEC_TERRAINVAGUE;//On met à jour la capacité en électricité
             break;
 
         }
         case 1: {//cabane
             habitation->nbHabitants = NB_HABITANTS_CABANE;//On met à jour le nombre d'habitants
-            habitation->capaciteEauMax = NB_HABITANTS_CABANE;
-            habitation->capaciteElectriqueMax = NB_HABITANTS_CABANE;
+            habitation->capaciteEauMax = CAPACITE_EAU_CABANE;//On met à jour la capacité en eau
+            habitation->capaciteElectriqueMax = CAPACITE_ELEC_CABANE;//On met à jour la capacité en électricité
             simcity->map.mapTile[habitation->coordXY->celluleX][habitation->coordXY->celluleY].typeBloc = TYPE_CABANE;//On affiche la tile correspondante
             break;
         }
 
         case 2:{//maison
             habitation->nbHabitants = NB_HABITANTS_MAISON;//On met à jour le nombre d'habitants
-            habitation->capaciteEauMax = NB_HABITANTS_MAISON;
-            habitation->capaciteElectriqueMax = NB_HABITANTS_MAISON;
+            habitation->capaciteEauMax = CAPACITE_EAU_MAISON;//On met à jour la capacité en eau
+            habitation->capaciteElectriqueMax = CAPACITE_ELEC_MAISON;//On met à jour la capacité en électricité
             simcity->map.mapTile[habitation->coordXY->celluleX][habitation->coordXY->celluleY].typeBloc = TYPE_MAISON;//On affiche la tile correspondante
             break;
         }
 
         case 3:{//immeuble
             habitation->nbHabitants = NB_HABITANTS_IMMEUBLE;//On met à jour le nombre d'habitants
-            habitation->capaciteEauMax = NB_HABITANTS_IMMEUBLE;
-            habitation->capaciteElectriqueMax = NB_HABITANTS_IMMEUBLE;
+            habitation->capaciteEauMax = CAPACITE_EAU_IMMEUBLE;//On met à jour la capacité en eau
+            habitation->capaciteElectriqueMax = CAPACITE_ELEC_IMMEUBLE;//On met à jour la capacité en électricité
             simcity->map.mapTile[habitation->coordXY->celluleX][habitation->coordXY->celluleY].typeBloc = TYPE_IMMEUBLE;//On affiche la tile correspondante
             break;
         }
 
         case 4: {//gratteciel
             habitation->nbHabitants = NB_HABITANTS_GRATTECIEL;//On met à jour le nombre d'habitants
-            habitation->capaciteEauMax = NB_HABITANTS_GRATTECIEL;
-            habitation->capaciteElectriqueMax = NB_HABITANTS_GRATTECIEL;
+            habitation->capaciteEauMax = CAPACITE_EAU_GRATTECIEL;//On met à jour la capacité en eau
+            habitation->capaciteElectriqueMax = CAPACITE_ELEC_GRATTECIEL;//On met à jour la capacité en électricité
             simcity->map.mapTile[habitation->coordXY->celluleX][habitation->coordXY->celluleY].typeBloc = TYPE_GRATTE_CIEL;//On affiche la tile correspondante
             break;
         }
 
         case 5:{//ruine
             habitation->nbHabitants = NB_HABITANTS_RUINE;//On met à jour le nombre d'habitants
-            habitation->capaciteEauMax = NB_HABITANTS_RUINE;
-            habitation->capaciteElectriqueMax = NB_HABITANTS_RUINE;
+            habitation->capaciteEauMax = CAPACITE_EAU_RUINE;//On met à jour la capacité en eau
+            habitation->capaciteElectriqueMax = CAPACITE_ELEC_RUINE;//On met à jour la capacité en électricité
             simcity->map.mapTile[habitation->coordXY->celluleX][habitation->coordXY->celluleY].typeBloc = TYPE_RUINE;//On affiche la tile correspondante
             break;
         }
@@ -475,7 +475,7 @@ void miseAJourDonneesHabitation(Simcity* simcity, Habitation* habitation) {
 
 ///Fonction testant si le bâtiment doit régresser
 void isRegressionPossible(Simcity* simcity, Habitation* habitation) {
-    if(simcity->capaciteEauRestante < habitation->capaciteEauMax || simcity->capaciteElecRestante < habitation->capaciteElectriqueMax){//Si la capacité disponible en eau ou en électricité est inférieure à la capacité nécessaire àl'habitation
+    if(habitation->eauMax == FALSE || habitation->elecMax == FALSE) {//Si la capacité disponible en eau ou en électricité est inférieure à la capacité nécessaire àl'habitation
         habitation->regression = TRUE;//Evolution de l'habitation testée impossible
     }else{habitation->regression = FALSE;}//Evolution de l'habitation testée possible
 }
@@ -497,7 +497,7 @@ void isEvolutionPossible(Simcity* simcity, Habitation* habitation) {
     Habitation* habitationEvolue = habitation;//Création d'une variable tampon habitationEvolue
     habitationEvolue->compteurEvolution++;//habitationEvolue à une evolution à 1 stade de plus que l'habitation qu'on teste
     miseAJourDonneesHabitation(simcity, habitationEvolue);//On met à jour les données de habitationEvolue
-    if(simcity->capaciteEauRestante < habitationEvolue->capaciteEauMax || simcity->capaciteElecRestante < habitationEvolue->capaciteElectriqueMax){//Si la capacité disponible en eau ou en électricité est inférieure à la capacité nécessaire àl'habitation
+    if(habitationEvolue->eauMax == FALSE || habitationEvolue->elecMax == FALSE){//Si la capacité disponible en eau ou en électricité est inférieure à la capacité nécessaire àl'habitation
         habitation->evolutionPossible = FALSE;//Evolution de l'habitation testée impossible
     }else{habitation->evolutionPossible = TRUE;}//Evolution de l'habitation testée possible
 }
