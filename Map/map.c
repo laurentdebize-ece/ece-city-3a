@@ -978,26 +978,4 @@ void detruire(Simcity *simcity){ // reinitialise toutes les données du batiment
             }
         }
     }
-
 }
-
-void cliquer(Simcity* simcity){
-    for (int i = 0; i < NBR_MAX_HAB; ++i) {
-        for (int j = 0; j < 8; ++j) {
-            if (simcity->outOfBorder && simcity->allegro.event.mouse.button == 1
-            && simcity->tabHabitation[i].coordXY[j].celluleX == simcity->interactionExterieure.mouse.celluleXY.celluleX
-            && simcity->tabHabitation[i].coordXY[j].celluleY == simcity->interactionExterieure.mouse.celluleXY.celluleY){
-                printf("Habitation : %d\n", i);
-            }
-        }
-    }
-    for (int i = 0; i < NBR_MAX_INFRA; ++i) {
-        for (int j = 0; j < 16; ++j) {
-            if (simcity->outOfBorder && simcity->allegro.event.mouse.button == 1 && simcity->tabInfrastructure[i].coordXY[j].celluleX == simcity->interactionExterieure.mouse.celluleXY.celluleX && simcity->tabInfrastructure[i].coordXY[j].celluleY == simcity->interactionExterieure.mouse.celluleXY.celluleY){
-                printf("Infrastructure : %d\n", i);
-            }
-        }
-    }
-}
-
-
