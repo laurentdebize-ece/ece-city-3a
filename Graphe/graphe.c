@@ -552,7 +552,7 @@ void BFSPompier(Simcity* simcity){
                                         CoordsXY coords = simcity->tabHabitation[i].coordXY[k];
                                         simcity->graphe.grille[coords.celluleX][coords.celluleY].couleur = 2;
                                     }
-                                    if(num.distance < 20){
+                                    if(num.distance < CAPACITE_POMPIER){
                                         insertionListeAdj(listeAdj, &simcity->tabHabitation[i], num.distance);
                                         simcity->tabHabitation[i].pompier = TRUE;
                                     }

@@ -12,8 +12,26 @@
 #define NB_HABITANTS_GRATTECIEL 1000
 #define NB_HABITANTS_RUINE 0
 
+//Capacités en eau en fonction du type de batiment
+#define CAPACITE_EAU_TERRAINVAGUE 0
+#define CAPACITE_EAU_CABANE 10
+#define CAPACITE_EAU_MAISON 50
+#define CAPACITE_EAU_IMMEUBLE 100
+#define CAPACITE_EAU_GRATTECIEL 1000
+#define CAPACITE_EAU_RUINE 0
+
+//Capacités en électricité en fonction du type de batiment
+#define CAPACITE_ELEC_TERRAINVAGUE 0
+#define CAPACITE_ELEC_CABANE 10
+#define CAPACITE_ELEC_MAISON 50
+#define CAPACITE_ELEC_IMMEUBLE 100
+#define CAPACITE_ELEC_GRATTECIEL 1000
+#define CAPACITE_ELEC_RUINE 0
+
+//Capacités des infrastructures
 #define CAPACITE_EAU 5000 //Capacité du chateau d'eau
 #define CAPACITE_ELECTRIQUE 5000 //Capacité de la centrale électrique
+#define CAPACITE_POMPIER 20 //Capacité de la caserne de pompiers
 
 
 void initTabBatiments(Simcity* simcity);

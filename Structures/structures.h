@@ -253,6 +253,12 @@ typedef struct {
 
 } ToolBox;
 
+
+
+
+/////////////////////////////////////// Structures des éléments du jeu ///////////////////////////////////////
+
+///Structure des infrastructures
 struct Batiment{
     CoordsXY coordXY[NBR_COORDS_XY_INFRA];//coordonnées de l'infrastructure
     int typeBatiment;//type d'infrastructure - Electricité(2) - Eau(3) - Pompiers(4)
@@ -266,10 +272,6 @@ struct Batiment{
     ListeAdj *adjacence;//liste des adjacents du batiment (centrale ou chateau)
 
 };
-
-
-
-/////////////////////////////////////// Structures des éléments du jeu ///////////////////////////////////////
 
 ///Structure des habitations
 typedef struct {

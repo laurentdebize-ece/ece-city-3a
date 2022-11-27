@@ -2,6 +2,7 @@
 #define ECE_CITY_3A_GRAPHE_H
 
 #include "../Structures/structures.h"
+#include "../Batiments/batiments.h"
 
 /*
 
