@@ -14,6 +14,7 @@ void initTabBatiments(Simcity* simcity) {
         simcity->tabHabitation[i].capaciteEauRecu = 0;
         simcity->tabHabitation[i].isFeu = FALSE;
         simcity->tabHabitation[i].isFeuRuine =FALSE;
+        simcity->tabHabitation[i].pompier = FALSE;
         for (int j = 0; j < NBR_COORDS_XY_HAB; ++j) {
             simcity->tabHabitation[i].coordXY[j].celluleX = -1;
             simcity->tabHabitation[i].coordXY[j].celluleY = -1;

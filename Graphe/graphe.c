@@ -482,7 +482,7 @@ void BFSPompier(Simcity* simcity){
         if (simcity->tabInfrastructure[i].typeBatiment == 4) { /////4
 
             CaseBFS departS = { .distance = 1, .coordsXy = simcity->tabInfrastructure[i].coordXY[0] };
-            //on recup la liste d'adja dans la struct du bat pour lequel on lance le BFS
+            //on recup la liste d'adja dans la struct du bâtiment pour lequel on lance le BFS
             ListeAdj* listeAdj = simcity->tabInfrastructure[i].adjacence;
             clearListeAdj(listeAdj);
             //on marque la case en Gris

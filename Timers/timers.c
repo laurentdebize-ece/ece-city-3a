@@ -88,20 +88,18 @@ void timerBatiment(Simcity* simcity) {
                 if(simcity->tabHabitation[i].regression == TRUE) {
                     regressionHabitation(simcity, &simcity->tabHabitation[i]);
                 }
-                //j'ai modif ici
+                //Boucle test pompier
                 for(int l = 0; l < simcity->nbHabitations; ++l){
-                    if(simcity->tabHabitation[l].isFeu == TRUE && simcity->tabHabitation[l].pompier == TRUE) {
-                        simcity->tabHabitation[l].isFeu = FALSE;
+                    if(simcity->tabHabitation[l].isFeu == TRUE && simcity->tabHabitation[l].pompier == TRUE) {//Si en feu et dans la zone pompiers
+                        simcity->tabHabitation[l].isFeu = FALSE;//On éteint le feu
+                        simcity->tabHabitation[l].evolutionPossible = TRUE;//on relance l'évolution
                     }
-                    else if(simcity->tabHabitation[l].isFeu == TRUE && simcity->tabHabitation[l].pompier == FALSE) {
-                        // on met en ruine la maison
-                        simcity->tabHabitation[l].isFeuRuine = TRUE;
+                    else if(simcity->tabHabitation[l].isFeu == TRUE && simcity->tabHabitation[l].pompier == FALSE) {//Si en feu et pas dans la zone pompiers
+                        simcity->tabHabitation[l].isFeuRuine = TRUE;//La maiso, doit tomber en ruine
+                        eteindreFeuMettreRuine(simcity, &simcity->tabHabitation[i]);//On met la maison en ruine
                     }
                 }
                 isFeu(&simcity->tabHabitation[i]);
-                if(simcity->tabHabitation[i].isFeu == TRUE) {
-                    eteindreFeuMettreRuine(simcity, &simcity->tabHabitation[i]);
-                }
                 recevoirImpots(simcity, simcity->tabHabitation[i].nbHabitants);//On reçoit les impôts
             }
         }
