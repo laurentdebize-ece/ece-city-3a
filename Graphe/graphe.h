@@ -67,6 +67,7 @@ void enfilerVoisin(Simcity *simcity, CaseBFS num, t_file *f);
 //affichage des niveaux -1 et -2
 void niveau1Eau(Simcity *simcity);
 void niveau2Elec(Simcity *simcity);
+void niveau3Pompier(Simcity *simcity);
 
 //calcul des capacités de chaque maison
 void calculCapaciteElec(Simcity *simcity);

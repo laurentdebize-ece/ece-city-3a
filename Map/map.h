@@ -42,5 +42,9 @@ void detruire(Simcity *simcity);
 
 void cliquer(Simcity* simcity);
 
-
+bool collerAlaRouteHab(Simcity* simcity);
+bool collerAlaRouteElec(Simcity* simcity);
+bool collerAlaRouteEau(Simcity* simcity);
+bool collerAlaRoutPompier(Simcity* simcity);
+bool collerAlaRouteInfra(Simcity* simcity);
 #endif

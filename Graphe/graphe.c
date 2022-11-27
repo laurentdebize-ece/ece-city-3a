@@ -72,19 +72,8 @@ void recupdonne(Graphe *graphe){
 
 //reseau d'eau
 void niveau1Eau(Simcity *simcity){
-
     for (int x = 0; x < NBCELLULEX; ++x) {
         for (int y = 0; y < NBCELLULEY; ++y) {
-            if (simcity->map.mapTile[x][y].typeBloc == TYPE_HERBE){
-                al_draw_bitmap_region(*(simcity->map.spriteTile[HERBE].image)
-                        , simcity->map.spriteTile[HERBE].spriteX
-                        , simcity->map.spriteTile[HERBE].spriteY
-                        , simcity->map.spriteTile[HERBE].spriteLargeur
-                        , simcity->map.spriteTile[HERBE].spriteHauteur
-                        ,simcity->map.mapTile[x][y].coordsXY.screenX
-                        ,simcity->map.mapTile[x][y].coordsXY.screenY
-                        ,0);
-            }
             if (simcity->map.mapTile[x][y].typeEau == 1 ){
                 al_draw_bitmap_region(*(simcity->map.spriteTile[EAU_RESEAU].image)
                         , simcity->map.spriteTile[EAU_RESEAU].spriteX
@@ -104,22 +93,30 @@ void niveau1Eau(Simcity *simcity){
 void niveau2Elec(Simcity *simcity){
     for (int x = 0; x < NBCELLULEX; ++x) {
         for (int y = 0; y < NBCELLULEY; ++y) {
-            if (simcity->map.mapTile[x][y].typeBloc == TYPE_HERBE){
-                al_draw_bitmap_region(*(simcity->map.spriteTile[HERBE].image)
-                        , simcity->map.spriteTile[HERBE].spriteX
-                        , simcity->map.spriteTile[HERBE].spriteY
-                        , simcity->map.spriteTile[HERBE].spriteLargeur
-                        , simcity->map.spriteTile[HERBE].spriteHauteur
-                        ,simcity->map.mapTile[x][y].coordsXY.screenX
-                        ,simcity->map.mapTile[x][y].coordsXY.screenY
-                        ,0);
-            }
             if (simcity->map.mapTile[x][y].typeElec == 1){
                 al_draw_bitmap_region(*(simcity->map.spriteTile[ELEC_RESEAU].image)
                         , simcity->map.spriteTile[ELEC_RESEAU].spriteX
                         , simcity->map.spriteTile[ELEC_RESEAU].spriteY
                         , simcity->map.spriteTile[ELEC_RESEAU].spriteLargeur
                         , simcity->map.spriteTile[ELEC_RESEAU].spriteHauteur
+                        ,simcity->map.mapTile[x][y].coordsXY.screenX
+                        ,simcity->map.mapTile[x][y].coordsXY.screenY
+                        ,0);
+            }
+        }
+    }
+}
+//reseau de pompier
+void niveau3Pompier(Simcity *simcity){
+
+    for (int x = 0; x < NBCELLULEX; ++x) {
+        for (int y = 0; y < NBCELLULEY; ++y) {
+            if (simcity->map.mapTile[x][y].typePompier == 1){
+                al_draw_bitmap_region(*(simcity->map.spriteTile[POMPIER_RESEAU].image)
+                        , simcity->map.spriteTile[POMPIER_RESEAU].spriteX
+                        , simcity->map.spriteTile[POMPIER_RESEAU].spriteY
+                        , simcity->map.spriteTile[POMPIER_RESEAU].spriteLargeur
+                        , simcity->map.spriteTile[POMPIER_RESEAU].spriteHauteur
                         ,simcity->map.mapTile[x][y].coordsXY.screenX
                         ,simcity->map.mapTile[x][y].coordsXY.screenY
                         ,0);
@@ -365,9 +362,11 @@ void BFSEau(Simcity* simcity){
 
             while (actuel != NULL)
             {
-                //printf("Habitation %x | Distance %d \n", actuel->MaMaison, actuel->distanceAMonBatiment);
+                //printf("Chateau eau %d Habitation %x | Distance %d \n",i, actuel->MaMaison, actuel->distanceAMonBatiment);
                 actuel = actuel->suivant;
             }
+
+
         }
     }
     for(int i = 0; i < NBCELLULEX; i++){
@@ -390,6 +389,7 @@ void BFSElec(Simcity* simcity){
 
         //si dans le tab de Batiments, on trouve une centrale electrique : typeBatiment = 2
         if (simcity->tabInfrastructure[i].typeBatiment == 2) {
+            printf("%d \n", i);
             CaseBFS departS = { .distance = 1, .coordsXy = simcity->tabInfrastructure[i].coordXY[0] };
             //on recup la liste d'adja dans la struct du bat pour lequel on lance le BFS
             ListeAdj* listeAdj = simcity->tabInfrastructure[i].adjacence;
@@ -480,6 +480,7 @@ void BFSPompier(Simcity* simcity){
 
         //si dans le tab de Batiments, on trouve une caserne de pompier : typebatiment = 4
         if (simcity->tabInfrastructure[i].typeBatiment == 4) { /////4
+
             CaseBFS departS = { .distance = 1, .coordsXy = simcity->tabInfrastructure[i].coordXY[0] };
             //on recup la liste d'adja dans la struct du bat pour lequel on lance le BFS
             ListeAdj* listeAdj = simcity->tabInfrastructure[i].adjacence;
@@ -494,52 +495,56 @@ void BFSPompier(Simcity* simcity){
                 // je récupère les coordonnes du premier element de ma file
                 CaseBFS num = defiler(&f);
 
-                // si couleur == 2 on ne visite pas
-                if (simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY].couleur == 2)
-                    continue;
+                    // si couleur == 2 on ne visite pas
+                    if (simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY].couleur == 2)
+                        continue;
 
-                Cellule celluleActuelle = simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY];
-                //printf("coords %d %d %d \n", num.coordsXy.celluleX, num.coordsXy.celluleY, celluleActuelle.type);
-                //enum TYPE_BLOC{TYPE_HERBE,TYPE_ROUTE,TYPE_TERRAIN_VAGUE,TYPE_CABANE,TYPE_MAISON,TYPE_IMMEUBLE,TYPE_GRATTE_CIEL, TYPE_ELEC_DROIT, TYPE_ELEC_COTE, TYPE_EAU_DROIT, TYPE_EAU_COTE, TYPE_POMPIER_DROIT, TYPE_POMPIER_COTE, NB_TYPE_BLOC};
-                switch(celluleActuelle.type){
+                    Cellule celluleActuelle = simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY];
+                    //printf("coords %d %d %d \n", num.coordsXy.celluleX, num.coordsXy.celluleY, celluleActuelle.type);
+                    //enum TYPE_BLOC{TYPE_HERBE,TYPE_ROUTE,TYPE_TERRAIN_VAGUE,TYPE_CABANE,TYPE_MAISON,TYPE_IMMEUBLE,TYPE_GRATTE_CIEL, TYPE_ELEC_DROIT, TYPE_ELEC_COTE, TYPE_EAU_DROIT, TYPE_EAU_COTE, TYPE_POMPIER_DROIT, TYPE_POMPIER_COTE, NB_TYPE_BLOC};
+                    switch(celluleActuelle.type){
 
-                    case TYPE_POMPIER_COTE :
-                    case TYPE_POMPIER_DROIT :
-                    {
-                        enfilerVoisin(simcity, num, &f);
-                    }
-                        break;
-                    case TYPE_ROUTE :
-                    {
-                        simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY].elec = TRUE;
-                        simcity->map.mapTile[num.coordsXy.celluleX][num.coordsXy.celluleY].typeElec = TRUE;
-                        enfilerVoisin(simcity, num, &f);
-                    }
-                        break;
-                    case TYPE_TERRAIN_VAGUE :
-                    case TYPE_CABANE :
-                    case TYPE_MAISON :
-                    case TYPE_IMMEUBLE :
-                    case TYPE_GRATTE_CIEL :
-                    {
-                        for (int i = 0; i < NBR_MAX_HAB; ++i) {
-                            for (int j = 0; j < 8; ++j) {
-                                if (simcity->tabHabitation[i].coordXY[j].celluleX == num.coordsXy.celluleX
-                                    && simcity->tabHabitation[i].coordXY[j].celluleY == num.coordsXy.celluleY) {
-                                    for (int k = 0; k < 8; ++k) {
-                                        CoordsXY coords = simcity->tabHabitation[i].coordXY[k];
-                                        simcity->graphe.grille[coords.celluleX][coords.celluleY].couleur = 2;
+                        case TYPE_POMPIER_COTE :
+                        case TYPE_POMPIER_DROIT :
+                        {
+                            enfilerVoisin(simcity, num, &f);
+                        }
+                            break;
+                        case TYPE_ROUTE :
+                        {
+                            if(num.distance < 20){
+                                simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY].pompier = TRUE;
+                                simcity->map.mapTile[num.coordsXy.celluleX][num.coordsXy.celluleY].typePompier = TRUE;
+                            }
+                            enfilerVoisin(simcity, num, &f);
+                        }
+                            break;
+                        case TYPE_TERRAIN_VAGUE :
+                        case TYPE_CABANE :
+                        case TYPE_MAISON :
+                        case TYPE_IMMEUBLE :
+                        case TYPE_GRATTE_CIEL :
+                        {
+                            for (int i = 0; i < NBR_MAX_HAB; ++i) {
+                                for (int j = 0; j < 8; ++j) {
+                                    if (simcity->tabHabitation[i].coordXY[j].celluleX == num.coordsXy.celluleX
+                                        && simcity->tabHabitation[i].coordXY[j].celluleY == num.coordsXy.celluleY) {
+                                        for (int k = 0; k < 8; ++k) {
+                                            CoordsXY coords = simcity->tabHabitation[i].coordXY[k];
+                                            simcity->graphe.grille[coords.celluleX][coords.celluleY].couleur = 2;
+                                        }
+                                        insertionListeAdj(listeAdj, &simcity->tabHabitation[i], num.distance);
                                     }
-                                    insertionListeAdj(listeAdj, &simcity->tabHabitation[i], num.distance);
                                 }
                             }
                         }
+                            break;
                     }
-                        break;
-                }
-                //je marque en Noir le sommet que j'ai fini de visiter
-                simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY].couleur = 2;
+                    //je marque en Noir le sommet que j'ai fini de visiter
+                    simcity->graphe.grille[num.coordsXy.celluleX][num.coordsXy.celluleY].couleur = 2;
+
             }
+
 
             struct Element *actuel = listeAdj->premier;
 
@@ -558,8 +563,11 @@ void BFSPompier(Simcity* simcity){
                 }
                 actuel = actuel->suivant;
             }
+
         }
+
     }
+
 }
 
 

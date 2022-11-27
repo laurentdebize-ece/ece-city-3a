@@ -118,6 +118,12 @@ void bitmapSpriteInit(Simcity* simcity){
     simcity->map.spriteTile[ELEC_RESEAU].spriteHauteur = 20;
     simcity->map.spriteTile[ELEC_RESEAU].spriteX = 32;
     simcity->map.spriteTile[ELEC_RESEAU].spriteY = 30;
+
+    simcity->map.spriteTile[POMPIER_RESEAU].image = &simcity->tabBitmap[BITMAP_MAP];
+    simcity->map.spriteTile[POMPIER_RESEAU].spriteLargeur = 20;
+    simcity->map.spriteTile[POMPIER_RESEAU].spriteHauteur = 20;
+    simcity->map.spriteTile[POMPIER_RESEAU].spriteX = 32;
+    simcity->map.spriteTile[POMPIER_RESEAU].spriteY = 58;
 }
 
 void calculPositionSourisEnCelluleXY(Simcity* simcity) {
@@ -155,6 +161,7 @@ void afficherMap(Simcity* simcity){
 
     bool modeNiveauEau = simcity->toolBox.vue1EnMain;
     bool modeNiveauElectricite = simcity->toolBox.vue2EnMain;
+    bool modeNiveauPompier = simcity->toolBox.vue3EnMain;
 
     for (int x = 0; x < NBCELLULEX; ++x) {
         for (int y = 0; y < NBCELLULEY; ++y) {
@@ -207,8 +214,11 @@ void afficherMap(Simcity* simcity){
     if(modeNiveauEau){
         niveau1Eau(simcity);
     }
-    if(modeNiveauElectricite == 1){
+    if(modeNiveauElectricite){
         niveau2Elec(simcity);
+    }
+    if(modeNiveauPompier){
+        niveau3Pompier(simcity);
     }
     afficherPrevision(simcity);
     afficherIsFeu(simcity);
@@ -230,14 +240,6 @@ void afficherPrevision(Simcity* simcity){
     afficherPrevElec(simcity);
     afficherPrevEau(simcity);
     afficherPrevPompier(simcity);
-}
-
-bool collerAlaRouteHab(Simcity* simcity){
-
-    if (simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX - 1][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_ROUTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY - 1].typeBloc == TYPE_ROUTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX + 3][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_ROUTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX + 2][simcity->interactionExterieure.mouse.celluleXY.celluleY - 1].typeBloc == TYPE_ROUTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX + 3][simcity->interactionExterieure.mouse.celluleXY.celluleY + 2].typeBloc == TYPE_ROUTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX + 2][simcity->interactionExterieure.mouse.celluleXY.celluleY + 3].typeBloc == TYPE_ROUTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY + 3].typeBloc == TYPE_ROUTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX - 1][simcity->interactionExterieure.mouse.celluleXY.celluleY + 2].typeBloc == TYPE_ROUTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX + 1][simcity->interactionExterieure.mouse.celluleXY.celluleY - 1].typeBloc == TYPE_ROUTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX - 1][simcity->interactionExterieure.mouse.celluleXY.celluleY + 1].typeBloc == TYPE_ROUTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX + 1][simcity->interactionExterieure.mouse.celluleXY.celluleY + 3].typeBloc == TYPE_ROUTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX + 3][simcity->interactionExterieure.mouse.celluleXY.celluleY + 1].typeBloc == TYPE_ROUTE){
-               return true;
-    }
-    return false;
 }
 
 int isTerrainVaguePossible(Simcity* simcity){
@@ -660,6 +662,13 @@ bool collerAlaRouteInfra(Simcity* simcity){
         return collerAlaRoutPompier(simcity);
     }
 }
+bool collerAlaRouteHab(Simcity* simcity){
+
+    if (simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX - 1][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_ROUTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY - 1].typeBloc == TYPE_ROUTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX + 3][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_ROUTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX + 2][simcity->interactionExterieure.mouse.celluleXY.celluleY - 1].typeBloc == TYPE_ROUTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX + 3][simcity->interactionExterieure.mouse.celluleXY.celluleY + 2].typeBloc == TYPE_ROUTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX + 2][simcity->interactionExterieure.mouse.celluleXY.celluleY + 3].typeBloc == TYPE_ROUTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY + 3].typeBloc == TYPE_ROUTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX - 1][simcity->interactionExterieure.mouse.celluleXY.celluleY + 2].typeBloc == TYPE_ROUTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX + 1][simcity->interactionExterieure.mouse.celluleXY.celluleY - 1].typeBloc == TYPE_ROUTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX - 1][simcity->interactionExterieure.mouse.celluleXY.celluleY + 1].typeBloc == TYPE_ROUTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX + 1][simcity->interactionExterieure.mouse.celluleXY.celluleY + 3].typeBloc == TYPE_ROUTE || simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX + 3][simcity->interactionExterieure.mouse.celluleXY.celluleY + 1].typeBloc == TYPE_ROUTE){
+        return true;
+    }
+    return false;
+}
 
 int isElecPossible(Simcity* simcity){
     if (simcity->toolBox.elecEnMain == 1 && simcity->outOfBorder && collerAlaRouteInfra(simcity) && simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_HERBE){
@@ -889,7 +898,7 @@ void poserBatiment(Simcity *simcity){
     poserPompier(simcity);
     BFSEau(simcity);
     BFSElec(simcity);
-    //BFSPompier(simcity);
+    BFSPompier(simcity);
 }
 
 void tournerBatiment(Simcity *simcity){
