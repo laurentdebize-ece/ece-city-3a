@@ -686,6 +686,8 @@ void calculCapaciteElec(Simcity* simcity){
     for (int i = 0; i < simcity->nbInfrastructures; ++i) {
         if (simcity->tabInfrastructure[i].typeBatiment == 2) { //si on a un chateau d'eau
 
+            simcity->capaciteTotElecUtilise = 0;
+
             while(simcity->tabInfrastructure[i].adjacence->premier != NULL) { //tant que la liste n'est pas vide
 
                 if (simcity->tabInfrastructure[i].capaciteElectriqueDonne < CAPACITE_ELECTRIQUE && (simcity->tabInfrastructure[i].capaciteElectriqueMax - simcity->tabInfrastructure[i].capaciteElectriqueDonne) >= simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteElectriqueMax){ //si le chateau peut donner plus eau que ce qu'il manque à l'habitation
