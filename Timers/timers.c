@@ -83,10 +83,12 @@ void timerBatiment(Simcity* simcity) {
                         miseAJourDonneesHabitation(simcity, &simcity->tabHabitation[i]);//On met à jour les données du bâtiment
                     }
                 }
-                /*isRegressionPossible(simcity, &simcity->tabHabitation[i]);//On teste si le bâtiment doit régresser
-                if(simcity->tabHabitation[i].regression == TRUE) {//S'il doit régresser
-                    regressionHabitation(simcity, &simcity->tabHabitation[i]);//On le fait régresser
-                }*/
+                if(simcity->capitaliste== TRUE) {
+                    isRegressionPossible(&simcity->tabHabitation[i]);//On teste si le bâtiment doit régresser
+                    if (simcity->tabHabitation[i].regression == TRUE) {//S'il doit régresser
+                        regressionHabitation(simcity, &simcity->tabHabitation[i]);//On le fait régresser
+                    }
+                }
 
                 //Boucle test pompier
                 for(int l = 0; l < simcity->nbHabitations; ++l){
@@ -95,7 +97,7 @@ void timerBatiment(Simcity* simcity) {
                         simcity->tabHabitation[l].evolutionPossible = TRUE;//on relance l'évolution
                     }
                     else if(simcity->tabHabitation[l].isFeu == TRUE && simcity->tabHabitation[l].pompier == FALSE) {//Si en feu et pas dans la zone pompiers
-                        simcity->tabHabitation[l].isFeuRuine = TRUE;//La maiso, doit tomber en ruine
+                        simcity->tabHabitation[l].isFeuRuine = TRUE;//La maison doit tomber en ruine
                         eteindreFeuMettreRuine(simcity, &simcity->tabHabitation[i]);//On met la maison en ruine
                     }
                 }

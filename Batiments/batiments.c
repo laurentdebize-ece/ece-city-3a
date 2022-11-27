@@ -71,6 +71,7 @@ void construireHabitation(Simcity* simcity) {
     simcity->nbHabitations++;//on ajoute une habitation suplémentaire à notre nombre d'habitations
 }
 
+///Fonction permettant de construire une infrastructure
 void construireInfrastructure(Simcity* simcity){
 
     if(simcity->banque.achatPompier == 1 && simcity->map.mapTile[simcity->interactionExterieure.mouse.celluleXY.celluleX][simcity->interactionExterieure.mouse.celluleXY.celluleY].typeBloc == TYPE_POMPIER_COTE) {//Si on  achete caserne de pompier
@@ -422,24 +423,6 @@ void construireInfrastructure(Simcity* simcity){
     simcity->nbInfrastructures ++;
 }
 
-void compterCapaciteTotaleEauUtilise(Simcity* simcity, Habitation* habitation, int ancienneCapacite){
-    //for (int i = 0; i < simcity->nbHabitations ; ++i) {
-        //simcity->capaciteTotEauUtilise += simcity->tabHabitation[i].capaciteEauRecu;
-    //}
-    //simcity->capaciteEauRestante = simcity->capaciteTotEau - simcity->capaciteTotEauUtilise;
-    int temp = habitation->capaciteEauRecu - ancienneCapacite;
-    simcity->capaciteTotEauUtilise += temp;
-    printf("EAU   utilisee%d\n", simcity->capaciteTotEauUtilise);
-}
-void compterCapaciteTotaleElecUtilise(Simcity* simcity){
-    for (int i = 0; i < simcity->nbHabitations; ++i) {
-        simcity->capaciteTotElecUtilise += simcity->tabHabitation[i].capaciteElectriqueRecu;
-        //simcity->capaciteTotElecUtilise += simcity->tabInfrastructure[i].capaciteElectriqueDonne;
-    }
-    simcity->capaciteElecRestante = simcity->capaciteTotElec - simcity->capaciteTotElecUtilise;
-    printf("ELEC   Rest%d, tot%d, utilisee%d\n", simcity->capaciteElecRestante, simcity->capaciteTotElec,simcity->capaciteTotElecUtilise);
-}
-
 ///mise a jour des habitations QUAND ILS EVOLUENT
 void miseAJourDonneesHabitation(Simcity* simcity, Habitation* habitation) {
     switch (habitation->compteurEvolution) {
@@ -497,12 +480,13 @@ void miseAJourDonneesHabitation(Simcity* simcity, Habitation* habitation) {
 }
 
 ///Fonction testant si le bâtiment doit régresser
-void isRegressionPossible(Simcity* simcity, Habitation* habitation) {
-    printf("habEauMax%d    ", habitation->eauMax);
-    if(habitation->eauMax == FALSE /*|| habitation->elecMax == FALSE*/) {//Si la capacité disponible en eau ou en électricité est inférieure à la capacité nécessaire àl'habitation
-        habitation->regression = TRUE;//Evolution de l'habitation testée impossible
-        printf("Regressions true");
-    }else{habitation->regression = FALSE;}//Evolution de l'habitation testée possible
+void isRegressionPossible(Habitation* habitation) {
+    if(habitation->compteurEvolution >= 1) {//Si ce n'est pas un terrain vague
+        if(habitation->eauMax == FALSE || habitation->elecMax == FALSE) {//Si la capacité disponible en eau ou en électricité est inférieure à la capacité nécessaire àl'habitation
+            habitation->regression = TRUE;//Evolution de l'habitation testée impossible
+        }else{
+            habitation->regression = FALSE;}//Evolution de l'habitation testée possible
+    }
 }
 
 ///Fonction permettant la régression de l'habitation
@@ -514,37 +498,37 @@ void regressionHabitation(Simcity* simcity, Habitation* habitation) {
         habitation->compteurEvolution = 5;//Le batiment est en ruine
     }
     miseAJourDonneesHabitation(simcity, habitation);//On met à jour les données du batiment
-    printf(" - nv evol%d\n", habitation->compteurEvolution);
-    habitation->regression = FALSE;
+    habitation->regression = FALSE;//On ne doit plus faire régresser le bâtiment
 
 }
 
 ///Fonction testant si l'evolution du batiment est possible par rapport aux capacités
 void isEvolutionPossible(Simcity* simcity, Habitation* habitation) {
-    Habitation habitationEvolue = *habitation;
+    Habitation habitationEvolue = *habitation;//On crée une habitation tampon
     habitationEvolue.compteurEvolution++;//habitationEvolue à une evolution à 1 stade de plus que l'habitation qu'on teste
-    switch (habitationEvolue.compteurEvolution) {
-        case 1 :
+    switch (habitationEvolue.compteurEvolution) {//On teste le compteur évolution
+        case 1 ://Si c'est une cabane
             habitationEvolue.capaciteEauMax = CAPACITE_EAU_CABANE;
             habitationEvolue.capaciteElectriqueMax = CAPACITE_ELEC_CABANE;
             break;
-        case 2:
+        case 2://Si c'est une maison
             habitationEvolue.capaciteEauMax = CAPACITE_EAU_MAISON;
             habitationEvolue.capaciteElectriqueMax = CAPACITE_ELEC_MAISON;
             break;
-        case 3 :
+        case 3 ://Si c'est une immeuble
             habitationEvolue.capaciteEauMax = CAPACITE_EAU_IMMEUBLE;
             habitationEvolue.capaciteElectriqueMax = CAPACITE_ELEC_IMMEUBLE;
             break;
-        case 4 :
+        case 4 ://Si c'est une gratte-ciel
             habitationEvolue.capaciteEauMax = CAPACITE_EAU_GRATTECIEL;
             habitationEvolue.capaciteElectriqueMax = CAPACITE_ELEC_GRATTECIEL;
             break;
     }
-    simcity->capaciteEauRestante = simcity->capaciteTotEau - simcity->capaciteTotEauUtilise;
-    int eauBesoin = habitationEvolue.capaciteEauMax - habitation->capaciteEauMax;
-    int elecBesoin = habitationEvolue.capaciteElectriqueMax - habitation->capaciteElectriqueMax;
-    if(simcity->capaciteEauRestante < eauBesoin && simcity->capaciteElecRestante < elecBesoin) {
+    simcity->capaciteEauRestante = simcity->capaciteTotEau - simcity->capaciteTotEauUtilise;//On met à jour la capacité d'eau restante dans le jeu
+    simcity->capaciteElecRestante = simcity->capaciteTotElec - simcity->capaciteTotElecUtilise;//On met à jour la capacité d'électricité restante dans le jeu
+    int eauBesoin = habitationEvolue.capaciteEauMax - habitation->capaciteEauMax;//On calcule l'eau supplémentaire dont aura besoin le bâtiment
+    int elecBesoin = habitationEvolue.capaciteElectriqueMax - habitation->capaciteElectriqueMax;//On calcule l'électricité supplémentaire dont aura besoin le bâtiment
+    if(simcity->capaciteEauRestante < eauBesoin || simcity->capaciteElecRestante < elecBesoin) {//Si la capacité d'eau ou d'électricité restantes sont inférieures à la quantité dont le bâtiment à besoin
         habitation->evolutionPossible = FALSE;//Evolution de l'habitation testée impossible
     }
     else{
