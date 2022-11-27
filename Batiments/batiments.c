@@ -498,6 +498,7 @@ void miseAJourDonneesHabitation(Simcity* simcity, Habitation* habitation) {
 
 ///Fonction testant si le bâtiment doit régresser
 void isRegressionPossible(Simcity* simcity, Habitation* habitation) {
+    printf("habEauMax%d    ", habitation->eauMax);
     if(habitation->eauMax == FALSE /*|| habitation->elecMax == FALSE*/) {//Si la capacité disponible en eau ou en électricité est inférieure à la capacité nécessaire àl'habitation
         habitation->regression = TRUE;//Evolution de l'habitation testée impossible
         printf("Regressions true");
@@ -521,7 +522,6 @@ void regressionHabitation(Simcity* simcity, Habitation* habitation) {
 ///Fonction testant si l'evolution du batiment est possible par rapport aux capacités
 void isEvolutionPossible(Simcity* simcity, Habitation* habitation) {
     Habitation habitationEvolue = *habitation;
-    //Habitation* habitationEvolue = habitation;//Création d'une variable tampon habitationEvolue
     habitationEvolue.compteurEvolution++;//habitationEvolue à une evolution à 1 stade de plus que l'habitation qu'on teste
     switch (habitationEvolue.compteurEvolution) {
         case 1 :
@@ -541,37 +541,19 @@ void isEvolutionPossible(Simcity* simcity, Habitation* habitation) {
             habitationEvolue.capaciteElectriqueMax = CAPACITE_ELEC_GRATTECIEL;
             break;
     }
-    //miseAJourDonneesHabitation(simcity, habitationEvolue);//On met à jour les données de habitationEvolue
-    int eauBesoin = habitation->capaciteEauMax - habitationEvolue.capaciteEauMax;
-    if(simcity->capaciteEauRestante < eauBesoin) {
-        //if(habitationEvolue.eauMax == FALSE /*|| habitationEvolue->elecMax == FALSE*/){//Si la capacité disponible en eau ou en électricité est inférieure à la capacité nécessaire àl'habitation
+    simcity->capaciteEauRestante = simcity->capaciteTotEau - simcity->capaciteTotEauUtilise;
+    int eauBesoin = habitationEvolue.capaciteEauMax - habitation->capaciteEauMax;
+    int elecBesoin = habitationEvolue.capaciteElectriqueMax - habitation->capaciteElectriqueMax;
+    printf("elecRestante%d\n", simcity->capaciteElecRestante);
+    printf("elecBesoin%d\n", elecBesoin);
+    if(simcity->capaciteEauRestante < eauBesoin /*|| simcity->capaciteElecRestante < elecBesoin*/) {
         habitation->evolutionPossible = FALSE;//Evolution de l'habitation testée impossible
-    }else{habitation->evolutionPossible = TRUE;
-        //printf("possible %d", habitation->evolutionPossible);
-    }//Evolution de l'habitation testée possible
-    //habitationEvolue->compteurEvolution--;
-    /*switch (habitationEvolue->compteurEvolution) {
-        case 0 :
-            habitationEvolue->capaciteEauMax = CAPACITE_EAU_TERRAINVAGUE;
-            habitationEvolue->capaciteElectriqueMax = CAPACITE_ELEC_TERRAINVAGUE;
-            break;
-        case 1 :
-            habitationEvolue->capaciteEauMax = CAPACITE_EAU_CABANE;
-            habitationEvolue->capaciteElectriqueMax = CAPACITE_ELEC_CABANE;
-            break;
-        case 2:
-            habitationEvolue->capaciteEauMax = CAPACITE_EAU_MAISON;
-            habitationEvolue->capaciteElectriqueMax = CAPACITE_ELEC_MAISON;
-            break;
-        case 3 :
-            habitationEvolue->capaciteEauMax = CAPACITE_EAU_IMMEUBLE;
-            habitationEvolue->capaciteElectriqueMax = CAPACITE_ELEC_IMMEUBLE;
-            break;
-        case 4 :
-            habitationEvolue->capaciteEauMax = CAPACITE_EAU_GRATTECIEL;
-            habitationEvolue->capaciteElectriqueMax = CAPACITE_ELEC_GRATTECIEL;
-            break;
-    }*/
+        printf("EvolPossibleFALSE\n");
+    }
+    else /*if(simcity->capaciteEauRestante >= eauBesoin && simcity->capaciteElecRestante >= elecBesoin)*/ {
+        habitation->evolutionPossible = TRUE;
+        printf("EvolPossibleTRUE\n");
+    }
 }
 
 ///Fonction comptant le nombre d'habitants total de la ville
