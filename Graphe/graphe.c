@@ -72,6 +72,7 @@ void recupdonne(Graphe *graphe){
 
 //reseau d'eau
 void niveau1Eau(Simcity *simcity){
+    partiellementAlimenteEau(simcity);
     for (int x = 0; x < NBCELLULEX; ++x) {
         for (int y = 0; y < NBCELLULEY; ++y) {
             if (simcity->map.mapTile[x][y].typeEau == 1 ){
@@ -95,6 +96,10 @@ void niveau1Eau(Simcity *simcity){
                 al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 460, 0, "Eau : %d", simcity->tabHabitation[i].capaciteEauRecu);
             }
         }
+        if (simcity->tabHabitation[i].partiellementEau == true){
+            al_draw_rectangle(simcity->tabHabitation[i].coordXY[0].screenX,simcity->tabHabitation[i].coordXY[0].screenY,simcity->tabHabitation[i].coordXY[0].screenX+ 60, simcity->tabHabitation[i].coordXY[0].screenY + 60,
+                              al_map_rgb(255,0,0), 3);
+        }
     }
     for (int i = 0; i < simcity->nbInfrastructures; ++i) {
         for (int j = 0; j < NBR_COORDS_XY_INFRA; ++j) {
@@ -115,6 +120,7 @@ void niveau1Eau(Simcity *simcity){
 
 //reseau d'electricite
 void niveau2Elec(Simcity *simcity){
+    partiellementAlimenteElec(simcity);
     for (int x = 0; x < NBCELLULEX; ++x) {
         for (int y = 0; y < NBCELLULEY; ++y) {
             if (simcity->map.mapTile[x][y].typeElec == 1){
@@ -136,6 +142,10 @@ void niveau2Elec(Simcity *simcity){
                 al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 430, 0, "Hab : %d", simcity->tabHabitation[i].nbHabitants);
                 al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 460, 0, "Elec : %d",simcity->tabHabitation[i].capaciteElectriqueRecu);
             }
+        }
+        if (simcity->tabHabitation[i].partiellementElec == true){
+            al_draw_rectangle(simcity->tabHabitation[i].coordXY[0].screenX,simcity->tabHabitation[i].coordXY[0].screenY,simcity->tabHabitation[i].coordXY[0].screenX+ 60, simcity->tabHabitation[i].coordXY[0].screenY + 60,
+                              al_map_rgb(255,0,0), 3);
         }
     }
     for (int i = 0; i < simcity->nbInfrastructures; ++i) {
