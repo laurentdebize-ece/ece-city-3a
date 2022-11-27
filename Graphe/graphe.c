@@ -625,23 +625,31 @@ void calculCapaciteEau(Simcity* simcity){
     for (int i = 0; i < NBR_MAX_INFRA; ++i) {
         if (simcity->tabInfrastructure[i].typeBatiment == 3) { //si on a un chateau d'eau
             ListeAdj *HabitationAdj = simcity->tabInfrastructure[i].adjacence; //je récupère sa liste des habitations adjacentes au chateau d'eau que je regarde
-            while(HabitationAdj->premier != NULL) { //tant que la liste n'est pas vide
-                deltaEauSurplus = simcity->tabInfrastructure[i].capaciteEauMax - simcity->tabInfrastructure[i].capaciteEauDonne;
-                deltaEauManquant = HabitationAdj->premier->MaMaison->capaciteEauMax - HabitationAdj->premier->MaMaison->capaciteEauRecu;
-                if (deltaEauManquant <= deltaEauSurplus) { //si le chateau peut donner plus eau que ce qu'il manque à l'habitation
-                    HabitationAdj->premier->MaMaison->capaciteEauRecu += deltaEauManquant;
-                    deltaEauSurplus -= deltaEauManquant;
-                } else { //si la centrale ne peut pas donner plus d'electricité que ce qu'il manque à l'habitation
-                    HabitationAdj->premier->MaMaison->capaciteEauRecu += deltaEauSurplus;
-                    HabitationAdj->premier->MaMaison->eauMax = FALSE;
-                }
-                if(HabitationAdj->premier->MaMaison->capaciteEauRecu == HabitationAdj->premier->MaMaison->capaciteEauMax){
-                    HabitationAdj->premier->MaMaison->eauMax = TRUE;
-                }
-                printf("Habitation %x || capacite eau %d \n", HabitationAdj->premier->MaMaison, HabitationAdj->premier->MaMaison->capaciteEauRecu);
+            deltaEauSurplus = simcity->tabInfrastructure[i].capaciteEauMax - simcity->tabInfrastructure[i].capaciteEauDonne;
+            deltaEauManquant = HabitationAdj->premier->MaMaison->capaciteEauMax - HabitationAdj->premier->MaMaison->capaciteEauRecu;
 
-                HabitationAdj->premier = HabitationAdj->premier->suivant; //on regarde la suivante
-                 }
+            while(HabitationAdj->premier != NULL) { //tant que la liste n'est pas vide
+
+                    if (deltaEauManquant <= deltaEauSurplus && simcity->tabInfrastructure[i].capaciteEauDonne < CAPACITE_EAU) { //si le chateau peut donner plus eau que ce qu'il manque à l'habitation
+                        simcity->tabInfrastructure[i].capaciteEauDonne += deltaEauManquant;
+                        HabitationAdj->premier->MaMaison->capaciteEauRecu += deltaEauManquant;
+                        deltaEauSurplus -= deltaEauManquant;
+                    }
+
+                    else { //si la centrale ne peut pas donner plus d'electricité que ce qu'il manque à l'habitation
+                       // simcity->tabInfrastructure[i].capaciteEauDonne += deltaEauManquant;
+                        HabitationAdj->premier->MaMaison->capaciteEauRecu += deltaEauSurplus;
+                        HabitationAdj->premier->MaMaison->eauMax = FALSE;
+                    }
+
+
+                    if(HabitationAdj->premier->MaMaison->capaciteEauRecu == HabitationAdj->premier->MaMaison->capaciteEauMax){
+                        HabitationAdj->premier->MaMaison->eauMax = TRUE;
+                    }
+                    printf("Habitation %x || capacite eau %d \n", HabitationAdj->premier->MaMaison, HabitationAdj->premier->MaMaison->capaciteEauRecu);
+
+                    HabitationAdj->premier = HabitationAdj->premier->suivant; //on regarde la suivante
+            }
         }
     }
 }
