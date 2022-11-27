@@ -72,6 +72,7 @@ void recupdonne(Graphe *graphe){
 
 //reseau d'eau
 void niveau1Eau(Simcity *simcity){
+    partiellementAlimenteEau(simcity);
     for (int x = 0; x < NBCELLULEX; ++x) {
         for (int y = 0; y < NBCELLULEY; ++y) {
             if (simcity->map.mapTile[x][y].typeEau == 1 ){
@@ -95,6 +96,10 @@ void niveau1Eau(Simcity *simcity){
                 al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 460, 0, "Eau : %d", simcity->tabHabitation[i].capaciteEauRecu);
             }
         }
+        if (simcity->tabHabitation[i].partiellementEau == true){
+            al_draw_rectangle(simcity->tabHabitation[i].coordXY[0].screenX,simcity->tabHabitation[i].coordXY[0].screenY,simcity->tabHabitation[i].coordXY[0].screenX+ 60, simcity->tabHabitation[i].coordXY[0].screenY + 60,
+                              al_map_rgb(255,0,0), 3);
+        }
     }
     for (int i = 0; i < simcity->nbInfrastructures; ++i) {
         for (int j = 0; j < NBR_COORDS_XY_INFRA; ++j) {
@@ -115,6 +120,7 @@ void niveau1Eau(Simcity *simcity){
 
 //reseau d'electricite
 void niveau2Elec(Simcity *simcity){
+    partiellementAlimenteElec(simcity);
     for (int x = 0; x < NBCELLULEX; ++x) {
         for (int y = 0; y < NBCELLULEY; ++y) {
             if (simcity->map.mapTile[x][y].typeElec == 1){
@@ -136,6 +142,10 @@ void niveau2Elec(Simcity *simcity){
                 al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 430, 0, "Hab : %d", simcity->tabHabitation[i].nbHabitants);
                 al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 460, 0, "Elec : %d",simcity->tabHabitation[i].capaciteElectriqueRecu);
             }
+        }
+        if (simcity->tabHabitation[i].partiellementElec == true){
+            al_draw_rectangle(simcity->tabHabitation[i].coordXY[0].screenX,simcity->tabHabitation[i].coordXY[0].screenY,simcity->tabHabitation[i].coordXY[0].screenX+ 60, simcity->tabHabitation[i].coordXY[0].screenY + 60,
+                              al_map_rgb(255,0,0), 3);
         }
     }
     for (int i = 0; i < simcity->nbInfrastructures; ++i) {
@@ -621,21 +631,21 @@ void BFSPompier(Simcity* simcity){
 }
 
 void partiellementAlimenteEau(Simcity* simcity){
-    for (int i = 0; i < simcity->nbHabitations; ++i) {
-        if (simcity->tabHabitation[i].capaciteEauMax == simcity->tabHabitation[i].capaciteEauRecu){
-            simcity->tabHabitation[i].partiellementEau = false;
+    for (int i = 0; i < simcity->nbHabitations; ++i) { // parcours les habitation
+        if (simcity->tabHabitation[i].capaciteEauMax == simcity->tabHabitation[i].capaciteEauRecu){ // si la capacite d'eau est max
+            simcity->tabHabitation[i].partiellementEau = false; // pas de carence en eau
         }else{
-            simcity->tabHabitation[i].partiellementEau = true;
+            simcity->tabHabitation[i].partiellementEau = true; // habitation est en carence en Eau
         }
     }
 }
 
 void partiellementAlimenteElec(Simcity* simcity){
-    for (int i = 0; i < simcity->nbHabitations; ++i) {
-        if (simcity->tabHabitation[i].capaciteElectriqueMax == simcity->tabHabitation[i].capaciteElectriqueRecu){
-            simcity->tabHabitation[i].partiellementElec = false;
+    for (int i = 0; i < simcity->nbHabitations; ++i) { // parcours les habs
+        if (simcity->tabHabitation[i].capaciteElectriqueMax == simcity->tabHabitation[i].capaciteElectriqueRecu){ // si la capacite d'electricite est max
+            simcity->tabHabitation[i].partiellementElec = false;// pas de carence d'electricite
         } else{
-            simcity->tabHabitation[i].partiellementElec = true;
+            simcity->tabHabitation[i].partiellementElec = true;// habitation est en carence d'Electricite
         }
     }
 }
@@ -667,8 +677,8 @@ void calculCapaciteEau(Simcity* simcity){
                         simcity->tabInfrastructure[i].capaciteEauDonne += (simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauMax - simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauRecu);
                         simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauRecu += (simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauMax - simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauRecu);
 
-                    }
-                    else if (simcity->tabInfrastructure[i].capaciteEauDonne < CAPACITE_EAU && (simcity->tabInfrastructure[i].capaciteEauMax - simcity->tabInfrastructure[i].capaciteEauDonne) <= (simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauMax - simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauRecu) && (simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauMax - simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauRecu) > 0) { //si la centrale ne peut pas donner plus d'electricité que ce qu'il manque à l'habitation
+                    }//si la centrale ne peut pas donner plus d'electricité que ce qu'il manque à l'habitation
+                    else if (simcity->tabInfrastructure[i].capaciteEauDonne < CAPACITE_EAU && (simcity->tabInfrastructure[i].capaciteEauMax - simcity->tabInfrastructure[i].capaciteEauDonne) <= (simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauMax - simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauRecu) && (simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauMax - simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauRecu) > 0) {
                         simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauRecu += (simcity->tabInfrastructure[i].capaciteEauMax - simcity->tabInfrastructure[i].capaciteEauDonne);
                         simcity->tabInfrastructure[i].capaciteEauDonne += (simcity->tabInfrastructure[i].capaciteEauMax - simcity->tabInfrastructure[i].capaciteEauDonne);
                     }
