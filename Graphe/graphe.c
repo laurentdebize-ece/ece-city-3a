@@ -87,6 +87,15 @@ void niveau1Eau(Simcity *simcity){
             }
         }
     }
+    for (int i = 0; i < simcity->nbHabitations; ++i) {
+        for (int j = 0; j < NBR_COORDS_XY_HAB; ++j) {
+            if (simcity->interactionExterieure.mouse.celluleXY.celluleX == simcity->tabHabitation[i].coordXY[j].celluleX && simcity->interactionExterieure.mouse.celluleXY.celluleY == simcity->tabHabitation[i].coordXY[j].celluleY){
+                printf("%d\n",i);
+                al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 400, 0, "Hab : %d", i);
+                al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 450, 0, "Eau : %d", simcity->tabHabitation[i].capaciteEauRecu);
+            }
+        }
+    }
 }
 
 //reseau d'electricite
@@ -102,6 +111,15 @@ void niveau2Elec(Simcity *simcity){
                         ,simcity->map.mapTile[x][y].coordsXY.screenX
                         ,simcity->map.mapTile[x][y].coordsXY.screenY
                         ,0);
+            }
+        }
+    }
+    for (int i = 0; i < simcity->nbHabitations; ++i) {
+        for (int j = 0; j < NBR_COORDS_XY_HAB; ++j) {
+            if (simcity->interactionExterieure.mouse.celluleXY.celluleX == simcity->tabHabitation[i].coordXY[j].celluleX && simcity->interactionExterieure.mouse.celluleXY.celluleY == simcity->tabHabitation[i].coordXY[j].celluleY){
+                printf("%d\n",i);
+                al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 400, 0, "Hab : %d", i);
+                al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 2, 450, 0, "Elec : %d",simcity->tabHabitation[i].capaciteElectriqueRecu);
             }
         }
     }
