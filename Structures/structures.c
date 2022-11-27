@@ -54,6 +54,7 @@ void timerCreate(Simcity* simcity){
 ///Fonction permettant l'initialisation des polices allegro
 void fontsCreate(Simcity* simcity) {
     simcity->allegro.fonts[0] =  al_load_font("../Sources/polices/barreCompteurs.ttf", 25, 0);//Chargement de la police de la barre des compteurs
+    simcity->allegro.fonts[1] =  al_load_font("../Sources/polices/barreCompteurs.ttf", 18, 0);//Chargement de la police de la barre des compteurs
 }
 
 ///Fonction permettant l'initialisation des couleurs allegro
