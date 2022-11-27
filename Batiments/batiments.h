@@ -43,6 +43,8 @@ void nombreHabitantsTot(Simcity* simcity);
 void afficherNbHabitantsTot(Simcity* simcity);
 void construireHabitation(Simcity* simcity);
 void construireInfrastructure(Simcity* simcity);
+void compterCapaciteTotaleEauUtilise(Simcity* simcity,Habitation* habitation, int ancienneCapacite);
+void compterCapaciteTotaleElecUtilise(Simcity* simcity);
 void isFeu(Habitation* habitation);
 void afficherIsFeu(Simcity* simcity);
 void eteindreFeuMettreRuine(Simcity* simcity, Habitation* habitation);

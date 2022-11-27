@@ -649,6 +649,7 @@ void calculCapaciteEau(Simcity* simcity){
                 if (simcity->tabInfrastructure[i].capaciteEauDonne < CAPACITE_EAU && (simcity->tabInfrastructure[i].capaciteEauMax - simcity->tabInfrastructure[i].capaciteEauDonne) >= simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauMax) { //si le chateau peut donner plus eau que ce qu'il manque à l'habitation
                     simcity->tabInfrastructure[i].capaciteEauDonne += (simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauMax - simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauRecu);
                     simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauRecu += (simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauMax - simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauRecu);
+
                 }
                 else if (simcity->tabInfrastructure[i].capaciteEauDonne < CAPACITE_EAU && (simcity->tabInfrastructure[i].capaciteEauMax - simcity->tabInfrastructure[i].capaciteEauDonne) <= (simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauMax - simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauRecu) && (simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauMax - simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauRecu) > 0) { //si la centrale ne peut pas donner plus d'electricité que ce qu'il manque à l'habitation
                     // simcity->tabInfrastructure[i].capaciteEauDonne += deltaEauManquant;

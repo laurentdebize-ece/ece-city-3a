@@ -434,6 +434,8 @@ typedef struct {
     int nbHabitations;//Nombre d'habitations de la ville
     int nbInfrastructures;//Nombre d'infrastructures de la ville
     int nbHabitants;//Nombre d'habitants de la ville
+    int capaciteTotEau;
+    int capaciteTotElec;
     int capaciteEauRestante;//Capacité en eau disponible
     int capaciteTotEauUtilise;//Capacité en eau disponible
     int capaciteElecRestante;//Capacité en électricité disponible

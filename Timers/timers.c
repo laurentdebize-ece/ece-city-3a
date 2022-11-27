@@ -64,6 +64,7 @@ void timerBatiment(Simcity* simcity) {
     long long compteurChrono = al_get_timer_count(simcity->allegro.chrono);//Récupération de la valeur du chrono (1sec)
     long long compteurTimer = al_get_timer_count(simcity->allegro.timer);//Récupération de la valeur du timer (1/60sec)
     bool modulo60 = FALSE;//Initialisation d'un booléen test modulo60
+    int ancienneCapacite = 0;
     if (compteurTimer%60 == 0) {//Si le timer est modulo 60
         modulo60 = TRUE;//Le booléen test modulo60 est vrai
     } else {modulo60 = FALSE;}
@@ -71,6 +72,7 @@ void timerBatiment(Simcity* simcity) {
         if(simcity->tabHabitation[i].timerCree == TRUE) {//Si le bâtiment est créé
             simcity->tabHabitation[i].timerBatiment = (int)compteurChrono - simcity->tabHabitation[i].dateCreation;
             if(simcity->pause == 0 && simcity->tabHabitation[i].timerBatiment % 15 == 0 && modulo60 == TRUE) {//Si on n'est pas en pause, toutes les 15 secondes
+                //ancienneCapacite = simcity->tabHabitation[i].capaciteEauRecu;
                 if(simcity->tabHabitation[i].compteurEvolution == 5) {//Si le bâtiment est une ruine
                     simcity->tabHabitation[i].compteurEvolution = 0;//On met le bâtiment à l'état de terrain vague
                     simcity->tabHabitation[i].evolutionPossible = TRUE;//L'évolution du bâtiment est possible
@@ -78,20 +80,18 @@ void timerBatiment(Simcity* simcity) {
                 if(simcity->communiste == TRUE) {//Si on joue en mode communiste
                    isEvolutionPossible(simcity, &simcity->tabHabitation[i]);//On teste si l'évolution est possible par rapport aux capacités
                 }
-                printf(" - %d\n", simcity->tabHabitation[i].evolutionPossible);
+                //printf(" - %d\n", simcity->tabHabitation[i].evolutionPossible);
                 if(simcity->tabHabitation[i].evolutionPossible == TRUE) {//Si l'évolution est possible
-                    printf("aaaaa\n");
                     if(simcity->tabHabitation[i].compteurEvolution < 4) {//Si le bâtiment n'est pas une ruine et n'est pas un gratte-ciel
-                        printf("bbbbb\n");
                         simcity->tabHabitation[i].compteurEvolution++;//Le bâtiment passe à l'évolution supérieure
                         miseAJourDonneesHabitation(simcity, &simcity->tabHabitation[i]);//On met à jour les données du bâtiment
                     }
                 }
-              /*  isRegressionPossible(simcity, &simcity->tabHabitation[i]);//On teste si le bâtiment doit régresser
+                isRegressionPossible(simcity, &simcity->tabHabitation[i]);//On teste si le bâtiment doit régresser
                 if(simcity->tabHabitation[i].regression == TRUE) {//S'il doit régresser
                     regressionHabitation(simcity, &simcity->tabHabitation[i]);//On le fait régresser
                 }
-                 */
+
                 //Boucle test pompier
                 for(int l = 0; l < simcity->nbHabitations; ++l){
                     if(simcity->tabHabitation[l].isFeu == TRUE && simcity->tabHabitation[l].pompier == TRUE) {//Si en feu et dans la zone pompiers
@@ -103,6 +103,13 @@ void timerBatiment(Simcity* simcity) {
                         eteindreFeuMettreRuine(simcity, &simcity->tabHabitation[i]);//On met la maison en ruine
                     }
                 }
+                //compterCapaciteTotaleEauUtilise(simcity, &simcity->tabHabitation[i], ancienneCapacite);
+                //printf("EAU   utilisee%d\n", simcity->capaciteTotEauUtilise);
+                //ancienneCapacite = 0;
+                BFSEau(simcity);
+                BFSElec(simcity);
+                BFSPompier(simcity);
+                calculCapaciteEau(simcity);
                 isFeu(&simcity->tabHabitation[i]);//On met en feu les habitations
                 recevoirImpots(simcity, simcity->tabHabitation[i].nbHabitants);//On reçoit les impôts
             }
