@@ -353,6 +353,12 @@ void afficherToolbox (Simcity* simcity){
     al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[POMPIER].image),simcity->toolBox.tabSpriteToolBox[POMPIER].spriteX,simcity->toolBox.tabSpriteToolBox[POMPIER].spriteY,simcity->toolBox.tabSpriteToolBox[POMPIER].spriteLargeur,simcity->toolBox.tabSpriteToolBox[POMPIER].spriteHauteur,simcity->toolBox.tabSpriteToolBox[POMPIER].screenX,simcity->toolBox.tabSpriteToolBox[POMPIER].screenY,0);
     al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[PAUSE].image),simcity->toolBox.tabSpriteToolBox[PAUSE].spriteX,simcity->toolBox.tabSpriteToolBox[PAUSE].spriteY,simcity->toolBox.tabSpriteToolBox[PAUSE].spriteLargeur,simcity->toolBox.tabSpriteToolBox[PAUSE].spriteHauteur,simcity->toolBox.tabSpriteToolBox[PAUSE].screenX,simcity->toolBox.tabSpriteToolBox[PAUSE].screenY,0);
     al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[VUE_3].image),simcity->toolBox.tabSpriteToolBox[VUE_3].spriteX,simcity->toolBox.tabSpriteToolBox[VUE_3].spriteY,simcity->toolBox.tabSpriteToolBox[VUE_3].spriteLargeur,simcity->toolBox.tabSpriteToolBox[VUE_3].spriteHauteur,simcity->toolBox.tabSpriteToolBox[VUE_3].screenX,simcity->toolBox.tabSpriteToolBox[VUE_3].screenY,0);
+    al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[ELEC].image),simcity->toolBox.tabSpriteToolBox[ELEC].spriteX,simcity->toolBox.tabSpriteToolBox[ELEC].spriteY,simcity->toolBox.tabSpriteToolBox[ELEC].spriteLargeur,simcity->toolBox.tabSpriteToolBox[ELEC].spriteHauteur,-5,300,0);
+    al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[EAU].image),simcity->toolBox.tabSpriteToolBox[EAU].spriteX,simcity->toolBox.tabSpriteToolBox[EAU].spriteY,simcity->toolBox.tabSpriteToolBox[EAU].spriteLargeur,simcity->toolBox.tabSpriteToolBox[EAU].spriteHauteur,-5,350,0);
+    al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 30, 305, 0, ": %d", simcity->capaciteElecRestante);
+    al_draw_textf(simcity->allegro.fonts[1], simcity->allegro.color[WHITE], 30, 355, 0, ": %d", simcity->capaciteEauRestante);
+
+
 
     if (simcity->toolBox.routeHover){
         al_draw_bitmap_region(*(simcity->toolBox.tabSpriteToolBox[ROUTE_HOVER].image),simcity->toolBox.tabSpriteToolBox[ROUTE_HOVER].spriteX,simcity->toolBox.tabSpriteToolBox[ROUTE_HOVER].spriteY,simcity->toolBox.tabSpriteToolBox[ROUTE_HOVER].spriteLargeur,simcity->toolBox.tabSpriteToolBox[ROUTE_HOVER].spriteHauteur,simcity->toolBox.tabSpriteToolBox[ROUTE_HOVER].screenX,simcity->toolBox.tabSpriteToolBox[ROUTE_HOVER].screenY,0);
