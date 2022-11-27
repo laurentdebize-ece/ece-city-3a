@@ -635,14 +635,29 @@ void calculCapaciteElec(Simcity* simcity) {
             }
         }
     }
+}*/
+
+void calculCapaTotEau(Simcity* simcity){
+    for (int i = 0; i < simcity->nbInfrastructures; ++i) {
+        if (simcity->tabInfrastructure[i].typeBatiment == 3){
+            simcity->capaciteTotEauUtilise += simcity->tabInfrastructure[i].capaciteEauDonne;
+        }
+    }
 }
 
-*/
+void calculCapaTotElec(Simcity* simcity){
+    for (int i = 0; i < simcity->nbInfrastructures; ++i) {
+        if (simcity->tabInfrastructure[i].typeBatiment == 2){
+            simcity->capaciteTotElecUtilise += simcity->tabInfrastructure[i].capaciteElectriqueDonne;
+        }
+    }
+}
+
 void calculCapaciteEau(Simcity* simcity){
 
-    for (int i = 0; i < NBR_MAX_INFRA; ++i) {
+    for (int i = 0; i < simcity->nbInfrastructures; ++i) {
         if (simcity->tabInfrastructure[i].typeBatiment == 3) { //si on a un chateau d'eau
-
+            simcity->capaciteTotEauUtilise = 0;
             while(simcity->tabInfrastructure[i].adjacence->premier != NULL) { //tant que la liste n'est pas vide
 
                 if (simcity->tabInfrastructure[i].capaciteEauDonne < CAPACITE_EAU && (simcity->tabInfrastructure[i].capaciteEauMax - simcity->tabInfrastructure[i].capaciteEauDonne) >= simcity->tabInfrastructure[i].adjacence->premier->MaMaison->capaciteEauMax) { //si le chateau peut donner plus eau que ce qu'il manque à l'habitation
@@ -660,15 +675,15 @@ void calculCapaciteEau(Simcity* simcity){
                 }
 
                 simcity->tabInfrastructure[i].adjacence->premier = simcity->tabInfrastructure[i].adjacence->premier->suivant; //on regarde la suivante
-                simcity->capaciteTotEauUtilise = simcity->tabInfrastructure[i].capaciteEauDonne;
             }
+            calculCapaTotEau(simcity);
         }
     }
 }
 
 void calculCapaciteElec(Simcity* simcity){
 
-    for (int i = 0; i < NBR_MAX_INFRA; ++i) {
+    for (int i = 0; i < simcity->nbInfrastructures; ++i) {
         if (simcity->tabInfrastructure[i].typeBatiment == 2) { //si on a un chateau d'eau
 
             while(simcity->tabInfrastructure[i].adjacence->premier != NULL) { //tant que la liste n'est pas vide
@@ -686,8 +701,7 @@ void calculCapaciteElec(Simcity* simcity){
                     simcity->tabInfrastructure[i].adjacence->premier->MaMaison->elecMax = TRUE;
                 }
                 simcity->tabInfrastructure[i].adjacence->premier = simcity->tabInfrastructure[i].adjacence->premier->suivant; //on regarde la suivante
-                simcity->capaciteTotElecUtilise = simcity->tabInfrastructure[i].capaciteElectriqueDonne;
-
+                calculCapaTotElec(simcity);
             }
         }
     }
